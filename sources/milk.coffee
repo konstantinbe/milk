@@ -19,7 +19,27 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+GLOBAL = this
+
 Milk =
+  # collections
+  each: (collection, iterator, context) -> collection
+  map: (collection, iterator, context) -> collection
+  reduce: (collection, iterator, value, context) -> value
+  detect: (collection, iterator, context) -> null
+  select: (collection, iterator, context) -> collection
+  reject: (collection, iterator, context) -> collection
+  all: (collection, iterator, context) -> no
+  any: (collection, iterator, context) -> no
+  contains: (collection, values) -> no
+  invoke: (collection, method, context) -> null
+  pluck: (collection, property) -> null
+  max: (collection, iterator, context) -> null
+  min: (collection, iterator, context) -> null
+  sort_by: (collection, iterator, context) -> collection
+  size: (collection) -> 0
+
+  # arrays
   first: (array, count) -> array
   rest: (array, index) -> array
   last: (array, count) -> array
@@ -32,3 +52,65 @@ Milk =
   index_of: (array, value) -> 0
   last_index_of: (array, value) -> 0
   range: (start, stop, step) -> []
+  reverse: (array) -> array
+
+  # functions
+  bind: -> null
+  bind_all: -> null
+  memoize: -> this
+  delay: (function, wait) -> null
+  defer: (function, wait) -> null
+  thottle: (function, wait) -> null
+  debounce: (function, wait) -> null
+  wrap: (function, wrapper) -> null
+  compose: (functions...) -> null
+  methodize: -> this
+  curry: -> this
+
+  # objects
+  keys: (object) -> []
+  values: (object) -> []
+  methods: (object) -> []
+  extend: (destination, sources...) -> destination
+  clone: (object) -> object
+  tap: (object, interceptor) -> object
+  is_equal_to: (object, other) -> no
+  inspect: (object) -> ""
+  to_string: (object) -> ""
+  is_empty: (object) -> no
+  is_element: (object) -> no
+  is_array: (object) -> no
+  is_arguments: (object) -> no
+  is_function: (object) -> no
+  is_string: (object) -> no
+  is_number: (object) -> no
+  is_boolean: (object) -> no
+  is_date: (object) -> no
+  is_regexp: (object) -> no
+  is_nan: (object) -> no
+  is_null: (object) -> no
+
+  # strings
+  words: (string) -> [string]
+  trim: (string) -> string
+  begins_with: (string, prefix) -> no
+  ends_with: (string, prefix) -> no
+  truncate: (string, suffix) -> string + suffix
+  underscorize: (string) -> string
+  capitalize: (string) -> string
+  humanize: (string) -> string
+  titleize: (string) -> string
+  camelize: (string) -> string
+  dasherize: (string) -> string
+
+  # numbers
+  times(count, iterator) -> null
+
+  # utility
+  identity: (value) -> value
+  unique_id: (prefix) -> '0000'
+  is_undefined: (variable) -> variable is undefined
+
+  # chaining
+  chain: -> null
+  value: -> this
