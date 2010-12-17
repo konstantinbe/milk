@@ -19,8 +19,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-GLOBAL = this
-
 Milk =
   # collections
   each: (collection, iterator, context) -> collection
@@ -58,11 +56,11 @@ Milk =
   bind: -> null
   bind_all: -> null
   memoize: -> this
-  delay: (function, wait) -> null
-  defer: (function, wait) -> null
-  thottle: (function, wait) -> null
-  debounce: (function, wait) -> null
-  wrap: (function, wrapper) -> null
+  delay: (func, wait) -> null
+  defer: (func, wait) -> null
+  thottle: (func, wait) -> null
+  debounce: (func, wait) -> null
+  wrap: (func, wrapper) -> null
   compose: (functions...) -> null
   methodize: -> this
   curry: -> this
@@ -104,7 +102,7 @@ Milk =
   dasherize: (string) -> string
 
   # numbers
-  times(count, iterator) -> null
+  times: (count, iterator) -> null
 
   # utility
   identity: (value) -> value
