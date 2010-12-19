@@ -37,8 +37,14 @@ Object::has = (name, options = {}) ->
   readable = options['access'] & READ
   writeable = options['access'] & WRITE
 
-  getter = this[options['get']] or -> this[options['variable']] + ' (accessed through getter)'
-  setter = this[options['set']] or (value) ->  this[options['variable']] = value + ' (set through setter)'
+  default_getter = -> this[options['variable']] + ' (accessed through getter)'
+  default_setter = (value) ->  this[options['variable']] = value + ' (set through setter)'
+
+  custom_getter = this[options['get']]
+  custom_setter = this[options['set']]
+
+  getter = custom_getter or default_getter
+  setter = custom_setter or default_setter
 
   config = {}
   config['writeable'] = writeable
@@ -47,8 +53,8 @@ Object::has = (name, options = {}) ->
   config['configurable'] = no
   config['enumerable'] = yes
 
-  using_default_getter_or_setter = this[options['get']]? or this[options['set']]?
-  @prototype[options['variable']] = options['default'] if using_default_getter_or_setter
+  using_only_default_accessors = not (custom_getter or custom_setter)
+  @prototype[options['variable']] = options['default'] if using_only_default_accessors
   Object.defineProperty @prototype, name, config
 
 
