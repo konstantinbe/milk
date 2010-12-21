@@ -19,6 +19,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+native_reduce = Array.
+
 Collection =
   each: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
@@ -61,15 +63,12 @@ Collection =
     [iterator, context] = [context, undefined] unless iterator?
     # TODO: Implement this.
 
+  reduce: (initial, iterator) ->
+    # TODO: Implement this.
+
   sort_by: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
     # TODO: Implement this.
-
-  values: ->
-    values = []
-    @each (value) ->
-      values.push value
-    values
 
   contains: (value) ->
     return no unless value
@@ -83,5 +82,14 @@ Collection =
   pluck: (key) ->
     # TODO: Implement this.
 
+  # TODO: Make this a property.
+  values: () ->
+    values = []
+    @each (value) ->
+      values.push value
+    values
+
+  # TODO: Make this a property.
   size: () ->
+    return @length if @length?
     @values.length
