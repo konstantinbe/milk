@@ -20,30 +20,37 @@
 # THE SOFTWARE.
 
 Collection =
-  each: (iterator, context) ->
+  each: (context, iterator) ->
+    [iterator, context] = [context, undefined] unless iterator?
     @forEach iterator, context
 
-  collect: (iterator, context) ->
+  collect: (context, iterator) ->
+    [iterator, context] = [context, undefined] unless iterator?
     @map iterator, context
 
-  select: (predicate, context) ->
-    @filter predicate, context
+  select: (context, iterator) ->
+    [iterator, context] = [context, undefined] unless iterator?
+    @filter iterator, context
 
-  reject: (predicate, context) ->
+  reject: (context, iterator) ->
+    [iterator, context] = [context, undefined] unless iterator?
     # TODO: Implement this.
 
-  detect: (predicate, context) ->
+  detect: (context, iterator) ->
+    [iterator, context] = [context, undefined] unless iterator?
     # TODO: Implement this.
 
-  all: (predicate, context) ->
-    @every predicate, context
+  all: (context, iterator) ->
+    [iterator, context] = [context, undefined] unless iterator?
+    @every iterator, context
 
-  any: (predicate, context) ->
-    @some predicate, context
+  any: (context, iterator) ->
+    [iterator, context] = [context, undefined] unless iterator?
+    @some iterator, context
 
   contains: (value) ->
     return no unless value
-    return yes if @indexOf and @indexOf value isnt -1
+    return yes if @indexOf? and @indexOf(value) isnt -1
     return @any (current_value) ->
       current_value is value
 
@@ -53,8 +60,10 @@ Collection =
   pluck: (key) ->
     # TODO: Implement this.
 
-  max: (iterator, context) ->
+  max: (context, iterator) ->
+    [iterator, context] = [context, undefined] unless iterator?
     # TODO: Implement this.
 
-  min: (iterator, context) ->
+  min: (context, iterator) ->
+    [iterator, context] = [context, undefined] unless iterator?
     # TODO: Implement this.
