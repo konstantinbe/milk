@@ -48,10 +48,29 @@ Collection =
     [iterator, context] = [context, undefined] unless iterator?
     @some iterator, context
 
+  max: (context, iterator) ->
+    [iterator, context] = [context, undefined] unless iterator?
+    # TODO: Implement this.
+
+  min: (context, iterator) ->
+    [iterator, context] = [context, undefined] unless iterator?
+    # TODO: Implement this.
+
+  sort_by: (context, iterator) ->
+    [iterator, context] = [context, undefined] unless iterator?
+    # TODO: Implement this.
+
+  # returns all values as an array
+  values: ->
+    values = []
+    @each (value) ->
+      values.push value
+    values
+
   contains: (value) ->
     return no unless value
     return yes if @indexOf? and @indexOf(value) isnt -1
-    return @any (current_value) ->
+    @any (current_value) ->
       current_value is value
 
   invoke: (method) ->
@@ -60,10 +79,5 @@ Collection =
   pluck: (key) ->
     # TODO: Implement this.
 
-  max: (context, iterator) ->
-    [iterator, context] = [context, undefined] unless iterator?
-    # TODO: Implement this.
-
-  min: (context, iterator) ->
-    [iterator, context] = [context, undefined] unless iterator?
-    # TODO: Implement this.
+  size: () ->
+    @values.length
