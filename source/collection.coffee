@@ -22,15 +22,18 @@
 Collection =
   each: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
-    @forEach iterator, context
+    return @forEach iterator, context if @forEach?
+    # TODO: Implement fallback.
 
   collect: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
-    @map iterator, context
+    return @map iterator, context if @map?
+    # TODO: Implement fallback.
 
   select: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
-    @filter iterator, context
+    return @filter iterator, context if @filter
+    # TODO: Implement fallback.
 
   reject: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
@@ -42,11 +45,13 @@ Collection =
 
   all: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
-    @every iterator, context
+    return @every iterator, context if @every
+    # TODO: Implement fallback.
 
   any: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
-    @some iterator, context
+    return @some iterator, context if @some
+    # TODO: Implement fallback.
 
   max: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
@@ -60,7 +65,6 @@ Collection =
     [iterator, context] = [context, undefined] unless iterator?
     # TODO: Implement this.
 
-  # returns all values as an array
   values: ->
     values = []
     @each (value) ->
@@ -73,7 +77,7 @@ Collection =
     @any (current_value) ->
       current_value is value
 
-  invoke: (method) ->
+  invoke: (method, args...) ->
     # TODO: Implement this.
 
   pluck: (key) ->
