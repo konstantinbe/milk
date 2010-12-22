@@ -40,3 +40,6 @@ ObjectExtensions =
 
   mixin: (mixins...) ->
     # TODO: Implement this.
+
+  responds_to: (method) ->
+    # TODO: Implement this.

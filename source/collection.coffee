@@ -74,7 +74,7 @@ Collection =
     @any (current_value) ->
       current_value is value
 
-  invoke: (method, args...) ->
+  invoke: (method, method_arguments...) ->
     # TODO: Implement this.
 
   pluck: (key) ->

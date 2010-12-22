@@ -35,7 +35,7 @@ ArrayExtensions =
   flatten: () ->
     # TODO: Implement this.
 
-  without: (values) ->
+  without: (values...) ->
     # TODO: Implement this.
 
   unique: (sorted = no) ->
@@ -52,3 +52,24 @@ ArrayExtensions =
 
   last_index_of: (value) ->
     # TODO: Implement this.
+
+  add: (values...) ->
+    # TODO: Implement this.
+
+  insert: (index, values...) ->
+    # TODO: Implement this.
+
+  remove: (values...) ->
+    # TODO: Implement this.
+
+  replace: (object, replacement) ->
+    # TODO: Implement this.
+
+  add_collections: (collections...) ->
+    # TODO: Implement this. Find a better name.
+
+  insert_collections: (index, collections...) ->
+    # TODO: Implement this. Find a better name.
+
+  remove_collections: (collections...) ->
+    # TODO: Implement this. Find a better name.
