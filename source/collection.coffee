@@ -19,8 +19,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-native_reduce = Array.
-
 Collection =
   each: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
@@ -93,3 +91,6 @@ Collection =
   size: () ->
     return @length if @length?
     @values.length
+
+  empty: () ->
+    @size() is 0
