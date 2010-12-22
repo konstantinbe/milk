@@ -20,8 +20,8 @@
 # THE SOFTWARE.
 
 FunctionExtensions =
-  bind: (object) ->
-    # TODO: Implement this. Also known as 'curry'.
+  curry: (object) ->
+    # TODO: Implement this. Also known as 'bind'.
 
   wrap: (wrapper) ->
     # TODO: Implement this.
