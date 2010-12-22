@@ -22,47 +22,6 @@
 
 # global constants
 ROOT = exports ? this
-ROOT.READ = 1
-ROOT.WRITE = 2
-
-
-# defines a property on an object/class
-Object::has = (name, options = {}) ->
-  options['access'] ?= READ | WRITE
-  options['default'] ?= null
-  options['variable'] ?= '_' + name
-  options['get'] ?= 'get_' + name
-  options['set'] ?= 'set_' + name
-
-  readable = options['access'] & READ
-  writeable = options['access'] & WRITE
-
-  default_getter = -> this[options['variable']] + ' (accessed through getter)'
-  default_setter = (value) ->  this[options['variable']] = value + ' (set through setter)'
-
-  custom_getter = this[options['get']]
-  custom_setter = this[options['set']]
-
-  getter = custom_getter or default_getter
-  setter = custom_setter or default_setter
-
-  config = {}
-  config['writeable'] = writeable
-  config['get'] = getter if readable
-  config['set'] = setter if writeable
-  config['configurable'] = no
-  config['enumerable'] = yes
-
-  using_only_default_accessors = not (custom_getter or custom_setter)
-  @prototype[options['variable']] = options['default'] if using_only_default_accessors
-  Object.defineProperty @prototype, name, config
-
-
-# TODO: Implement these.
-Object::has_one = (name, options) -> null
-Object::has_many = (name, options) -> null
-Object::belongs_to = (name, options) -> null
-Object::has_and_belongs_to_many = (name, options) -> null
 
 
 # define the class

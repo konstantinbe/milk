@@ -47,6 +47,9 @@ ArrayExtensions =
   zip: (arrays...) ->
     # TODO: Implement this.
 
+  reverse: () ->
+    # TODO: Implement this.
+
   index_of: (value) ->
     # TODO: Implement this.
 
