@@ -19,24 +19,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-ObjectExtensions =
-  clone: () ->
-    # TODO: Implement this.
-
-  equals: (object) ->
-    # TODO: Implement this.
-
-  hash: () ->
-    # TODO: Implement this.
-
-  keys: () ->
-    # TODO: Implement this.
-
-  values: () ->
-    # TODO: Implement this.
-
-  methods: () ->
-    # TODO: Implement this.
-
-  mixin: (mixins...) ->
+NumberExtensions =
+  times: (count) ->
     # TODO: Implement this.

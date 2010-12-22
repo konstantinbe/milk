@@ -19,24 +19,35 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-ObjectExtensions =
-  clone: () ->
-    # TODO: Implement this.
+is_object: (value) ->
+  # TODO: Implement this.
 
-  equals: (object) ->
-    # TODO: Implement this.
+is_array: (value) ->
+  # TODO: Implement this.
 
-  hash: () ->
-    # TODO: Implement this.
+is_function: (value) ->
+  # TODO: Implement this.
 
-  keys: () ->
-    # TODO: Implement this.
+is_string: (value) ->
+  # TODO: Implement this.
 
-  values: () ->
-    # TODO: Implement this.
+is_number: (value) ->
+  # TODO: Implement this.
 
-  methods: () ->
-    # TODO: Implement this.
+is_boolean: (value) ->
+  # TODO: Implement this.
 
-  mixin: (mixins...) ->
-    # TODO: Implement this.
+is_date: (value) ->
+  # TODO: Implement this.
+
+is_regexp: (value) ->
+  # TODO: Implement this.
+
+is_null: (value) ->
+  # TODO: Implement this.
+
+is_undefined: (value) ->
+  # TODO: Implement this.
+
+is_element: (value) ->
+  # TODO: Implement this.
