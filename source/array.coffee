@@ -65,11 +65,11 @@ ArrayExtensions =
   replace: (object, replacement) ->
     # TODO: Implement this.
 
-  add_collections: (collections...) ->
-    # TODO: Implement this. Find a better name.
+  add_many: (collections...) ->
+    # TODO: Implement this.
 
-  insert_collections: (index, collections...) ->
-    # TODO: Implement this. Find a better name.
+  insert_many: (index, collections...) ->
+    # TODO: Implement this.
 
-  remove_collections: (collections...) ->
-    # TODO: Implement this. Find a better name.
+  remove_many: (collections...) ->
+    # TODO: Implement this.
