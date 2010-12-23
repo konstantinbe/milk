@@ -41,39 +41,44 @@ ObjectExtensions =
   methods: () ->
     # TODO: Implement this.
 
-  mixin: (mixins...) ->
-    # TODO: Implement this.
-
   responds_to: (method) ->
     # TODO: Implement this.
 
-  merge: (object, options = {}) ->
-    options['reverse'] ?= no
-    # TODO: Implement this.
+  mixin: (objects...) ->
+    for object in objects
+      for key, value of object
+        this[key] = value
+    this
+
+  merge: (objects...) ->
+    for object in objects
+      for key, value of object
+        this[key] ?= value
+    this
 
   has: (name, options = {}) ->
     options['access'] ?= READ | WRITE
     options['default'] ?= null
     options['variable'] ?= '_' + name
-    options['get'] ?= 'get_' + name
-    options['set'] ?= 'set_' + name
+    options['getter'] ?= 'get_' + name
+    options['setter'] ?= 'set_' + name
 
-    readable = options['access'] & READ
-    writeable = options['access'] & WRITE
+    readable = options.access & READ
+    writeable = options.access & WRITE
 
     default_getter = -> this[options['variable']] + ' (accessed through getter)'
     default_setter = (value) ->  this[options['variable']] = value + ' (set through setter)'
 
-    custom_getter = this[options['get']]
-    custom_setter = this[options['set']]
+    custom_getter = this[options['getter']]
+    custom_setter = this[options['setter']]
 
     getter = custom_getter or default_getter
     setter = custom_setter or default_setter
 
     config =
       writeable: writeable
-      get: getter if readable
-      set: setter if writeable
+      getter: getter if readable
+      setter: setter if writeable
       configurable: no
       enumerable: yes
 

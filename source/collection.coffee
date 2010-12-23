@@ -22,17 +22,17 @@
 Collection =
   each: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
-    return @forEach iterator, context if @forEach?
+    @forEach iterator, context if @forEach?
     # TODO: Implement fallback.
 
   collect: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
-    return @map iterator, context if @map?
+    @map iterator, context if @map?
     # TODO: Implement fallback.
 
   select: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
-    return @filter iterator, context if @filter
+    @filter iterator, context if @filter
     # TODO: Implement fallback.
 
   reject: (context, iterator) ->
@@ -45,12 +45,12 @@ Collection =
 
   all: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
-    return @every iterator, context if @every
+    @every iterator, context if @every
     # TODO: Implement fallback.
 
   any: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
-    return @some iterator, context if @some
+    @some iterator, context if @some
     # TODO: Implement fallback.
 
   max: (context, iterator) ->
@@ -91,15 +91,13 @@ Collection =
 
   # TODO: Make this a property.
   values: () ->
-    values = []
     @each (value) ->
       values.push value
-    values
+    return values
 
   # TODO: Make this a property.
   size: () ->
-    return @length if @length?
-    @values.length
+    if @length? then @length else @values.length
 
   empty: () ->
     @size() is 0
