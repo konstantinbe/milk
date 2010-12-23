@@ -23,14 +23,14 @@ ROOT = exports ? this
 
 Utilities =
   is_object: (value) ->
-    typeof value isnt 'undefined'
+    value?
 
   is_array: (value) ->
     return Array.isArray(value) if Array.isArray?
-    value and value.concat? and value.unshift? and not value.callee
+    value? and value.concat? and value.unshift? and not value.callee
 
   is_function: (value) ->
-    value and value.constructor? and value.call? and value.apply?
+    value? and value.constructor? and value.call? and value.apply?
 
   is_string: (value) ->
     value is '' or (value and value.charCodeAt? and obj.substr?)
@@ -42,10 +42,10 @@ Utilities =
     value is true or value is false
 
   is_date: (value) ->
-    value and value.getTimezoneOffset? and value.setUTCFullYear?
+    value? and value.getTimezoneOffset? and value.setUTCFullYear?
 
   is_regexp: (value) ->
-    value and value.test? and value.exec? and (value.ignoreCase || value.ignoreCase is no)
+    value? and value.test? and value.exec? and (value.ignoreCase || value.ignoreCase is no)
 
   is_null: (value) ->
     value is null
