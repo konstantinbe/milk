@@ -27,7 +27,7 @@ Utilities =
 
   is_array: (value) ->
     return Array.isArray(value) if Array.isArray?
-    value? and value.concat? and value.unshift? and not value.callee
+    value? and value.concat? and value.unshift? and not value.callee?
 
   is_function: (value) ->
     value? and value.constructor? and value.call? and value.apply?
@@ -45,7 +45,7 @@ Utilities =
     value? and value.getTimezoneOffset? and value.setUTCFullYear?
 
   is_regexp: (value) ->
-    value? and value.test? and value.exec? and (value.ignoreCase || value.ignoreCase is no)
+    value? and value.test? and value.exec? and (value.ignoreCase? or value.ignoreCase is no)
 
   is_null: (value) ->
     value is null
