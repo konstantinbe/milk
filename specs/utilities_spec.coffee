@@ -19,40 +19,22 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-ROOT = exports ? this
+describe 'Utilties', ->
+  it "checks the type of a value", ->
+    values = [undefined, null, {}, (() -> this), "", yes, 1, [], new Date(), /.*/]
 
-Utilities =
-  is_object: (value) ->
+    expect(Utilities.is_undefined undefined).toBe(true)
+
+    # values.each (value)
+    # is_undefined(value)
+    # is_null(value)
+    # is_object(value)
+    # is_function(value)
+    # is_string(value)
+    # is_boolean(value)
+    # is_number(value)
+    # is_array(value)
+    # is_date(value)
+    # is_regexp(value)
+
     # TODO: Implement this.
-
-  is_array: (value) ->
-    # TODO: Implement this.
-
-  is_function: (value) ->
-    # TODO: Implement this.
-
-  is_string: (value) ->
-    # TODO: Implement this.
-
-  is_number: (value) ->
-    # TODO: Implement this.
-
-  is_boolean: (value) ->
-    # TODO: Implement this.
-
-  is_date: (value) ->
-    # TODO: Implement this.
-
-  is_regexp: (value) ->
-    # TODO: Implement this.
-
-  is_null: (value) ->
-    # TODO: Implement this.
-
-  is_undefined: (value) ->
-    value is undefined
-
-  is_element: (value) ->
-    # TODO: Implement this.
-
-ROOT.Utilities = Utilities

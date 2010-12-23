@@ -51,7 +51,7 @@ ObjectExtensions =
     options['reverse'] ?= no
     # TODO: Implement this.
 
-  has = (name, options = {}) ->
+  has: (name, options = {}) ->
     options['access'] ?= READ | WRITE
     options['default'] ?= null
     options['variable'] ?= '_' + name
@@ -81,14 +81,14 @@ ObjectExtensions =
     @prototype[options['variable']] = options['default'] if using_only_default_accessors
     Object.defineProperty @prototype, name, config
 
-  has_one = (name, options = {}) -> null
+  has_one: (name, options = {}) -> null
     # TODO: Implement this.
 
-  has_many = (name, options = {}) -> null
+  has_many: (name, options = {}) -> null
     # TODO: Implement this.
 
-  belongs_to = (name, options = {}) -> null
+  belongs_to: (name, options = {}) -> null
     # TODO: Implement this.
 
-  has_and_belongs_to_many = (name, options = {}) -> null
+  has_and_belongs_to_many: (name, options = {}) -> null
     # TODO: Implement this.
