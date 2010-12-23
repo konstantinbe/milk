@@ -19,22 +19,33 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-describe 'Utilties', ->
-  it "checks the type of a value", ->
-    values = [undefined, null, {}, (() -> this), "", yes, 1, [], new Date(), /.*/]
-
+describe 'Utilities', ->
+  it "should check if a value is undefined", ->
     expect(Utilities.is_undefined undefined).toBe(true)
 
-    # values.each (value)
-    # is_undefined(value)
-    # is_null(value)
-    # is_object(value)
-    # is_function(value)
-    # is_string(value)
-    # is_boolean(value)
-    # is_number(value)
-    # is_array(value)
-    # is_date(value)
-    # is_regexp(value)
+  it "should check if a value is null", ->
+    expect(Utilities.is_null null).toBe(true)
 
-    # TODO: Implement this.
+  it "should check if a value is an object", ->
+    expect(Utilities.is_object {}).toBe(true)
+
+  it "should check if a value is a function", ->
+    expect(Utilities.is_function () -> this).toBe(true)
+
+  it "should check if a value is a string", ->
+    expect(Utilities.is_string "").toBe(true)
+
+  it "should check if a value is boolean", ->
+    expect(Utilities.is_boolean yes).toBe(true)
+
+  it "should check if a value is a number", ->
+    expect(Utilities.is_number 1).toBe(true)
+
+  it "should check if a value is an array", ->
+    expect(Utilities.is_array []).toBe(true)
+
+  it "should check if a value is a date", ->
+    expect(Utilities.is_date new Date()).toBe(true)
+
+  it "should check if a value is a regular expression", ->
+    expect(Utilities.is_regexp //).toBe(true)

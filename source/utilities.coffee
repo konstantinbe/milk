@@ -26,33 +26,31 @@ Utilities =
     # TODO: Implement this.
 
   is_array: (value) ->
-    # TODO: Implement this.
+    return Array.isArray(value) if Array.isArray?
+    value and value.concat? and value.unshift? and not value.callee
 
   is_function: (value) ->
-    # TODO: Implement this.
+    value and value.constructor? and value.call? and value.apply?
 
   is_string: (value) ->
-    # TODO: Implement this.
+    value is '' or (value and value.charCodeAt? and obj.substr?)
 
   is_number: (value) ->
-    # TODO: Implement this.
+    value is 0 or (value and value.toExponential? and value.toFixed?)
 
   is_boolean: (value) ->
-    # TODO: Implement this.
+    value is true or value is false
 
   is_date: (value) ->
-    # TODO: Implement this.
+    value and value.getTimezoneOffset? and value.setUTCFullYear?
 
   is_regexp: (value) ->
-    # TODO: Implement this.
+    value and value.test? and value.exec? and (value.ignoreCase || value.ignoreCase is no)
 
   is_null: (value) ->
-    # TODO: Implement this.
+    value is null
 
   is_undefined: (value) ->
     value is undefined
-
-  is_element: (value) ->
-    # TODO: Implement this.
 
 ROOT.Utilities = Utilities
