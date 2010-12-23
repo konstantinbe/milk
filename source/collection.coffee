@@ -61,6 +61,10 @@ Collection =
     [iterator, context] = [context, undefined] unless iterator?
     # TODO: Implement this.
 
+  partition: (context, iterator) ->
+    [iterator, context] = [context, undefined] unless iterator?
+    # TODO: Implement this.
+
   reduce: (initial, iterator) ->
     reduced_value = initial
     index = 0
