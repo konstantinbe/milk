@@ -23,7 +23,7 @@ ROOT = exports ? this
 
 Utilities =
   is_object: (value) ->
-    # TODO: Implement this.
+    typeof value isnt undefined
 
   is_array: (value) ->
     return Array.isArray(value) if Array.isArray?
