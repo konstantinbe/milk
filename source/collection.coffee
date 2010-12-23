@@ -62,7 +62,12 @@ Collection =
     # TODO: Implement this.
 
   reduce: (initial, iterator) ->
-    # TODO: Implement this.
+    reduced_value = initial
+    index = 0
+    @each (value) ->
+      reduced_value = iterator(reduced_value, value, index)
+      index += 1
+    reduced_value
 
   sort_by: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
