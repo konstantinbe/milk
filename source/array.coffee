@@ -20,14 +20,17 @@
 # THE SOFTWARE.
 
 ArrayExtensions =
-  first: (count = 1) ->
-    # TODO: Implement this.
+  first: (count) ->
+    return this[0] unless count?
+    @slice(0, count)
 
-  rest: (index = 1) ->
-    # TODO: Implement this.
+  rest: (index) ->
+    @slice(index)
 
-  last: (count = 1) ->
-    # TODO: Implement this.
+  last: (count) ->
+    last_index = @length - 1
+    return this[last_index] unless count?
+    @slice(last_index, -count)
 
   compact: () ->
     # TODO: Implement this.
@@ -44,10 +47,10 @@ ArrayExtensions =
   intersect: (arrays...) ->
     # TODO: Implement this.
 
-  zip: (arrays...) ->
-    # TODO: Implement this.
+  append: (arrays...) ->
+    # TODO: Implement this
 
-  reverse: () ->
+  zip: (arrays...) ->
     # TODO: Implement this.
 
   index_of: (value) ->
@@ -76,3 +79,10 @@ ArrayExtensions =
 
   remove_many: (collections...) ->
     # TODO: Implement this.
+
+  # native array methods:
+  # * reserve
+  # * join
+  # * concat
+  # * slice
+  # * ...
