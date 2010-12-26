@@ -41,6 +41,9 @@ ArrayExtensions =
   without: (values...) ->
     # TODO: Implement this.
 
+  without_many: (collections...) ->
+    # TODO: Implement this.
+
   unique: (sorted = no) ->
     # TODO: Implement this.
 
@@ -62,22 +65,31 @@ ArrayExtensions =
   add: (values...) ->
     # TODO: Implement this.
 
-  insert: (index, values...) ->
+  add_many: (collections...) ->
+    # TODO: Implement this.
+
+  insert_at: (index, values...) ->
+    # TODO: Implement this.
+
+  insert_many_at: (index, collections...) ->
     # TODO: Implement this.
 
   remove: (values...) ->
     # TODO: Implement this.
 
-  replace: (object, replacement) ->
-    # TODO: Implement this.
-
-  add_many: (collections...) ->
-    # TODO: Implement this.
-
-  insert_many: (index, collections...) ->
+  remove_at: (indexes...) ->
     # TODO: Implement this.
 
   remove_many: (collections...) ->
+    # TODO: Implement this.
+
+  replace: (value, replacement) ->
+    # TODO: Implement this.
+
+  replace_at: (index, replacement) ->
+    # TODO: Implement this.
+
+  replace_many: (values, replacements) ->
     # TODO: Implement this.
 
   # native array methods:
