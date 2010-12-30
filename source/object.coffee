@@ -48,13 +48,13 @@ ObjectExtensions =
     for object in objects
       for key, value of object
         this[key] = value
-    this
+    return this
 
   merge: (objects...) ->
     for object in objects
       for key, value of object
         this[key] ?= value
-    this
+    return this
 
   has: (name, options = {}) ->
     options['access'] ?= READ | WRITE
@@ -85,6 +85,7 @@ ObjectExtensions =
     using_only_default_accessors = not (custom_getter or custom_setter)
     @prototype[options['variable']] = options['default'] if using_only_default_accessors
     Object.defineProperty @prototype, name, config
+    return this
 
   has_one: (name, options = {}) -> null
     # TODO: Implement this.
