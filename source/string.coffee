@@ -40,3 +40,5 @@ StringExtensions =
 
   dasherize: () ->
     # TODO: Implement this.
+
+String::mixin StringExtensions
