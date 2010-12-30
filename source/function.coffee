@@ -31,3 +31,5 @@ FunctionExtensions =
 
   methodize: () ->
     # TODO: Implement this.
+
+Function::mixin FunctionExtensions
