@@ -26,7 +26,7 @@ ROOT = exports ? this
 
 # define the class
 # class Book
-#   @has 'uniqueID', access: READ, default: '010101010101'
+#   @has 'unique_id', access: READ, default: '010101010101'
 #   @has 'changed', access: WRITE
 #   @has 'title', default: 'New Book' # read and write by default
 #   @has 'author', default: 'Unknown'
@@ -40,5 +40,5 @@ ROOT = exports ? this
 # book.title = 'CoffeeScript Cookbook'
 # console.log 'Title of book is: ' + book.title
 #
-# book.uniqueID = "Test"
-# console.log book.uniqueID
+# book.unique_id = "Test"
+# console.log book.unique_id
