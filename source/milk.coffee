@@ -19,26 +19,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-
-# global constants
-ROOT = exports ? this
-
-
-# define the class
-# class Book
-#   @has 'unique_id', access: READ, default: '010101010101'
-#   @has 'changed', access: WRITE
-#   @has 'title', default: 'New Book' # read and write by default
-#   @has 'author', default: 'Unknown'
-#   @has 'isbn'
-
-
-# run some tests
-# book = new Book()
-# console.log 'Default book title: ' + book.title
-#
-# book.title = 'CoffeeScript Cookbook'
-# console.log 'Title of book is: ' + book.title
-#
-# book.unique_id = "Test"
-# console.log book.unique_id
+require 'utilities'
+require 'object'
+require 'function'
+require 'number'
+require 'string'
+require 'array'
+require 'collection'
