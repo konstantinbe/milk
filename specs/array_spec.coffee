@@ -21,35 +21,30 @@
 
 describe 'Array extended by Milk', ->
   it "should return the first element", ->
-    # expect([1, 2, 3].first()).toBe(1)
-    # expect([].first()).toBe(null)
+    expect([1, 2, 3].first()).toBe(1)
+    expect([].first()).toBe(undefined)
 
   it "should return first N elements", ->
-    # expect([1, 2, 3].first(0)).toEqual([])
-    # expect([1, 2, 3].first(1)).toEqual([1])
-    # expect([1, 2, 3].first(2)).toEqual([1, 2])
-    # expect([1, 2, 3].first(3)).toEqual([1, 2, 3])
-    # expect([1, 2, 3].first(10)).toEqual([1, 2, 3])
+    expect([1, 2, 3].first(0)).toEqual([])
+    expect([1, 2, 3].first(1)).toEqual([1])
+    expect([1, 2, 3].first(2)).toEqual([1, 2])
+    expect([1, 2, 3].first(3)).toEqual([1, 2, 3])
+    expect([1, 2, 3].first(10)).toEqual([1, 2, 3])
 
   it "should return rest elements", ->
-    # expect([1, 2, 3].rest()).toEqual([2, 3])
-    # expect([1, 2, 3].rest(0)).toEqual([1, 2, 3])
-    # expect([1, 2, 3].rest(2)).toEqual([3])
-    # expect([1, 2, 3].rest(3)).toEqual([])
-    # expect([1, 2, 3].rest(10)).toEqual([])
+    expect([1, 2, 3].rest()).toEqual([2, 3])
+    expect([1, 2, 3].rest(0)).toEqual([1, 2, 3])
+    expect([1, 2, 3].rest(2)).toEqual([3])
+    expect([1, 2, 3].rest(3)).toEqual([])
+    expect([1, 2, 3].rest(10)).toEqual([])
 
   it "should return the last element", ->
-    # expect([1, 2, 3].last()).toBe(3)
-    # expect([].last()).toBe(null)
+    expect([1, 2, 3].last()).toBe(3)
+    expect([].last()).toBe(undefined)
 
   it "should return the last N elements", ->
-    # expect([1, 2, 3].last(0)).toEqual([])
-    # expect([1, 2, 3].last(1)).toEqual([3])
-    # expect([1, 2, 3].last(2)).toEqual([2, 3])
-    # expect([1, 2, 3].last(3)).toEqual([1, 2, 3])
-    # expect([1, 2, 3].last(10)).toEqual([1, 2, 3])
-
-  it "should return only a part of an array", ->
-    # expect([1, 2, 3].part(1, 1)).toEqual([2])
-    # expect([1, 2, 3].part(1, 2)).toEqual([2, 3])
-    # expect([1, 2, 3].part(1, 10)).toEqual([2, 3])
+    expect([1, 2, 3].last(0)).toEqual([])
+    expect([1, 2, 3].last(1)).toEqual([3])
+    expect([1, 2, 3].last(2)).toEqual([2, 3])
+    expect([1, 2, 3].last(3)).toEqual([1, 2, 3])
+    expect([1, 2, 3].last(10)).toEqual([1, 2, 3])

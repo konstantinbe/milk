@@ -22,15 +22,16 @@
 ArrayExtensions =
   first: (count) ->
     return this[0] unless count?
-    @slice(0, count)
+    @slice 0, count
 
-  rest: (index) ->
-    @slice(index)
+  rest: (index = 1) ->
+    @slice index
 
   last: (count) ->
     last_index = @length - 1
     return this[last_index] unless count?
-    @slice(last_index, -count)
+    return [] if count is 0
+    @slice -count
 
   compact: () ->
     # TODO: Implement this.
@@ -98,3 +99,5 @@ ArrayExtensions =
   # * concat
   # * slice
   # * ...
+
+Array::mixin ArrayExtensions
