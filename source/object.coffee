@@ -98,3 +98,5 @@ ObjectExtensions =
 
   has_and_belongs_to_many: (name, options = {}) -> null
     # TODO: Implement this.
+
+Utilities.mixin Object.prototype, ObjectExtensions
