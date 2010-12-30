@@ -53,4 +53,11 @@ Utilities =
   is_undefined: (value) ->
     value is undefined
 
+  mixin: (object, mixins...) ->
+    for hash in mixins
+      for key, value of hash
+        object[key] = value
+    return object
+
+
 ROOT.Utilities = Utilities

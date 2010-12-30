@@ -49,3 +49,6 @@ describe 'Utilities', ->
 
   it "should check if a value is a regular expression", ->
     expect(Utilities.is_regexp //).toBe(true)
+
+  it "should mixin objects into an object", ->
+    expect(Utilities.mixin({}, {title: "test" })).toEqual({ title: "test" })
