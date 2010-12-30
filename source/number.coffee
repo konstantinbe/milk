@@ -22,3 +22,5 @@
 NumberExtensions =
   times: (count) ->
     # TODO: Implement this.
+
+Number.mixin NumberExtensions
