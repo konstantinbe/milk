@@ -24,15 +24,17 @@ describe 'Array extended by Milk', ->
     expect([1, 2, 3].first()).toBe(1)
     expect([].first()).toBe(undefined)
 
-  it "should return first N elements", ->
+  it "should return the first N elements", ->
     expect([1, 2, 3].first(0)).toEqual([])
     expect([1, 2, 3].first(1)).toEqual([1])
     expect([1, 2, 3].first(2)).toEqual([1, 2])
     expect([1, 2, 3].first(3)).toEqual([1, 2, 3])
     expect([1, 2, 3].first(10)).toEqual([1, 2, 3])
 
-  it "should return rest elements", ->
+  it "should return the rest elements", ->
     expect([1, 2, 3].rest()).toEqual([2, 3])
+
+  it "should return the rest elements starting at a specified index", ->
     expect([1, 2, 3].rest(0)).toEqual([1, 2, 3])
     expect([1, 2, 3].rest(2)).toEqual([3])
     expect([1, 2, 3].rest(3)).toEqual([])
