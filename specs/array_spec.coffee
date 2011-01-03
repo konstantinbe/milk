@@ -19,34 +19,41 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-describe 'Array extended by Milk', ->
-  it "should return the first element", ->
-    expect([1, 2, 3].first()).toBe(1)
-    expect([].first()).toBe(undefined)
+describe 'Array, extended by Milk', ->
 
-  it "should return the first N elements", ->
-    expect([1, 2, 3].first(0)).toEqual([])
-    expect([1, 2, 3].first(1)).toEqual([1])
-    expect([1, 2, 3].first(2)).toEqual([1, 2])
-    expect([1, 2, 3].first(3)).toEqual([1, 2, 3])
-    expect([1, 2, 3].first(10)).toEqual([1, 2, 3])
+  describe 'first([count])', ->
 
-  it "should return the rest elements", ->
-    expect([1, 2, 3].rest()).toEqual([2, 3])
+    it "returns the first element if |count| is not given", ->
+      expect([1, 2, 3].first()).toBe(1)
+      expect([].first()).toBe(undefined)
 
-  it "should return the rest elements starting at a specified index", ->
-    expect([1, 2, 3].rest(0)).toEqual([1, 2, 3])
-    expect([1, 2, 3].rest(2)).toEqual([3])
-    expect([1, 2, 3].rest(3)).toEqual([])
-    expect([1, 2, 3].rest(10)).toEqual([])
+    it "returns an array containing the first N elements if |count| = N is given", ->
+      expect([1, 2, 3].first(0)).toEqual([])
+      expect([1, 2, 3].first(1)).toEqual([1])
+      expect([1, 2, 3].first(2)).toEqual([1, 2])
+      expect([1, 2, 3].first(3)).toEqual([1, 2, 3])
+      expect([1, 2, 3].first(10)).toEqual([1, 2, 3])
 
-  it "should return the last element", ->
-    expect([1, 2, 3].last()).toBe(3)
-    expect([].last()).toBe(undefined)
+  describe 'rest(index = 1)', ->
 
-  it "should return the last N elements", ->
-    expect([1, 2, 3].last(0)).toEqual([])
-    expect([1, 2, 3].last(1)).toEqual([3])
-    expect([1, 2, 3].last(2)).toEqual([2, 3])
-    expect([1, 2, 3].last(3)).toEqual([1, 2, 3])
-    expect([1, 2, 3].last(10)).toEqual([1, 2, 3])
+    it "returns an array containing all but the first element if |index| is not given", ->
+      expect([1, 2, 3].rest()).toEqual([2, 3])
+
+    it "returns an array containing all elements starting at the specified |index|", ->
+      expect([1, 2, 3].rest(0)).toEqual([1, 2, 3])
+      expect([1, 2, 3].rest(2)).toEqual([3])
+      expect([1, 2, 3].rest(3)).toEqual([])
+      expect([1, 2, 3].rest(10)).toEqual([])
+
+  describe 'last([count])', ->
+
+    it "returns the last element if |count| is not given", ->
+      expect([1, 2, 3].last()).toBe(3)
+      expect([].last()).toBe(undefined)
+
+    it "returns an array containing the last N elements if |count| = N is given", ->
+      expect([1, 2, 3].last(0)).toEqual([])
+      expect([1, 2, 3].last(1)).toEqual([3])
+      expect([1, 2, 3].last(2)).toEqual([2, 3])
+      expect([1, 2, 3].last(3)).toEqual([1, 2, 3])
+      expect([1, 2, 3].last(10)).toEqual([1, 2, 3])
