@@ -19,8 +19,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-ROOT = exports ? this
-
 Utilities =
   is_object: (value) ->
     value?
@@ -54,10 +52,10 @@ Utilities =
     value is undefined
 
   mixin: (object, mixins...) ->
-    for hash in mixins
-      for key, value of hash
+    for mixin in mixins
+      for key, value of mixin
         object[key] = value
     return object
 
-
+ROOT = exports ? this
 ROOT.Utilities = Utilities
