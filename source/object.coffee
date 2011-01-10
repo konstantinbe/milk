@@ -44,17 +44,19 @@ ObjectExtensions =
   responds_to: (method) ->
     # TODO: Implement this.
 
-  mixin: (objects...) ->
-    for object in objects
-      for key, value of object
+  mixin: (mixins...) ->
+    for mixin in mixins
+      for key, value of mixin
         this[key] = value
     return this
 
   merge: (objects...) ->
     for object in objects
       for key, value of object
-        this[key] ?= value
+        this[key] = value
     return this
+
+
 
   has: (name, options = {}) ->
     options['access'] ?= READ | WRITE
