@@ -83,7 +83,7 @@ Collection =
     @any (current_value) ->
       current_value is value
 
-  invoke: (method, method_arguments...) ->
+  invoke: (method, parameters...) ->
     # TODO: Implement this.
 
   pluck: (key) ->
@@ -101,3 +101,6 @@ Collection =
 
   empty: () ->
     @size() is 0
+
+ROOT = exports ? this
+ROOT.Collection = Collection
