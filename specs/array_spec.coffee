@@ -57,3 +57,15 @@ describe 'Array, extended by Milk', ->
       expect([1, 2, 3].last(2)).toEqual([2, 3])
       expect([1, 2, 3].last(3)).toEqual([1, 2, 3])
       expect([1, 2, 3].last(10)).toEqual([1, 2, 3])
+
+  describe 'compact()', ->
+
+    it 'returns a copy of the array', ->
+      array = [1, 2, 3]
+      expect(array.compact()).not.toBe(array)
+
+    it 'removes all null values', ->
+      expect([null, 1, null, 2, null, 3, null].compact()).toEqual([1, 2, 3])
+
+    it 'removes all undefined values', ->
+      expect([undefined, 1, undefined, 2, undefined, 3, undefined].compact()).toEqual([1, 2, 3])

@@ -34,7 +34,8 @@ ArrayExtensions =
     @slice -count
 
   compact: () ->
-    # TODO: Implement this.
+    this.filter (value) ->
+      value?
 
   flatten: () ->
     # TODO: Implement this.
@@ -100,4 +101,5 @@ ArrayExtensions =
   # * slice
   # * ...
 
+Array::mixin Collection
 Array::mixin ArrayExtensions
