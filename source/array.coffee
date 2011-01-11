@@ -44,16 +44,16 @@ ArrayExtensions =
     result
 
   with: (values...) ->
-    @clone().add values...
+    @with_many values
 
   with_many: (collections...) ->
     @clone().add_many collections...
 
   without: (values...) ->
-    # TODO: Implement this.
+    @without_many values
 
   without_many: (collections...) ->
-    # TODO: Implement this.
+    @clone().remove_many collections...
 
   unique: (sorted = no) ->
     # TODO: Implement this.
@@ -68,13 +68,13 @@ ArrayExtensions =
     # TODO: Implement this.
 
   index_of: (value) ->
-    # TODO: Implement this.
+    @indexOf value
 
   last_index_of: (value) ->
-    # TODO: Implement this.
+    @lastIndexOf value
 
   add: (values...) ->
-    @push values...
+    @add_many values
     this
 
   add_many: (collections...) ->
@@ -90,21 +90,27 @@ ArrayExtensions =
     # TODO: Implement this.
 
   remove: (values...) ->
-    # TODO: Implement this.
-
-  remove_at: (indexes...) ->
-    # TODO: Implement this.
+    @remove_many values
 
   remove_many: (collections...) ->
+    collections.each (collection) =>
+      collection.each (value) =>
+        index = @index_of value
+        while index >= 0
+          @splice index, 1
+          index = @index_of value
+    this
+
+  remove_at: (indexes...) ->
     # TODO: Implement this.
 
   replace: (value, replacement) ->
     # TODO: Implement this.
 
-  replace_at: (index, replacement) ->
+  replace_many: (values, replacements) ->
     # TODO: Implement this.
 
-  replace_many: (values, replacements) ->
+  replace_at: (index, replacement) ->
     # TODO: Implement this.
 
   clone: () ->

@@ -85,14 +85,14 @@ describe 'Array, extended by Milk', ->
 
     it 'returns a new array without modifying the receiver', ->
       array = [1, 2, 3]
-      expect(array.with(4)).not.toBe array
+      expect(array.with 4).not.toBe array
       expect(array).toEqual [1, 2, 3]
 
     it 'adds one value to the end', ->
-      expect([1, 2, 3].with(4)).toEqual [1, 2, 3, 4]
+      expect([1, 2, 3].with 4).toEqual [1, 2, 3, 4]
 
-    it 'adds multiple values to the end', ->
-      expect([1, 2, 3].with(4, 5, 6)).toEqual [1, 2, 3, 4, 5, 6]
+    it 'adds many values to the end', ->
+      expect([1, 2, 3].with 4, 5, 6).toEqual [1, 2, 3, 4, 5, 6]
 
     it 'adds nothing to the end if no value is given', ->
       expect([1, 2, 3].with()).toEqual [1, 2, 3]
@@ -101,14 +101,52 @@ describe 'Array, extended by Milk', ->
 
     it 'returns a new array without modifying the receiver', ->
       array = [1, 2, 3]
-      expect(array.with_many([4])).not.toBe array
+      expect(array.with_many [4]).not.toBe array
       expect(array).toEqual [1, 2, 3]
 
     it 'adds all values from one collection to the end', ->
-      expect([1, 2, 3].with_many([4, 5, 6])).toEqual [1, 2, 3, 4, 5, 6]
+      expect([1, 2, 3].with_many [4, 5, 6]).toEqual [1, 2, 3, 4, 5, 6]
 
-    it 'adds all values from multiple collections to the end', ->
-      expect([1, 2, 3].with_many([4], [5, 6])).toEqual [1, 2, 3, 4, 5, 6]
+    it 'adds all values from many collections to the end', ->
+      expect([1, 2, 3].with_many [4], [5, 6]).toEqual [1, 2, 3, 4, 5, 6]
 
     it 'adds nothing to the end if no collection is given', ->
       expect([1, 2, 3].with_many()).toEqual [1, 2, 3]
+
+  describe 'without(values...)', ->
+
+    it 'returns a new array without modifying the receiver', ->
+      array = [1, 2, 3]
+      expect(array.without 3).not.toBe array
+      expect(array).toEqual [1, 2, 3]
+
+    it 'removes all occurences of one value', ->
+      expect([1, 2, 3, 2].without 2).toEqual [1, 3]
+
+    it 'removes all occurences of many values', ->
+      expect([1, 2, 3, 2].without 1, 2, 3).toEqual []
+
+    it 'removes nothing if the value is not in the array', ->
+      expect([1, 2, 3].without 4).toEqual [1, 2, 3]
+
+    it 'removes nothing if no value is given', ->
+      expect([1, 2, 3].without()).toEqual [1, 2, 3]
+
+  describe 'without_many(collections...)', ->
+
+    it 'returns a new array without modifying the receiver', ->
+      array = [1, 2, 3]
+      expect(array.without_many [3]).not.toBe array
+      expect(array).toEqual [1, 2, 3]
+
+    it 'removes all occurences of all values from one collection', ->
+      expect([1, 2, 3, 2].without_many [2, 3]).toEqual [1]
+
+    it 'removes all occurences of all values from many collections', ->
+      expect([1, 2, 3, 3].without_many [2], [3]).toEqual [1]
+
+    it 'removes nothing if no value from the collection is not in the array', ->
+      expect([1, 2, 3].without_many [4, 5]).toEqual [1, 2, 3]
+
+    it 'removes nothing if no collection is given', ->
+      expect([1, 2, 3].without_many()).toEqual [1, 2, 3]
