@@ -34,7 +34,7 @@ ArrayExtensions =
     @slice -count
 
   compact: () ->
-    this.filter (value) ->
+    @filter (value) ->
       value?
 
   flatten: () ->
