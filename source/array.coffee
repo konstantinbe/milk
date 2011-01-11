@@ -70,12 +70,14 @@ ArrayExtensions =
     # TODO: Implement this.
 
   add: (values...) ->
-    @push values... if @push?
-    # TODO: Implement fallback.
+    @push values...
+    this
 
   add_many: (collections...) ->
-    @concat collections... if @concat?
-    # TODO: Implement fallback.
+    collections.each (collection) =>
+      collection.each (value) =>
+        @push value
+    this
 
   insert_at: (index, values...) ->
     # TODO: Implement this.
