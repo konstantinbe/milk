@@ -67,12 +67,9 @@ Collection =
 
   inject: (initial, iterator) ->
     return @reduce initial, iterator if @reduce?
-    # fallback
     result = initial
-    index = 0
     @each (value) ->
-      result = iterator(result, value, index)
-      index += 1
+      result = iterator(result, value)
     result
 
   sort_by: (context, iterator) ->
