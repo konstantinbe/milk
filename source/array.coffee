@@ -40,10 +40,10 @@ ArrayExtensions =
   flatten: () ->
 
   with: (values...) ->
-    # TODO: Implement this.
+    @with_many values
 
-  with_many: (values...) ->
-    # TODO: Implement this.
+  with_many: (collections...) ->
+    [].concat collections...
 
   without: (values...) ->
     # TODO: Implement this.
