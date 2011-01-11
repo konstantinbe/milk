@@ -65,13 +65,13 @@ Collection =
     [iterator, context] = [context, undefined] unless iterator?
     # TODO: Implement this.
 
-  reduce: (initial, iterator) ->
-    reduced_value = initial
+  inject: (initial, iterator) ->
+    result = initial
     index = 0
     @each (value) ->
-      reduced_value = iterator(reduced_value, value, index)
+      result = iterator(result, value, index)
       index += 1
-    reduced_value
+    result
 
   sort_by: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
