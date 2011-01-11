@@ -66,6 +66,8 @@ Collection =
     # TODO: Implement this.
 
   inject: (initial, iterator) ->
+    return @reduce initial, iterator if @reduce?
+    # fallback
     result = initial
     index = 0
     @each (value) ->
