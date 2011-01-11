@@ -1,5 +1,6 @@
 body {
-  font-family: "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
+  font-family: "Menlo", "Calibri", "Arial", sans-serif;
+  font-size: 9pt;
 }
 
 
@@ -13,17 +14,17 @@ body {
 
 .run_spec {
   float:right;
+  display: none;
   padding-right: 5px;
   font-size: .8em;
-  text-decoration: none;
 }
 
 .jasmine_reporter {
-  margin: 0 5px;
+  margin: 20px;
 }
 
 .banner {
-  color: #303;
+  color: #333;
   background-color: #fef;
   padding: 5px;
 }
@@ -53,9 +54,12 @@ body {
 
 
 .suite {
-  border: 1px outset gray;
   margin: 5px 0;
-  padding-left: 1em;
+  padding-top: 10px;
+  margin-top: 20px;
+  padding-left: 20px;
+  font-weight: bold;
+  color: black;
 }
 
 .suite .suite {
@@ -63,7 +67,7 @@ body {
 }
 
 .suite.passed {
-  background-color: #dfd;
+  background-color: white;
 }
 
 .suite.failed {
@@ -72,42 +76,38 @@ body {
 
 .spec {
   margin: 5px;
-  padding-left: 1em;
+  padding-left: 20px;
   clear: both;
+  font-weight: normal;
+  color: #666;
 }
 
 .spec.failed, .spec.passed, .spec.skipped {
   padding-bottom: 5px;
-  border: 1px solid gray;
 }
 
 .spec.failed {
-  background-color: #fbb;
-  border-color: red;
+  color: red;
 }
 
 .spec.passed {
-  background-color: #bfb;
-  border-color: green;
+  color: green;
 }
 
 .spec.skipped {
-  background-color: #bbb;
+  color: yellow;
 }
 
 .messages {
-  border-left: 1px dashed gray;
   padding-left: 1em;
   padding-right: 1em;
 }
 
 .passed {
-  background-color: #cfc;
   display: none;
 }
 
 .failed {
-  background-color: #fbb;
 }
 
 .skipped {
@@ -137,7 +137,6 @@ body {
   margin-left: 10px;
   max-height: 5em;
   overflow: auto;
-  border: 1px inset red;
   padding: 1em;
   background: #eef;
 }
@@ -159,8 +158,15 @@ body {
 }
 
 .runner {
-  border: 1px solid gray;
   display: block;
   margin: 5px 0;
   padding: 2px 0 2px 10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
