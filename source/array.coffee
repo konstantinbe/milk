@@ -38,6 +38,11 @@ ArrayExtensions =
       value?
 
   flatten: () ->
+
+  with: (values...) ->
+    # TODO: Implement this.
+
+  with_many: (values...) ->
     # TODO: Implement this.
 
   without: (values...) ->
