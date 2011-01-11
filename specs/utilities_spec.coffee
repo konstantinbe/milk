@@ -20,35 +20,47 @@
 # THE SOFTWARE.
 
 describe 'Utilities', ->
-  it "should check if a value is undefined", ->
-    expect(Utilities.is_undefined undefined).toBe(true)
 
-  it "should check if a value is null", ->
-    expect(Utilities.is_null null).toBe(true)
+  describe 'is_undefined(value)', ->
+    it "checks if a value is undefined", ->
+      expect(Utilities.is_undefined undefined).toBe(true)
 
-  it "should check if a value is an object", ->
-    expect(Utilities.is_object {}).toBe(true)
+  describe 'is_null(value)', ->
+    it "checks if a value is null", ->
+      expect(Utilities.is_null null).toBe(true)
 
-  it "should check if a value is a function", ->
-    expect(Utilities.is_function () -> this).toBe(true)
+  describe 'is_object(value)', ->
+    it "checks if a value is an object", ->
+      expect(Utilities.is_object {}).toBe(true)
 
-  it "should check if a value is a string", ->
-    expect(Utilities.is_string "").toBe(true)
+  describe 'is_function(value)', ->
+    it "checks if a value is a function", ->
+      expect(Utilities.is_function () -> this).toBe(true)
 
-  it "should check if a value is boolean", ->
-    expect(Utilities.is_boolean yes).toBe(true)
+  describe 'is_string(value)', ->
+    it "checks if a value is a string", ->
+      expect(Utilities.is_string "").toBe(true)
 
-  it "should check if a value is a number", ->
-    expect(Utilities.is_number 1).toBe(true)
+  describe 'is_boolean(value)', ->
+    it "checks if a value is boolean", ->
+      expect(Utilities.is_boolean yes).toBe(true)
 
-  it "should check if a value is an array", ->
-    expect(Utilities.is_array []).toBe(true)
+  describe 'is_number(value)', ->
+    it "checks if a value is a number", ->
+      expect(Utilities.is_number 1).toBe(true)
 
-  it "should check if a value is a date", ->
-    expect(Utilities.is_date new Date()).toBe(true)
+  describe 'is_array(value)', ->
+    it "checks if a value is an array", ->
+      expect(Utilities.is_array []).toBe(true)
 
-  it "should check if a value is a regular expression", ->
-    expect(Utilities.is_regexp //).toBe(true)
+  describe 'is_date(value)', ->
+    it "checks if a value is a date", ->
+      expect(Utilities.is_date new Date()).toBe(true)
 
-  it "should mixin objects into an object", ->
-    expect(Utilities.mixin({}, {title: "test" })).toEqual({ title: "test" })
+  describe 'is_regexp(value)', ->
+    it "checks if a value is a regular expression", ->
+      expect(Utilities.is_regexp //).toBe(true)
+
+  describe 'mixin(mixins...)', ->
+    it "mixes all key value pairs of objects into an object", ->
+      expect(Utilities.mixin({}, {title: "test" })).toEqual({ title: "test" })
