@@ -78,3 +78,35 @@ describe 'Array, extended by Milk', ->
 
     it 'flattens an array', ->
       expect([1, [2], [3, [[[4]]]]].flatten()).toEqual [1, 2, 3, 4]
+
+  describe 'with(values...)', ->
+
+    it 'returns a new array without modifying the receiver', ->
+      array = [1, 2, 3]
+      expect(array.with(4)).not.toBe array
+      expect(array).toEqual [1, 2, 3]
+
+    it 'adds one value to the end', ->
+      expect([1, 2, 3].with(4)).toEqual [1, 2, 3, 4]
+
+    it 'adds multiple values to the end', ->
+      expect([1, 2, 3].with(4, 5, 6)).toEqual [1, 2, 3, 4, 5, 6]
+
+    it 'adds nothing to the end if no value is given', ->
+      expect([1, 2, 3].with()).toEqual [1, 2, 3]
+
+  describe 'with_many(collections...)', ->
+
+    it 'returns a new array without modifying the receiver', ->
+      array = [1, 2, 3]
+      expect(array.with_many([4])).not.toBe array
+      expect(array).toEqual [1, 2, 3]
+
+    it 'adds all values from one collection to the end', ->
+      expect([1, 2, 3].with_many([4, 5, 6])).toEqual [1, 2, 3, 4, 5, 6]
+
+    it 'adds all values from multiple collections to the end', ->
+      expect([1, 2, 3].with_many([4], [5, 6])).toEqual [1, 2, 3, 4, 5, 6]
+
+    it 'adds nothing to the end if no collection is given', ->
+      expect([1, 2, 3].with_many()).toEqual [1, 2, 3]

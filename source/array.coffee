@@ -44,10 +44,10 @@ ArrayExtensions =
     result
 
   with: (values...) ->
-    @with_many values
+    @clone().add values...
 
   with_many: (collections...) ->
-    [].concat collections...
+    @clone().add_many collections...
 
   without: (values...) ->
     # TODO: Implement this.
