@@ -101,6 +101,9 @@ ArrayExtensions =
   replace_many: (values, replacements) ->
     # TODO: Implement this.
 
+  clone: () ->
+    [].add_many this
+
   # native array methods:
   # * reserve
   # * join
