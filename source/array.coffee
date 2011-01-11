@@ -38,6 +38,10 @@ ArrayExtensions =
       value?
 
   flatten: () ->
+    result = []
+    @each (value) =>
+      if Utilities.is_array value then result.add_many value.flatten() else result.add value
+    result
 
   with: (values...) ->
     @with_many values
