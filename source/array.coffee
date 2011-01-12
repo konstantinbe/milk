@@ -114,7 +114,7 @@ ArrayExtensions =
   replace_many: (values, replacements) ->
     # TODO: Implement this.
 
-  replace_at: (index, replacement) ->
+  replace_at: (index, replacements...) ->
     # TODO: Implement this.
 
   clone: () ->
