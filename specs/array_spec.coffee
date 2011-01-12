@@ -150,3 +150,12 @@ describe 'Array, extended by Milk', ->
 
     it 'removes nothing if no collection is given', ->
       expect([1, 2, 3].without_many()).toEqual [1, 2, 3]
+
+  describe 'unique()', ->
+    it 'returns a new array without modifying the receiver', ->
+      array = [1, 2, 3, 3]
+      expect(array.unique()).not.toBe array
+      expect(array).toEqual [1, 2, 3, 3]
+
+    it 'removes all duplicates in an array', ->
+      expect([1, 1, 1, 2, 2, 2, 3, 3, 3].unique()).toEqual [1, 2, 3]

@@ -55,8 +55,12 @@ ArrayExtensions =
   without_many: (collections...) ->
     @clone().remove_many collections...
 
-  unique: (sorted = no) ->
-    # TODO: Implement this.
+  unique: () ->
+    result = @clone()
+    for i in [0..@length]
+      for j in [0..@length]
+        result.splice(j, 1) if i isnt j and result[j] is result[i]
+    result
 
   intersect: (arrays...) ->
     # TODO: Implement this.
