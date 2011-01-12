@@ -236,8 +236,48 @@ describe 'Array, extended by Milk', ->
   xdescribe 'insert_at(index, values...)'
   xdescribe 'insert_many_at(index, collections...)'
 
-  xdescribe 'remove(values...)'
-  xdescribe 'remove_many(collections...)'
+  describe 'remove(values...)', ->
+    it 'removes all occurences of one value', ->
+      array = [1, 2, 3, 2]
+      array.remove 2
+      expect(array).to_equal [1, 3]
+
+    it 'removes all occurences of many values', ->
+      array = [1, 2, 3, 2]
+      array.remove 1, 2, 3
+      expect(array).to_equal []
+
+    it 'removes nothing if the value is not in the array', ->
+      array = [1, 2, 3]
+      array.remove 4
+      expect(array).to_equal [1, 2, 3]
+
+    it 'removes nothing if no value is given', ->
+      array = [1, 2, 3]
+      array.remove()
+      expect(array).to_equal [1, 2, 3]
+
+  describe 'remove_many(collections...)', ->
+    it 'removes all occurences of all values from one collection', ->
+      array = [1, 2, 3, 2]
+      array.remove_many [2, 3]
+      expect(array).to_equal [1]
+
+    it 'removes all occurences of all values from many collections', ->
+      array = [1, 2, 3, 3]
+      array.remove_many [2], [3]
+      expect(array).to_equal [1]
+
+    it 'removes nothing if no value from the collection is not in the array', ->
+      array = [1, 2, 3]
+      array.remove_many [4, 5]
+      expect(array).to_equal [1, 2, 3]
+
+    it 'removes nothing if no collection is given', ->
+      array = [1, 2, 3]
+      array.remove()
+      expect(array).to_equal [1, 2, 3]
+
   xdescribe 'remove_at(index)'
 
   xdescribe 'replace(value, replacement)'
