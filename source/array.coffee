@@ -66,7 +66,7 @@ ArrayExtensions =
     # TODO: Implement this.
 
   unite: (arrays...) ->
-    # TODO: Implement this.
+    @concat(arrays...).unique()
 
   zip: (arrays...) ->
     # TODO: Implement this.

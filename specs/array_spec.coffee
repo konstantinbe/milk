@@ -161,7 +161,23 @@ describe 'Array, extended by Milk', ->
       expect([1, 1, 1, 2, 2, 2, 3, 3, 3].unique()).to_equal [1, 2, 3]
 
   xdescribe 'intersect(arrays...)'
-  xdescribe 'unite(arrays...)'
+
+  describe 'unite(arrays...)', ->
+
+    it 'returns a new array without modifying the receiver', ->
+      array = [1, 2, 3]
+      expect(array.unite [4, 5]).not.to_be array
+      expect(array).to_equal [1, 2, 3]
+
+    it 'appends one array', ->
+      expect([1, 2, 3].unite [4, 5, 6]).to_equal [1, 2, 3, 4, 5, 6]
+
+    it 'appends multiple arrays', ->
+      expect([1, 2, 3].unite [4], [5], [6]).to_equal [1, 2, 3, 4, 5, 6]
+
+    it 'removes duplicates after uniting all arrays', ->
+      expect([1, 1, 2, 2, 3, 3].unite [4, 4], [5, 5, 6, 6]).to_equal [1, 2, 3, 4, 5, 6]
+
   xdescribe 'zip(arrays...)'
 
   xdescribe 'index_of(value)'
