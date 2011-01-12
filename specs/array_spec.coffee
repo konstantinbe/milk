@@ -159,3 +159,27 @@ describe 'Array, extended by Milk', ->
 
     it 'removes all duplicates in an array', ->
       expect([1, 1, 1, 2, 2, 2, 3, 3, 3].unique()).to_equal [1, 2, 3]
+
+  xdescribe 'intersect(arrays...)'
+  xdescribe 'unite(arrays...)'
+  xdescribe 'zip(arrays...)'
+
+  xdescribe 'index_of(value)'
+  xdescribe 'last_index_of(value)'
+
+  xdescribe 'add(values...)'
+  xdescribe 'add_many(collections...)'
+
+  xdescribe 'insert_at(index, values...)'
+  xdescribe 'insert_many_at(index, collections...)'
+
+  xdescribe 'remove(values...)'
+  xdescribe 'remove_many(collections...)'
+  xdescribe 'remove_at(index)'
+
+  xdescribe 'replace(value, replacement)'
+  xdescribe 'replace_many(values, replacements)'
+  xdescribe 'replace_at(index, replacements...)'
+
+  xdescribe 'clone()'
+  xdescribe 'equals(array)'
