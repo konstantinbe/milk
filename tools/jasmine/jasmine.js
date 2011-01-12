@@ -349,11 +349,11 @@ jasmine.Spy.prototype.andCallFake = function(fakeFunc) {
  *
  * foo.bar();
  *
- * expect(foo.bar.callCount).toEqual(1);
+ * expect(foo.bar.callCount).to_equal(1);
  *
  * foo.bar.reset();
  *
- * expect(foo.bar.callCount).toEqual(0);
+ * expect(foo.bar.callCount).to_equal(0);
  */
 jasmine.Spy.prototype.reset = function() {
   this.wasCalled = false;
@@ -451,7 +451,7 @@ var spyOn = function(obj, methodName) {
  *
  * @example
  * it('should be true', function() {
- *   expect(true).toEqual(true);
+ *   expect(true).to_equal(true);
  * });
  *
  * @param {String} desc description of this specification
@@ -520,10 +520,10 @@ var waitsFor = function(latchFunction, optional_timeoutMessage, optional_timeout
  *
  * Used for spec setup, including validating assumptions.
  *
- * @param {Function} beforeEachFunction
+ * @param {Function} before_eachFunction
  */
-var beforeEach = function(beforeEachFunction) {
-  jasmine.getEnv().beforeEach(beforeEachFunction);
+var before_each = function(before_eachFunction) {
+  jasmine.getEnv().before_each(before_eachFunction);
 };
 
 /**
@@ -531,17 +531,17 @@ var beforeEach = function(beforeEachFunction) {
  *
  * Used for restoring any state that is hijacked during spec execution.
  *
- * @param {Function} afterEachFunction
+ * @param {Function} after_eachFunction
  */
-var afterEach = function(afterEachFunction) {
-  jasmine.getEnv().afterEach(afterEachFunction);
+var after_each = function(after_eachFunction) {
+  jasmine.getEnv().after_each(after_eachFunction);
 };
 
 /**
  * Defines a suite of specifications.
  *
  * Stores the description and all defined specs in the Jasmine environment as one suite of specs. Variables declared
- * are accessible by calls to beforeEach, it, and afterEach. Describe blocks can be nested, allowing for specialization
+ * are accessible by calls to before_each, it, and after_each. Describe blocks can be nested, allowing for specialization
  * of setup in some tests.
  *
  * @example
@@ -771,11 +771,11 @@ jasmine.Env.prototype.describe = function(description, specDefinitions) {
   return suite;
 };
 
-jasmine.Env.prototype.beforeEach = function(beforeEachFunction) {
+jasmine.Env.prototype.before_each = function(before_eachFunction) {
   if (this.currentSuite) {
-    this.currentSuite.beforeEach(beforeEachFunction);
+    this.currentSuite.before_each(before_eachFunction);
   } else {
-    this.currentRunner_.beforeEach(beforeEachFunction);
+    this.currentRunner_.before_each(before_eachFunction);
   }
 };
 
@@ -783,11 +783,11 @@ jasmine.Env.prototype.currentRunner = function () {
   return this.currentRunner_;
 };
 
-jasmine.Env.prototype.afterEach = function(afterEachFunction) {
+jasmine.Env.prototype.after_each = function(after_eachFunction) {
   if (this.currentSuite) {
-    this.currentSuite.afterEach(afterEachFunction);
+    this.currentSuite.after_each(after_eachFunction);
   } else {
-    this.currentRunner_.afterEach(afterEachFunction);
+    this.currentRunner_.after_each(after_eachFunction);
   }
 
 };
@@ -1151,33 +1151,33 @@ jasmine.Matchers.matcherFn_ = function(matcherName, matcherFunction) {
 
 
 /**
- * toBe: compares the actual to the expected using ===
+ * to_be: compares the actual to the expected using ===
  * @param expected
  */
-jasmine.Matchers.prototype.toBe = function(expected) {
+jasmine.Matchers.prototype.to_be = function(expected) {
   return this.actual === expected;
 };
 
 /**
  * toNotBe: compares the actual to the expected using !==
  * @param expected
- * @deprecated as of 1.0. Use not.toBe() instead.
+ * @deprecated as of 1.0. Use not.to_be() instead.
  */
 jasmine.Matchers.prototype.toNotBe = function(expected) {
   return this.actual !== expected;
 };
 
 /**
- * toEqual: compares the actual to the expected using common sense equality. Handles Objects, Arrays, etc.
+ * to_equal: compares the actual to the expected using common sense equality. Handles Objects, Arrays, etc.
  *
  * @param expected
  */
-jasmine.Matchers.prototype.toEqual = function(expected) {
+jasmine.Matchers.prototype.to_equal = function(expected) {
   return this.env.equals_(this.actual, expected);
 };
 
 /**
- * toNotEqual: compares the actual to the expected using the ! of jasmine.Matchers.toEqual
+ * toNotEqual: compares the actual to the expected using the ! of jasmine.Matchers.to_equal
  * @param expected
  * @deprecated as of 1.0. Use not.toNotEqual() instead.
  */
@@ -1191,14 +1191,14 @@ jasmine.Matchers.prototype.toNotEqual = function(expected) {
  *
  * @param expected
  */
-jasmine.Matchers.prototype.toMatch = function(expected) {
+jasmine.Matchers.prototype.to_match = function(expected) {
   return new RegExp(expected).test(this.actual);
 };
 
 /**
- * Matcher that compares the actual to the expected using the boolean inverse of jasmine.Matchers.toMatch
+ * Matcher that compares the actual to the expected using the boolean inverse of jasmine.Matchers.to_match
  * @param expected
- * @deprecated as of 1.0. Use not.toMatch() instead.
+ * @deprecated as of 1.0. Use not.to_match() instead.
  */
 jasmine.Matchers.prototype.toNotMatch = function(expected) {
   return !(new RegExp(expected).test(this.actual));
@@ -1207,28 +1207,28 @@ jasmine.Matchers.prototype.toNotMatch = function(expected) {
 /**
  * Matcher that compares the actual to jasmine.undefined.
  */
-jasmine.Matchers.prototype.toBeDefined = function() {
+jasmine.Matchers.prototype.to_be_defined = function() {
   return (this.actual !== jasmine.undefined);
 };
 
 /**
  * Matcher that compares the actual to jasmine.undefined.
  */
-jasmine.Matchers.prototype.toBeUndefined = function() {
+jasmine.Matchers.prototype.to_beUndefined = function() {
   return (this.actual === jasmine.undefined);
 };
 
 /**
  * Matcher that compares the actual to null.
  */
-jasmine.Matchers.prototype.toBeNull = function() {
+jasmine.Matchers.prototype.to_be_null = function() {
   return (this.actual === null);
 };
 
 /**
  * Matcher that boolean not-nots the actual.
  */
-jasmine.Matchers.prototype.toBeTruthy = function() {
+jasmine.Matchers.prototype.to_be_truthy = function() {
   return !!this.actual;
 };
 
@@ -1236,7 +1236,7 @@ jasmine.Matchers.prototype.toBeTruthy = function() {
 /**
  * Matcher that boolean nots the actual.
  */
-jasmine.Matchers.prototype.toBeFalsy = function() {
+jasmine.Matchers.prototype.to_be_falsy = function() {
   return !this.actual;
 };
 
@@ -1344,7 +1344,7 @@ jasmine.Matchers.prototype.wasNotCalledWith = function() {
  *
  * @param {Object} expected
  */
-jasmine.Matchers.prototype.toContain = function(expected) {
+jasmine.Matchers.prototype.to_contain = function(expected) {
   return this.env.contains_(this.actual, expected);
 };
 
@@ -1358,11 +1358,11 @@ jasmine.Matchers.prototype.toNotContain = function(expected) {
   return !this.env.contains_(this.actual, expected);
 };
 
-jasmine.Matchers.prototype.toBeLessThan = function(expected) {
+jasmine.Matchers.prototype.to_be_less_than = function(expected) {
   return this.actual < expected;
 };
 
-jasmine.Matchers.prototype.toBeGreaterThan = function(expected) {
+jasmine.Matchers.prototype.to_be_greater_than = function(expected) {
   return this.actual > expected;
 };
 
@@ -1371,7 +1371,7 @@ jasmine.Matchers.prototype.toBeGreaterThan = function(expected) {
  *
  * @param {String} expected
  */
-jasmine.Matchers.prototype.toThrow = function(expected) {
+jasmine.Matchers.prototype.to_throw = function(expected) {
   var result = false;
   var exception;
   if (typeof this.actual != 'function') {
@@ -1788,14 +1788,14 @@ jasmine.Runner.prototype.execute = function() {
   });
 };
 
-jasmine.Runner.prototype.beforeEach = function(beforeEachFunction) {
-  beforeEachFunction.typeName = 'beforeEach';
-  this.before_.splice(0,0,beforeEachFunction);
+jasmine.Runner.prototype.before_each = function(before_eachFunction) {
+  before_eachFunction.typeName = 'before_each';
+  this.before_.splice(0,0,before_eachFunction);
 };
 
-jasmine.Runner.prototype.afterEach = function(afterEachFunction) {
-  afterEachFunction.typeName = 'afterEach';
-  this.after_.splice(0,0,afterEachFunction);
+jasmine.Runner.prototype.after_each = function(after_eachFunction) {
+  after_eachFunction.typeName = 'after_each';
+  this.after_.splice(0,0,after_eachFunction);
 };
 
 
@@ -2121,14 +2121,14 @@ jasmine.Suite.prototype.finish = function(onComplete) {
   }
 };
 
-jasmine.Suite.prototype.beforeEach = function(beforeEachFunction) {
-  beforeEachFunction.typeName = 'beforeEach';
-  this.before_.unshift(beforeEachFunction);
+jasmine.Suite.prototype.before_each = function(before_eachFunction) {
+  before_eachFunction.typeName = 'before_each';
+  this.before_.unshift(before_eachFunction);
 };
 
-jasmine.Suite.prototype.afterEach = function(afterEachFunction) {
-  afterEachFunction.typeName = 'afterEach';
-  this.after_.unshift(afterEachFunction);
+jasmine.Suite.prototype.after_each = function(after_eachFunction) {
+  after_eachFunction.typeName = 'after_each';
+  this.after_.unshift(after_eachFunction);
 };
 
 jasmine.Suite.prototype.results = function() {

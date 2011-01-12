@@ -23,44 +23,44 @@ describe 'Utilities', ->
 
   describe 'is_undefined(value)', ->
     it "checks if a value is undefined", ->
-      expect(Utilities.is_undefined undefined).toBe(true)
+      expect(Utilities.is_undefined undefined).to_be(true)
 
   describe 'is_null(value)', ->
     it "checks if a value is null", ->
-      expect(Utilities.is_null null).toBe(true)
+      expect(Utilities.is_null null).to_be(true)
 
   describe 'is_object(value)', ->
     it "checks if a value is an object", ->
-      expect(Utilities.is_object {}).toBe(true)
+      expect(Utilities.is_object {}).to_be(true)
 
   describe 'is_function(value)', ->
     it "checks if a value is a function", ->
-      expect(Utilities.is_function () -> this).toBe(true)
+      expect(Utilities.is_function () -> this).to_be(true)
 
   describe 'is_string(value)', ->
     it "checks if a value is a string", ->
-      expect(Utilities.is_string "").toBe(true)
+      expect(Utilities.is_string "").to_be(true)
 
   describe 'is_boolean(value)', ->
     it "checks if a value is boolean", ->
-      expect(Utilities.is_boolean yes).toBe(true)
+      expect(Utilities.is_boolean yes).to_be(true)
 
   describe 'is_number(value)', ->
     it "checks if a value is a number", ->
-      expect(Utilities.is_number 1).toBe(true)
+      expect(Utilities.is_number 1).to_be(true)
 
   describe 'is_array(value)', ->
     it "checks if a value is an array", ->
-      expect(Utilities.is_array []).toBe(true)
+      expect(Utilities.is_array []).to_be(true)
 
   describe 'is_date(value)', ->
     it "checks if a value is a date", ->
-      expect(Utilities.is_date new Date()).toBe(true)
+      expect(Utilities.is_date new Date()).to_be(true)
 
   describe 'is_regexp(value)', ->
     it "checks if a value is a regular expression", ->
-      expect(Utilities.is_regexp //).toBe(true)
+      expect(Utilities.is_regexp //).to_be(true)
 
   describe 'mixin(mixins...)', ->
     it "mixes all key value pairs of objects into an object", ->
-      expect(Utilities.mixin({}, {title: "test" })).toEqual({ title: "test" })
+      expect(Utilities.mixin({}, {title: "test" })).to_equal({ title: "test" })
