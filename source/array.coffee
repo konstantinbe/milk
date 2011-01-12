@@ -65,8 +65,8 @@ ArrayExtensions =
   intersect: (arrays...) ->
     # TODO: Implement this.
 
-  append: (arrays...) ->
-    # TODO: Implement this
+  unite: (arrays...) ->
+    # TODO: Implement this.
 
   zip: (arrays...) ->
     # TODO: Implement this.
