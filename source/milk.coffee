@@ -19,10 +19,4 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require 'utilities'
-require 'object'
-require 'function'
-require 'number'
-require 'string'
-require 'collection'
-require 'array'
+this.exports = this unless exports?
