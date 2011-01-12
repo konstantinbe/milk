@@ -22,7 +22,6 @@
 describe 'Array, extended by Milk', ->
 
   describe 'first([count])', ->
-
     it "returns the first element if |count| is not given", ->
       expect([1, 2, 3].first()).to_be 1
       expect([].first()).to_be undefined
@@ -35,7 +34,6 @@ describe 'Array, extended by Milk', ->
       expect([1, 2, 3].first 10).to_equal [1, 2, 3]
 
   describe 'rest(index = 1)', ->
-
     it "returns a new array containing all but the first element if |index| is not given", ->
       expect([1, 2, 3].rest()).to_equal [2, 3]
 
@@ -46,7 +44,6 @@ describe 'Array, extended by Milk', ->
       expect([1, 2, 3].rest 10).to_equal []
 
   describe 'last([count])', ->
-
     it "returns the last element if |count| is not given", ->
       expect([1, 2, 3].last()).to_be 3
       expect([].last()).to_be undefined
@@ -59,7 +56,6 @@ describe 'Array, extended by Milk', ->
       expect([1, 2, 3].last 10).to_equal [1, 2, 3]
 
   describe 'compact()', ->
-
     it 'returns a new array without modifying the receiver', ->
       array = [1, 2, 3]
       expect(array.compact()).not.to_be array
@@ -72,7 +68,6 @@ describe 'Array, extended by Milk', ->
       expect([undefined, 1, undefined, 2, undefined, 3, undefined].compact()).to_equal [1, 2, 3]
 
   describe 'flatten()', ->
-
     it 'returns a new array without modifying the receiver', ->
       array = [1, 2, 3]
       expect(array.flatten()).not.to_be array
@@ -82,7 +77,6 @@ describe 'Array, extended by Milk', ->
       expect([1, [2], [3, [[[4]]]]].flatten()).to_equal [1, 2, 3, 4]
 
   describe 'with(values...)', ->
-
     it 'returns a new array without modifying the receiver', ->
       array = [1, 2, 3]
       expect(array.with 4).not.to_be array
@@ -98,7 +92,6 @@ describe 'Array, extended by Milk', ->
       expect([1, 2, 3].with()).to_equal [1, 2, 3]
 
   describe 'with_many(collections...)', ->
-
     it 'returns a new array without modifying the receiver', ->
       array = [1, 2, 3]
       expect(array.with_many [4]).not.to_be array
@@ -114,7 +107,6 @@ describe 'Array, extended by Milk', ->
       expect([1, 2, 3].with_many()).to_equal [1, 2, 3]
 
   describe 'without(values...)', ->
-
     it 'returns a new array without modifying the receiver', ->
       array = [1, 2, 3]
       expect(array.without 3).not.to_be array
@@ -133,7 +125,6 @@ describe 'Array, extended by Milk', ->
       expect([1, 2, 3].without()).to_equal [1, 2, 3]
 
   describe 'without_many(collections...)', ->
-
     it 'returns a new array without modifying the receiver', ->
       array = [1, 2, 3]
       expect(array.without_many [3]).not.to_be array
@@ -163,7 +154,6 @@ describe 'Array, extended by Milk', ->
   xdescribe 'intersect(arrays...)'
 
   describe 'unite(arrays...)', ->
-
     it 'returns a new array without modifying the receiver', ->
       array = [1, 2, 3]
       expect(array.unite [4, 5]).not.to_be array
@@ -181,7 +171,6 @@ describe 'Array, extended by Milk', ->
   xdescribe 'zip(arrays...)'
 
   describe 'index_of(value)', ->
-
     it 'returns the index of value', ->
       expect([1, 2, 3].index_of 2).to_be 1
 
