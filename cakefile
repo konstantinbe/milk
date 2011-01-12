@@ -19,11 +19,11 @@ open = (args) ->
 task 'build', 'build Milk', ->
   files = fs.readdirSync 'source'
   files = ('source/' + file for file in files when file.match(/\.coffee$/))
-  coffee ['-c', '--output', 'builds'].concat(files)
+  coffee ['-c', '--output', 'build'].concat(files)
 
 task 'spec', 'run specs', ->
   invoke 'build'
   files = fs.readdirSync 'specs'
   files = ('specs/' + file for file in files when file.match(/\.coffee$/))
-  coffee ['-c', '--output', 'builds'].concat(files)
+  coffee ['-c', '--output', 'build'].concat(files)
   open ['specs/run.html']
