@@ -201,8 +201,37 @@ describe 'Array, extended by Milk', ->
     it 'returns -1 if the value is not contained in the array', ->
       expect([1, 2, 3].last_index_of 4).to_be -1
 
-  xdescribe 'add(values...)'
-  xdescribe 'add_many(collections...)'
+  describe 'add(values...)', ->
+    it 'adds one value to the end', ->
+      array = [1, 2, 3]
+      array.add 4
+      expect(array).to_equal [1, 2, 3, 4]
+
+    it 'adds many values to the end', ->
+      array = [1, 2, 3]
+      array.add 4, 5, 6
+      expect(array).to_equal [1, 2, 3, 4, 5, 6]
+
+    it 'adds nothing to the end if no value is given', ->
+      array = [1, 2, 3]
+      array.add()
+      expect(array).to_equal [1, 2, 3]
+
+  describe 'add_many(collections...)', ->
+    it 'adds all values from one collection to the end', ->
+      array = [1, 2, 3]
+      array.add_many [4, 5, 6]
+      expect(array).to_equal [1, 2, 3, 4, 5, 6]
+
+    it 'adds all values from many collections to the end', ->
+      array = [1, 2, 3]
+      array.add_many [4], [5, 6]
+      expect(array).to_equal [1, 2, 3, 4, 5, 6]
+
+    it 'adds nothing to the end if no collection is given', ->
+      array = [1, 2, 3]
+      array.add_many()
+      expect(array).to_equal [1, 2, 3]
 
   xdescribe 'insert_at(index, values...)'
   xdescribe 'insert_many_at(index, collections...)'
