@@ -180,8 +180,26 @@ describe 'Array, extended by Milk', ->
 
   xdescribe 'zip(arrays...)'
 
-  xdescribe 'index_of(value)'
-  xdescribe 'last_index_of(value)'
+  describe 'index_of(value)', ->
+
+    it 'returns the index of value', ->
+      expect([1, 2, 3].index_of 2).to_be 1
+
+    it 'returns the first found index of value if the value is contained more than once in the array', ->
+      expect([1, 2, 3, 2].index_of 2).to_be 1
+
+    it 'returns -1 if the value is not contained in the array', ->
+      expect([1, 2, 3].index_of 4).to_be -1
+
+  describe 'last_index_of(value)', ->
+    it 'returns the index of value', ->
+      expect([1, 2, 3].last_index_of 2).to_be 1
+
+    it 'returns the last found index of value if the value is contained more than once in the array', ->
+      expect([1, 2, 3, 2].last_index_of 2).to_be 3
+
+    it 'returns -1 if the value is not contained in the array', ->
+      expect([1, 2, 3].last_index_of 4).to_be -1
 
   xdescribe 'add(values...)'
   xdescribe 'add_many(collections...)'
