@@ -222,8 +222,39 @@ describe 'Array, extended by Milk', ->
       array.add_many()
       expect(array).to_equal [1, 2, 3]
 
-  xdescribe 'insert_at(index, values...)'
-  xdescribe 'insert_many_at(index, collections...)'
+  describe 'insert(value, options = at: 0)', ->
+    it 'inserts the value at a specified index', ->
+      array = [1, 2, 4]
+      array.insert 3, at: 2
+      expect(array).to_equal [1, 2, 3, 4]
+
+    it 'inserts the value at the beginning if optional parameter at is not given', ->
+      array = [1, 2, 3]
+      array.insert 0
+      expect(array).to_equal [0, 1, 2, 3]
+
+    it 'throws an exception if value is undefined', ->
+      expect(-> [1, 2, 3].insert undefined).to_throw 'InvalidParameterException'
+
+    it 'throws an exception if value is not given', ->
+      expect(-> [1, 2, 3].insert()).to_throw 'InvalidParameterException'
+
+  describe 'insert_many(collection, options = at: 0)', ->
+    it 'inserts the collection at a specified index', ->
+      array = [1, 2, 5]
+      array.insert_many [3, 4], at: 2
+      expect(array).to_equal [1, 2, 3, 4, 5]
+
+    it 'inserts the collection at the beginning if optional parameter at is not given', ->
+      array = [1, 2, 3]
+      array.insert_many [0]
+      expect(array).to_equal [0, 1, 2, 3]
+
+    it 'throws an exception if value is undefined', ->
+      expect(-> [1, 2, 3].insert_many undefined).to_throw 'InvalidParameterException'
+
+    it 'throws an exception if value is not given', ->
+      expect(-> [1, 2, 3].insert_many()).to_throw 'InvalidParameterException'
 
   describe 'remove(values...)', ->
     it 'removes all occurences of one value', ->
