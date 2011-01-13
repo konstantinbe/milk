@@ -111,7 +111,11 @@ ArrayExtensions =
     this
 
   remove_at: (indexes...) ->
-    # TODO: Implement this.
+    indexes.sort()
+    offset = 0
+    indexes.each (index) =>
+      @splice(index - offset, 1)
+      offset += 1
 
   replace: (value, replacement) ->
     # TODO: Implement this.

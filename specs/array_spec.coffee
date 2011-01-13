@@ -152,6 +152,7 @@ describe 'Array, extended by Milk', ->
       expect([1, 1, 1, 2, 2, 2, 3, 3, 3].unique()).to_equal [1, 2, 3]
 
   xdescribe 'intersect(arrays...)'
+    # TODO: Implement all() and any() of Collection first.
 
   describe 'unite(arrays...)', ->
     it 'returns a new array without modifying the receiver', ->
@@ -169,6 +170,7 @@ describe 'Array, extended by Milk', ->
       expect([1, 1, 2, 2, 3, 3].unite [4, 4], [5, 5, 6, 6]).to_equal [1, 2, 3, 4, 5, 6]
 
   xdescribe 'zip(arrays...)'
+    # TODO: Implement max() of Collection first.
 
   describe 'index_of(value)', ->
     it 'returns the index of value', ->
@@ -230,7 +232,7 @@ describe 'Array, extended by Milk', ->
 
     it 'inserts the value at the beginning if optional parameter at is not given', ->
       array = [1, 2, 3]
-      array.insert 0
+      array.insert 0, 0
       expect(array).to_equal [0, 1, 2, 3]
 
     it 'throws an exception if value is undefined', ->
@@ -298,7 +300,21 @@ describe 'Array, extended by Milk', ->
       array.remove()
       expect(array).to_equal [1, 2, 3]
 
-  xdescribe 'remove_at(index)'
+  describe 'remove_at(indexes...)', ->
+    it 'removes value at specified index', ->
+      array = [1, 2, 3]
+      array.remove_at 1
+      expect(array).to_equal [1, 3]
+
+    it 'removes values at specified indexes', ->
+      array = [1, 2, 3, 4, 5]
+      array.remove_at 1, 2, 3
+      expect(array).to_equal [1, 5]
+
+    it 'removes values at specified indexes even if indexes are given unsorted', ->
+      array = [1, 2, 3, 4, 5]
+      array.remove_at 2, 1, 3
+      expect(array).to_equal [1, 5]
 
   xdescribe 'replace(value, replacement)'
   xdescribe 'replace_many(values, replacements)'
