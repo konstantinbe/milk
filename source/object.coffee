@@ -58,21 +58,21 @@ ObjectExtensions =
 
 
 
-  has: (name, options = {}) ->
-    options['access'] ?= READ | WRITE
-    options['default'] ?= null
-    options['variable'] ?= '_' + name
-    options['getter'] ?= 'get_' + name
-    options['setter'] ?= 'set_' + name
+  has: (name, params = {}) ->
+    params['access'] ?= READ | WRITE
+    params['default'] ?= null
+    params['variable'] ?= '_' + name
+    params['getter'] ?= 'get_' + name
+    params['setter'] ?= 'set_' + name
 
-    readable = options.access & READ
-    writeable = options.access & WRITE
+    readable = params.access & READ
+    writeable = params.access & WRITE
 
-    default_getter = -> this[options['variable']] + ' (accessed through getter)'
-    default_setter = (value) ->  this[options['variable']] = value + ' (set through setter)'
+    default_getter = -> this[params['variable']] + ' (accessed through getter)'
+    default_setter = (value) ->  this[params['variable']] = value + ' (set through setter)'
 
-    custom_getter = this[options['getter']]
-    custom_setter = this[options['setter']]
+    custom_getter = this[params['getter']]
+    custom_setter = this[params['setter']]
 
     getter = custom_getter or default_getter
     setter = custom_setter or default_setter
@@ -85,20 +85,20 @@ ObjectExtensions =
       enumerable: yes
 
     using_only_default_accessors = not (custom_getter or custom_setter)
-    @prototype[options['variable']] = options['default'] if using_only_default_accessors
+    @prototype[params['variable']] = params['default'] if using_only_default_accessors
     Object.defineProperty @prototype, name, config
     return this
 
-  has_one: (name, options = {}) -> null
+  has_one: (name, params = {}) -> null
     # TODO: Implement this.
 
-  has_many: (name, options = {}) -> null
+  has_many: (name, params = {}) -> null
     # TODO: Implement this.
 
-  belongs_to: (name, options = {}) -> null
+  belongs_to: (name, params = {}) -> null
     # TODO: Implement this.
 
-  has_and_belongs_to_many: (name, options = {}) -> null
+  has_and_belongs_to_many: (name, params = {}) -> null
     # TODO: Implement this.
 
 Utilities.mixin Object.prototype, ObjectExtensions

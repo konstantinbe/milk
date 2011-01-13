@@ -87,14 +87,14 @@ ArrayExtensions =
         @push value
     this
 
-  insert: (value, options = at: 0) ->
+  insert: (value, params = at: 0) ->
     throw 'InvalidParameterException' if value == undefined
-    @splice options.at, 0, value
+    @splice params['at'], 0, value
     this
 
-  insert_many: (collection, options = at: 0) ->
+  insert_many: (collection, params = at: 0) ->
     throw 'InvalidParameterException' if collection == undefined
-    @splice options.at, 0, collection...
+    @splice params['at'], 0, collection...
     this
 
   remove: (values...) ->

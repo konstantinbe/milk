@@ -222,7 +222,7 @@ describe 'Array, extended by Milk', ->
       array.add_many()
       expect(array).to_equal [1, 2, 3]
 
-  describe 'insert(value, options = at: 0)', ->
+  describe 'insert(value, params = at: 0)', ->
     it 'inserts the value at a specified index', ->
       array = [1, 2, 4]
       array.insert 3, at: 2
@@ -239,7 +239,7 @@ describe 'Array, extended by Milk', ->
     it 'throws an exception if value is not given', ->
       expect(-> [1, 2, 3].insert()).to_throw 'InvalidParameterException'
 
-  describe 'insert_many(collection, options = at: 0)', ->
+  describe 'insert_many(collection, params = at: 0)', ->
     it 'inserts the collection at a specified index', ->
       array = [1, 2, 5]
       array.insert_many [3, 4], at: 2
