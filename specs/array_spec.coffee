@@ -320,5 +320,11 @@ describe 'Array, extended by Milk', ->
   xdescribe 'replace_many(values, replacements)'
   xdescribe 'replace_at(index, replacements...)'
 
-  xdescribe 'clone()'
+  describe 'clone()', ->
+    it 'clones an array', ->
+      array = [1, 2, 3]
+      clone = array.clone()
+      expect(clone).not.to_be array
+      expect(clone).to_equal array
+
   xdescribe 'equals(array)'
