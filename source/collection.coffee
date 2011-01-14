@@ -23,17 +23,14 @@ Collection =
   each: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
     @forEach iterator, context if @forEach?
-    # TODO: Implement fallback.
 
   collect: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
     @map iterator, context if @map?
-    # TODO: Implement fallback.
 
   select: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
     @filter iterator, context if @filter
-    # TODO: Implement fallback.
 
   reject: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
@@ -46,12 +43,10 @@ Collection =
   all: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
     @every iterator, context if @every
-    # TODO: Implement fallback.
 
   any: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
     @some iterator, context if @some
-    # TODO: Implement fallback.
 
   max: (context, iterator) ->
     [iterator, context] = [context, undefined] unless iterator?
