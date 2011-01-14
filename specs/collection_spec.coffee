@@ -18,3 +18,59 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
+
+describe 'Collection', ->
+
+  describe 'each(iterator, context)', ->
+    it 'Forwards to native forEach()', ->
+
+  describe 'collect(iterator, context)', ->
+    it 'Forwards to native map()', ->
+
+  describe 'select(iterator, context)', ->
+    it 'Forwards to native filter()', ->
+
+  describe 'reject(iterator, context)', ->
+    it 'TODO: Describe this.', ->
+
+  describe 'detect(iterator, context)', ->
+    it 'TODO: Describe this.', ->
+
+  describe 'all(iterator, context)', ->
+    it 'Forwards to native every()', ->
+
+  describe 'any(iterator, context)', ->
+    it 'Forwards to native some()', ->
+
+  describe 'max()', ->
+    it 'TODO: Implement this.', ->
+
+  describe 'min()', ->
+    it 'TODO: Implement this.', ->
+
+  describe 'partition(iterator, context)', ->
+    it 'TODO: Implement this.', ->
+
+  describe 'inject(initial, iterator)', ->
+    it 'Forwards to native reduce()', ->
+
+  describe 'sort_by(compare, context)', ->
+    it 'TODO: Implement this.', ->
+
+  describe 'contains(value)', ->
+    it 'TODO: Implement this.', ->
+
+  describe 'invoke(method, params...)', ->
+    it 'TODO: Implement this.', ->
+
+  describe 'pluck(key)', ->
+    it 'TODO: Implement this.', ->
+
+  describe 'values()', ->
+    it 'TODO: Implement this.', ->
+
+  describe 'size()', ->
+    it 'TODO: Implement this.', ->
+
+  describe 'empty()', ->
+    it 'TODO: Implement this.', ->

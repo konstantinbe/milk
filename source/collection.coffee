@@ -41,23 +41,21 @@ Collection =
   any: (iterator, context) ->
     @some iterator, context if @some
 
-  max: (iterator, context) ->
-    # TODO: Implement this.
+  max: () ->
+    @inject -Infinity, (current, value) =>
+      if current > value then current else value
 
-  min: (iterator, context) ->
-    # TODO: Implement this.
+  min: () ->
+    @inject Infinity, (current, value) =>
+      if current < value then current else value
 
   partition: (iterator, context) ->
     # TODO: Implement this.
 
   inject: (initial, iterator) ->
     return @reduce initial, iterator if @reduce?
-    result = initial
-    @each (value) ->
-      result = iterator(result, value)
-    result
 
-  sort_by: (iterator, context) ->
+  sort_by: (compare, context) ->
     # TODO: Implement this.
 
   contains: (value) ->
