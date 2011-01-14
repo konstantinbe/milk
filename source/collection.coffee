@@ -20,44 +20,34 @@
 # THE SOFTWARE.
 
 Collection =
-  each: (context, iterator) ->
-    [iterator, context] = [context, undefined] unless iterator?
+  each: (iterator, context) ->
     @forEach iterator, context if @forEach?
 
-  collect: (context, iterator) ->
-    [iterator, context] = [context, undefined] unless iterator?
+  collect: (iterator, context) ->
     @map iterator, context if @map?
 
-  select: (context, iterator) ->
-    [iterator, context] = [context, undefined] unless iterator?
+  select: (iterator, context) ->
     @filter iterator, context if @filter
 
-  reject: (context, iterator) ->
-    [iterator, context] = [context, undefined] unless iterator?
+  reject: (iterator, context) ->
     # TODO: Implement this.
 
-  detect: (context, iterator) ->
-    [iterator, context] = [context, undefined] unless iterator?
+  detect: (iterator, context) ->
     # TODO: Implement this.
 
-  all: (context, iterator) ->
-    [iterator, context] = [context, undefined] unless iterator?
+  all: (iterator, context) ->
     @every iterator, context if @every
 
-  any: (context, iterator) ->
-    [iterator, context] = [context, undefined] unless iterator?
+  any: (iterator, context) ->
     @some iterator, context if @some
 
-  max: (context, iterator) ->
-    [iterator, context] = [context, undefined] unless iterator?
+  max: (iterator, context) ->
     # TODO: Implement this.
 
-  min: (context, iterator) ->
-    [iterator, context] = [context, undefined] unless iterator?
+  min: (iterator, context) ->
     # TODO: Implement this.
 
-  partition: (context, iterator) ->
-    [iterator, context] = [context, undefined] unless iterator?
+  partition: (iterator, context) ->
     # TODO: Implement this.
 
   inject: (initial, iterator) ->
@@ -67,8 +57,7 @@ Collection =
       result = iterator(result, value)
     result
 
-  sort_by: (context, iterator) ->
-    [iterator, context] = [context, undefined] unless iterator?
+  sort_by: (iterator, context) ->
     # TODO: Implement this.
 
   contains: (value) ->
