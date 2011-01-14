@@ -329,8 +329,6 @@ describe 'Array, extended by Milk', ->
       array.replace 4, with: 2
       expect(array).to_equal [1, 2, 3]
 
-  xdescribe 'replace_many(values, replacements)'
-
   describe 'replace_at(index, params = {})', ->
     it 'replaces value at index with value', ->
       array = [1, 4, 3]

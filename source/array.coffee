@@ -134,9 +134,6 @@ ArrayExtensions =
     indexes.each (index) =>
       @replace_at index, with_many: replacements
 
-  replace_many: (values, params = {}) ->
-    # TODO: Implement this.
-
   replace_at: (index, params = {}) ->
     params['with'] ?= undefined
     params['with_many'] ?= undefined
