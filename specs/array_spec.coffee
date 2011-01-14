@@ -192,6 +192,13 @@ describe 'Array, extended by Milk', ->
     it 'returns -1 if the value is not contained in the array', ->
       expect([1, 2, 3].last_index_of 4).to_be -1
 
+  describe 'indexes_of(value)', ->
+    it 'returns all indexes of a value', ->
+      expect([1, 2, 3, 2, 4].indexes_of 2).to_equal [1, 3]
+
+    it 'returns empty array if the value is not contained in the array', ->
+      expect([1, 2, 3].indexes_of 4).to_equal []
+
   describe 'add(values...)', ->
     it 'adds one value to the end', ->
       array = [1, 2, 3]
@@ -316,9 +323,24 @@ describe 'Array, extended by Milk', ->
       array.remove_at 2, 1, 3
       expect(array).to_equal [1, 5]
 
-  xdescribe 'replace(value, replacement)'
+  describe 'replace(value, params = {})', ->
+    it 'replaces value with value', ->
+      array = [1, 4, 3]
+      array.replace 4, with: 2
+      expect(array).to_equal [1, 2, 3]
+
   xdescribe 'replace_many(values, replacements)'
-  xdescribe 'replace_at(index, replacements...)'
+
+  describe 'replace_at(index, params = {})', ->
+    it 'replaces value at index with value', ->
+      array = [1, 4, 3]
+      array.replace_at 1, with: 2
+      expect(array).to_equal [1, 2, 3]
+
+    it 'replaces value at index with many values', ->
+      array = [1, 4, 4]
+      array.replace_at 1, with_many: [2, 3]
+      expect(array).to_equal [1, 2, 3, 4]
 
   describe 'clone()', ->
     it 'clones an array', ->

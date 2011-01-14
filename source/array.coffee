@@ -77,6 +77,12 @@ ArrayExtensions =
   last_index_of: (value) ->
     @lastIndexOf value
 
+  indexes_of: (value) ->
+    indexes = []
+    @each (current, index) ->
+      indexes.add index if value is current
+    indexes
+
   add: (values...) ->
     @add_many values
     this
@@ -119,14 +125,23 @@ ArrayExtensions =
       @splice(index - offset, 1)
       offset += 1
 
-  replace: (value, replacement) ->
+  replace: (value, params = {}) ->
+    params['with'] ?= undefined
+    params['with_many'] ?= undefined
+    replacements = if params['with']? then [params['with']] else params['with_many']
+    throw 'InvalidParameterException' unless replacements
+    indexes = @indexes_of value
+    indexes.each (index) =>
+      @replace_at index, with_many: replacements
+
+  replace_many: (values, params = {}) ->
     # TODO: Implement this.
 
-  replace_many: (values, replacements) ->
-    # TODO: Implement this.
-
-  replace_at: (index, replacements...) ->
-    # TODO: Implement this.
+  replace_at: (index, params = {}) ->
+    params['with'] ?= undefined
+    params['with_many'] ?= undefined
+    replacements = if params['with']? then [params['with']] else params['with_many']
+    @splice index, 1, replacements...
 
   clone: () ->
     [].add_many this
