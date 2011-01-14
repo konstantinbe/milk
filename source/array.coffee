@@ -143,6 +143,12 @@ ArrayExtensions =
   clone: () ->
     [].add_many this
 
+  equals: (object) ->
+    return no unless is_array = Utilities.is_array(object)
+    return no unless has_same_length = @length is object.length
+    return no unless has_same_values = (@all (value, index) -> value is object[index])
+    yes
+
   # native array methods:
   # * reserve
   # * join

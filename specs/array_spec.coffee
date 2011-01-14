@@ -347,4 +347,12 @@ describe 'Array, extended by Milk', ->
       expect(clone).not.to_be array
       expect(clone).to_equal array
 
-  xdescribe 'equals(array)'
+  describe 'equals(array)', ->
+    it 'returns true for an array with the same values', ->
+      expect([1, 2, 3].equals [1, 2, 3]).to_be true
+
+    it 'returns false for an array with the same values but in a different order', ->
+      expect([1, 2, 3].equals [1, 3, 2]).to_be false
+
+    it 'returns false when passing something else than an array (for example an object)', ->
+      expect([1, 2, 3].equals {}).to_be false
