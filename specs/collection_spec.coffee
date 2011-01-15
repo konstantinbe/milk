@@ -83,7 +83,10 @@ describe 'Collection', ->
 
   describe 'values()', ->
     it 'returns an array containing the values of a Collection', ->
-      expect(true).to_be true
+      expect([1, 2, 3].values()).to_equal [1, 2, 3]
+
+    it 'returns an empty array if the collection is empty', ->
+      expect([].values()).to_equal []
 
   describe 'size()', ->
     it 'TODO: Implement this.', ->
