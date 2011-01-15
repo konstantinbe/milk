@@ -23,54 +23,72 @@ describe 'Collection', ->
 
   describe 'each(iterator, context)', ->
     it 'Forwards to native forEach()', ->
+      expect(true).to_be true
 
   describe 'collect(iterator, context)', ->
     it 'Forwards to native map()', ->
+      expect(true).to_be true
 
   describe 'select(iterator, context)', ->
     it 'Forwards to native filter()', ->
+      expect(true).to_be true
 
   describe 'reject(iterator, context)', ->
     it 'TODO: Describe this.', ->
+      expect(true).to_be true
 
   describe 'detect(iterator, context)', ->
     it 'TODO: Describe this.', ->
+      expect(true).to_be true
 
   describe 'all(iterator, context)', ->
     it 'Forwards to native every()', ->
+      expect(true).to_be true
 
   describe 'any(iterator, context)', ->
     it 'Forwards to native some()', ->
+      expect(true).to_be true
 
   describe 'max()', ->
     it 'TODO: Implement this.', ->
+      expect(true).to_be true
 
   describe 'min()', ->
     it 'TODO: Implement this.', ->
+      expect(true).to_be true
 
   describe 'partition(iterator, context)', ->
     it 'TODO: Implement this.', ->
+      expect(true).to_be true
 
   describe 'inject(initial, iterator)', ->
     it 'Forwards to native reduce()', ->
+      expect(true).to_be true
 
   describe 'sort_by(compare, context)', ->
     it 'TODO: Implement this.', ->
+      expect(true).to_be true
 
   describe 'contains(value)', ->
     it 'TODO: Implement this.', ->
+      expect(true).to_be true
 
   describe 'invoke(method, params...)', ->
     it 'TODO: Implement this.', ->
+      expect(true).to_be true
 
   describe 'pluck(key)', ->
     it 'TODO: Implement this.', ->
+      expect(true).to_be true
 
   describe 'values()', ->
-    it 'TODO: Implement this.', ->
+    it 'returns an array containing the values of a Collection', ->
+      expect(true).to_be true
 
   describe 'size()', ->
     it 'TODO: Implement this.', ->
+      expect(true).to_be true
 
   describe 'empty()', ->
     it 'TODO: Implement this.', ->
+      expect(true).to_be true

@@ -21,13 +21,15 @@
 
 Collection =
   each: (iterator, context) ->
-    @forEach iterator, context if @forEach?
+    throw 'AbstractMethodCalledException'
 
   collect: (iterator, context) ->
-    @map iterator, context if @map?
+    return @map iterator, context if @map?
+    @values().collect iterator, context
 
   select: (iterator, context) ->
-    @filter iterator, context if @filter
+    return @filter iterator, context if @filter?
+    @values().select iterator, context
 
   reject: (iterator, context) ->
     # TODO: Implement this.
@@ -36,10 +38,10 @@ Collection =
     # TODO: Implement this.
 
   all: (iterator, context) ->
-    @every iterator, context if @every
+    return @every iterator, context if @every?
 
   any: (iterator, context) ->
-    @some iterator, context if @some
+    @some iterator, context if @some?
 
   max: () ->
     @inject -Infinity, (current, value) =>
@@ -54,13 +56,14 @@ Collection =
 
   inject: (initial, iterator) ->
     return @reduce initial, iterator if @reduce?
+    @values().reduce initial, iterator
 
   sort_by: (compare, context) ->
     # TODO: Implement this.
 
   contains: (value) ->
     return no unless value
-    return yes if @indexOf? and @indexOf(value) isnt -1
+    return yes if @indexOf? and @indexOf value isnt -1
     @any (current_value) ->
       current_value is value
 
@@ -70,11 +73,11 @@ Collection =
   pluck: (key) ->
     # TODO: Implement this.
 
-  # TODO: Make this a property.
   values: () ->
+    values = []
     @each (value) ->
-      values.push value
-    return values
+      values.add value
+    values
 
   # TODO: Make this a property.
   size: () ->
