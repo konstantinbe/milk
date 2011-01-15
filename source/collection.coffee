@@ -79,9 +79,8 @@ Collection =
       values.add value
     values
 
-  # TODO: Make this a property.
   size: () ->
-    if @length? then @length else @values.length
+    if @length? then @length else @values().length
 
   empty: () ->
     @size() is 0
