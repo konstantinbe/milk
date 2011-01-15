@@ -46,13 +46,13 @@ ObjectExtensions =
 
   mixin: (mixins...) ->
     for mixin in mixins
-      for key, value of mixin
+      for own key, value of mixin
         this[key] = value
     return this
 
   merge: (objects...) ->
     for object in objects
-      for key, value of object
+      for own key, value of object
         this[key] = value
     return this
 

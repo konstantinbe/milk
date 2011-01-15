@@ -53,7 +53,7 @@ Utilities =
 
   mixin: (object, mixins...) ->
     for mixin in mixins
-      for key, value of mixin
+      for own key, value of mixin
         object[key] = value
     return object
 
