@@ -7,9 +7,9 @@ Getting Started
 Changelog
 ---------
 
-### 0.0.001
+### 0.0.001 - Underway
 
-* Initial release.
+* First release.
 
 
 License

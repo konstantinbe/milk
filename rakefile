@@ -18,6 +18,12 @@ task :build => [:prepare] do
   put "Compiling #{NAME}.coffee ... "
   run "coffee --compile --output build/ build/#{NAME}.coffee"
   puts OK
+
+  put "Preparing release package ... "
+  delete_file_if_exists "build/#{NAME}-#{RELEASE}"
+  run "mkdir build/#{NAME}-#{RELEASE}"
+  run "cp build/#{NAME}.coffee build/#{NAME}-#{RELEASE}/"
+  puts OK
 end
 
 task :specs => [:prepare, :build] do
@@ -79,7 +85,7 @@ end
 
 task :pack do
   put "Packing release package ... "
-  run "cd build; zip -rq #{NAME}-#{VERSION}.zip #{NAME}-#{VERSION}; cd .."
+  run "cd build; zip -rq #{NAME}-#{RELEASE}.zip #{NAME}-#{RELEASE}; cd .."
   puts OK
 end
 
@@ -88,7 +94,7 @@ task :upload do
   repos = "#{LOGIN}/#{NAME}"
 
   github = Net::GitHub::Upload.new :login => LOGIN, :token => TOKEN
-  direct_link = github.upload :repos => repos, :file  => "build/#{NAME}-#{VERSION}.zip", :description => ""
+  direct_link = github.upload :repos => repos, :file  => "build/#{NAME}-#{RELEASE}.zip", :description => ""
   puts OK
 end
 
