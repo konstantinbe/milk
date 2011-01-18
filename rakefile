@@ -1,0 +1,72 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+require 'rubygems'
+require 'net/github-upload'
+
+task :specs => ["build/milk.js", 'build/specs.js'] do
+  put "Opening specs in browser ... "
+  run "open resources/specs.html"
+  puts OK
+end
+
+file 'build/milk.js' do
+
+end
+
+file 'build/specs.js' do
+
+end
+
+task :init do
+  put "Setting up repo ... "
+  run "mv .git/hooks/pre-commit.sample .git/hooks/pre-commit" unless File.exists? ".git/hooks/pre-commit"
+  run "git config --unset core.ignorecase" if `git config core.ignorecase`.length > 0
+  puts OK
+
+  put "Setting up wiki ... "
+  run "git clone #{WIKI} wiki" unless File.exists? "wiki"
+  run "mv wiki/.git/hooks/pre-commit.sample wiki/.git/hooks/pre-commit" unless File.exists? "wiki/.git/hooks/pre-commit"
+  run "cd wiki; git config --unset core.ignorecase" if `git config core.ignorecase`.length > 0
+  puts OK
+end
+
+def assert(condition, message = "")
+  unless condition
+    puts message + "\n\n"
+    exit 1
+  end
+end
+
+def check(condition)
+  unless condition
+    puts FAILED
+    exit 1
+  end
+end
+
+def run(command)
+  success = system command
+  check success
+end
+
+def delete_file_if_exists(path)
+  run "rm -rf #{path}" if File.exists? path
+end
+
+def put(string)
+  print string
+  STDOUT.flush
+end
+
+REPO = `git config remote.origin.url`.chomp
+NAME = REPO.scan("\/(.*)\.git").first.to_s
+WIKI = REPO.gsub ".git", ".wiki.git"
+
+LOGIN = `git config github.user`.chomp
+TOKEN = `git config github.token`.chomp
+
+OK = "\33[0m\33[32mOK\33[0m"
+FAILED = "\33[0m\33[31mFAILED\33[0m"
+
+RELEASE = File.open("README.md", "r") { |file| file.read }.scan(/^### (\d(?:\.\d+)+)\s/).first.to_s
