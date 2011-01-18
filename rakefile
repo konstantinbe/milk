@@ -4,6 +4,12 @@ require 'fileutils'
 require 'rubygems'
 require 'net/github-upload'
 
+# custom tasks
+
+task :build do
+  # nothing todo here
+end
+
 task :specs => ["build/milk.js", 'build/specs.js'] do
   put "Opening specs in browser ... "
   run "open resources/specs.html"
@@ -18,6 +24,90 @@ file 'build/specs.js' do
 
 end
 
+# default tasks
+
+task :release => [:check, :clean, :prepare, :build, :pack, :upload, :update, :tag, :push] do
+  puts "Released version #{RELEASE}."
+end
+
+task :check do
+  put "Checking whether the Changelog has an enrty marked with 'Underway' ... "
+  readme = File.open("README.md", "r") { |file| file.read }
+  check readme.match /^### (\d\.\d.+) - Underway/
+  puts ok
+
+  put "Checking whether version #{release_version} isn't already released ... "
+  output = `git tag`
+  check (not (output.match release_version))
+  puts ok
+
+  put "Checking whether repo is clean ... "
+  output = `git status`
+  check output.match "working directory clean"
+  puts ok
+
+  put "Checking whether on branch master ... "
+  output = `git status`
+  check output.match "On branch master"
+  puts ok
+
+  put "Checking whether master in sync with origin/master ... "
+  output = `git diff master origin/master`
+  check output.length == 0
+  puts ok
+end
+
+task :clean do
+  put "Cleaning ... "
+  delete_file_if_exists "build"
+  puts ok
+end
+
+task :prepare do
+  run "mkdir build" unless File.exists? "build"
+end
+
+task :pack => ['build/things.js', 'build/docs', 'resources/bootstrap.js', 'resources/things.html'] do
+  put "Packing release package ... "
+  run "cd build; zip -rq #{NAME}-#{VERSION}.zip #{NAME}-#{VERSION}; cd .."
+  puts ok
+end
+
+task :upload do
+  put "Uploading release package to GitHub ... "
+  repos = "#{LOGIN}/#{NAME}"
+
+  github = Net::GitHub::Upload.new :login => LOGIN, :token => TOKEN
+  direct_link = github.upload :repos => repos, :file  => "build/#{NAME}-#{VERSION}.zip", :description => ""
+  puts ok
+end
+
+task :update do
+  put "Updating Changelog in README ... "
+  readme = File.open("README.md", "r") { |file| file.read }
+  readme.gsub! /^### (\d\.\d.+) - Underway/, '### \1'
+  File.open("README.md", "w") { |file| file.write readme }
+  output = `git add README.md`
+  output = `git commit -m 'Released #{RELEASE}.'`
+  puts ok
+end
+
+task :tag do
+  put "Tagging ... "
+  output = `git tag #{RELEASE}`
+  puts ok
+end
+
+task :push do
+  put "Pushing changes ... "
+  output = `git push`
+  puts ok
+
+  put "Pushing tags ... "
+  output = `git push --tags`
+  puts ok
+end
+
 task :init do
   put "Setting up repo ... "
   run "mv .git/hooks/pre-commit.sample .git/hooks/pre-commit" unless File.exists? ".git/hooks/pre-commit"
@@ -30,6 +120,8 @@ task :init do
   run "cd wiki; git config --unset core.ignorecase" if `git config core.ignorecase`.length > 0
   puts OK
 end
+
+# functions
 
 def assert(condition, message = "")
   unless condition
@@ -58,6 +150,8 @@ def put(string)
   print string
   STDOUT.flush
 end
+
+# constants
 
 REPO = `git config remote.origin.url`.chomp
 NAME = REPO.scan("\/(.*)\.git").first.to_s
