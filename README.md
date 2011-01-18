@@ -7,7 +7,7 @@ Getting Started
 Changelog
 ---------
 
-### 0.0.001 - Underway
+### 0.0.01 - Underway
 
 * First release.
 
