@@ -20,13 +20,13 @@
 # THE SOFTWARE.
 
 this.exports = this unless exports?
-
 if not exports.require? then exports.require = (path) -> # do nothing
 
+require "exceptions"
 require "utilities"
-require "object"
+require "object_extensions"
 require "collection"
-require "array"
-require "function"
-require "number"
-require "string"
+require "array_extensions"
+require "function_extensions"
+require "number_extensions"
+require "string_extensions"
