@@ -1,3 +1,20 @@
+Getting Started
+---------------
+
+* TODO: document.
+
+
+Changelog
+---------
+
+### 0.0.001 - Underway
+
+* Initial release.
+
+
+License
+-------
+
 Released under the MIT license.
 
 Copyright (c) 2010 Konstantin Bender.
