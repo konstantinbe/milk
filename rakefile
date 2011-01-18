@@ -6,22 +6,32 @@ require 'net/github-upload'
 
 # custom tasks
 
-task :build do
-  # nothing todo here
-end
+task :build => [:prepare] do
+  put "Concatenating source files ... "
+  file_names = [NAME] + File.open("source/#{NAME}.coffee", "r") { |file| file.read }.scan(/^\s*require\s*\(?[\"|\'](.*)[\"|\']/)
+  file_paths = file_names.map do |file_name|
+    "source/" + file_name.to_s + ".coffee"
+  end
+  run "cat #{file_paths.join(" ")} > build/#{NAME}.coffee"
+  puts OK
 
-task :specs => ["build/milk.js", 'build/specs.js'] do
-  put "Opening specs in browser ... "
-  run "open resources/specs.html"
+  put "Compiling #{NAME}.coffee ... "
+  run "coffee --compile --output build/ build/#{NAME}.coffee"
   puts OK
 end
 
-file 'build/milk.js' do
+task :specs => [:prepare, :build] do
+  put "Concatenating specs ... "
+  run "cat specs/*.coffee > build/specs.coffee"
+  puts OK
 
-end
+  put "Compiling specs.coffee ... "
+  run "coffee --compile --output build/ build/specs.coffee"
+  puts OK
 
-file 'build/specs.js' do
-
+  put "Opening specs in browser ... "
+  run "open resources/specs.html"
+  puts OK
 end
 
 # default tasks
@@ -31,46 +41,46 @@ task :release => [:check, :clean, :prepare, :build, :pack, :upload, :update, :ta
 end
 
 task :check do
-  put "Checking whether the Changelog has an enrty marked with 'Underway' ... "
+  put "Checking whether the Changelog has an entry marked with 'Underway' ... "
   readme = File.open("README.md", "r") { |file| file.read }
   check readme.match /^### (\d\.\d.+) - Underway/
-  puts ok
+  puts OK
 
-  put "Checking whether version #{release_version} isn't already released ... "
+  put "Checking whether version #{RELEASE} isn't already released ... "
   output = `git tag`
-  check (not (output.match release_version))
-  puts ok
+  check (not (output.match RELEASE))
+  puts OK
 
   put "Checking whether repo is clean ... "
   output = `git status`
   check output.match "working directory clean"
-  puts ok
+  puts OK
 
   put "Checking whether on branch master ... "
   output = `git status`
   check output.match "On branch master"
-  puts ok
+  puts OK
 
   put "Checking whether master in sync with origin/master ... "
   output = `git diff master origin/master`
   check output.length == 0
-  puts ok
+  puts OK
 end
 
 task :clean do
   put "Cleaning ... "
   delete_file_if_exists "build"
-  puts ok
+  puts OK
 end
 
 task :prepare do
   run "mkdir build" unless File.exists? "build"
 end
 
-task :pack => ['build/things.js', 'build/docs', 'resources/bootstrap.js', 'resources/things.html'] do
+task :pack do
   put "Packing release package ... "
   run "cd build; zip -rq #{NAME}-#{VERSION}.zip #{NAME}-#{VERSION}; cd .."
-  puts ok
+  puts OK
 end
 
 task :upload do
@@ -79,7 +89,7 @@ task :upload do
 
   github = Net::GitHub::Upload.new :login => LOGIN, :token => TOKEN
   direct_link = github.upload :repos => repos, :file  => "build/#{NAME}-#{VERSION}.zip", :description => ""
-  puts ok
+  puts OK
 end
 
 task :update do
@@ -89,23 +99,23 @@ task :update do
   File.open("README.md", "w") { |file| file.write readme }
   output = `git add README.md`
   output = `git commit -m 'Released #{RELEASE}.'`
-  puts ok
+  puts OK
 end
 
 task :tag do
   put "Tagging ... "
   output = `git tag #{RELEASE}`
-  puts ok
+  puts OK
 end
 
 task :push do
   put "Pushing changes ... "
   output = `git push`
-  puts ok
+  puts OK
 
   put "Pushing tags ... "
   output = `git push --tags`
-  puts ok
+  puts OK
 end
 
 task :init do
@@ -154,13 +164,10 @@ end
 # constants
 
 REPO = `git config remote.origin.url`.chomp
-NAME = REPO.scan("\/(.*)\.git").first.to_s
+NAME = REPO.scan(/\/(.*)\.git/).first.to_s
 WIKI = REPO.gsub ".git", ".wiki.git"
-
 LOGIN = `git config github.user`.chomp
 TOKEN = `git config github.token`.chomp
-
 OK = "\33[0m\33[32mOK\33[0m"
 FAILED = "\33[0m\33[31mFAILED\33[0m"
-
 RELEASE = File.open("README.md", "r") { |file| file.read }.scan(/^### (\d(?:\.\d+)+)\s/).first.to_s
