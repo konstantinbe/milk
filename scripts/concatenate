@@ -31,7 +31,7 @@ LANGUAGES << {
   :name => "JavaScript",
   :extension => '.js',
   :comment => '//',
-  :regexp => '/\A((?:.|\n)*?)^\s*require\s*\(\s*[\"|\'](.*)[\"|\']((?:.|\n)*)\Z/'
+  :regexp => /\A((?:.|\n)*?)^\s*require\s*\(\s*[\"|'](.*)[\"|']\s*\)\s*;?\s*$((?:.|\n)*)\Z/
 }
 
 LANGUAGES << {
@@ -49,8 +49,8 @@ def concatenate(source, regexp, extension, concatenated = "")
 
   path = result[0][1].to_s + extension
 
-  assert File.exists? path, "File not found: #{path}"
-  assert File.file? path, "Not a file at path: #{path}"
+  assert File.exists?(path), "File not found: #{path}"
+  assert File.file?(path), "Not a file at path: #{path}"
 
   source = "\n" + File.open(path, "r") { |file| file.read } + result[0][2].to_s
   concatenated = concatenated + result[0][0].to_s
