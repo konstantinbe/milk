@@ -1,0 +1,60 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'commander/import'
+
+program :version, "0.0.01"
+program :description, 'CoffeeScript Foundation Library'
+
+command :concatenate do |c|
+  c.syntax = 'milk concatenate file [options]'
+  c.summary = ''
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--list', 'Some switch that does something'
+  c.action do |args, options|
+
+    # make sure file is given
+    assert args.length > 0, "file required.\n#{c.syntax}"
+
+    # generate list
+    list = []
+    paths = [args.first]
+    until paths.length == 0
+
+      # remove path from the top
+      path = paths.pop
+
+      # make sure file exists
+      assert File.exists?(path), "File not found: #{path}"
+      assert (not File.directory? path), "File may not be a directory: #{path}"
+
+      # make sure file is either CoffeeScript or JavaScript
+      extension = File.extname path
+      assert (extension == ".js" or extension == '.coffee'), "File type not supported: #{extension}"
+
+      # add path to the list
+      list << path
+
+      # extract dir from path
+      dir = File.dirname path
+
+      # scan file for names
+      found_names = File.open(path, "r") { |file| file.read.scan /^\s*require\s*\(?[\"|\'](.*)[\"|\']/ }
+      found_paths = found_names.map { |found_name| File.join(dir, found_name.to_s) + extension  }
+      found_paths_filtered = found_paths.delete_if { |found_path| list.include?(found_path) }
+      paths.concat found_paths_filtered.reverse
+    end
+
+    puts list
+  end
+end
+
+# ---------------------------------------------------------------- functions ---
+
+def assert(condition, message = "", error = 1)
+  unless condition
+    puts "[ERROR] " + message
+    exit error
+  end
+end
