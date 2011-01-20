@@ -8,10 +8,14 @@
   <script type="text/javascript" src="../tools/jasmine/jasmine-html.js"></script>
 
   <!-- include source files here... -->
-  <script type="text/javascript" src="../build/milk.js"></script>
+  <% sources.each do |source| %>
+    <script type="text/javascript" src="<%= source %>"></script>
+  <% end %>
 
   <!-- include spec files here... -->
-  <script type="text/javascript" src="../build/specs.js"></script>
+  <% specs.each do |spec| %>
+    <script type="text/javascript" src="<%= spec %>"></script>
+  <% end %>
 </head>
 <body>
 
