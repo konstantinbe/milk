@@ -5,11 +5,6 @@ require 'rubygems'
 require 'net/github-upload'
 require 'ERB'
 
-# --------------------------------------------------------- custom constants ---
-
-SOURCES = ["core"] + File.open("source/core.coffee", "r") { |file| file.read }.scan(/^\s*require\s*\(?[\"|\'](.*)[\"|\']/).map { |name| name.to_s }
-SPECS = `ls `
-
 # ------------------------------------------------------------- custom tasks ---
 
 task :build => [:prepare] do
@@ -28,7 +23,7 @@ task :build => [:prepare] do
   puts OK
 end
 
-task :specs => [:prepare, :build] do
+task :specs => [:prepare] do
   put "Compiling source and specs ... "
   run "coffee --compile --output build/javascript/ source/*.coffee specs/*.coffee"
   puts OK
