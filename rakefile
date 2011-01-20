@@ -29,21 +29,28 @@ task :build => [:prepare] do
 end
 
 task :specs => [:prepare, :build] do
+  put "Compiling source and specs ... "
+  run "coffee --compile --output build/javascript/ source/*.coffee specs/*.coffee"
+  puts OK
+
+  put "Generating list of source files ... "
+  sources = `cd build; ../apps/milk concatenate javascript/core.js --list`.split "\n"
+  puts OK
+
+  put "Generating list of spec files ... "
+  specs = `cd build; ls javascript/*_spec.js`.split "\n"
+  puts OK
+
   put "Generating spec runner HTML file ... "
-  render_erb_template_to_file("resources/specs.erb", self.send("binding"), "resources/specs.html")
-  puts OK
-
-  put "Concatenating specs ... "
-  run "cat specs/*.coffee > build/specs.coffee"
-  puts OK
-
-  put "Compiling specs.coffee ... "
-  run "coffee --compile --output build/ build/specs.coffee"
+  render_erb_template_to_file("resources/specs.erb", self.send("binding"), "build/specs.html")
   puts OK
 
   put "Opening specs in browser ... "
-  run "open resources/specs.html"
+  run "open build/specs.html"
   puts OK
+
+  puts "Watching source and specs and compile on the fly when they change ... "
+  system "coffee --watch --compile --output build/javascript/ source/*.coffee specs/*.coffee"
 end
 
 # --------------------------------------------------------- custom functions ---
