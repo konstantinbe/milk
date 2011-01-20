@@ -19,11 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require "exceptions"
-require "utilities"
-require "object_extensions"
-require "collection"
-require "array_extensions"
-require "function_extensions"
-require "number_extensions"
-require "string_extensions"
+this.exports = this unless exports?
+if not exports.require? then exports.require = (path) -> # do nothing
+
+require "milk"
