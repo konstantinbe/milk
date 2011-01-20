@@ -7,22 +7,19 @@ require 'net/github-upload'
 # ------------------------------------------------------------- custom tasks ---
 
 task :build => [:prepare] do
-  put "Concatenating source files ... "
-  file_names = [NAME] + File.open("source/#{NAME}.coffee", "r") { |file| file.read }.scan(/^\s*require\s*\(?[\"|\'](.*)[\"|\']/)
-  file_paths = file_names.map do |file_name|
-    "source/" + file_name.to_s + ".coffee"
-  end
-  run "cat #{file_paths.join(" ")} > build/#{NAME}.coffee"
+
+  put "Compiling ... "
+  run "coffee --compile --output build/javascript/ source/*.coffee"
   puts OK
 
-  put "Compiling #{NAME}.coffee ... "
-  run "coffee --compile --output build/ build/#{NAME}.coffee"
+  put "Concatenating ... "
+  run "cd build/javascript/; ../../scripts/concatenate #{NAME}.js > ../#{NAME}.js"
   puts OK
 
   put "Preparing release package ... "
   delete_file_if_exists "build/#{NAME}-#{RELEASE}"
   run "mkdir build/#{NAME}-#{RELEASE}"
-  run "cp build/#{NAME}.coffee build/#{NAME}-#{RELEASE}/"
+  run "cp build/#{NAME}.js build/#{NAME}-#{RELEASE}/"
   puts OK
 end
 
