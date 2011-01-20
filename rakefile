@@ -3,11 +3,16 @@
 require 'fileutils'
 require 'rubygems'
 require 'net/github-upload'
+require 'ERB'
+
+# --------------------------------------------------------- custom constants ---
+
+SOURCES = ["core"] + File.open("source/core.coffee", "r") { |file| file.read }.scan(/^\s*require\s*\(?[\"|\'](.*)[\"|\']/).map { |name| name.to_s }
+SPECS = `ls `
 
 # ------------------------------------------------------------- custom tasks ---
 
 task :build => [:prepare] do
-
   put "Compiling ... "
   run "coffee --compile --output build/javascript/ source/*.coffee"
   puts OK
@@ -24,6 +29,10 @@ task :build => [:prepare] do
 end
 
 task :specs => [:prepare, :build] do
+  put "Generating spec runner HTML file ... "
+  render_erb_template_to_file("resources/specs.erb", self.send("binding"), "resources/specs.html")
+  puts OK
+
   put "Concatenating specs ... "
   run "cat specs/*.coffee > build/specs.coffee"
   puts OK
@@ -35,6 +44,16 @@ task :specs => [:prepare, :build] do
   put "Opening specs in browser ... "
   run "open resources/specs.html"
   puts OK
+end
+
+# --------------------------------------------------------- custom functions ---
+
+def generate_source_file_list()
+
+end
+
+def generate_spec_file_list()
+
 end
 
 # ------------------------------------------------------------ default tasks ---
@@ -162,6 +181,12 @@ end
 def put(string)
   print string
   STDOUT.flush
+end
+
+def render_erb_template_to_file(template_path, binding, file_path)
+  template = File.open(template_path, "r") { |file| ERB.new(file.read) }
+  cache_xml = template.result binding
+  File.open(file_path, "w") { |file| file.write(cache_xml) }
 end
 
 # ---------------------------------------------------------------- constants ---
