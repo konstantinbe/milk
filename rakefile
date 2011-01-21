@@ -5,6 +5,20 @@ require 'rubygems'
 require 'net/github-upload'
 require 'ERB'
 
+# --------------------------------------------------------- custom constants ---
+
+MODULES = [
+  "core",
+  "exceptions",
+  "utilities",
+  "object_extensions",
+  "collection",
+  "array_extensions",
+  "function_extensions",
+  "number_extensions",
+  "string_extensions"
+]
+
 # ------------------------------------------------------------- custom tasks ---
 
 task :build => [:prepare] do
@@ -13,8 +27,8 @@ task :build => [:prepare] do
   puts OK
 
   put "Concatenating ... "
-  run "cd build/javascript/; ../../scripts/concatenate #{NAME}.js > ../#{NAME}.js"
-  puts OK
+  assert false, "TODO: Implement this."
+  put OK
 
   put "Preparing release package ... "
   delete_file_if_exists "build/#{NAME}-#{RELEASE}"
@@ -29,7 +43,7 @@ task :specs => [:prepare] do
   puts OK
 
   put "Generating list of source files ... "
-  sources = `cd build; ../apps/milk concatenate javascript/core.js --list`.split "\n"
+  sources = MODULES.map { |m| "javascript/" + m + ".js" }
   puts OK
 
   put "Generating list of spec files ... "
