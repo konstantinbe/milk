@@ -36,8 +36,6 @@ Possible Features
 Inspiration
 -----------
 
-Overview:
-
 * [Cocoa](http://developer.apple.com/cocoa/)
 * [Prototype](http://www.prototypejs.org/)
 * [Ruby on Rails](http://rubyonrails.org/)
