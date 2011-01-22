@@ -4,6 +4,46 @@ Getting Started
 * TODO: document.
 
 
+Roadmap
+-------
+
+* Milk 0.1 **Utility Belt** -- *Covers most of the functionalty provided by underscore.js.*
+* Milk 0.2 **Cacao** -- *Adds Cocoa style key-value coding and key-value observing.*
+
+
+Planned Features
+----------------
+
+* Underscore.js style extensions to native objects ("Utility Belt")
+* Useful stuff from Rails' Active Support
+
+* Key-value coding
+* Key-value observing
+* Cocoa style bindings
+
+* Rails style Active Model
+* Rails style validations
+
+* Cocoa style notifications
+* Cocoa style events
+
+* Browser-only additions
+* Server-only additions
+
+* Proper build system
+
+
+Inspiration
+-----------
+
+* [Cocoa](http://developer.apple.com/cocoa/)
+* [Prototype](http://www.prototypejs.org/)
+* [Ruby on Rails](http://rubyonrails.org/)
+
+* [Backbone](http://documentcloud.github.com/backbone/)
+* [Doodle](http://www.rubyinside.com/doodle-a-new-way-to-build-and-define-ruby-classes-795.html)
+
+
 Changelog
 ---------
 
