@@ -11,8 +11,8 @@ Roadmap
 * Milk 0.2 **Cacao** -- *Adds Cocoa style key-value coding and key-value observing.*
 
 
-Planned Features
-----------------
+Possible Features
+-----------------
 
 * Underscore.js style extensions to native objects ("Utility Belt")
 * Useful stuff from Rails' Active Support
