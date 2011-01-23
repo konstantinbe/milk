@@ -8,7 +8,7 @@ Roadmap
 -------
 
 * Milk 0.1 **Utility Belt** -- *Covers most of the functionalty provided by underscore.js.*
-* Milk 0.2 **Cacao** -- *Adds Cocoa style key-value coding and key-value observing.*
+* ...
 
 
 Possible Features
