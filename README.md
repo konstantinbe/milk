@@ -39,6 +39,7 @@ Inspiration
 * [Cocoa](http://developer.apple.com/cocoa/)
 * [Prototype](http://www.prototypejs.org/)
 * [Ruby on Rails](http://rubyonrails.org/)
+* [Underscore.js](http://documentcloud.github.com/underscore/)
 
 * [Backbone](http://documentcloud.github.com/backbone/)
 * [Doodle](http://www.rubyinside.com/doodle-a-new-way-to-build-and-define-ruby-classes-795.html)
