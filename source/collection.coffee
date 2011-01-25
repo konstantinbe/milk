@@ -21,7 +21,8 @@
 
 Milk.Collection =
   each: (iterator, context) ->
-    throw 'AbstractMethodCalledException'
+    return @values().each iterator, context unless @is_array()
+    @forEach iterator, context
 
   collect: (iterator, context) ->
     return @values().collect iterator, context unless @is_array()
