@@ -41,10 +41,8 @@ Milk.ArrayExtensions =
       value?
 
   flatten: () ->
-    result = []
-    @each (value) =>
+    @inject [], (result, value) =>
       if value.is_array() then result.add_many value.flatten() else result.add value
-    result
 
   with: (values...) ->
     @with_many values
@@ -88,7 +86,6 @@ Milk.ArrayExtensions =
 
   add: (values...) ->
     @add_many values
-    this
 
   add_many: (collections...) ->
     collections.each (collection) =>
@@ -110,7 +107,6 @@ Milk.ArrayExtensions =
 
   remove: (values...) ->
     @remove_many values
-    this
 
   remove_many: (collections...) ->
     collections.each (collection) =>
@@ -127,6 +123,7 @@ Milk.ArrayExtensions =
     indexes.each (index) =>
       @splice(index - offset, 1)
       offset += 1
+    this
 
   replace: (value, params = {}) ->
     params['with'] ?= undefined
@@ -136,12 +133,14 @@ Milk.ArrayExtensions =
     indexes = @indexes_of value
     indexes.each (index) =>
       @replace_at index, with_many: replacements
+    this
 
   replace_at: (index, params = {}) ->
     params['with'] ?= undefined
     params['with_many'] ?= undefined
     replacements = if params['with']? then [params['with']] else params['with_many']
     @splice index, 1, replacements...
+    this
 
   clone: () ->
     [].add_many this

@@ -33,10 +33,19 @@ Milk.Collection =
     @filter iterator, context
 
   reject: (iterator, context) ->
-    # TODO: Implement this.
+    @inject [], (values, value) ->
+      values.add value unless iterator(value)
+      values
+
+    # values = []
+    # @each (value) ->
+    #   values.add value unless iterator value
+    # values
 
   detect: (iterator, context) ->
-    # TODO: Implement this.
+    for own value in @values()
+      return value if iterator value
+    false
 
   all: (iterator, context) ->
     return @values().all iterator, context unless @is_array()
@@ -47,14 +56,14 @@ Milk.Collection =
     @some iterator, context
 
   max: () ->
-    return @values().max unless @is_array
-    return null unless @length == 0
+    return @values().max unless @is_array()
+    return null if @empty()
     @inject @first, (current, value) =>
       if current > value then current else value
 
   min: () ->
-    return @values().min unless @is_array
-    return null unless @length == 0
+    return @values().min unless @is_array()
+    return null if @empty()
     @inject @first, (current, value) =>
       if current < value then current else value
 
@@ -63,7 +72,7 @@ Milk.Collection =
 
   inject: (initial, iterator) ->
     return @values().inject initial, iterator unless @is_array()
-    @reduce initial, iterator
+    @reduce iterator, initial
 
   sort_by: (compare, context) ->
     # TODO: Implement this.

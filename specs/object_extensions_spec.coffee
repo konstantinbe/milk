@@ -20,30 +20,30 @@
 # THE SOFTWARE.
 
 describe "Milk.ObjectExtensions", ->
-  describe 'is_function(value)', ->
+  describe "is_function(value)", ->
     it "returns yes if receiver is a function", ->
       expect((->).is_function()).to_be true
 
-  describe 'is_string(value)', ->
+  describe "is_string(value)", ->
     it "returns yes if receiver is a string", ->
       expect("".is_string()).to_be true
 
-  describe 'is_boolean(value)', ->
+  describe "is_boolean(value)", ->
     it "returns yes if receiver is a boolean", ->
       expect(yes.is_boolean()).to_be true
 
-  describe 'is_number(value)', ->
+  describe "is_number(value)", ->
     it "returns yes if receiver is a number", ->
       expect(1.is_number()).to_be true
 
-  describe 'is_array(value)', ->
+  describe "is_array(value)", ->
     it "returns yes if receiver is an array", ->
       expect([].is_array()).to_be true
 
-  describe 'is_date(value)', ->
+  describe "is_date(value)", ->
     it "returns yes if receiver is a date", ->
       expect((new Date()).is_date()).to_be true
 
-  describe 'is_regexp(value)', ->
+  describe "is_regexp(value)", ->
     it "returns yes if receiver is a regular expression", ->
       expect(//.is_regexp()).to_be true

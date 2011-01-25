@@ -19,87 +19,93 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-describe 'Milk.Collection', ->
+describe "Milk.Collection", ->
 
-  describe 'each(iterator, [context])', ->
-    it 'iterates over all objects in a collection', ->
+  describe "each(iterator, [context])", ->
+    it "iterates over all objects in a collection", ->
       squared = []
       [1, 2, 3].each (number) -> squared.add number * number
       expect(squared).to_equal [1, 4, 9]
 
-  describe 'collect(iterator, [context])', ->
-    it 'returns all objects after applying iterator on them', ->
+  describe "collect(iterator, [context])", ->
+    it "returns all objects after applying iterator on them", ->
       expect([1, 2, 3].collect (number) -> number * number).to_equal [1, 4, 9]
 
-  describe 'select(iterator, [context])', ->
-    it 'returns all objects for which the iterator returns true', ->
+  describe "select(iterator, [context])", ->
+    it "returns all objects for which the iterator returns true", ->
       expect([1, 2, 3, 4, 5].select (number) -> number == 3).to_equal [3]
 
-  describe 'reject(iterator, [context])', ->
-    it 'returns all objects for which the iterator returns false', ->
+  describe "reject(iterator, [context])", ->
+    it "returns all objects for which the iterator returns false", ->
       expect([1, 2, 3, 4, 5].reject (number) -> number == 3).to_equal [1, 2, 4, 5]
 
-  describe 'detect(iterator, [context])', ->
-    it 'returns the first object for which the iterator returns true', ->
+  describe "detect(iterator, [context])", ->
+    it "returns the first object for which the iterator returns true", ->
       expect([1, 2, 3, 4, 5].detect (number) -> number == 3).to_be 3
 
-  describe 'all(iterator, [context])', ->
-    it 'returns true if iterator returns true for all objects', ->
+  describe "all(iterator, [context])", ->
+    it "returns true if iterator returns true for all objects", ->
       expect([1, 2, 3].all (number) -> true).to_be true
 
-    it 'returns false if iterator returns false for at least one object', ->
+    it "returns false if iterator returns false for at least one object", ->
       expect([1, 2, 3].all (number) -> if number == 3 then false else true).to_be false
 
-  describe 'any(iterator, [context])', ->
-    it 'returns true if iterator returns true for at least one object', ->
+  describe "any(iterator, [context])", ->
+    it "returns true if iterator returns true for at least one object", ->
       expect([1, 2, 3].any (number) -> if number == 2 then true else false).to_be true
 
-    it 'returns false if iterator returns false for all objects', ->
+    it "returns false if iterator returns false for all objects", ->
       expect([1, 2, 3].any (number) -> false).to_be false
 
-  describe 'max()', ->
-    it 'TODO: Implement this.', ->
+  describe "max()", ->
+    it "returns the max value", ->
+      expect([1, 3, 2, 4, 1].max()).to_be 4
+
+    it "returns null if empty", ->
+      expect([].max()).to_be null
+
+  describe "min()", ->
+    it "returns the min value", ->
+      expect([1, 3, 2, -1, 1].min()).to_be -1
+
+    it "returns null if empty", ->
+      expect([].min()).to_be null
+
+  describe "partition(iterator, [context])", ->
+    it "TODO: Implement this.", ->
       expect(true).to_be true
 
-  describe 'min()', ->
-    it 'TODO: Implement this.', ->
+  describe "inject(initial, iterator)", ->
+    it "Forwards to native reduce()", ->
       expect(true).to_be true
 
-  describe 'partition(iterator, [context])', ->
-    it 'TODO: Implement this.', ->
+  describe "sort_by(compare, [context])", ->
+    it "TODO: Implement this.", ->
       expect(true).to_be true
 
-  describe 'inject(initial, iterator)', ->
-    it 'Forwards to native reduce()', ->
+  describe "contains(value)", ->
+    it "TODO: Implement this.", ->
       expect(true).to_be true
 
-  describe 'sort_by(compare, [context])', ->
-    it 'TODO: Implement this.', ->
+  describe "invoke(method, params...)", ->
+    it "TODO: Implement this.", ->
       expect(true).to_be true
 
-  describe 'contains(value)', ->
-    it 'TODO: Implement this.', ->
+  describe "pluck(key)", ->
+    it "TODO: Implement this.", ->
       expect(true).to_be true
 
-  describe 'invoke(method, params...)', ->
-    it 'TODO: Implement this.', ->
-      expect(true).to_be true
-
-  describe 'pluck(key)', ->
-    it 'TODO: Implement this.', ->
-      expect(true).to_be true
-
-  describe 'values()', ->
-    it 'returns an array containing the values of a Collection', ->
+  describe "values()", ->
+    it "returns an array containing the values of a Collection", ->
       expect([1, 2, 3].values()).to_equal [1, 2, 3]
 
-    it 'returns an empty array if the collection is empty', ->
+    it "returns an empty array if the collection is empty", ->
       expect([].values()).to_equal []
 
-  describe 'size()', ->
-    it 'TODO: Implement this.', ->
+  describe "size()", ->
+    it "TODO: Implement this.", ->
       expect(true).to_be true
 
-  describe 'empty()', ->
-    it 'TODO: Implement this.', ->
+  describe "empty()", ->
+    it "TODO: Implement this.", ->
       expect(true).to_be true
