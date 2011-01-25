@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-Collection =
+Milk.Collection =
   each: (iterator, context) ->
     throw 'AbstractMethodCalledException'
 
@@ -84,6 +84,3 @@ Collection =
 
   empty: () ->
     @size() is 0
-
-ROOT = exports ? this
-ROOT.Collection = Collection

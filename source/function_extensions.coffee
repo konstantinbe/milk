@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-FunctionExtensions =
+Milk.FunctionExtensions =
   curry: (object) ->
     # TODO: Implement this. Also known as 'bind'.
 
@@ -32,4 +32,4 @@ FunctionExtensions =
   methodize: () ->
     # TODO: Implement this.
 
-Function::mixin FunctionExtensions
+Function::mixin Milk.FunctionExtensions

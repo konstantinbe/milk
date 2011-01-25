@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-Utilities =
+Milk.Utilities =
   is_object: (value) ->
     value?
 
@@ -51,11 +51,4 @@ Utilities =
   is_undefined: (value) ->
     value is undefined
 
-  mixin: (object, mixins...) ->
-    for mixin in mixins
-      for own key, value of mixin
-        object[key] = value
-    return object
-
-ROOT = exports ? this
-ROOT.Utilities = Utilities
+Milk.mixin Milk.Utilities

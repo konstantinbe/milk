@@ -20,6 +20,9 @@
 # THE SOFTWARE.
 
 this.exports = this unless exports?
-if not exports.require? then exports.require = (path) -> # do nothing
 
-require "milk"
+Object::mixin = (mixins...) ->
+  for mixin in mixins
+    for own key, value of mixin
+      this[key] = value
+  return this

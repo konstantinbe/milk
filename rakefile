@@ -9,6 +9,7 @@ require 'ERB'
 
 MODULES = [
   "core",
+  "milk",
   "exceptions",
   "utilities",
   "object_extensions",
@@ -57,9 +58,6 @@ task :specs => [:prepare] do
   put "Opening specs in browser ... "
   run "open build/specs.html"
   puts OK
-
-  puts "Watching source and specs and compile on the fly when they change ... "
-  system "coffee --watch --compile --output build/javascript/ source/*.coffee specs/*.coffee"
 end
 
 # --------------------------------------------------------- custom functions ---

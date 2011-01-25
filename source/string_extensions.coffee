@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-StringExtensions =
+Milk.StringExtensions =
   words: () ->
     # TODO: Implement this.
 
@@ -41,4 +41,4 @@ StringExtensions =
   dasherize: () ->
     # TODO: Implement this.
 
-String::mixin StringExtensions
+String::mixin Milk.StringExtensions

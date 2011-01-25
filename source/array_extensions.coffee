@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-ArrayExtensions =
+Milk.ArrayExtensions =
   each: (iterator, context) ->
     @forEach iterator, context
 
@@ -43,7 +43,7 @@ ArrayExtensions =
   flatten: () ->
     result = []
     @each (value) =>
-      if Utilities.is_array value then result.add_many value.flatten() else result.add value
+      if Milk.is_array value then result.add_many value.flatten() else result.add value
     result
 
   with: (values...) ->
@@ -147,7 +147,7 @@ ArrayExtensions =
     [].add_many this
 
   equals: (object) ->
-    return no unless is_array = Utilities.is_array(object)
+    return no unless is_array = Milk.is_array(object)
     return no unless has_same_length = @length is object.length
     return no unless has_same_values = (@all (value, index) -> value is object[index])
     yes
@@ -159,5 +159,5 @@ ArrayExtensions =
   # * slice
   # * ...
 
-Array::mixin Collection
-Array::mixin ArrayExtensions
+Array::mixin Milk.Collection
+Array::mixin Milk.ArrayExtensions
