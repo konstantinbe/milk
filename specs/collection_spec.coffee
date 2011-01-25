@@ -21,33 +21,41 @@
 
 describe 'Milk.Collection', ->
 
-  describe 'each(iterator, context)', ->
-    it 'Forwards to native forEach()', ->
-      expect(true).to_be true
+  describe 'each(iterator, [context])', ->
+    it 'iterates over all objects in a collection', ->
+      squared = []
+      [1, 2, 3].each (number) -> squared.add number * number
+      expect(squared).to_equal [1, 4, 9]
 
-  describe 'collect(iterator, context)', ->
-    it 'Forwards to native map()', ->
-      expect(true).to_be true
+  describe 'collect(iterator, [context])', ->
+    it 'returns all objects after applying iterator on them', ->
+      expect([1, 2, 3].collect (number) -> number * number).to_equal [1, 4, 9]
 
-  describe 'select(iterator, context)', ->
-    it 'Forwards to native filter()', ->
-      expect(true).to_be true
+  describe 'select(iterator, [context])', ->
+    it 'returns all objects for which the iterator returns true', ->
+      expect([1, 2, 3, 4, 5].select (number) -> number == 3).to_equal [3]
 
-  describe 'reject(iterator, context)', ->
-    it 'TODO: Describe this.', ->
-      expect(true).to_be true
+  describe 'reject(iterator, [context])', ->
+    it 'returns all objects for which the iterator returns false', ->
+      expect([1, 2, 3, 4, 5].reject (number) -> number == 3).to_equal [1, 2, 4, 5]
 
-  describe 'detect(iterator, context)', ->
-    it 'TODO: Describe this.', ->
-      expect(true).to_be true
+  describe 'detect(iterator, [context])', ->
+    it 'returns the first object for which the iterator returns true', ->
+      expect([1, 2, 3, 4, 5].detect (number) -> number == 3).to_be 3
 
-  describe 'all(iterator, context)', ->
-    it 'Forwards to native every()', ->
-      expect(true).to_be true
+  describe 'all(iterator, [context])', ->
+    it 'returns true if iterator returns true for all objects', ->
+      expect([1, 2, 3].all (number) -> true).to_be true
 
-  describe 'any(iterator, context)', ->
-    it 'Forwards to native some()', ->
-      expect(true).to_be true
+    it 'returns false if iterator returns false for at least one object', ->
+      expect([1, 2, 3].all (number) -> if number == 3 then false else true).to_be false
+
+  describe 'any(iterator, [context])', ->
+    it 'returns true if iterator returns true for at least one object', ->
+      expect([1, 2, 3].any (number) -> if number == 2 then true else false).to_be true
+
+    it 'returns false if iterator returns false for all objects', ->
+      expect([1, 2, 3].any (number) -> false).to_be false
 
   describe 'max()', ->
     it 'TODO: Implement this.', ->
@@ -57,7 +65,7 @@ describe 'Milk.Collection', ->
     it 'TODO: Implement this.', ->
       expect(true).to_be true
 
-  describe 'partition(iterator, context)', ->
+  describe 'partition(iterator, [context])', ->
     it 'TODO: Implement this.', ->
       expect(true).to_be true
 
@@ -65,7 +73,7 @@ describe 'Milk.Collection', ->
     it 'Forwards to native reduce()', ->
       expect(true).to_be true
 
-  describe 'sort_by(compare, context)', ->
+  describe 'sort_by(compare, [context])', ->
     it 'TODO: Implement this.', ->
       expect(true).to_be true
 
