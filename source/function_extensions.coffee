@@ -31,5 +31,3 @@ Milk.FunctionExtensions =
 
   methodize: () ->
     # TODO: Implement this.
-
-Function::mixin Milk.FunctionExtensions

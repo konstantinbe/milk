@@ -22,5 +22,3 @@
 Milk.NumberExtensions =
   times: (count) ->
     # TODO: Implement this.
-
-Number.mixin Milk.NumberExtensions

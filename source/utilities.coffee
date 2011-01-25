@@ -50,5 +50,3 @@ Milk.Utilities =
 
   is_undefined: (value) ->
     value is undefined
-
-Milk.mixin Milk.Utilities

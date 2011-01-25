@@ -19,24 +19,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-Milk.StringExtensions =
-  words: () ->
-    # TODO: Implement this.
+Milk.mixin Milk.Utilities
 
-  titleize: () ->
-    # TODO: Implement this.
+Object::mixin Milk.ObjectExtensions
+Number::mixin Milk.NumberExtensions
+String::mixin Milk.StringExtensions
+Function::mixin Milk.FunctionExtensions
 
-  humanize: () ->
-    # TODO: Implement this.
-
-  camelize: () ->
-    # TODO: Implement this.
-
-  underscorize: () ->
-    # TODO: Implement this.
-
-  pluralize: () ->
-    # TODO: Implement this.
-
-  dasherize: () ->
-    # TODO: Implement this.
+Array::mixin Milk.Collection
+Array::mixin Milk.ArrayExtensions

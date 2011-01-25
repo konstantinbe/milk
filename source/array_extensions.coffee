@@ -158,6 +158,3 @@ Milk.ArrayExtensions =
   # * concat
   # * slice
   # * ...
-
-Array::mixin Milk.Collection
-Array::mixin Milk.ArrayExtensions

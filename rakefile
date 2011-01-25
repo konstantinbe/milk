@@ -12,24 +12,22 @@ MODULES = [
   "milk",
   "exceptions",
   "utilities",
-  "object_extensions",
   "collection",
+  "object_extensions",
   "array_extensions",
   "function_extensions",
   "number_extensions",
-  "string_extensions"
+  "string_extensions",
+  "init"
 ]
 
 # ------------------------------------------------------------- custom tasks ---
 
 task :build => [:prepare] do
-  put "Compiling ... "
-  run "coffee --compile --output build/javascript/ source/*.coffee"
+  put "Compiling source ... "
+  run "coffee --compile --output --join build/ source/*.coffee"
+  run "mv build/concatenation.js build/milk.js"
   puts OK
-
-  put "Concatenating ... "
-  assert false, "TODO: Implement this."
-  put OK
 
   put "Preparing release package ... "
   delete_file_if_exists "build/#{NAME}-#{RELEASE}"
@@ -40,7 +38,7 @@ end
 
 task :specs => [:prepare] do
   put "Compiling source and specs ... "
-  run "coffee --compile --output build/javascript/ source/*.coffee specs/*.coffee"
+  run "coffee  --bare --compile --output build/javascript/ source/*.coffee specs/*.coffee"
   puts OK
 
   put "Generating list of source files ... "

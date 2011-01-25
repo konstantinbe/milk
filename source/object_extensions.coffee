@@ -46,5 +46,3 @@ Milk.ObjectExtensions =
       for own key, value of object
         this[key] = value
     return this
-
-Object::mixin ObjectExtensions
