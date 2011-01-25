@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-describe 'Collection', ->
+describe 'Milk.Collection', ->
 
   describe 'each(iterator, context)', ->
     it 'Forwards to native forEach()', ->

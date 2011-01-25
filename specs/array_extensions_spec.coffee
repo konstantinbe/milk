@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-describe 'Array, extended by Milk', ->
+describe 'Milk.ArrayExtensions', ->
 
   describe 'first([count])', ->
     it "returns the first element if |count| is not given", ->

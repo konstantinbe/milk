@@ -24,12 +24,12 @@ Milk.Collection =
     throw 'AbstractMethodCalledException'
 
   collect: (iterator, context) ->
-    return @map iterator, context if @map?
-    @values().collect iterator, context
+    return @values().collect iterator, context unless @is_array()
+    @map iterator, context
 
   select: (iterator, context) ->
-    return @filter iterator, context if @filter?
-    @values().select iterator, context
+    return @values().select iterator, context unless @is_array()
+    @filter iterator, context
 
   reject: (iterator, context) ->
     # TODO: Implement this.
@@ -38,34 +38,39 @@ Milk.Collection =
     # TODO: Implement this.
 
   all: (iterator, context) ->
-    return @every iterator, context if @every?
+    return @values().all iterator, context unless @is_array()
+    @every iterator, context
 
   any: (iterator, context) ->
-    @some iterator, context if @some?
+    return @values().any iterator, context unless @is_array()
+    @some iterator, context
 
   max: () ->
-    @inject -Infinity, (current, value) =>
+    return @values().max unless @is_array
+    return null unless @length == 0
+    @inject @first, (current, value) =>
       if current > value then current else value
 
   min: () ->
-    @inject Infinity, (current, value) =>
+    return @values().min unless @is_array
+    return null unless @length == 0
+    @inject @first, (current, value) =>
       if current < value then current else value
 
   partition: (iterator, context) ->
     # TODO: Implement this.
 
   inject: (initial, iterator) ->
-    return @reduce initial, iterator if @reduce?
-    @values().reduce initial, iterator
+    return @values().inject initial, iterator unless @is_array()
+    @reduce initial, iterator
 
   sort_by: (compare, context) ->
     # TODO: Implement this.
 
   contains: (value) ->
+    return @values().contains value unless @is_array()
     return no unless value
-    return yes if @indexOf? and @indexOf value isnt -1
-    @any (current_value) ->
-      current_value is value
+    @indexOf value != -1
 
   invoke: (method, params...) ->
     # TODO: Implement this.
@@ -83,4 +88,4 @@ Milk.Collection =
     if @length? then @length else @values().length
 
   empty: () ->
-    @size() is 0
+    @size() == 0

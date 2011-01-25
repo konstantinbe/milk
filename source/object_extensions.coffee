@@ -46,3 +46,24 @@ Milk.ObjectExtensions =
       for own key, value of object
         this[key] = value
     return this
+
+  is_array: () ->
+    Array.isArray this
+
+  is_function: () ->
+    @constructor? and @call? and @apply?
+
+  is_string: () ->
+    this == '' or (@charCodeAt? and @substr?)
+
+  is_number: () ->
+    this == 0 or (@toExponential? and @toFixed?)
+
+  is_boolean: () ->
+    this instanceof Boolean
+
+  is_date: () ->
+    @getTimezoneOffset? and @setUTCFullYear?
+
+  is_regexp: (value) ->
+    @test? and @exec? and (@ignoreCase? or @ignoreCase == no)

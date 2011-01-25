@@ -19,44 +19,4 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-describe 'Utilities', ->
-
-  describe 'is_undefined(value)', ->
-    it "checks if a value is undefined", ->
-      expect(Milk.is_undefined undefined).to_be(true)
-
-  describe 'is_null(value)', ->
-    it "checks if a value is null", ->
-      expect(Milk.is_null null).to_be(true)
-
-  describe 'is_object(value)', ->
-    it "checks if a value is an object", ->
-      expect(Milk.is_object {}).to_be(true)
-
-  describe 'is_function(value)', ->
-    it "checks if a value is a function", ->
-      expect(Milk.is_function () -> this).to_be(true)
-
-  describe 'is_string(value)', ->
-    it "checks if a value is a string", ->
-      expect(Milk.is_string "").to_be(true)
-
-  describe 'is_boolean(value)', ->
-    it "checks if a value is boolean", ->
-      expect(Milk.is_boolean yes).to_be(true)
-
-  describe 'is_number(value)', ->
-    it "checks if a value is a number", ->
-      expect(Milk.is_number 1).to_be(true)
-
-  describe 'is_array(value)', ->
-    it "checks if a value is an array", ->
-      expect(Milk.is_array []).to_be(true)
-
-  describe 'is_date(value)', ->
-    it "checks if a value is a date", ->
-      expect(Milk.is_date new Date()).to_be(true)
-
-  describe 'is_regexp(value)', ->
-    it "checks if a value is a regular expression", ->
-      expect(Milk.is_regexp //).to_be(true)
+describe 'Milk.Utilities', ->

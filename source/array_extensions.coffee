@@ -43,7 +43,7 @@ Milk.ArrayExtensions =
   flatten: () ->
     result = []
     @each (value) =>
-      if Milk.is_array value then result.add_many value.flatten() else result.add value
+      if value.is_array() then result.add_many value.flatten() else result.add value
     result
 
   with: (values...) ->
@@ -147,7 +147,7 @@ Milk.ArrayExtensions =
     [].add_many this
 
   equals: (object) ->
-    return no unless is_array = Milk.is_array(object)
+    return no unless is_array = object.is_array()
     return no unless has_same_length = @length is object.length
     return no unless has_same_values = (@all (value, index) -> value is object[index])
     yes

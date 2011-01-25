@@ -18,35 +18,3 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-
-Milk.Utilities =
-  is_object: (value) ->
-    value?
-
-  is_array: (value) ->
-    return Array.isArray(value) if Array.isArray?
-    value? and value.concat? and value.unshift? and not value.callee?
-
-  is_function: (value) ->
-    value? and value.constructor? and value.call? and value.apply?
-
-  is_string: (value) ->
-    value is '' or (value and value.charCodeAt? and obj.substr?)
-
-  is_number: (value) ->
-    value is 0 or (value and value.toExponential? and value.toFixed?)
-
-  is_boolean: (value) ->
-    value is true or value is false
-
-  is_date: (value) ->
-    value? and value.getTimezoneOffset? and value.setUTCFullYear?
-
-  is_regexp: (value) ->
-    value? and value.test? and value.exec? and (value.ignoreCase? or value.ignoreCase is no)
-
-  is_null: (value) ->
-    value is null
-
-  is_undefined: (value) ->
-    value is undefined
