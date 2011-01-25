@@ -27,8 +27,8 @@ Milk.ArrayExtensions =
     return this[0] unless count?
     @slice 0, count
 
-  rest: (index = 1) ->
-    @slice index
+  rest: () ->
+    @slice 1
 
   last: (count) ->
     last_index = @length - 1

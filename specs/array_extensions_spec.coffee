@@ -33,15 +33,9 @@ describe 'Array, extended by Milk', ->
       expect([1, 2, 3].first 3).to_equal [1, 2, 3]
       expect([1, 2, 3].first 10).to_equal [1, 2, 3]
 
-  describe 'rest(index = 1)', ->
-    it "returns a new array containing all but the first element if |index| is not given", ->
+  describe 'rest()', ->
+    it "returns a new array containing all except the first element", ->
       expect([1, 2, 3].rest()).to_equal [2, 3]
-
-    it "returns a new array containing all elements starting at the specified |index|", ->
-      expect([1, 2, 3].rest 0).to_equal [1, 2, 3]
-      expect([1, 2, 3].rest 2).to_equal [3]
-      expect([1, 2, 3].rest 3).to_equal []
-      expect([1, 2, 3].rest 10).to_equal []
 
   describe 'last([count])', ->
     it "returns the last element if |count| is not given", ->
