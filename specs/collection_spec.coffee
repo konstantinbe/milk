@@ -94,8 +94,9 @@ describe "Milk.Collection", ->
       expect(true).to_be true
 
   describe "pluck(key)", ->
-    it "TODO: Implement this.", ->
-      expect(true).to_be true
+    it "returns an array collecting the values for the given key", ->
+      people = [{name: "Peter", age: 59}, {name: "Esther", age: 45}, {name: "Heinerle", age: 4}]
+      expect(people.pluck 'name').to_equal ["Peter", "Esther", "Heinerle"]
 
   describe "values()", ->
     it "returns an array containing the values of a Collection", ->

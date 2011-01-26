@@ -84,7 +84,8 @@ Milk.Collection =
     # TODO: Implement this.
 
   pluck: (key) ->
-    # TODO: Implement this.
+    @collect (value) ->
+      value[key]
 
   values: () ->
     values = []
