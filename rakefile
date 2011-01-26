@@ -60,13 +60,7 @@ end
 
 # --------------------------------------------------------- custom functions ---
 
-def generate_source_file_list()
-
-end
-
-def generate_spec_file_list()
-
-end
+# none.
 
 # ------------------------------------------------------------ default tasks ---
 
