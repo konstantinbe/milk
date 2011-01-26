@@ -90,8 +90,11 @@ describe "Milk.Collection", ->
       expect(true).to_be true
 
   describe "invoke(method, params...)", ->
-    it "TODO: Implement this.", ->
-      expect(true).to_be true
+    it "collects the results after invoking method on every item", ->
+      expect([1, 2, 3].invoke('toFixed')).to_equal ['1', '2', '3']
+
+    it "also forwards arguments", ->
+      expect([1, 2, 3].invoke('toFixed', 2)).to_equal ['1.00', '2.00', '3.00']
 
   describe "pluck(key)", ->
     it "returns an array collecting the values for the given key", ->

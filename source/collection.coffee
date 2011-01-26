@@ -81,7 +81,8 @@ Milk.Collection =
     @indexOf value != -1
 
   invoke: (method, params...) ->
-    # TODO: Implement this.
+    @collect (value) ->
+      value[method].apply(value, params)
 
   pluck: (key) ->
     @collect (value) ->
