@@ -104,7 +104,7 @@ describe "Milk.Collection", ->
     it "TODO: Implement this.", ->
       expect(true).to_be true
 
-  describe "invoke(method, params...)", ->
+  describe "invoke(method, args...)", ->
     it "collects the results after invoking method on every item", ->
       expect([1, 2, 3].invoke('toFixed')).to_equal ['1', '2', '3']
 
