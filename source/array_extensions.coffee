@@ -95,13 +95,13 @@ Milk.ArrayExtensions =
 
   insert: (value, params = {}) ->
     params['at'] ?= 0
-    throw 'InvalidParameterException' if value == undefined
+    throw "InvalidArgumentException" if value == undefined
     @splice params['at'], 0, value
     this
 
   insert_many: (collection, params = {}) ->
     params['at'] ?= 0
-    throw 'InvalidParameterException' if collection == undefined
+    throw "InvalidArgumentException" if collection == undefined
     @splice params['at'], 0, collection...
     this
 
@@ -129,7 +129,7 @@ Milk.ArrayExtensions =
     params['with'] ?= undefined
     params['with_many'] ?= undefined
     replacements = if params['with']? then [params['with']] else params['with_many']
-    throw 'InvalidParameterException' unless replacements
+    throw "InvalidArgumentException" unless replacements
     indexes = @indexes_of value
     indexes.each (index) =>
       @replace_at index, with_many: replacements
