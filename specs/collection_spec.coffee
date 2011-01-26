@@ -123,10 +123,16 @@ describe "Milk.Collection", ->
     it "returns an empty array if the collection is empty", ->
       expect([].values()).to_equal []
 
-  describe "size()", ->
-    it "TODO: Implement this.", ->
-      expect(true).to_be true
+  describe "count()", ->
+    it "returns the number of elements in a collection", ->
+      expect([].count()).to_be 0
+      expect([1, 2, 3].count()).to_be 3
+      expect([1, 2, 3, 3, 3].count()).to_be 5
 
   describe "empty()", ->
-    it "TODO: Implement this.", ->
-      expect(true).to_be true
+    it "returns true if collection is empty", ->
+      expect([].empty()).to_be true
+
+    it "returns false if collection has at least one element", ->
+      expect([1].empty()).to_be false
+      expect([1, 2, 3].empty()).to_be false

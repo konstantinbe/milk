@@ -94,8 +94,8 @@ Milk.Collection =
       values.add value
     values
 
-  size: () ->
+  count: () ->
     if @length? then @length else @values().length
 
   empty: () ->
-    @size() == 0
+    @count() == 0
