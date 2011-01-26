@@ -61,8 +61,12 @@ Milk.Collection =
     @inject @first, (current, value) =>
       if current < value then current else value
 
-  partition: (iterator, context) ->
-    # TODO: Implement this.
+  partition: (iterator) ->
+    @inject {}, (partition, value) ->
+      key = iterator value
+      partition[key] = [] unless partition[key]
+      partition[key].add value
+      partition
 
   inject: (initial, iterator) ->
     return @values().inject initial, iterator unless @is_array()

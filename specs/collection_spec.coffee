@@ -72,8 +72,10 @@ describe "Milk.Collection", ->
       expect([].min()).to_be null
 
   describe "partition(iterator, [context])", ->
-    it "TODO: Implement this.", ->
-      expect(true).to_be true
+    it "returns a hash containing a partition where the the results of the iterator are used as keys", ->
+      partition = [0, 1, 2, 3, 4, 5].partition (value) -> if value % 2 == 0 then "even" else "odd"
+      expect(partition["odd"]).to_equal [1, 3, 5]
+      expect(partition["even"]).to_equal [0, 2, 4]
 
   describe "inject(initial, iterator)", ->
     it "Forwards to native reduce()", ->
