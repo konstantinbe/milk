@@ -54,7 +54,7 @@ task :specs => [:prepare] do
   puts OK
 
   put "Opening specs in browser ... "
-  run "open build/specs.html"
+  run "open build/specs.html -a 'Google Chrome'"
   puts OK
 end
 
