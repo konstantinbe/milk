@@ -248,12 +248,6 @@ describe "Milk.ArrayExtensions", ->
       array = [1, 2, 3]
       expect(array.insert 4, at: 0).to_be array
 
-    it "throws an exception if value is undefined", ->
-      expect(-> [1, 2, 3].insert undefined).to_throw "InvalidArgumentException"
-
-    it "throws an exception if value is not given", ->
-      expect(-> [1, 2, 3].insert()).to_throw "InvalidArgumentException"
-
   describe "insert_many(collection, params = {})", ->
     it "inserts the collection at a specified index", ->
       array = [1, 2, 5]
@@ -268,12 +262,6 @@ describe "Milk.ArrayExtensions", ->
     it "returns the receiver", ->
       array = [1, 2, 3]
       expect(array.insert_many [4], at: 0).to_be array
-
-    it "throws an exception if value is undefined", ->
-      expect(-> [1, 2, 3].insert_many undefined).to_throw "InvalidArgumentException"
-
-    it "throws an exception if value is not given", ->
-      expect(-> [1, 2, 3].insert_many()).to_throw "InvalidArgumentException"
 
   describe "remove(values...)", ->
     it "removes all occurences of one value", ->
@@ -294,9 +282,6 @@ describe "Milk.ArrayExtensions", ->
     it "returns the receiver", ->
       array = [1, 2, 3]
       expect(array.remove 3).to_be array
-
-    it "throws an exception if value is not given", ->
-      expect(-> [1, 2, 3].remove()).to_throw "InvalidArgumentException"
 
   describe "remove_many(collections...)", ->
     it "removes all occurences of all values from one collection", ->
@@ -323,9 +308,6 @@ describe "Milk.ArrayExtensions", ->
       array = [1, 2, 3]
       expect(array.remove_many [3]).to_be array
 
-    it "throws an exception if collection is not given", ->
-      expect(-> [1, 2, 3].remove_many()).to_throw "InvalidArgumentException"
-
   describe "remove_at(indexes...)", ->
     it "removes value at specified index", ->
       array = [1, 2, 3]
@@ -346,9 +328,6 @@ describe "Milk.ArrayExtensions", ->
       array = [1, 2, 3]
       expect(array.remove_at 0).to_be array
 
-    it "throws an exception if no index is given", ->
-      expect(-> [1, 2, 3].remove_at()).to_throw "InvalidArgumentException"
-
   describe "replace(value, params = {})", ->
     it "replaces value with value", ->
       array = [1, 4, 3]
@@ -358,12 +337,6 @@ describe "Milk.ArrayExtensions", ->
     it "returns the receiver", ->
       array = [1, 2, 3]
       expect(array.replace 1, with: 5).to_be array
-
-    it "throws an exception if no value is given", ->
-      expect(-> [1, 2, 3].replace()).to_throw "InvalidArgumentException"
-
-    it "throws an exception if no replacement value is given", ->
-      expect(-> [1, 2, 3].replace(1)).to_throw "InvalidArgumentException"
 
   describe "replace_at(index, params = {})", ->
     it "replaces value at index with value", ->
@@ -379,12 +352,6 @@ describe "Milk.ArrayExtensions", ->
     it "returns the receiver", ->
       array = [1, 2, 3]
       expect(array.replace_at 0, with: 5).to_be array
-
-    it "throws an exception if no index is given", ->
-      expect(-> [1, 2, 3].replace_at()).to_throw "InvalidArgumentException"
-
-    it "throws an exception if no replacement value is given", ->
-      expect(-> [1, 2, 3].replace_at(1)).to_throw "InvalidArgumentException"
 
   describe "clone()", ->
     it "clones an array", ->

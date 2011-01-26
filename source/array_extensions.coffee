@@ -95,13 +95,11 @@ Milk.ArrayExtensions =
 
   insert: (value, params = {}) ->
     params['at'] ?= 0
-    throw "InvalidArgumentException" if value == undefined
     @splice params['at'], 0, value
     this
 
   insert_many: (collection, params = {}) ->
     params['at'] ?= 0
-    throw "InvalidArgumentException" if collection == undefined
     @splice params['at'], 0, collection...
     this
 
