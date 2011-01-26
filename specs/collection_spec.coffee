@@ -101,8 +101,11 @@ describe "Milk.Collection", ->
       expect(false).to_be(true)
 
   describe "contains(value)", ->
-    it "TODO: Implement this.", ->
-      expect(true).to_be true
+    it "returns true if collection contains value", ->
+      expect([1, 2, 3].contains 2).to_be true
+
+    it "returns false if collection does not contain the value", ->
+      expect([1, 2, 3].contains 4).to_be false
 
   describe "invoke(method, args...)", ->
     it "collects the results after invoking method on every item", ->
