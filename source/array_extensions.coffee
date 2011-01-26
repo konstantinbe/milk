@@ -144,8 +144,8 @@ Milk.ArrayExtensions =
     [].add_many this
 
   equals: (object) ->
-    return no unless is_array = object.is_array()
-    return no unless has_same_length = @length is object.length
+    return no unless object.is_array()
+    return no unless @length == object.length
     return no unless has_same_values = (@all (value, index) -> value is object[index])
     yes
 

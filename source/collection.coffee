@@ -34,13 +34,7 @@ Milk.Collection =
 
   reject: (iterator, context) ->
     @inject [], (values, value) ->
-      values.add value unless iterator(value)
-      values
-
-    # values = []
-    # @each (value) ->
-    #   values.add value unless iterator value
-    # values
+      unless iterator value then values.add value else values
 
   detect: (iterator, context) ->
     for own value in @values()
