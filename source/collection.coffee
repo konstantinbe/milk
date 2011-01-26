@@ -78,7 +78,7 @@ Milk.Collection =
   contains: (value) ->
     return @values().contains value unless @is_array()
     return no unless value
-    @indexOf value != -1
+    @indexOf(value) != -1
 
   invoke: (method, args...) ->
     @collect (value) ->
