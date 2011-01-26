@@ -72,7 +72,7 @@ Milk.Collection =
     return @values().inject initial, iterator unless @is_array()
     @reduce iterator, initial
 
-  sort_by: (compare, context) ->
+  sort_by: (args...) ->
     # TODO: Implement this.
 
   contains: (value) ->

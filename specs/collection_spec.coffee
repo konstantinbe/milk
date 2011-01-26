@@ -82,8 +82,23 @@ describe "Milk.Collection", ->
       expect(true).to_be true
 
   describe "sort_by(compare, [context])", ->
-    it "TODO: Implement this.", ->
-      expect(true).to_be true
+    it "sorts by one property name", ->
+      expect(false).to_be(true)
+
+    it "sorts by many property names", ->
+      expect(false).to_be(true)
+
+    it "sorts by using a compare function", ->
+      expect(false).to_be(true)
+
+    it "sorts by a string containing comma separated property names", ->
+      expect(false).to_be(true)
+
+    it "allows ASC and DESC keywords after a property name", ->
+      expect(false).to_be(true)
+
+    it "allows mixed types of arguments: property names, arrays of property names, functions, and comma separated property names", ->
+      expect(false).to_be(true)
 
   describe "contains(value)", ->
     it "TODO: Implement this.", ->
