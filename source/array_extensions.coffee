@@ -146,7 +146,7 @@ Milk.ArrayExtensions =
   equals: (object) ->
     return no unless object.is_array()
     return no unless @length == object.length
-    return no unless has_same_values = (@all (value, index) -> value is object[index])
+    return no unless (@all (value, index) -> value == object[index])
     yes
 
   # native array methods:
