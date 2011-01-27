@@ -72,7 +72,13 @@ Milk.ArrayExtensions =
     @concat(arrays...).unique()
 
   zip: (arrays...) ->
-    # TODO: Implement this.
+    arrays = [this].with_many arrays
+    counts = arrays.collect (array) -> array.count()
+    zipped = []
+    for index in [0..counts.max() - 1]
+      row = arrays.collect (array) -> array[index]
+      zipped.add row
+    zipped
 
   index_of: (value) ->
     @indexOf value

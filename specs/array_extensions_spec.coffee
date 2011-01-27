@@ -170,8 +170,15 @@ describe "Milk.ArrayExtensions", ->
     it "removes duplicates after uniting all arrays", ->
       expect([1, 1, 2, 2, 3, 3].unite [4, 4], [5, 5, 6, 6]).to_equal [1, 2, 3, 4, 5, 6]
 
-  xdescribe "zip(arrays...)"
-    # TODO: Implement max() of Collection first.
+  describe "zip(arrays...)", ->
+    it "zips receiver with an array of the same length", ->
+      expect([1, 2, 3].zip ['one', 'two', 'three']).to_equal [[1, 'one'], [2, 'two'], [3, 'three']]
+
+    it "zips receiver with many arrays of the same length", ->
+      expect([1, 2, 3].zip ['one', 'two', 'three'], ['uno', 'due', 'tres']).to_equal [[1, 'one', 'uno'], [2, 'two', 'due'], [3, 'three', 'tres']]
+
+    it "fills up with undefined if arrays are of different length", ->
+      expect([1, 2, 3].zip ['one', 'two'], ['uno']).to_equal [[1, 'one', 'uno'], [2, 'two', undefined], [3, undefined, undefined]]
 
   describe "index_of(value)", ->
     it "returns the index of value", ->
