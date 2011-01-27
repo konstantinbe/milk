@@ -64,7 +64,9 @@ Milk.ArrayExtensions =
     result
 
   intersect: (arrays...) ->
-    # TODO: Implement this.
+    @unique().select (value) ->
+      arrays.all (array) ->
+        array.contains value
 
   unite: (arrays...) ->
     @concat(arrays...).unique()

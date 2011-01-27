@@ -145,8 +145,15 @@ describe "Milk.ArrayExtensions", ->
     it "removes all duplicates in an array", ->
       expect([1, 1, 1, 2, 2, 2, 3, 3, 3].unique()).to_equal [1, 2, 3]
 
-  describe "intersect(arrays...)", ->
-    # TODO: Implement all() and any() of Collection first.
+  describe "intersect(array)", ->
+    it "returns the intersection between the receiver and an array", ->
+      expect([0, 1, 2, 3, 4, 5].intersect([1, 2, 3, 6])).to_equal [1, 2, 3]
+
+    it "returns the intersection between the receiver and many arrays", ->
+      expect([0, 1, 2, 3, 4, 5].intersect([1, 2, 3, 6], [1, 2, 4], [1])).to_equal [1]
+
+    it "removes duplicates", ->
+      expect([1, 2, 2, 3, 3, 3].intersect([1, 2, 3])).to_equal [1, 2, 3]
 
   describe "unite(arrays...)", ->
     it "returns a new array without modifying the receiver", ->
