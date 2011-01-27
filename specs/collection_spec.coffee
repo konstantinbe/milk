@@ -81,7 +81,7 @@ describe "Milk.Collection", ->
     it "Forwards to native reduce()", ->
       expect(true).to_be true
 
-  describe "sort_by(compare, [context])", ->
+  xdescribe "sort_by(compare, [context])", ->
     it "sorts by one property name", ->
       expect(false).to_be(true)
 
