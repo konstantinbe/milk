@@ -31,8 +31,7 @@ Milk.ArrayExtensions =
     @slice 1
 
   last: (count) ->
-    last_index = @length - 1
-    return this[last_index] unless count?
+    return this[@length - 1] unless count?
     return [] if count is 0
     @slice -count
 
@@ -42,7 +41,8 @@ Milk.ArrayExtensions =
 
   flatten: () ->
     @inject [], (result, value) =>
-      if value.is_array() then result.add_many value.flatten() else result.add value
+      values = if value.is_array() then value.flatten() else [value]
+      result.add_many values
 
   with: (values...) ->
     @with_many values
@@ -150,7 +150,7 @@ Milk.ArrayExtensions =
     yes
 
   # native array methods:
-  # * reserve
+  # * reverse
   # * join
   # * concat
   # * slice
