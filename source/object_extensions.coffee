@@ -45,7 +45,10 @@ Milk.ObjectExtensions =
     for object in objects
       for own key, value of object
         this[key] = value
-    return this
+    this
+
+  freeze: () ->
+    # TODO: Implement this.
 
   is_array: () ->
     Array.isArray this
