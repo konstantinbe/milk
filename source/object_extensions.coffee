@@ -20,6 +20,12 @@
 # THE SOFTWARE.
 
 Milk.ObjectExtensions =
+  get: (key) ->
+    # TODO: Implement this.
+
+  set: (key, value, options = {}) ->
+    # TODO: Implement this.
+
   clone: () ->
     # TODO: Implement this.
 
@@ -48,6 +54,9 @@ Milk.ObjectExtensions =
     this
 
   freeze: () ->
+    # TODO: Implement this.
+
+  description: () ->
     # TODO: Implement this.
 
   is_array: () ->
