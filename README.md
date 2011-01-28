@@ -27,6 +27,8 @@ Possible Features
 * Cocoa style notifications
 * Cocoa style events
 
+* Automatic caching of computed properties
+
 * Browser-only additions
 * Server-only additions
 
