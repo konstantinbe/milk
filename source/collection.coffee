@@ -72,9 +72,6 @@ Milk.Collection =
     return @values().inject initial, iterator unless @is_array()
     @reduce iterator, initial
 
-  sort_by: (args...) ->
-    # TODO: Implement this.
-
   contains: (value) ->
     return @values().contains value unless @is_array()
     return no unless value

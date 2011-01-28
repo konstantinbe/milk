@@ -35,6 +35,21 @@ Milk.ArrayExtensions =
     return [] if count is 0
     @slice -count
 
+  with: (values...) ->
+    @concat values
+
+  with_many: (collections...) ->
+    @concat collections...
+
+  without: (values...) ->
+    @without_many values
+
+  without_many: (collections...) ->
+    @clone().remove_many collections...
+
+  without_at: (indexes...) ->
+    # TODO: Implement this.
+
   compact: () ->
     @filter (value) ->
       value?
@@ -43,18 +58,6 @@ Milk.ArrayExtensions =
     @inject [], (result, value) =>
       values = if value.is_array() then value.flatten() else [value]
       result.add_many values
-
-  with: (values...) ->
-    @with_many values
-
-  with_many: (collections...) ->
-    @clone().add_many collections...
-
-  without: (values...) ->
-    @without_many values
-
-  without_many: (collections...) ->
-    @clone().remove_many collections...
 
   unique: () ->
     result = @clone()
@@ -80,18 +83,6 @@ Milk.ArrayExtensions =
       zipped.add row
     zipped
 
-  index_of: (value) ->
-    @indexOf value
-
-  last_index_of: (value) ->
-    @lastIndexOf value
-
-  indexes_of: (value) ->
-    indexes = []
-    @each (current, index) ->
-      indexes.add index if value is current
-    indexes
-
   add: (values...) ->
     @add_many values
 
@@ -99,16 +90,6 @@ Milk.ArrayExtensions =
     collections.each (collection) =>
       collection.each (value) =>
         @push value
-    this
-
-  insert: (value, params = {}) ->
-    params['at'] ?= 0
-    @splice params['at'], 0, value
-    this
-
-  insert_many: (collection, params = {}) ->
-    params['at'] ?= 0
-    @splice params['at'], 0, collection...
     this
 
   remove: (values...) ->
@@ -131,6 +112,16 @@ Milk.ArrayExtensions =
       offset += 1
     this
 
+  insert: (value, params = {}) ->
+    params['at'] ?= 0
+    @splice params['at'], 0, value
+    this
+
+  insert_many: (collection, params = {}) ->
+    params['at'] ?= 0
+    @splice params['at'], 0, collection...
+    this
+
   replace: (value, params = {}) ->
     params['with'] ?= undefined
     params['with_many'] ?= undefined
@@ -148,14 +139,35 @@ Milk.ArrayExtensions =
     @splice index, 1, replacements...
     this
 
+  index_of: (value) ->
+    @indexOf value
+
+  last_index_of: (value) ->
+    @lastIndexOf value
+
+  indexes_of: (value) ->
+    indexes = []
+    @each (current, index) ->
+      indexes.add index if value is current
+    indexes
+
+  sort_by: (keys...) ->
+    # TODO: Implement this.
+
+  join_by: (separator) ->
+    @join separator
+
   clone: () ->
-    [].add_many this
+    [].concat this
 
   equals: (object) ->
     return no unless object.is_array()
     return no unless @length == object.length
     return no unless (@all (value, index) -> value == object[index])
     yes
+
+  description: () ->
+    "[" + @toString() + "]"
 
   # native array methods:
   # * reverse
