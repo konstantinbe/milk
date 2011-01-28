@@ -367,6 +367,25 @@ describe "Milk.ArrayExtensions", ->
       array = [1, 2, 3]
       expect(array.replace_at 0, with: 5).to_be array
 
+  xdescribe "sort_by(compare, [context])", ->
+    it "sorts by one property name", ->
+      expect(false).to_be(true)
+
+    it "sorts by many property names", ->
+      expect(false).to_be(true)
+
+    it "sorts by using a compare function", ->
+      expect(false).to_be(true)
+
+    it "sorts by a string containing comma separated property names", ->
+      expect(false).to_be(true)
+
+    it "allows ASC and DESC keywords after a property name", ->
+      expect(false).to_be(true)
+
+    it "allows mixed types of arguments: property names, arrays of property names, functions, and comma separated property names", ->
+      expect(false).to_be(true)
+
   describe "clone()", ->
     it "clones an array", ->
       array = [1, 2, 3]
