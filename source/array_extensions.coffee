@@ -152,7 +152,11 @@ Milk.ArrayExtensions =
     indexes
 
   sort_by: (keys...) ->
-    # TODO: Implement this.
+    @sort (object1, object2) ->
+      for own key in keys
+        return 1 if object1[key] > object2[key]
+        return -1 if object1[key] < object2[key]
+      0
 
   join_by: (separator) ->
     @join separator
