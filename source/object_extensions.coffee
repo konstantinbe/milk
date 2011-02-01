@@ -51,16 +51,16 @@ Milk.ObjectExtensions =
     this
 
   freeze: () ->
-    Object.freeze(this)
+    Object.freeze this
 
   seal: () ->
-    Object.seal(this)
+    Object.seal this
 
   is_frozen: () ->
-    Object.isFrozen(this)
+    Object.isFrozen this
 
   is_sealed: () ->
-    Object.isSealed(this)
+    Object.isSealed this
 
   is_array: () ->
     Array.isArray this
