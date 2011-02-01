@@ -46,7 +46,8 @@ task :specs => [:prepare] do
   puts OK
 
   put "Generating list of spec files ... "
-  specs = `cd build; ls javascript/*_spec.js`.split "\n"
+  specs = ['javascript/spec_helper.js']
+  specs << `cd build; ls javascript/*_spec.js`.split("\n")
   puts OK
 
   put "Generating spec runner HTML file ... "
