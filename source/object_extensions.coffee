@@ -21,7 +21,7 @@
 
 Milk.ObjectExtensions =
   get: (key) ->
-    # TODO: Implement this.
+    this[key]
 
   set: (key, value, options = {}) ->
     # TODO: Implement this.
