@@ -39,6 +39,12 @@ describe "Milk.ObjectExtensions", ->
       expect(person.name).to_be "Peter Pan"
       expect(person.age).to_be 56
 
+    it "sets nothing if hash is empty", ->
+      person = name: "Peter", age: 45
+      person.set {}
+      expect(person.name).to_be "Peter"
+      expect(person.age).to_be 45
+
     it "throws if one of the properties does not exist", ->
       person = name: "Peter", age: 45
       expect(-> person.set name: "Peter Pan", age: 56, city: "Burmingham").to_throw()
