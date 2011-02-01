@@ -71,7 +71,7 @@ License
 
 Released under the MIT license.
 
-Copyright (c) 2010 Konstantin Bender.
+Copyright (c) 2010 [Konstantin Bender](https://github.com/konstantinbender).
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
