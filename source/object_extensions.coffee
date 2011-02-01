@@ -54,7 +54,16 @@ Milk.ObjectExtensions =
     this
 
   freeze: () ->
-    # TODO: Implement this.
+    Object.freeze(this)
+
+  seal: () ->
+    Object.seal(this)
+
+  is_frozen: () ->
+    Object.isFrozen(this)
+
+  is_sealed: () ->
+    Object.isSealed(this)
 
   is_array: () ->
     Array.isArray this
@@ -81,7 +90,7 @@ Milk.ObjectExtensions =
     # TODO: Implement this.
 
   clone: () ->
-    # TODO: Implement this.
+    {}.set this
 
   equals: (object) ->
     # TODO: Implement this.

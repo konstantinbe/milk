@@ -97,6 +97,38 @@ describe "Milk.ObjectExtensions", ->
       method = () -> console.log "I'm a method."
       expect({method: method}.responds_to()).to_be no
 
+  describe "seal()", ->
+    it "seals the receiver", ->
+      person = name: "Peter", age: 45
+      person.seal()
+      expect(Object.isSealed(person)).to_be true
+
+  describe "freeze()", ->
+    it "freezes the receiver", ->
+      person = name: "Peter", age: 45
+      person.freeze()
+      expect(Object.isFrozen(person)).to_be true
+
+  describe "is_sealed()", ->
+    it "returns no if receiver is not sealed", ->
+      person = name: "Peter", age: 45
+      expect(person.is_sealed()).to_be false
+
+    it "returns yes if receiver is sealed", ->
+      person = name: "Peter", age: 45
+      person.seal()
+      expect(person.is_sealed()).to_be true
+
+  describe "is_frozen()", ->
+    it "returns no if receiver is not frozen", ->
+      person = name: "Peter", age: 45
+      expect(person.is_frozen()).to_be false
+
+    it "returns yes if receiver is sealed", ->
+      person = name: "Peter", age: 45
+      person.freeze()
+      expect(person.is_frozen()).to_be true
+
   describe "is_function(value)", ->
     it "returns yes if receiver is a function", ->
       expect((->).is_function()).to_be true
