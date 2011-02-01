@@ -393,9 +393,9 @@ describe "Milk.ArrayExtensions", ->
 
     it "sorts by a string containing comma separated property names", ->
 
-    it "allows ASC and DESC keywords after a property name", ->
+    it "allows ASC and DESC keywords after a property name to specify ascending (default) or descending order", ->
 
-    it "allows mixed types of arguments: property names, arrays of property names, functions, and comma separated property names", ->
+    it "allows mixed types of arguments: property names, arrays of property names, and comma separated property names", ->
 
     it "returns the receiver", ->
       expect(people.sort_by 'name').to_be people
