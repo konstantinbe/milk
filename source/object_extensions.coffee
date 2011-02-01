@@ -49,7 +49,7 @@ Milk.ObjectExtensions =
     # TODO: Implement this.
 
   responds_to: (method) ->
-    # TODO: Implement this.
+    this[method]? and this[method].is_function()
 
   merge: (objects...) ->
     for object in objects
