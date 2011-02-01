@@ -156,3 +156,19 @@ describe "Milk.ObjectExtensions", ->
   describe "is_regexp(value)", ->
     it "returns yes if receiver is a regular expression", ->
       expect(//.is_regexp()).to_be true
+
+  describe "clone(options = {})", ->
+    it "returns a new object", ->
+      expect({}.clone()).to_be_an_object()
+
+    it "has all keys and values of the receiver", ->
+      person = name: "Peter", age: 45
+      clone = person.clone()
+      expect(clone.keys()).to_equal ['name', 'age']
+      expect(clone.values()).to_equal ["Peter", 45]
+
+    it "makes a shallow copy, i.e. does not copy objects recursively, just references them", ->
+      address = street: "Rhode-Island-Alley", city: "Karlsruhe"
+      person = name: "Peter", age: 45, address: address
+      clone = person.clone()
+      expect(clone.address).to_be address
