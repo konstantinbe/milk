@@ -51,6 +51,13 @@ More specific:
 * [Rails Core Extensions](http://guides.rubyonrails.org/active_support_core_extensions.html)
 
 
+Acknowledgements
+----------------
+
+Special thanks to [Jeremy Ashkenas](https://github.com/jashkenas) for bringing
+[CoffeeScript](http://jashkenas.github.com/coffee-script/) into life.
+
+
 Changelog
 ---------
 
