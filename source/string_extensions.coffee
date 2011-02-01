@@ -40,3 +40,12 @@ Milk.StringExtensions =
 
   dasherize: () ->
     # TODO: Implement this.
+
+  clone: () ->
+    # TODO: Implement this.
+
+  equals: (object) ->
+    # TODO: Implement this.
+
+  description: () ->
+    # TODO: Implement this.
