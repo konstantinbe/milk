@@ -27,7 +27,7 @@ Milk.ObjectExtensions =
 
   set: (hash) ->
     for own key of hash
-      throw "[ERROR] Property '#{key}' not found." unless this[key]?
+      throw "[ERROR] Property '#{key}' not found." if this[key] == undefined
     for own key, value of hash
       this[key] = value
     this
