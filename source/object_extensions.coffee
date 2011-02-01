@@ -21,6 +21,8 @@
 
 Milk.ObjectExtensions =
   get: (key) ->
+    value = this[key]
+    throw "[ERROR] Property '#{key}' not found." if value == undefined
     this[key]
 
   set: (hash) ->

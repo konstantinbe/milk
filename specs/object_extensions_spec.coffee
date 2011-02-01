@@ -24,8 +24,8 @@ describe "Milk.ObjectExtensions", ->
     it "returns value for key", ->
       expect({name: "Peter"}.get 'name').to_be "Peter"
 
-    it "returns undefined if no value for key exists", ->
-      expect({name: "Peter"}.get 'city').to_be_undefined
+    it "throws if no value for key exists", ->
+      expect(-> {name: "Peter"}.get 'city').to_throw()
 
   describe "set(hash)", ->
     it "sets one value for key contained in the hash (Object)", ->
