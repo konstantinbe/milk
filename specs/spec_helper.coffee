@@ -21,7 +21,7 @@
 
 Matchers =
   to_be_an_object: () ->
-    @actual.is_object()
+    @actual? and @actual instanceof Object
 
 before_each ->
   @addMatchers Matchers

@@ -25,11 +25,9 @@ Milk.ObjectExtensions =
     throw "[ERROR] Property '#{key}' not found." if value == undefined
     this[key]
 
-  set: (hash) ->
-    for own key of hash
-      throw "[ERROR] Property '#{key}' not found." if this[key] == undefined
-    for own key, value of hash
-      this[key] = value
+  set: (key, value) ->
+    throw "[ERROR] Property '#{key}' not found." if this[key] == undefined
+    this[key] = value
     this
 
   keys: () ->
@@ -87,7 +85,10 @@ Milk.ObjectExtensions =
     # TODO: Implement this.
 
   clone: () ->
-    {}.set this
+    clone = {}
+    for own key, value of this
+      clone[key] = value
+    clone
 
   equals: (object) ->
     # TODO: Implement this.
