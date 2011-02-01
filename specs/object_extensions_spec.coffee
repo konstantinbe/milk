@@ -41,11 +41,11 @@ describe "Milk.ObjectExtensions", ->
 
     it "throws if one of the properties does not exist", ->
       person = name: "Peter", age: 45
-      expect(() -> person.set(name: "Peter Pan", age: 56, city: "Burmingham")).to_throw()
+      expect(-> person.set name: "Peter Pan", age: 56, city: "Burmingham").to_throw()
 
     it "sets nothing if one of the properties does not exist", ->
       person = name: "Peter", age: 45
-      expect(() -> person.set(name: "Peter Pan", age: 56, city: "Burmingham")).to_throw()
+      expect(-> person.set name: "Peter Pan", age: 56, city: "Burmingham").to_throw()
       expect(person.name).to_be "Peter"
       expect(person.age).to_be 45
 
