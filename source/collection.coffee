@@ -21,16 +21,13 @@
 
 Milk.Collection =
   each: (iterator, context) ->
-    return @values().each iterator, context unless @is_array()
-    @forEach iterator, context
+    return @values().each iterator, context
 
   collect: (iterator, context) ->
-    return @values().collect iterator, context unless @is_array()
-    @map iterator, context
+    return @values().collect iterator, context
 
   select: (iterator, context) ->
-    return @values().select iterator, context unless @is_array()
-    @filter iterator, context
+    return @values().select iterator, context
 
   reject: (iterator, context) ->
     @inject [], (values, value) ->
@@ -42,24 +39,16 @@ Milk.Collection =
     false
 
   all: (iterator, context) ->
-    return @values().all iterator, context unless @is_array()
-    @every iterator, context
+    return @values().all iterator, context
 
   any: (iterator, context) ->
-    return @values().any iterator, context unless @is_array()
-    @some iterator, context
+    return @values().any iterator, context
 
   max: () ->
-    return @values().max unless @is_array()
-    return null if @empty()
-    @inject @first, (current, value) =>
-      if current > value then current else value
+    @values().max()
 
   min: () ->
-    return @values().min unless @is_array()
-    return null if @empty()
-    @inject @first, (current, value) =>
-      if current < value then current else value
+    @values().min()
 
   partition: (iterator) ->
     @inject {}, (partition, value) ->
@@ -69,13 +58,10 @@ Milk.Collection =
       partition
 
   inject: (initial, iterator) ->
-    return @values().inject initial, iterator unless @is_array()
-    @reduce iterator, initial
+    @values().inject initial, iterator
 
   contains: (value) ->
-    return @values().contains value unless @is_array()
-    return no unless value
-    @indexOf(value) != -1
+    @values().contains value
 
   invoke: (method, args...) ->
     @collect (value) ->
@@ -92,7 +78,7 @@ Milk.Collection =
     values
 
   count: () ->
-    if @length? then @length else @values().length
+    @values().length
 
   empty: () ->
     @count() == 0

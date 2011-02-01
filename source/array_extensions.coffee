@@ -20,6 +20,42 @@
 # THE SOFTWARE.
 
 Milk.ArrayExtensions =
+  # collection methods
+  each: (iterator, context) ->
+    @forEach iterator, context
+
+  collect: (iterator, context) ->
+    @map iterator, context
+
+  select: (iterator, context) ->
+    @filter iterator, context
+
+  all: (iterator, context) ->
+    @every iterator, context
+
+  any: (iterator, context) ->
+    @some iterator, context
+
+  max: () ->
+    return null if @empty()
+    @inject @first, (current, value) =>
+      if current > value then current else value
+
+  min: () ->
+    return null if @empty()
+    @inject @first, (current, value) =>
+      if current < value then current else value
+
+  inject: (initial, iterator) ->
+    @reduce iterator, initial
+
+  contains: (value) ->
+    @indexOf(value) != -1
+
+  count: () ->
+    @length
+
+  # array-only methods
   each: (iterator, context) ->
     @forEach iterator, context
 
