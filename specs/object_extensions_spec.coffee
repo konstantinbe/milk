@@ -27,6 +27,27 @@ describe "Milk.ObjectExtensions", ->
     it "returns undefined if no value for key exists", ->
       expect({name: "Peter"}.get 'city').to_be_undefined
 
+  describe "set(hash)", ->
+    it "sets one value for key contained in the hash (Object)", ->
+      person = name: "Peter"
+      person.set name: "Peter Pan"
+      expect(person.name).to_be "Peter Pan"
+
+    it "sets many values for keys contained in the hash (Object)", ->
+      person = name: "Peter", age: 45
+      person.set name: "Peter Pan", age: 56
+      expect(person.name).to_be "Peter Pan"
+      expect(person.age).to_be 56
+
+    it "throws if one of the properties does not exist", ->
+      person = name: "Peter", age: 45
+      expect(() -> person.set(name: "Peter Pan", age: 56, city: "Burmingham")).to_throw()
+
+    it "sets nothing if one of the properties does not exist", ->
+      person = name: "Peter", age: 45
+      expect(person.name).to_be "Peter"
+      expect(person.age).to_be 45
+
   describe "is_function(value)", ->
     it "returns yes if receiver is a function", ->
       expect((->).is_function()).to_be true

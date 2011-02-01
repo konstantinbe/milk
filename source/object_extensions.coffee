@@ -23,8 +23,12 @@ Milk.ObjectExtensions =
   get: (key) ->
     this[key]
 
-  set: (key, value, options = {}) ->
-    # TODO: Implement this.
+  set: (hash) ->
+    for own key of hash
+      throw "[ERROR] Property '#{key}' not found." unless this[key]?
+    for own key, value of hash
+      this[key] = value
+    this
 
   keys: () ->
     # TODO: Implement this.
