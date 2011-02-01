@@ -26,15 +26,6 @@ Milk.ObjectExtensions =
   set: (key, value, options = {}) ->
     # TODO: Implement this.
 
-  clone: () ->
-    # TODO: Implement this.
-
-  equals: (object) ->
-    # TODO: Implement this.
-
-  hash: () ->
-    # TODO: Implement this.
-
   keys: () ->
     # TODO: Implement this.
 
@@ -54,9 +45,6 @@ Milk.ObjectExtensions =
     this
 
   freeze: () ->
-    # TODO: Implement this.
-
-  description: () ->
     # TODO: Implement this.
 
   is_array: () ->
@@ -79,3 +67,15 @@ Milk.ObjectExtensions =
 
   is_regexp: (value) ->
     @test? and @exec? and (@ignoreCase? or @ignoreCase == no)
+
+  hash: () ->
+    # TODO: Implement this.
+
+  clone: () ->
+    # TODO: Implement this.
+
+  equals: (object) ->
+    # TODO: Implement this.
+
+  description: () ->
+    # TODO: Implement this.
