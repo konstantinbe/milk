@@ -45,8 +45,13 @@ describe "Milk.ObjectExtensions", ->
 
     it "sets nothing if one of the properties does not exist", ->
       person = name: "Peter", age: 45
+      expect(() -> person.set(name: "Peter Pan", age: 56, city: "Burmingham")).to_throw()
       expect(person.name).to_be "Peter"
       expect(person.age).to_be 45
+
+    it "returns the receiver", ->
+      person = name: "Peter", age: 45
+      expect(person.set name: "Peter Pan", age: 56).to_be person
 
   describe "keys()", ->
     it "returns an array of keys", ->
