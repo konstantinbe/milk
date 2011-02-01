@@ -22,3 +22,12 @@
 Milk.NumberExtensions =
   times: (count) ->
     # TODO: Implement this.
+
+  clone: () ->
+    # TODO: Implement this.
+
+  equals: (object) ->
+    # TODO: Implement this.
+
+  description: () ->
+    # TODO: Implement this.
