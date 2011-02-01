@@ -31,7 +31,10 @@ Milk.ObjectExtensions =
     this
 
   keys: () ->
-    # TODO: Implement this.
+    keys = []
+    for own key, value of this
+       keys.add key
+    keys
 
   values: () ->
     # TODO: Implement this.
