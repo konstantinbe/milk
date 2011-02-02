@@ -10,7 +10,6 @@ require 'ERB'
 MODULES = [
   "core",
   "milk",
-  "exceptions",
   "collection",
   "object_extensions",
   "array_extensions",
