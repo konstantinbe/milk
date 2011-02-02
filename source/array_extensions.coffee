@@ -57,14 +57,14 @@ Milk.ArrayExtensions =
 
   # array-only methods
   first: (count) ->
-    return this[0] unless count?
+    return @[0] unless count?
     @slice 0, count
 
   rest: () ->
     @slice 1
 
   last: (count) ->
-    return this[@length - 1] unless count?
+    return @[@length - 1] unless count?
     return [] if count is 0
     @slice -count
 
@@ -111,7 +111,7 @@ Milk.ArrayExtensions =
     arrays = [this].with_many arrays
     counts = arrays.collect (array) -> array.count()
     zipped = []
-    for index in [0..counts.max() - 1]
+    for index in [0...counts.max()]
       row = arrays.collect (array) -> array[index]
       zipped.add row
     zipped
@@ -186,7 +186,7 @@ Milk.ArrayExtensions =
 
   sort_by: (keys...) ->
     @sort (object1, object2) ->
-      for own key in keys
+      for key in keys
         return 1 if object1[key] > object2[key]
         return -1 if object1[key] < object2[key]
       0

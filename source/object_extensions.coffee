@@ -21,13 +21,13 @@
 
 Milk.ObjectExtensions =
   get: (key) ->
-    value = this[key]
+    value = @[key]
     throw "[ERROR] Property '#{key}' not found." if value == undefined
-    this[key]
+    @[key]
 
   set: (key, value) ->
-    throw "[ERROR] Property '#{key}' not found." if this[key] == undefined
-    this[key] = value
+    throw "[ERROR] Property '#{key}' not found." if @[key] == undefined
+    @[key] = value
     this
 
   keys: () ->
@@ -40,12 +40,12 @@ Milk.ObjectExtensions =
     values
 
   responds_to: (method) ->
-    this[method]? and this[method].is_function()
+    @[method]? and @[method].is_function()
 
   merge: (objects...) ->
     for object in objects
       for own key, value of object
-        this[key] = value
+        @[key] = value
     this
 
   freeze: () ->

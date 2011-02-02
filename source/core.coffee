@@ -24,5 +24,5 @@ this.exports = this unless exports?
 Object::mixin = (mixins...) ->
   for mixin in mixins
     for own key, value of mixin
-      this[key] = value
+      @[key] = value
   return this

@@ -34,7 +34,7 @@ Milk.Collection =
       unless iterator value then values.add value else values
 
   detect: (iterator, context) ->
-    for own value in @values()
+    for value in @values()
       return value if iterator value
     false
 
