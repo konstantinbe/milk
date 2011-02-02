@@ -91,7 +91,7 @@ Milk.ObjectExtensions =
     clone
 
   equals: (object) ->
-    # TODO: Implement this.
+    this == object
 
   description: () ->
     # TODO: Implement this.

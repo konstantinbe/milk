@@ -164,3 +164,12 @@ describe "Milk.ObjectExtensions", ->
       person = name: "Peter", age: 45, address: address
       clone = person.clone()
       expect(clone.address).to_be address
+
+  describe "equals(object)", ->
+    it "returns yes if object is the same", ->
+      person = name: "Peter"
+      expect(person.equals person).to_be true
+
+    it "returns no if object is not the same", ->
+      person = name: "Peter"
+      expect(person.equals name: "Peter").to_be false
