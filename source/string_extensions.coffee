@@ -44,7 +44,7 @@ Milk.StringExtensions =
   clone: () ->
     # TODO: Implement this.
 
-  equals: (object) ->
+  equals: (object, options = {}) ->
     # TODO: Implement this.
 
   description: () ->
