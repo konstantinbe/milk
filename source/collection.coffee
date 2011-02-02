@@ -65,7 +65,7 @@ Milk.Collection =
 
   invoke: (method, args...) ->
     @collect (value) ->
-      value[method].apply(value, args)
+      value[method].apply value, args
 
   pluck: (key) ->
     @collect (value) ->
