@@ -56,9 +56,6 @@ Milk.ArrayExtensions =
     @length
 
   # array-only methods
-  each: (iterator, context) ->
-    @forEach iterator, context
-
   first: (count) ->
     return this[0] unless count?
     @slice 0, count
