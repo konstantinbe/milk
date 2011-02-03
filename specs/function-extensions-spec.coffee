@@ -20,13 +20,13 @@
 # THE SOFTWARE.
 
 describe "Milk.FunctionExtensions", ->
-  describe "clone()", ->
-    it "returns the same instance of a function", ->
-      func = () -> 1 + 1
-      expect(func.clone()).to_be func
-
   describe "wrap(wrapper)", ->
     it "returns a function", ->
       generate_text = -> "I should be wrapped by a div."
       div = generate_text.wrap (func) -> "<div>" + func() + "</div>"
       expect(div()).to_be "<div>I should be wrapped by a div.</div>"
+
+  describe "clone()", ->
+    it "returns the same instance of a function", ->
+      func = () -> 1 + 1
+      expect(func.clone()).to_be func
