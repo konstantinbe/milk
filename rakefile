@@ -11,11 +11,11 @@ MODULES = [
   "core",
   "milk",
   "collection",
-  "object_extensions",
-  "array_extensions",
-  "function_extensions",
-  "number_extensions",
-  "string_extensions",
+  "object-extensions",
+  "array-extensions",
+  "function-extensions",
+  "number-extensions",
+  "string-extensions",
   "init"
 ]
 
