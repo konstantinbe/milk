@@ -43,6 +43,13 @@ describe "Milk.NumberExtensions", ->
   describe "words()", ->
     # TODO: specify.
 
+  describe "prepend(strings...)", ->
+    it "prepends one string", ->
+      expect("World!".prepend "Hello ").to_be "Hello World!"
+
+    it "appends many strings", ->
+      expect("!".prepend "Hello", " ", "World").to_be "Hello World!"
+
   describe "append(strings...)", ->
     it "appends one string", ->
       expect("Hello ".append "World!").to_be "Hello World!"
