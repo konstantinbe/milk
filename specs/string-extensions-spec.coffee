@@ -44,7 +44,11 @@ describe "Milk.NumberExtensions", ->
     # TODO: specify.
 
   describe "append(strings...)", ->
-    # TODO: specify.
+    it "appends one string", ->
+      expect("Hello ".append "World!").to_be "Hello World!"
+
+    it "appends many strings", ->
+      expect("Hello".append " ", "World", "!").to_be "Hello World!"
 
   describe "titleize()", ->
     # TODO: specify.
