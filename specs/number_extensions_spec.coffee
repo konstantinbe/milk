@@ -19,9 +19,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-Milk.NumberExtensions =
-  times: (count) ->
-    # TODO: Implement this.
+describe "Milk.NumberExtensions", ->
+  describe "clone()", ->
+    it "returns a clone of the receiver", ->
+      five = 5
+      expect(five.clone()).to_equal 5
 
-  clone: () ->
-    return new Number(this)
+    it "which is not the same instance", ->
+      five = 5
+      five.unique_five_instance = "Unique Five Instance"
+      expect(five.clone().unique_five_instance).to_be undefined
