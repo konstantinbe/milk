@@ -40,6 +40,30 @@ describe "Milk.NumberExtensions", ->
     it "also works with control characters", ->
       expect("Hello World!\n".codes()).to_equal [72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33, 10]
 
+  describe "words()", ->
+    # TODO: specify.
+
+  describe "append(strings...)", ->
+    # TODO: specify.
+
+  describe "titleize()", ->
+    # TODO: specify.
+
+  describe "humanize()", ->
+    # TODO: specify.
+
+  describe "camelize()", ->
+    # TODO: specify.
+
+  describe "underscorize()", ->
+    # TODO: specify.
+
+  describe "pluralize()", ->
+    # TODO: specify.
+
+  describe "dasherize()", ->
+    # TODO: specify.
+
   describe "clone()", ->
     it "returns a clone of the receiver", ->
       string = "String"
