@@ -19,27 +19,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-Milk.StringExtensions =
-  words: () ->
-    # TODO: Implement this.
+describe "Milk.NumberExtensions", ->
+  describe "clone()", ->
+    it "returns a clone of the receiver", ->
+      string = "String"
+      expect(string.clone()).to_equal "String"
 
-  titleize: () ->
-    # TODO: Implement this.
-
-  humanize: () ->
-    # TODO: Implement this.
-
-  camelize: () ->
-    # TODO: Implement this.
-
-  underscorize: () ->
-    # TODO: Implement this.
-
-  pluralize: () ->
-    # TODO: Implement this.
-
-  dasherize: () ->
-    # TODO: Implement this.
-
-  clone: () ->
-    return new String(this)
+    it "which is not the same instance", ->
+      string = "String"
+      string.unique_string_instance = "Unique String Instance"
+      expect(string.clone().unique_string_instance).to_be undefined
