@@ -36,12 +36,12 @@ Milk.ArrayExtensions =
   any: (iterator, context) ->
     @some iterator, context
 
-  max: () ->
+  max: ->
     return null if @empty()
     @inject @first, (current, value) =>
       if current > value then current else value
 
-  min: () ->
+  min: ->
     return null if @empty()
     @inject @first, (current, value) =>
       if current < value then current else value
@@ -52,7 +52,7 @@ Milk.ArrayExtensions =
   contains: (value) ->
     @indexOf(value) != -1
 
-  count: () ->
+  count: ->
     @length
 
   # array-only methods
@@ -60,7 +60,7 @@ Milk.ArrayExtensions =
     return @[0] unless count?
     @slice 0, count
 
-  rest: () ->
+  rest: ->
     @slice 1
 
   last: (count) ->
@@ -83,16 +83,16 @@ Milk.ArrayExtensions =
   without_at: (indexes...) ->
     # TODO: Implement this.
 
-  compact: () ->
+  compact: ->
     @filter (value) ->
       value?
 
-  flatten: () ->
+  flatten: ->
     @inject [], (result, value) =>
       values = if value.is_array() then value.flatten() else [value]
       result.add_many values
 
-  unique: () ->
+  unique: ->
     result = @clone()
     for i in [0..@length]
       for j in [0..@length]
@@ -194,7 +194,7 @@ Milk.ArrayExtensions =
   join_by: (separator) ->
     @join separator
 
-  clone: () ->
+  clone: ->
     [].concat this
 
   equals: (object) ->
@@ -203,7 +203,7 @@ Milk.ArrayExtensions =
     return no unless (@all (value, index) -> value == object[index])
     yes
 
-  description: () ->
+  description: ->
     "[" + @toString() + "]"
 
   # native array methods:

@@ -20,5 +20,5 @@
 # THE SOFTWARE.
 
 Milk.RegExpExtensions =
-  clone: () ->
+  clone: ->
     # TODO: Implement this.

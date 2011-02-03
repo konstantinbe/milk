@@ -20,29 +20,29 @@
 # THE SOFTWARE.
 
 Milk.StringExtensions =
-  characters: () ->
+  characters: ->
     # TODO: Implement this.
 
-  words: () ->
+  words: ->
     # TODO: Implement this.
 
-  titleize: () ->
+  titleize: ->
     # TODO: Implement this.
 
-  humanize: () ->
+  humanize: ->
     # TODO: Implement this.
 
-  camelize: () ->
+  camelize: ->
     # TODO: Implement this.
 
-  underscorize: () ->
+  underscorize: ->
     # TODO: Implement this.
 
-  pluralize: () ->
+  pluralize: ->
     # TODO: Implement this.
 
-  dasherize: () ->
+  dasherize: ->
     # TODO: Implement this.
 
-  clone: () ->
+  clone: ->
     return new String(this)

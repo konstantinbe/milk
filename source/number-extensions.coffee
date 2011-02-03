@@ -23,5 +23,5 @@ Milk.NumberExtensions =
   times: (count) ->
     # TODO: Implement this.
 
-  clone: () ->
+  clone: ->
     return new Number(this)

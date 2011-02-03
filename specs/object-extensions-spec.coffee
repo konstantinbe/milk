@@ -59,7 +59,7 @@ describe "Milk.ObjectExtensions", ->
       expect({}.keys()).to_equal []
 
     it "also includes methods", ->
-      expect({method: () -> console.log "I'm a method." }.keys()).to_equal ['method']
+      expect({method: -> console.log "I'm a method." }.keys()).to_equal ['method']
 
   describe "values()", ->
     it "returns an array of values", ->
@@ -69,24 +69,24 @@ describe "Milk.ObjectExtensions", ->
       expect({}.values()).to_equal []
 
     it "also includes methods", ->
-      method = () -> console.log "I'm a method."
+      method = -> console.log "I'm a method."
       expect({method: method}.values()).to_equal [method]
 
   describe "responds_to(method)", ->
     it "returns yes if object responds to a method", ->
-      method = () -> console.log "I'm a method."
+      method = -> console.log "I'm a method."
       expect({method: method}.responds_to 'method').to_be yes
 
     it "returns no if object does not respond to a method (i.e. method does not exist)", ->
-      method = () -> console.log "I'm a method."
+      method = -> console.log "I'm a method."
       expect({method: method}.responds_to 'not_existing_method').to_be no
 
     it "returns no if method is null", ->
-      method = () -> console.log "I'm a method."
+      method = -> console.log "I'm a method."
       expect({method: method}.responds_to null).to_be no
 
     it "returns no if no arguments are passed", ->
-      method = () -> console.log "I'm a method."
+      method = -> console.log "I'm a method."
       expect({method: method}.responds_to()).to_be no
 
   describe "seal()", ->

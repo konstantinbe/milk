@@ -26,12 +26,12 @@ Milk.FunctionExtensions =
   bind_to: (object, args...) ->
     # TODO: Implement this.
 
-  methodize: () ->
+  methodize: ->
     # TODO: Implement this.
 
   wrap: (wrapper) ->
     func = this
-    () -> wrapper(func)
+    -> wrapper(func)
 
   compose: (funcs...) ->
     funcs = arguments
@@ -41,5 +41,5 @@ Milk.FunctionExtensions =
         args = [funcs[i].apply(this, args)]
       args[0]
 
-  clone: () ->
+  clone: ->
     this

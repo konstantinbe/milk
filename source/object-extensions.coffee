@@ -30,10 +30,10 @@ Milk.ObjectExtensions =
     @[key] = value
     this
 
-  keys: () ->
+  keys: ->
     Object.keys this
 
-  values: () ->
+  values: ->
     values = []
     for own key, value of this
        values.add value
@@ -48,40 +48,40 @@ Milk.ObjectExtensions =
         @[key] = value
     this
 
-  freeze: () ->
+  freeze: ->
     Object.freeze this
 
-  seal: () ->
+  seal: ->
     Object.seal this
 
-  is_frozen: () ->
+  is_frozen: ->
     Object.isFrozen this
 
-  is_sealed: () ->
+  is_sealed: ->
     Object.isSealed this
 
-  is_array: () ->
+  is_array: ->
     Array.isArray this
 
-  is_function: () ->
+  is_function: ->
     @constructor? and @call? and @apply?
 
-  is_string: () ->
+  is_string: ->
     this == '' or (@charCodeAt? and @substr?)
 
-  is_number: () ->
+  is_number: ->
     this == 0 or (@toExponential? and @toFixed?)
 
-  is_boolean: () ->
+  is_boolean: ->
     this instanceof Boolean
 
-  is_date: () ->
+  is_date: ->
     @getTimezoneOffset? and @setUTCFullYear?
 
   is_regexp: (value) ->
     @test? and @exec? and (@ignoreCase? or @ignoreCase == no)
 
-  clone: () ->
+  clone: ->
     clone = {}
     for own key, value of this
       clone[key] = value
@@ -90,5 +90,5 @@ Milk.ObjectExtensions =
   equals: (object) ->
     this == object
 
-  description: () ->
+  description: ->
     if @toString? then @toString() else "Object"

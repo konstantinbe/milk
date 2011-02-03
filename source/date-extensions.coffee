@@ -20,5 +20,5 @@
 # THE SOFTWARE.
 
 Milk.DateExtensions =
-  clone: () ->
+  clone: ->
     # TODO: Implement this.

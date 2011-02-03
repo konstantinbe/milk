@@ -28,5 +28,5 @@ describe "Milk.FunctionExtensions", ->
 
   describe "clone()", ->
     it "returns the same instance of a function", ->
-      func = () -> 1 + 1
+      func = -> 1 + 1
       expect(func.clone()).to_be func

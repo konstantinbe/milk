@@ -44,10 +44,10 @@ Milk.Collection =
   any: (iterator, context) ->
     return @values().any iterator, context
 
-  max: () ->
+  max: ->
     @values().max()
 
-  min: () ->
+  min: ->
     @values().min()
 
   partition: (iterator) ->
@@ -71,14 +71,14 @@ Milk.Collection =
     @collect (value) ->
       value[key]
 
-  values: () ->
+  values: ->
     values = []
     @each (value) ->
       values.add value
     values
 
-  count: () ->
+  count: ->
     @values().length
 
-  empty: () ->
+  empty: ->
     @count() == 0
