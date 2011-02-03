@@ -24,7 +24,8 @@ Milk.FunctionExtensions =
     # TODO: Implement this.
 
   wrap: (wrapper) ->
-    # TODO: Implement this.
+    func = this
+    () -> wrapper(func)
 
   compose: (functions...) ->
     # TODO: Implement this.
