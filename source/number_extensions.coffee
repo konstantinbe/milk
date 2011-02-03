@@ -25,6 +25,3 @@ Milk.NumberExtensions =
 
   clone: () ->
     # TODO: Implement this.
-
-  description: () ->
-    # TODO: Implement this.

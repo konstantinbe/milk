@@ -22,6 +22,3 @@
 Milk.RegExpExtensions =
   clone: () ->
     # TODO: Implement this.
-
-  description: () ->
-    # TODO: Implement this.

@@ -46,6 +46,3 @@ Milk.StringExtensions =
 
   equals: (object, options = {}) ->
     # TODO: Implement this.
-
-  description: () ->
-    # TODO: Implement this.

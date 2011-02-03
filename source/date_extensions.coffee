@@ -22,6 +22,3 @@
 Milk.DateExtensions =
   clone: () ->
     # TODO: Implement this.
-
-  description: () ->
-    # TODO: Implement this.
