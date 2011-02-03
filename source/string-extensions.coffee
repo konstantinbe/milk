@@ -21,7 +21,10 @@
 
 Milk.StringExtensions =
   characters: ->
-    # TODO: Implement this.
+    @split ""
+
+  codes: ->
+    @characters().map (character) -> character.charCodeAt 0
 
   words: ->
     # TODO: Implement this.

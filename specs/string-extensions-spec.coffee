@@ -20,6 +20,16 @@
 # THE SOFTWARE.
 
 describe "Milk.NumberExtensions", ->
+  describe "characters()", ->
+    it "returns an array", ->
+      expect("".characters()).to_equal []
+
+    it "contaiing individual characters", ->
+      expect("Hello World!".characters()).to_equal ["H", "e", "l", "l", "o", " ", "W", "o", "r", "l", "d", "!"]
+
+    it "also works with control characters", ->
+      expect("Hello World!\n".characters()).to_equal ["H", "e", "l", "l", "o", " ", "W", "o", "r", "l", "d", "!", "\n"]
+
   describe "clone()", ->
     it "returns a clone of the receiver", ->
       string = "String"
