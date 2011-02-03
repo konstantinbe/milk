@@ -20,8 +20,8 @@
 # THE SOFTWARE.
 
 Milk.FunctionExtensions =
-  curry: (object) ->
-    # TODO: Implement this. Also known as 'bind'.
+  curry: (func, args...) ->
+    # TODO: Implement this.
 
   wrap: (wrapper) ->
     # TODO: Implement this.
