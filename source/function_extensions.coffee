@@ -33,4 +33,4 @@ Milk.FunctionExtensions =
     # TODO: Implement this.
 
   clone: () ->
-    # TODO: Implement this.
+    this

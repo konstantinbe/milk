@@ -18,3 +18,9 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
+
+describe "Milk.FunctionExtensions", ->
+  describe "clone()", ->
+    it "returns the same instance of a function", ->
+      func = () -> 1 + 1
+      expect(func.clone()).to_be func
