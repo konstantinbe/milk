@@ -29,6 +29,9 @@ Milk.StringExtensions =
   words: ->
     # TODO: Implement this.
 
+  append: (strings...) ->
+    @concat strings...
+
   titleize: ->
     # TODO: Implement this.
 

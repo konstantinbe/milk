@@ -30,6 +30,16 @@ describe "Milk.NumberExtensions", ->
     it "also works with control characters", ->
       expect("Hello World!\n".characters()).to_equal ["H", "e", "l", "l", "o", " ", "W", "o", "r", "l", "d", "!", "\n"]
 
+  describe "codes", ->
+    it "returns an array", ->
+      expect("".codes()).to_equal []
+
+    it "contaiing the char codes for individual characters", ->
+      expect("Hello World!".codes()).to_equal [72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33]
+
+    it "also works with control characters", ->
+      expect("Hello World!\n".codes()).to_equal [72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33, 10]
+
   describe "clone()", ->
     it "returns a clone of the receiver", ->
       string = "String"
