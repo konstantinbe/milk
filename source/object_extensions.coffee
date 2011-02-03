@@ -81,9 +81,6 @@ Milk.ObjectExtensions =
   is_regexp: (value) ->
     @test? and @exec? and (@ignoreCase? or @ignoreCase == no)
 
-  hash: () ->
-    # TODO: Implement this.
-
   clone: () ->
     clone = {}
     for own key, value of this
