@@ -91,4 +91,4 @@ Milk.ObjectExtensions =
     this == object
 
   description: () ->
-    # TODO: Implement this.
+    if @toString? then @toString() else "Object"
