@@ -20,6 +20,9 @@
 # THE SOFTWARE.
 
 Milk.StringExtensions =
+  characters: () ->
+    # TODO: Implement this.
+
   words: () ->
     # TODO: Implement this.
 
