@@ -57,6 +57,15 @@ describe "Milk.NumberExtensions", ->
     it "appends many strings", ->
       expect("Hello".append " ", "World", "!").to_be "Hello World!"
 
+  describe "index_of(string)", ->
+    expect("Hello World!".index_of "l").to_be 2
+
+  describe "last_index_of(string)", ->
+    expect("Hello World!".last_index_of "l").to_be 9
+
+  describe "indexes_of(string)", ->
+    expect("Hello World!".indexes_of "l").to_equal [2, 3, 9]
+
   describe "titleize()", ->
     # TODO: specify.
 

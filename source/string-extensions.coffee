@@ -35,6 +35,20 @@ Milk.StringExtensions =
   append: (strings...) ->
     @concat strings...
 
+  index_of: (string) ->
+    @indexOf string
+
+  last_index_of: (string) ->
+    @lastIndexOf string
+
+  indexes_of: (string) ->
+    indexes = []
+    index = @indexOf string
+    while index >= 0
+      indexes.add index
+      index = @indexOf string, index + 1
+    indexes
+
   titleize: ->
     # TODO: Implement this.
 
