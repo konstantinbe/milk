@@ -20,18 +20,26 @@
 # THE SOFTWARE.
 
 Milk.FunctionExtensions =
-  curry: (func, args...) ->
+  curry: (args...) ->
+    # TODO: Implement this.
+
+  bind_to: (object, args...) ->
+    # TODO: Implement this.
+
+  methodize: () ->
     # TODO: Implement this.
 
   wrap: (wrapper) ->
     func = this
     () -> wrapper(func)
 
-  compose: (functions...) ->
-    # TODO: Implement this.
-
-  methodize: () ->
-    # TODO: Implement this.
+  compose: (funcs...) ->
+    funcs = arguments
+    ->
+      args = arguments
+      for i in [funcs.length - 1..0] by -1
+        args = [funcs[i].apply(this, args)]
+      args[0]
 
   clone: () ->
     this
