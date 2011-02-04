@@ -68,13 +68,40 @@ describe "Milk.NumberExtensions", ->
       expect("Hello".append " ", "World", "!").to_be "Hello World!"
 
   describe "index_of(string)", ->
-    expect("Hello World!".index_of "l").to_be 2
+    it "returns the index of the first occurence of string", ->
+      expect("Hello World!".index_of "l").to_be 2
 
   describe "last_index_of(string)", ->
-    expect("Hello World!".last_index_of "l").to_be 9
+    it "returns the index for the last occurence of string", ->
+      expect("Hello World!".last_index_of "l").to_be 9
 
   describe "indexes_of(string)", ->
-    expect("Hello World!".indexes_of "l").to_equal [2, 3, 9]
+    it "returns an array of indexes for all occurences of the string", ->
+      expect("Hello World!".indexes_of "l").to_equal [2, 3, 9]
+
+  describe "uppercase()", ->
+    it "returns an uppercase copy of the string", ->
+      expect("Hello World!".uppercase()).to_be "HELLO WORLD!"
+
+  describe "lowercase()", ->
+    it "returns a lowercase copy of the string", ->
+      expect("Hello World!".lowercase()).to_be "hello world!"
+
+  describe "capitalize()", ->
+    it "returns a copy of the string with the first letter uppercase and all other letters lowercase", ->
+      expect("hello World!".capitalize()).to_be "Hello world!"
+
+  describe "underscorize()", ->
+    it "splits into words and concatenates with underscores while lowercasing everything", ->
+      expect("Hello World!".underscorize()).to_be "hello_world"
+
+  describe "dasherize()", ->
+    it "splits into words and concatenates with dashes while lowercasing everything", ->
+      expect("Hello World!".dasherize()).to_be "hello-world"
+
+  describe "camelize()", ->
+    it "splits into words and concatenates with by capitalizing every word", ->
+      expect("hello World!".camelize()).to_be "HelloWorld"
 
   describe "titleize()", ->
     # TODO: specify.
@@ -82,16 +109,7 @@ describe "Milk.NumberExtensions", ->
   describe "humanize()", ->
     # TODO: specify.
 
-  describe "camelize()", ->
-    # TODO: specify.
-
-  describe "underscorize()", ->
-    # TODO: specify.
-
   describe "pluralize()", ->
-    # TODO: specify.
-
-  describe "dasherize()", ->
     # TODO: specify.
 
   describe "clone()", ->

@@ -61,22 +61,35 @@ Milk.StringExtensions =
       index = @indexOf string, index + 1
     indexes
 
+  uppercase: ->
+    @toUpperCase()
+
+  lowercase: ->
+    @toLowerCase()
+
+  capitalize: ->
+    return "" if @length == 0
+    first = @[0]
+    rest = @substr 1
+    first.uppercase() + rest.lowercase()
+
+  underscorize: ->
+    @lowercase().words().join_by "_"
+
+  dasherize: ->
+    @lowercase().words().join_by "-"
+
+  camelize: ->
+    capitalized_words = @lowercase().words().collect (word) -> word.capitalize()
+    capitalized_words.join ""
+
   titleize: ->
     # TODO: Implement this.
 
   humanize: ->
     # TODO: Implement this.
 
-  camelize: ->
-    # TODO: Implement this.
-
-  underscorize: ->
-    # TODO: Implement this.
-
   pluralize: ->
-    # TODO: Implement this.
-
-  dasherize: ->
     # TODO: Implement this.
 
   clone: ->
