@@ -27,6 +27,18 @@ Milk.StringExtensions =
     @characters().map (character) -> character.charCodeAt 0
 
   words: ->
+    cleaned = @clone().replace(/[\W|_]+/g, " ")
+    trimmed = cleaned.trim()
+    words = trimmed.split " "
+    words.select (word) -> word.length > 0
+
+  lines: ->
+    # TODO: Implement this.
+
+  paragraphs: ->
+    # TODO: Implement this.
+
+  part: (params = {}) ->
     # TODO: Implement this.
 
   prepend: (strings...) ->

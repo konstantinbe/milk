@@ -41,7 +41,17 @@ describe "Milk.NumberExtensions", ->
       expect("Hello World!\n".codes()).to_equal [72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33, 10]
 
   describe "words()", ->
-    # TODO: specify.
+    it "splits a string into words", ->
+      expect("HTML5 is great".words()).to_equal ["HTML5", "is", "great"]
+
+    it "removes all non-word characters", ->
+      expect("HTML5 is great! <> : {} [] | + =".words()).to_equal ["HTML5", "is", "great"]
+
+    it "also removes underscores", ->
+      expect("HTML5_is_great".words()).to_equal ["HTML5", "is", "great"]
+
+    it "doesn't include empty strings", ->
+      expect("".words()).to_equal []
 
   describe "prepend(strings...)", ->
     it "prepends one string", ->
