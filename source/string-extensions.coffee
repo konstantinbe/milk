@@ -27,7 +27,7 @@ Milk.StringExtensions =
     @characters().map (character) -> character.charCodeAt 0
 
   words: ->
-    cleaned = @clone().replace(/[\W|_]+/g, " ")
+    cleaned = @clone().replace("'", "").replace(/[\W|_]+/g, " ")
     trimmed = cleaned.trim()
     words = trimmed.split " "
     words.select (word) -> word.length > 0
@@ -84,7 +84,11 @@ Milk.StringExtensions =
     capitalized_words.join ""
 
   titleize: ->
-    # TODO: Implement this.
+    insignificant_words = ["a", "an", "the", "at", "by", "for", "in", "of", "off", "on", "out", "to", "up", "and", "as", "but", "if", "or", "nor", "is"]
+    is_insignificant = (word) -> insignificant_words.contains word
+    titleized_words = @lowercase().words().collect (word) ->
+      if is_insignificant word then word else word.capitalize()
+    titleized_words.join_by " "
 
   humanize: ->
     # TODO: Implement this.

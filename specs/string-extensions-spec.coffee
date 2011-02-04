@@ -47,6 +47,9 @@ describe "Milk.NumberExtensions", ->
     it "removes all non-word characters", ->
       expect("HTML5 is great! <> : {} [] | + =".words()).to_equal ["HTML5", "is", "great"]
 
+    it "doesn't split at apostrophes", ->
+      expect("Konstantin's MacBook Pro".words()).to_equal ["Konstantins", "MacBook", "Pro"]
+
     it "also removes underscores", ->
       expect("HTML5_is_great".words()).to_equal ["HTML5", "is", "great"]
 
@@ -104,7 +107,8 @@ describe "Milk.NumberExtensions", ->
       expect("hello World!".camelize()).to_be "HelloWorld"
 
   describe "titleize()", ->
-    # TODO: specify.
+    it "extracts words and capitalizes every word unless it's insignificant", ->
+      expect("Konstantin's macbook pro is Awesome.".titleize()).to_be "Konstantins Macbook Pro is Awesome"
 
   describe "humanize()", ->
     # TODO: specify.
