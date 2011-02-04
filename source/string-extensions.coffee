@@ -91,7 +91,10 @@ Milk.StringExtensions =
     titleized_words.join_by " "
 
   humanize: ->
-    # TODO: Implement this.
+    return "" if @length == 0
+    words = @lowercase().words()
+    words[0] = words[0].capitalize()
+    words.join_by " "
 
   pluralize: ->
     # TODO: Implement this.

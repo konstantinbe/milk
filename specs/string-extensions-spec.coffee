@@ -111,10 +111,10 @@ describe "Milk.NumberExtensions", ->
       expect("Konstantin's macbook pro is Awesome.".titleize()).to_be "Konstantins Macbook Pro is Awesome"
 
   describe "humanize()", ->
-    # TODO: specify.
+    it "extracts words, makes them all lowercase except the first word", ->
+      expect("Konstantin's-macbook_pro$is#Awesome.".humanize()).to_be "Konstantins macbook pro is awesome"
 
   describe "pluralize()", ->
-    # TODO: specify.
 
   describe "clone()", ->
     it "returns a clone of the receiver", ->
