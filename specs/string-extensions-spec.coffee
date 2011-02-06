@@ -48,13 +48,27 @@ describe "Milk.NumberExtensions", ->
       expect("HTML5 is great! <> : {} [] | + =".words()).to_equal ["HTML5", "is", "great"]
 
     it "doesn't split at apostrophes", ->
-      expect("Konstantin's MacBook Pro".words()).to_equal ["Konstantins", "MacBook", "Pro"]
+      expect("Konstantin's MacBook Pro".words()).to_equal ["Konstantins", "Mac", "Book", "Pro"]
 
     it "also removes underscores", ->
       expect("HTML5_is_great".words()).to_equal ["HTML5", "is", "great"]
 
     it "doesn't include empty strings", ->
       expect("".words()).to_equal []
+
+    it "works with came cased strings", ->
+      expect("HelloWorld!".words()).to_equal ["Hello", "World"]
+      expect("helloWorld!".words()).to_equal ["hello", "World"]
+
+    it "preserves acronyms", ->
+      expect("HTML".words()).to_equal ["HTML"]
+      expect("HTML5 is great!".words()).to_equal ["HTML5", "is", "great"]
+      expect("HTML5_is_great!".words()).to_equal ["HTML5", "is", "great"]
+      expect("HTML5-is-great!".words()).to_equal ["HTML5", "is", "great"]
+
+    it "preserves acronyms in camel cased strings", ->
+      expect("RegularHTMLReader".words()).to_equal ["Regular", "HTML", "Reader"]
+      expect("RegularHTML5Reader".words()).to_equal ["Regular", "HTML5", "Reader"]
 
   describe "prepend(strings...)", ->
     it "prepends one string", ->

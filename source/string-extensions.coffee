@@ -27,7 +27,7 @@ Milk.StringExtensions =
     @characters().map (character) -> character.charCodeAt 0
 
   words: ->
-    cleaned = @clone().replace("'", "").replace(/[\W|_]+/g, " ")
+    cleaned = @clone().replace("'", "").replace(/[\W|_]+/g, " ").replace(/([a-z]|\d)([A-Z])/g, "$1 $2").replace(/([A-Z]|\d)([a-z])/g, " $1$2")
     trimmed = cleaned.trim()
     words = trimmed.split " "
     words.select (word) -> word.length > 0
@@ -60,6 +60,12 @@ Milk.StringExtensions =
       indexes.add index
       index = @indexOf string, index + 1
     indexes
+
+  has_prefix: (string) ->
+    # TODO: Implement this.
+
+  has_suffix: (string) ->
+    # TODO: Implement this.
 
   uppercase: ->
     @toUpperCase()
