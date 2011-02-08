@@ -90,10 +90,10 @@ Milk.StringExtensions =
     capitalized_words.join ""
 
   titleize: ->
-    insignificant_words = ["a", "an", "the", "at", "by", "for", "in", "of", "off", "on", "out", "to", "up", "and", "as", "but", "if", "or", "nor", "is"]
-    is_insignificant = (word) -> insignificant_words.contains word
+    String::insignificant_words ?= {a: yes, an: yes, the: yes, at: yes, by: yes, for: yes, in: yes, of: yes, off: yes, on: yes, out: yes, to: yes, up: yes, and: yes, as: yes, but: yes, if: yes, or: yes, nor: yes, is: yes}
     titleized_words = @lowercase().words().collect (word) ->
-      if is_insignificant word then word else word.capitalize()
+      is_insignificant = String::insignificant_words[word]?
+      if is_insignificant then word else word.capitalize()
     titleized_words.join_by " "
 
   humanize: ->
