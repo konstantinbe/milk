@@ -158,6 +158,8 @@ describe "Milk.NumberExtensions", ->
 
   describe "pluralize()", ->
 
+  describe "singularize()", ->
+
   describe "clone()", ->
     it "returns a clone of the receiver", ->
       string = "String"

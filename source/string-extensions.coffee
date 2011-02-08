@@ -105,5 +105,8 @@ Milk.StringExtensions =
   pluralize: ->
     # TODO: Implement this.
 
+  singularize: ->
+    # TODO: Implement this.
+
   clone: ->
     return new String(this)
