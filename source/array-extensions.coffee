@@ -191,9 +191,6 @@ Milk.ArrayExtensions =
         return -1 if object1[key] < object2[key]
       0
 
-  join_by: (separator) ->
-    @join separator
-
   clone: ->
     [].concat this
 

@@ -80,10 +80,10 @@ Milk.StringExtensions =
     first.uppercase() + rest.lowercase()
 
   underscorize: ->
-    @lowercase().words().join_by "_"
+    @lowercase().words().join "_"
 
   dasherize: ->
-    @lowercase().words().join_by "-"
+    @lowercase().words().join "-"
 
   camelize: ->
     capitalized_words = @lowercase().words().collect (word) -> word.capitalize()
@@ -94,13 +94,13 @@ Milk.StringExtensions =
     titleized_words = @lowercase().words().collect (word) ->
       is_insignificant = String::insignificant_words[word]?
       if is_insignificant then word else word.capitalize()
-    titleized_words.join_by " "
+    titleized_words.join " "
 
   humanize: ->
     return "" if @length == 0
     words = @lowercase().words()
     words[0] = words[0].capitalize()
-    words.join_by " "
+    words.join " "
 
   pluralize: ->
     # TODO: Implement this.
