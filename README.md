@@ -20,6 +20,7 @@ Possible Features
 * Key-value coding
 * Key-value observing
 * Cocoa style bindings
+* Cocoa style key/value validations
 
 * Rails style Active Model
 * Rails style validations
