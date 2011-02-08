@@ -61,11 +61,11 @@ Milk.StringExtensions =
       index = @indexOf string, index + 1
     indexes
 
-  has_prefix: (string) ->
-    # TODO: Implement this.
+  begins_with: (string) ->
+    @index_of(string) == 0
 
-  has_suffix: (string) ->
-    # TODO: Implement this.
+  ends_with: (string) ->
+    @index_of(string) == this.length - string.length
 
   uppercase: ->
     @toUpperCase()

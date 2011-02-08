@@ -96,6 +96,20 @@ describe "Milk.NumberExtensions", ->
     it "returns an array of indexes for all occurences of the string", ->
       expect("Hello World!".indexes_of "l").to_equal [2, 3, 9]
 
+  describe "begins_with(string)", ->
+    it "returns yes if receiver begins with string", ->
+      expect("Hello World!".begins_with "Hello").to_be true
+
+    it "returns no otherwise", ->
+      expect("Hello World!".begins_with "Hellow").to_be false
+
+  describe "ends_with(string)", ->
+    it "returns yes if receiver ends with string", ->
+      expect("Hello World!".ends_with "World!").to_be true
+
+    it "returns no otherwise", ->
+      expect("Hello World!".ends_with "World").to_be false
+
   describe "uppercase()", ->
     it "returns an uppercase copy of the string", ->
       expect("Hello World!".uppercase()).to_be "HELLO WORLD!"
