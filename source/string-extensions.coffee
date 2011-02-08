@@ -33,10 +33,10 @@ Milk.StringExtensions =
     words.select (word) -> word.length > 0
 
   lines: ->
-    # TODO: Implement this.
+    @split "\n"
 
   paragraphs: ->
-    # TODO: Implement this.
+    @split "\n\n"
 
   part: (params = {}) ->
     # TODO: Implement this.

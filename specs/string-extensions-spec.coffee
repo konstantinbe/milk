@@ -34,7 +34,7 @@ describe "Milk.NumberExtensions", ->
     it "returns an array", ->
       expect("".codes()).to_equal []
 
-    it "contaiing the char codes for individual characters", ->
+    it "containing the char codes for individual characters", ->
       expect("Hello World!".codes()).to_equal [72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33]
 
     it "also works with control characters", ->
@@ -69,6 +69,20 @@ describe "Milk.NumberExtensions", ->
     it "preserves acronyms in camel cased strings", ->
       expect("RegularHTMLReader".words()).to_equal ["Regular", "HTML", "Reader"]
       expect("RegularHTML5Reader".words()).to_equal ["Regular", "HTML5", "Reader"]
+
+  describe "lines()", ->
+    it "returns an array of strings by splitting the receiver at \\n", ->
+      expect("Hello\nWorld!".lines()).to_equal ["Hello", "World!"]
+
+    it "returns empty strings for empty lines", ->
+      expect("Hello\n\nWorld!".lines()).to_equal ["Hello", "", "World!"]
+
+    it "returns an array with one empty string if the string is empty", ->
+      expect("".lines()).to_equal [""]
+
+  describe "paragraphs()", ->
+    it "returns an array of strings by splitting the receiver at double new lines \\n\\n", ->
+      expect("Hello\n\nWorld!".paragraphs()).to_equal ["Hello", "World!"]
 
   describe "prepend(strings...)", ->
     it "prepends one string", ->
