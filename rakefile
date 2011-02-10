@@ -16,6 +16,7 @@ MODULES = [
   "function-extensions",
   "number-extensions",
   "string-extensions",
+  "reg-exp-extensions",
   "init"
 ]
 

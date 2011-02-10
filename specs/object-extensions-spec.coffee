@@ -145,9 +145,9 @@ describe "Milk.ObjectExtensions", ->
     it "returns yes if receiver is a date", ->
       expect((new Date()).is_date()).to_be true
 
-  describe "is_regexp(value)", ->
+  describe "is_reg_exp(value)", ->
     it "returns yes if receiver is a regular expression", ->
-      expect(//.is_regexp()).to_be true
+      expect(//.is_reg_exp()).to_be true
 
   describe "clone(options = {})", ->
     it "returns a new object", ->

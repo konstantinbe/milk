@@ -78,7 +78,7 @@ Milk.ObjectExtensions =
   is_date: ->
     @getTimezoneOffset? and @setUTCFullYear?
 
-  is_regexp: (value) ->
+  is_reg_exp: (value) ->
     @test? and @exec? and (@ignoreCase? or @ignoreCase == no)
 
   clone: ->

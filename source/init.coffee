@@ -25,6 +25,7 @@ Object::mixin Milk.ObjectExtensions
 Number::mixin Milk.NumberExtensions
 String::mixin Milk.StringExtensions
 Function::mixin Milk.FunctionExtensions
+RegExp::mixin Milk.RegExpExtensions
 
 Array::mixin Milk.Collection
 Array::mixin Milk.ArrayExtensions

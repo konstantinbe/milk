@@ -23,8 +23,8 @@ describe "Milk.RegExpExtensions", ->
   describe "clone()", ->
     it "returns a clone of the receiver", ->
       reg_exp = /.*/
-      expect(reg_exp.clone()).to_equal /.*/
+      expect(reg_exp.clone().toString()).to_equal /.*/.toString()
 
     it "which is not the same instance", ->
       reg_exp = /.*/
-      expect(string.clone().unique_string_instance).not.to_be reg_exp
+      expect(reg_exp.clone()).not.to_be reg_exp
