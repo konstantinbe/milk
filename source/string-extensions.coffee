@@ -38,9 +38,6 @@ Milk.StringExtensions =
   paragraphs: ->
     @split "\n\n"
 
-  part: (params = {}) ->
-    # TODO: Implement this.
-
   prepend: (strings...) ->
     "".concat strings..., this
 
