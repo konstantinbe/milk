@@ -19,6 +19,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-Milk.RegExpExtensions =
-  clone: ->
-    return new RegExp(this)
+describe "Milk.RegExpExtensions", ->
+  describe "clone()", ->
+    it "returns a clone of the receiver", ->
+      reg_exp = /.*/
+      expect(reg_exp.clone()).to_equal /.*/
+
+    it "which is not the same instance", ->
+      reg_exp = /.*/
+      expect(string.clone().unique_string_instance).not.to_be reg_exp
