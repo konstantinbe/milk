@@ -21,4 +21,4 @@
 
 Milk.DateExtensions =
   clone: ->
-    # TODO: Implement this.
+    new Date(this)

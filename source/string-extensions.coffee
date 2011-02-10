@@ -106,4 +106,4 @@ Milk.StringExtensions =
     # TODO: Implement this.
 
   clone: ->
-    return new String(this)
+    new String(this)

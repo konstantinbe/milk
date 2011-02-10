@@ -20,4 +20,4 @@
 # THE SOFTWARE.
 
 exports.Milk =
-  VERSION: '0.0.001'
+  VERSION: '0.0.01'

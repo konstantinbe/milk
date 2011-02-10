@@ -61,6 +61,13 @@ Special thanks to [Jeremy Ashkenas](https://github.com/jashkenas) for bringing
 Changelog
 ---------
 
+### 0.1.00 - Underway
+
+* [In Progress] Implemented extensions for native JavaScript classes/objects
+  covering most of the underscore.js functionality.
+* Added inflection support for strings.
+
+
 ### 0.0.01
 
 * First release.

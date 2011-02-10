@@ -21,4 +21,4 @@
 
 Milk.NumberExtensions =
   clone: ->
-    return new Number(this)
+    new Number(this)

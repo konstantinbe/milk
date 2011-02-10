@@ -21,4 +21,4 @@
 
 Milk.RegExpExtensions =
   clone: ->
-    return new RegExp(this)
+    new RegExp(this)
