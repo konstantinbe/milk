@@ -113,7 +113,7 @@ end
 
 task :upload do
   put "Uploading release package to GitHub ... "
-  repos = "#{LOGIN}/#{NAME}"
+  repos = REPO.scan(/git@github\.com:(.*)\.git/).to_s
 
   github = Net::GitHub::Upload.new :login => LOGIN, :token => TOKEN
   direct_link = github.upload :repos => repos, :file  => "build/#{NAME}-#{RELEASE}.zip", :description => ""
@@ -157,6 +157,14 @@ task :init do
   run "mv wiki/.git/hooks/pre-commit.sample wiki/.git/hooks/pre-commit" unless File.exists? "wiki/.git/hooks/pre-commit"
   run "cd wiki; git config --unset core.ignorecase" if `git config core.ignorecase`.length > 0
   puts OK
+end
+
+task :info do
+  puts "Repository URL:         " + REPO
+  puts "Repository Name:        " + NAME
+  puts "Repository Wiki URL:    " + WIKI
+  puts "GitHub User:            " + LOGIN
+  puts "GitHub Token:           " + TOKEN
 end
 
 # ---------------------------------------------------------------- functions ---

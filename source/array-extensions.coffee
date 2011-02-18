@@ -83,14 +83,17 @@ Milk.ArrayExtensions =
   without_at: (indexes...) ->
     # TODO: Implement this.
 
-  compact: ->
+  compacted: ->
     @filter (value) ->
       value?
 
-  flatten: ->
+  flattened: ->
     @inject [], (result, value) =>
-      values = if value.is_array() then value.flatten() else [value]
+      values = if value.is_array() then value.flattened() else [value]
       result.add_many values
+
+  reversed: ->
+    @clone().reverse()
 
   unique: ->
     result = @clone()

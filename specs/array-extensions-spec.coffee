@@ -49,26 +49,36 @@ describe "Milk.ArrayExtensions", ->
       expect([1, 2, 3].last 3).to_equal [1, 2, 3]
       expect([1, 2, 3].last 10).to_equal [1, 2, 3]
 
-  describe "compact()", ->
+  describe "compacted()", ->
     it "returns a new array without modifying the receiver", ->
       array = [1, 2, 3]
-      expect(array.compact()).not.to_be array
+      expect(array.compacted()).not.to_be array
       expect(array).to_equal [1, 2, 3]
 
     it "removes all null values", ->
-      expect([null, 1, null, 2, null, 3, null].compact()).to_equal [1, 2, 3]
+      expect([null, 1, null, 2, null, 3, null].compacted()).to_equal [1, 2, 3]
 
     it "removes all undefined values", ->
-      expect([undefined, 1, undefined, 2, undefined, 3, undefined].compact()).to_equal [1, 2, 3]
+      expect([undefined, 1, undefined, 2, undefined, 3, undefined].compacted()).to_equal [1, 2, 3]
 
-  describe "flatten()", ->
+  describe "flattened()", ->
     it "returns a new array without modifying the receiver", ->
       array = [1, 2, 3]
-      expect(array.flatten()).not.to_be array
+      expect(array.flattened()).not.to_be array
       expect(array).to_equal [1, 2, 3]
 
     it "flattens an array", ->
-      expect([1, [2], [3, [[[4]]]]].flatten()).to_equal [1, 2, 3, 4]
+      expect([1, [2], [3, [[[4]]]]].flattened()).to_equal [1, 2, 3, 4]
+
+  describe "reversed()", ->
+    it "returns a new array without modifying the receiver", ->
+      array = [1, 2, 3]
+      expect(array.reversed()).not.to_be array
+      expect(array).to_equal [1, 2, 3]
+
+    it "reverses the order of the values", ->
+      array = [1, 2, 3]
+      expect(array.reversed()).to_equal [3, 2, 1]
 
   describe "with(values...)", ->
     it "returns a new array without modifying the receiver", ->

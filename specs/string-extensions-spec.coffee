@@ -132,33 +132,33 @@ describe "Milk.NumberExtensions", ->
     it "returns a lowercase copy of the string", ->
       expect("Hello World!".lowercase()).to_be "hello world!"
 
-  describe "capitalize()", ->
+  describe "capitalized()", ->
     it "returns a copy of the string with the first letter uppercase and all other letters lowercase", ->
-      expect("hello World!".capitalize()).to_be "Hello world!"
+      expect("hello World!".capitalized()).to_be "Hello world!"
 
-  describe "underscorize()", ->
+  describe "underscorized()", ->
     it "splits into words and concatenates with underscores while lowercasing everything", ->
-      expect("Hello World!".underscorize()).to_be "hello_world"
+      expect("Hello World!".underscorized()).to_be "hello_world"
 
-  describe "dasherize()", ->
+  describe "dasherized()", ->
     it "splits into words and concatenates with dashes while lowercasing everything", ->
-      expect("Hello World!".dasherize()).to_be "hello-world"
+      expect("Hello World!".dasherized()).to_be "hello-world"
 
-  describe "camelize()", ->
+  describe "camelized()", ->
     it "splits into words and concatenates with by capitalizing every word", ->
-      expect("hello World!".camelize()).to_be "HelloWorld"
+      expect("hello World!".camelized()).to_be "HelloWorld"
 
-  describe "titleize()", ->
+  describe "titleized()", ->
     it "extracts words and capitalizes every word unless it's insignificant", ->
-      expect("Konstantin's macbook pro is Awesome.".titleize()).to_be "Konstantins Macbook Pro is Awesome"
+      expect("Konstantin's macbook pro is Awesome.".titleized()).to_be "Konstantins Macbook Pro is Awesome"
 
-  describe "humanize()", ->
+  describe "humanized()", ->
     it "extracts words, makes them all lowercase except the first word", ->
-      expect("Konstantin's-macbook_pro$is#Awesome.".humanize()).to_be "Konstantins macbook pro is awesome"
+      expect("Konstantin's-macbook_pro$is#Awesome.".humanized()).to_be "Konstantins macbook pro is awesome"
 
-  describe "pluralize()", ->
+  describe "plural()", ->
 
-  describe "singularize()", ->
+  describe "singular()", ->
 
   describe "clone()", ->
     it "returns a clone of the receiver", ->

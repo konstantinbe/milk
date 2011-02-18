@@ -70,39 +70,39 @@ Milk.StringExtensions =
   lowercase: ->
     @toLowerCase()
 
-  capitalize: ->
+  capitalized: ->
     return "" if @length == 0
     first = @[0]
     rest = @substr 1
     first.uppercase() + rest.lowercase()
 
-  underscorize: ->
+  underscorized: ->
     @lowercase().words().join "_"
 
-  dasherize: ->
+  dasherized: ->
     @lowercase().words().join "-"
 
-  camelize: ->
-    capitalized_words = @lowercase().words().collect (word) -> word.capitalize()
+  camelized: ->
+    capitalized_words = @lowercase().words().collect (word) -> word.capitalized()
     capitalized_words.join ""
 
-  titleize: ->
+  titleized: ->
     String::insignificant_words ?= {a: yes, an: yes, the: yes, at: yes, by: yes, for: yes, in: yes, of: yes, off: yes, on: yes, out: yes, to: yes, up: yes, and: yes, as: yes, but: yes, if: yes, or: yes, nor: yes, is: yes}
     titleized_words = @lowercase().words().collect (word) ->
       is_insignificant = String::insignificant_words[word]?
-      if is_insignificant then word else word.capitalize()
+      if is_insignificant then word else word.capitalized()
     titleized_words.join " "
 
-  humanize: ->
+  humanized: ->
     return "" if @length == 0
     words = @lowercase().words()
-    words[0] = words[0].capitalize()
+    words[0] = words[0].capitalized()
     words.join " "
 
-  pluralize: ->
+  plural: ->
     # TODO: Implement this.
 
-  singularize: ->
+  singular: ->
     # TODO: Implement this.
 
   clone: ->

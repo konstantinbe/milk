@@ -39,6 +39,12 @@ Milk.ObjectExtensions =
        values.add value
     values
 
+  properties: ->
+    # TODO: Implement this.
+
+  methods: ->
+    # TODO: Implement this.
+
   responds_to: (method) ->
     @[method]? and @[method].is_function()
 
