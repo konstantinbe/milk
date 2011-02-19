@@ -37,14 +37,10 @@ Milk.ArrayExtensions =
     @some iterator, context
 
   max: ->
-    return null if @empty()
-    @inject @first, (current, value) =>
-      if current > value then current else value
+    Math.max.apply Math, @
 
   min: ->
-    return null if @empty()
-    @inject @first, (current, value) =>
-      if current < value then current else value
+    Math.min.apply Math, @
 
   inject: (initial, iterator) ->
     @reduce iterator, initial

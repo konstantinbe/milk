@@ -61,15 +61,15 @@ describe "Milk.Collection", ->
     it "returns the max value", ->
       expect([1, 3, 2, 4, 1].max()).to_be 4
 
-    it "returns null if empty", ->
-      expect([].max()).to_be null
+    it "returns -Infinity if empty", ->
+      expect([].max()).to_be -Infinity
 
   describe "min()", ->
     it "returns the min value", ->
       expect([1, 3, 2, -1, 1].min()).to_be -1
 
-    it "returns null if empty", ->
-      expect([].min()).to_be null
+    it "returns Infinity if empty", ->
+      expect([].min()).to_be Infinity
 
   describe "partition(iterator, [context])", ->
     it "returns a hash containing a partition where the the results of the iterator are used as keys", ->
