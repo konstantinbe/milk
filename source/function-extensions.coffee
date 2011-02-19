@@ -26,6 +26,9 @@ Milk.FunctionExtensions =
   bind_to: (object, args...) ->
     # TODO: Implement this.
 
+  memoize: (func) ->
+    # TODO: Implement this.
+
   methodize: ->
     # TODO: Implement this.
 
