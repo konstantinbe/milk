@@ -21,14 +21,33 @@
 
 describe "Milk.Core", ->
   describe "namespace(path, block)", ->
+    it "creates a namespace object in the global name space if it doesn't exist", ->
+      namespace 'NewNameSpace'
+      expect(NewNameSpace).to_be_defined()
+
+    it "returns the namespace object", ->
+      space = namespace 'NewNameSpaceToBeReturned'
+      expect(space).to_be(NewNameSpaceToBeReturned)
+
+    it "does not create a namespace object if it already exists", ->
+      existing_name_space = namespace 'ExistingNameSpace'
+      space = namespace 'ExistingNameSpace', -> @VERSION = "0.1"
+      expect(space).to_be_defined()
+      expect(space).to_be(existing_name_space)
+
+    it "adds objects defined in block to the namespace object", ->
+      space = namespace 'NameSpaceContainingVersion', -> @VERSION = "0.1"
+      expect(NameSpaceContainingVersion.VERSION).to_be("0.1")
+
     it "throws if no path is given", ->
       expect(-> namespace()).to_throw()
 
     it "throws if path is not a string", ->
       expect(-> namespace 5).to_throw()
 
-    it "throws if no block is given", ->
-      expect(-> namespace 'Hello.World').to_throw()
-
-    it "throws if block is not a function", ->
+    it "throws if block is given but not a function", ->
       expect(-> namespace 'Hello.World', '').to_throw()
+
+    ['', '1', '.', 'Milk.', 'Milk.2', 'Milk;Core', 'Milk,Core', 'Milk-Core'].each (invalid_path) ->
+      it "throws if path is invalid, example: '#{invalid_path}'", ->
+        expect(-> namespace invalid_path, -> 1).to_throw()
