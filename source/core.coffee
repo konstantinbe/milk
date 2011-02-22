@@ -26,3 +26,10 @@ Object::mixin = (mixins...) ->
     for own key, value of mixin
       @[key] = value
   return this
+
+namespace = (path, block) ->
+  global = this
+  parts = path.split "."
+  parts.each (part) ->
+    global[part] = {} unless global[part]
+  parts.last.exports = block()
