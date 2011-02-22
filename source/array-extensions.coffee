@@ -40,8 +40,8 @@ Milk.ArrayExtensions =
   min: ->
     Math.min.apply Math, @
 
-  inject: (initial, iterator) ->
-    @reduce iterator, initial
+  inject: (initial, block) ->
+    @reduce block, initial
 
   contains: (value) ->
     @index_of(value) != -1

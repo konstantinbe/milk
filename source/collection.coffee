@@ -20,29 +20,29 @@
 # THE SOFTWARE.
 
 Milk.Collection =
-  each: (iterator, context) ->
-    return @values().each iterator, context
+  each: (block, context) ->
+    return @values().each block, context
 
-  collect: (iterator, context) ->
-    return @values().collect iterator, context
+  collect: (block, context) ->
+    return @values().collect block, context
 
-  select: (iterator, context) ->
-    return @values().select iterator, context
+  select: (block, context) ->
+    return @values().select block, context
 
-  reject: (iterator, context) ->
+  reject: (block, context) ->
     @inject [], (values, value) ->
-      unless iterator value then values.add value else values
+      unless block value then values.add value else values
 
-  detect: (iterator, context) ->
+  detect: (block, context) ->
     for value in @values()
-      return value if iterator value
+      return value if block value
     false
 
-  all: (iterator, context) ->
-    return @values().all iterator, context
+  all: (block, context) ->
+    return @values().all block, context
 
-  any: (iterator, context) ->
-    return @values().any iterator, context
+  any: (block, context) ->
+    return @values().any block, context
 
   max: ->
     @values().max()
@@ -50,15 +50,15 @@ Milk.Collection =
   min: ->
     @values().min()
 
-  partition: (iterator) ->
+  partition: (block) ->
     @inject {}, (partition, value) ->
-      key = iterator value
+      key = block value
       partition[key] = [] unless partition[key]
       partition[key].add value
       partition
 
-  inject: (initial, iterator) ->
-    @values().inject initial, iterator
+  inject: (initial, block) ->
+    @values().inject initial, block
 
   contains: (value) ->
     @values().contains value
