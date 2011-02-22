@@ -28,8 +28,6 @@ Object::mixin = (mixins...) ->
   return this
 
 namespace = (path, block) ->
-  global = this
-  parts = path.split "."
-  parts.each (part) ->
-    global[part] = {} unless global[part]
-  parts.last.exports = block()
+  throw "[ERROR] Parameter path is required for namespace(path, block)." unless path? and path.is_string()
+  throw "[ERROR] Parameter block is required for namespace(path, block)." unless block? and block.is_function()
+  # TODO: Implement this.

@@ -21,3 +21,14 @@
 
 describe "Milk.Core", ->
   describe "namespace(path, block)", ->
+    it "throws if no path is given", ->
+      expect(-> namespace()).to_throw()
+
+    it "throws if path is not a string", ->
+      expect(-> namespace 5).to_throw()
+
+    it "throws if no block is given", ->
+      expect(-> namespace 'Hello.World').to_throw()
+
+    it "throws if block is not a function", ->
+      expect(-> namespace 'Hello.World', '').to_throw()
