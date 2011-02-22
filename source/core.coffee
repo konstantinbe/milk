@@ -28,6 +28,12 @@ Object::mixin = (mixins...) ->
   return this
 
 namespace = (path, block) ->
-  throw "[ERROR] Parameter path is required for namespace(path, block)." unless path? and path.is_string()
-  throw "[ERROR] Parameter block is required for namespace(path, block)." unless block? and block.is_function()
-  # TODO: Implement this.
+  throw "[ERROR] Parameter path is required for namespace(path, [block])." unless path? and path.is_string()
+  throw "[ERROR] Parameter block must be a function for namespace(path, [block])." if block? and not block.is_function()
+  throw "[ERROR] Parameter path of function namespace(path, block) is not valid: '#{path}'" unless path.match /^[A-Za-z][A-Za-z0-9_]*(\.[A-Za-z][A-Za-z0-9_]*)*$/
+  names = path.split "."
+  space = names.inject this, (parent, name) ->
+    console.log name
+    parent[name] ?= {}
+  block.call(space) if block?
+  space
