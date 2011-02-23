@@ -27,6 +27,15 @@ Object::mixin = (mixins...) ->
       @[key] = value
   return this
 
+Object::extend = (mixins...) ->
+  for mixin in mixins
+    for own key, value of mixin
+      @[key] = value
+  this
+
+Object::include = (mixins...) ->
+  @::extend mixins...
+
 namespace = (path, block) ->
   throw "[ERROR] Parameter path of function namespace(path, [block]) is required." unless path? and path.is_string()
   throw "[ERROR] Parameter block of function namespace(path, [block]) must be a function." if block? and not block.is_function()
