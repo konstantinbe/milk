@@ -27,17 +27,29 @@ describe "Milk.Core", ->
 
     it "returns the namespace object", ->
       space = namespace 'NewNameSpaceToBeReturned'
-      expect(space).to_be(NewNameSpaceToBeReturned)
+      expect(space).to_be NewNameSpaceToBeReturned
 
     it "does not create a namespace object if it already exists", ->
       existing_name_space = namespace 'ExistingNameSpace'
       space = namespace 'ExistingNameSpace', -> @VERSION = "0.1"
       expect(space).to_be_defined()
-      expect(space).to_be(existing_name_space)
+      expect(space).to_be existing_name_space
 
     it "adds objects defined in block to the namespace object", ->
       space = namespace 'NameSpaceContainingVersion', -> @VERSION = "0.1"
-      expect(NameSpaceContainingVersion.VERSION).to_be("0.1")
+      expect(NameSpaceContainingVersion.VERSION).to_be "0.1"
+
+    it "creates all namespace objects along the path", ->
+      namespace 'One.Two.Three'
+      expect(One.Two.Three).to_be_defined()
+
+    it "returns the last name space in path", ->
+      space = namespace 'Four.Five.Seven'
+      expect(Four.Five.Seven).to_be space
+
+    it "adds objects defined in block to the last namespace object", ->
+      space = namespace 'Eight.Nine.Ten', -> @VERSION = "0.1"
+      expect(Eight.Nine.Ten.VERSION).to_be "0.1"
 
     it "throws if no path is given", ->
       expect(-> namespace()).to_throw()
