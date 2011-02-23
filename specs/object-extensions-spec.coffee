@@ -93,13 +93,13 @@ describe "Milk.ObjectExtensions", ->
     it "seals the receiver", ->
       person = name: "Peter", age: 45
       person.seal()
-      expect(Object.isSealed(person)).to_be true
+      expect(person.is_sealed()).to_be true
 
   describe "freeze()", ->
     it "freezes the receiver", ->
       person = name: "Peter", age: 45
       person.freeze()
-      expect(Object.isFrozen(person)).to_be true
+      expect(person.is_frozen()).to_be true
 
   describe "is_sealed()", ->
     it "returns no if receiver is not sealed", ->

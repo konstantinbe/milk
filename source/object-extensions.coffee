@@ -19,6 +19,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+native_seal = Object.seal
+native_freeze = Object.freeze
+native_is_sealed = Object.isSealed
+native_is_frozen = Object.isFrozen
+
 Milk.ObjectExtensions =
   get: (key) ->
     value = @[key]
@@ -55,16 +60,18 @@ Milk.ObjectExtensions =
     this
 
   freeze: ->
-    Object.freeze this
+    if native_freeze? then native_freeze(this) else @is_frozen = -> yes
+    this
 
   seal: ->
-    Object.seal this
+    if native_seal? native_seal(this) else @is_sealed = -> yes
+    this
 
   is_frozen: ->
-    Object.isFrozen this
+    if native_is_frozen? then native_is_frozen(this) else no
 
   is_sealed: ->
-    Object.isSealed this
+    if native_is_sealed? then native_is_sealed(this) else no
 
   is_array: ->
     Array.isArray this
