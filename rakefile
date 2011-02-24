@@ -22,12 +22,16 @@ MODULES = [
 
 # ------------------------------------------------------------- custom tasks ---
 
-task :build => [:prepare] do
+task :build => [:prepare, 'build:milk', 'build:specs', 'build:package']
+
+task 'build:milk' => [:prepare] do
   put "Compiling Milk ... "
   run "coffee  --join --compile --output build/ " + MODULES.join(" ")
   run "mv build/concatenation.js build/milk.js"
   puts OK
+end
 
+task 'build:package' => [:prepare, 'build:milk'] do
   put "Preparing release package ... "
   delete_file_if_exists "build/#{NAME}-#{RELEASE}"
   run "mkdir build/#{NAME}-#{RELEASE}"
@@ -35,12 +39,14 @@ task :build => [:prepare] do
   puts OK
 end
 
-task :specs => [:prepare, :build] do
+task 'build:specs' => [:prepare] do
   put "Compiling specs ... "
   run "coffee --join --compile --output build/ specs/*.coffee"
   run "mv build/concatenation.js build/specs.js"
   puts OK
+end
 
+task :specs => [:prepare, 'build:milk', 'build:specs'] do
   put "Opening specs in browser ... "
   run "open resources/specs.html -a 'Google Chrome'"
   puts OK
