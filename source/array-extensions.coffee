@@ -19,20 +19,20 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-native_for_each = Array::forEach
-native_map = Array::map
-native_filter = Array::filter
-native_every = Array::every
-native_some = Array::some
-native_index_of = Array::indexOf
-native_last_index_of = Array::lastIndexOf
+native_array_for_each = Array::forEach
+native_array_map = Array::map
+native_array_filter = Array::filter
+native_array_every = Array::every
+native_array_some = Array::some
+native_array_index_of = Array::indexOf
+native_array_last_index_of = Array::lastIndexOf
 
 Milk.ArrayExtensions =
-  each: native_for_each
-  collect: native_map
-  select: native_filter
-  all: native_every
-  any: native_some
+  each: native_array_for_each
+  collect: native_array_map
+  select: native_array_filter
+  all: native_array_every
+  any: native_array_some
 
   max: ->
     Math.max.apply Math, @
@@ -169,8 +169,8 @@ Milk.ArrayExtensions =
     @splice index, 1, replacements...
     this
 
-  index_of: native_index_of
-  last_index_of: native_last_index_of
+  index_of: native_array_index_of
+  last_index_of: native_array_last_index_of
 
   indexes_of: (value) ->
     indexes = []

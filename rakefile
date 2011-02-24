@@ -8,23 +8,23 @@ require 'ERB'
 # --------------------------------------------------------- custom constants ---
 
 MODULES = [
-  "core",
-  "milk",
-  "collection",
-  "object-extensions",
-  "array-extensions",
-  "function-extensions",
-  "number-extensions",
-  "string-extensions",
-  "reg-exp-extensions",
-  "init"
+  "source/core.coffee",
+  "source/milk.coffee",
+  "source/collection.coffee",
+  "source/object-extensions.coffee",
+  "source/array-extensions.coffee",
+  "source/function-extensions.coffee",
+  "source/number-extensions.coffee",
+  "source/string-extensions.coffee",
+  "source/reg-exp-extensions.coffee",
+  "source/init.coffee"
 ]
 
 # ------------------------------------------------------------- custom tasks ---
 
 task :build => [:prepare] do
-  put "Compiling source ... "
-  run "coffee --compile --output --join build/ source/*.coffee"
+  put "Compiling Milk ... "
+  run "coffee  --join --compile --output build/ " + MODULES.join(" ")
   run "mv build/concatenation.js build/milk.js"
   puts OK
 
@@ -35,26 +35,14 @@ task :build => [:prepare] do
   puts OK
 end
 
-task :specs => [:prepare] do
-  put "Compiling source and specs ... "
-  run "coffee  --bare --compile --output build/javascript/ source/*.coffee specs/*.coffee"
-  puts OK
-
-  put "Generating list of source files ... "
-  sources = MODULES.map { |m| "javascript/" + m + ".js" }
-  puts OK
-
-  put "Generating list of spec files ... "
-  specs = ['javascript/spec-helper.js']
-  specs.concat `cd build; ls javascript/*-spec.js`.split("\n")
-  puts OK
-
-  put "Generating spec runner HTML file ... "
-  render_erb_template_to_file("resources/specs.erb", self.send("binding"), "build/specs.html")
+task :specs => [:prepare, :build] do
+  put "Compiling specs ... "
+  run "coffee --join --compile --output build/ specs/*.coffee"
+  run "mv build/concatenation.js build/specs.js"
   puts OK
 
   put "Opening specs in browser ... "
-  run "open build/specs.html -a 'Google Chrome'"
+  run "open resources/specs.html -a 'Google Chrome'"
   puts OK
 end
 
