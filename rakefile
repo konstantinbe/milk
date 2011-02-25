@@ -5,29 +5,13 @@ require 'rubygems'
 require 'net/github-upload'
 require 'ERB'
 
-# --------------------------------------------------------- custom constants ---
-
-MODULES = [
-  "source/core.coffee",
-  "source/milk.coffee",
-  "source/collection.coffee",
-  "source/object-extensions.coffee",
-  "source/array-extensions.coffee",
-  "source/function-extensions.coffee",
-  "source/number-extensions.coffee",
-  "source/string-extensions.coffee",
-  "source/reg-exp-extensions.coffee",
-  "source/init.coffee"
-]
-
 # ------------------------------------------------------------- custom tasks ---
 
 task :build => [:prepare, 'build:milk', 'build:specs', 'build:package']
 
 task 'build:milk' => [:prepare] do
   put "Compiling Milk ... "
-  run "coffee  --join --compile --output build/ " + MODULES.join(" ")
-  run "mv build/concatenation.js build/milk.js"
+  run "nibjs --coffee --autorequire --standalone --libname=Milk --output=build/milk.js source"
   puts OK
 end
 

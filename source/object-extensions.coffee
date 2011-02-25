@@ -24,7 +24,7 @@ native_freeze = Object.freeze
 native_is_sealed = Object.isSealed
 native_is_frozen = Object.isFrozen
 
-Milk.ObjectExtensions =
+exports.ObjectExtensions =
   get: (key) ->
     value = @[key]
     throw "[ERROR] Property '#{key}' not found." if value == undefined

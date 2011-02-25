@@ -27,7 +27,7 @@ native_array_some = Array::some
 native_array_index_of = Array::indexOf
 native_array_last_index_of = Array::lastIndexOf
 
-Milk.ArrayExtensions =
+exports.ArrayExtensions =
   each: native_array_for_each
   collect: native_array_map
   select: native_array_filter

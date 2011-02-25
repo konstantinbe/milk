@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-Milk.FunctionExtensions =
+exports.FunctionExtensions =
   curry: (args...) ->
     # TODO: Implement this.
 

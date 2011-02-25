@@ -18,3 +18,27 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
+
+Object::mixin = (mixins...) ->
+  for mixin in mixins
+    for own key, value of mixin
+      @[key] = value
+  return this
+
+{Collection} = require './collection'
+
+{ObjectExtensions} = require './object-extensions'
+{NumberExtensions} = require './number-extensions'
+{StringExtensions} = require './string-extensions'
+{FunctionExtensions} = require './function-extensions'
+{RegExpExtensions} = require './reg-exp-extensions'
+{ArrayExtensions} = require './array-extensions'
+
+Object::mixin ObjectExtensions
+Number::mixin NumberExtensions
+String::mixin StringExtensions
+Function::mixin FunctionExtensions
+RegExp::mixin RegExpExtensions
+
+Array::mixin Collection
+Array::mixin ArrayExtensions
