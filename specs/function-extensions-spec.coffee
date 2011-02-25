@@ -20,11 +20,35 @@
 # THE SOFTWARE.
 
 describe "Milk.FunctionExtensions", ->
+  describe "curry(args...)", ->
+
+  describe "bind_to(object, [args...])", ->
+    it "returns a new function which calls the receiver by passing object as the first argument", ->
+      plus_one = ((number) -> number + 1)
+      five = plus_one.bind_to(4)
+      expect(five()).to_be 5
+
+    it "curries arguments passed in at bind time", ->
+      concatenate = ((array, arrays...) -> array.concat arrays...)
+      one_two_three = concatenate.bind_to([1], [2], [3])
+      expect(one_two_three()).to_equal [1, 2, 3]
+
+    it "passes in regular arguments", ->
+      concatenate = ((array, arrays...) -> array.concat arrays...)
+      one_two_three = concatenate.bind_to([1], [2], [3])
+      expect(one_two_three([4, 5], [6])).to_equal [1, 2, 3, 4, 5, 6]
+
+  describe "memoize([func])", ->
+
+  describe "methodize()", ->
+
   describe "wrap(wrapper)", ->
     it "returns a function", ->
       generate_text = -> "I should be wrapped by a div."
       div = generate_text.wrap (func) -> "<div>" + func() + "</div>"
       expect(div()).to_be "<div>I should be wrapped by a div.</div>"
+
+  describe "compose(functions...)", ->
 
   describe "clone()", ->
     it "returns the same instance of a function", ->
