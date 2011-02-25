@@ -25,6 +25,9 @@ Object::mixin = (mixins...) ->
       @[key] = value
   return this
 
+Object::extend_by = (mixins...) ->
+  @prototype.mixin mixins...
+
 {Collection} = require './collection'
 
 {ObjectExtensions} = require './object-extensions'
@@ -34,11 +37,11 @@ Object::mixin = (mixins...) ->
 {RegExpExtensions} = require './reg-exp-extensions'
 {ArrayExtensions} = require './array-extensions'
 
-Object::mixin ObjectExtensions
-Number::mixin NumberExtensions
-String::mixin StringExtensions
-Function::mixin FunctionExtensions
-RegExp::mixin RegExpExtensions
+Object.extend_by ObjectExtensions
+Number.extend_by NumberExtensions
+String.extend_by StringExtensions
+Function.extend_by FunctionExtensions
+RegExp.extend_by RegExpExtensions
 
-Array::mixin Collection
-Array::mixin ArrayExtensions
+Array.extend_by Collection
+Array.extend_by ArrayExtensions
