@@ -47,9 +47,12 @@ describe "Milk.FunctionExtensions", ->
       one_two_three = concatenate.bind_to([1], [2], [3])
       expect(one_two_three([4, 5], [6])).to_equal [1, 2, 3, 4, 5, 6]
 
-  describe "memoize([func])", ->
-
   describe "methodize()", ->
+    it "returns a new function that pushes this as the first argument at call time", ->
+      concatenate = (array, arrays...) -> array.concat arrays...
+      array = [1, 2, 3]
+      array.concatenate = concatenate.methodize()
+      expect(array.concatenate [4], [5, 6]).to_equal [1, 2, 3, 4, 5, 6]
 
   describe "wrap(wrapper)", ->
     it "returns a function", ->

@@ -26,11 +26,9 @@ exports.FunctionExtensions =
   bind_to: (object, args...) ->
     => this.call(this, object, args..., arguments...)
 
-  memoize: (func) ->
-    # TODO: Implement this.
-
   methodize: ->
-    # TODO: Implement this.
+    self = this
+    -> self.call(null, this, arguments...)
 
   wrap: (wrapper) ->
     func = this
