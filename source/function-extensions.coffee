@@ -21,10 +21,10 @@
 
 exports.FunctionExtensions =
   curry: (args...) ->
-    # TODO: Implement this.
+    => this.call(this, args..., arguments...)
 
   bind_to: (object, args...) ->
-    => this.call(null, object, args..., arguments...)
+    => this.call(this, object, args..., arguments...)
 
   memoize: (func) ->
     # TODO: Implement this.

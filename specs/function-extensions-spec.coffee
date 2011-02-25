@@ -21,6 +21,15 @@
 
 describe "Milk.FunctionExtensions", ->
   describe "curry(args...)", ->
+    it "curries arguments passed in at bind time", ->
+      concatenate = (arrays...) -> arrays.inject [], (memo, array) -> memo.add_many array
+      one_two_three = concatenate.curry([1], [2], [3])
+      expect(one_two_three()).to_equal [1, 2, 3]
+
+    it "passes in regular arguments", ->
+      concatenate = (arrays...) -> arrays.inject [], (memo, array) -> memo.add_many array
+      one_two_three = concatenate.curry([1], [2], [3])
+      expect(one_two_three([4, 5], [6])).to_equal [1, 2, 3, 4, 5, 6]
 
   describe "bind_to(object, [args...])", ->
     it "returns a new function which calls the receiver by passing object as the first argument", ->
