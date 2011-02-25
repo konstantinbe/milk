@@ -1,3 +1,22 @@
+Milk
+----
+
+Milk is a CoffeeScript library inspired by Rails, Cocoa, Prototype and others.
+
+Milk is strongly *opinionated*. *Beaty* and *Clarity* has #1 priority, therefore
+common "conventions" and "best-practices" may be violated.
+
+
+Conventions
+-----------
+
+* 2 spaces, no tabs.
+* Namespaces, Classes, Mixins use CamelCase notation:
+  `Core.Extensions`, `RegularXMLParser`, `PartiallyFreezeable`.
+* Variables, functions, properties, and methods use underscore notation:
+  `number_of_items`, `compute_number_of_items()`.
+
+
 Getting Started
 ---------------
 
