@@ -11,9 +11,12 @@ Conventions
 -----------
 
 * 2 spaces, no tabs.
-* Namespaces, Classes, Mixins use CamelCase notation:
+* Use CamelCase notation for namespaces, classes, and mixins:
   `Core.Extensions`, `RegularXMLParser`, `PartiallyFreezeable`.
-* Variables, functions, properties, and methods use underscore notation:
+* Use UPPERCASE notation for constants:
+  `Comparable.GREATER_THAN`
+* Use underscore notation for everything else (variables, functions, properties,
+  methods, ...):
   `number_of_items`, `compute_number_of_items()`.
 
 
