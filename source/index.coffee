@@ -19,9 +19,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-this.Milk =
-  VERSION: "0.0.01"
-
 Object::mixin = (mixins...) ->
   for mixin in mixins
     for own key, value of mixin
@@ -50,4 +47,4 @@ RegExp.extend_by RegExpExtensions
 Array.extend_by Collection
 Array.extend_by ArrayExtensions
 
-Milk.Comparable = Comparable
+exports.Comparable = Comparable

@@ -20,7 +20,14 @@
 # THE SOFTWARE.
 
 exports.Comparable =
-  is_comparable: yes,
+  is_comparable: yes
+
+  is_less_than: (value) ->
+    @compare_to(value) == -1
+
+  is_less_than_or_equal_to: (value) ->
+    result = @compare_to value
+    result == 0 or result == -1
 
   is_greater_than: (value) ->
     @compare_to(value) == 1
@@ -29,9 +36,11 @@ exports.Comparable =
     result = @compare_to value
     result == 0 or result == 1
 
-  is_less_than: (value) ->
-    @compare_to(value) == -1
+  is_between: (lower, upper, options = {}) ->
+    return @is_greater_than left and @is_less_than if options['exclude_bounds']
+    return @is_greater_than left and @is_less_than_or_equal_to right if options['exclude_upper_bound']
+    return @is_greater_than_or_equal_to left and @is_less_than right if options['exclude_lower_bound']
+    @is_greater_than_or_equal_to left and @is_less_than_or_equal_to right
 
-  is_less_than_or_equal_to: (value) ->
-    result = @compare_to value
-    result == 0 or result == -1
+  equals: (value) ->
+    @compare_to(value) == 0

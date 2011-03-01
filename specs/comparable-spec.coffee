@@ -44,3 +44,22 @@ describe "Milk.Comparable", ->
         expect(person).to_be_defined()
         expect(Milk.Comparable).to_be_defined()
         expect(person.is_comparable).to_be true
+
+  describe "methods", ->
+    describe "is_less_than(value)", ->
+      # TODO: specify.
+
+    describe "is_less_than_or_equal_to(value)", ->
+      # TODO: specify.
+
+    describe "is_greater_than(value)", ->
+      # TODO: specify.
+
+    describe "is_greater_than_or_equal_to(value)", ->
+      # TODO: specify.
+
+    describe "is_between(lower, upper, [options = {}])", ->
+      # TODO: specify.
+
+    describe "equals(value)", ->
+      # TODO: specify.
