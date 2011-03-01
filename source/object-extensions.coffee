@@ -45,10 +45,10 @@ exports.ObjectExtensions =
     values
 
   properties: ->
-    # TODO: Implement this.
+    # TODO: implement.
 
   methods: ->
-    # TODO: Implement this.
+    # TODO: implement.
 
   responds_to: (method) ->
     @[method]? and @[method].is_function()

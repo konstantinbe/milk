@@ -75,7 +75,7 @@ exports.ArrayExtensions =
     @clone().remove_many collections...
 
   without_at: (indexes...) ->
-    # TODO: Implement this.
+    # TODO: implement.
 
   compacted: ->
     @filter (value) ->
