@@ -44,6 +44,9 @@ exports.ObjectExtensions =
        values.add value
     values
 
+  class: ->
+    @constructor
+
   properties: ->
     # TODO: implement.
 
