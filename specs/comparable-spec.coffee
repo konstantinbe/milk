@@ -19,35 +19,28 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-this.Milk =
-  VERSION: "0.0.01"
 
-Object::mixin = (mixins...) ->
-  for mixin in mixins
-    for own key, value of mixin
-      @[key] = value
-  return this
+describe "Milk.Comparable", ->
+  class Person
+    @mixin Milk.Comparable
+    name: ''
+    constructor: (@name) ->
+    compare_to: (value) ->
+      return +1 if @name > value
+      return -1 if @name < value
+      return 0
 
-Object::extend_by = (mixins...) ->
-  @prototype.mixin mixins...
+  person = null
 
-{Collection} = require './collection'
-{Comparable} = require './comparable'
+  create_person = -> person = new Person("Peter")
+  destroy_person = -> person = null
 
-{ObjectExtensions} = require './object-extensions'
-{NumberExtensions} = require './number-extensions'
-{StringExtensions} = require './string-extensions'
-{FunctionExtensions} = require './function-extensions'
-{RegExpExtensions} = require './reg-exp-extensions'
-{ArrayExtensions} = require './array-extensions'
+  describe "properties", ->
+    describe "is_comparable", ->
+      before_each create_person
+      after_each destroy_person
 
-Object.extend_by ObjectExtensions
-Number.extend_by NumberExtensions
-String.extend_by StringExtensions
-Function.extend_by FunctionExtensions
-RegExp.extend_by RegExpExtensions
-
-Array.extend_by Collection
-Array.extend_by ArrayExtensions
-
-Milk.Comparable = Comparable
+      it "returns yes if object mixes Comparable in", ->
+        expect(person).to_be_defined()
+        expect(Milk.Comparable).to_be_defined()
+        expect(person.is_comparable).to_be true

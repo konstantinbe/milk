@@ -19,35 +19,19 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-this.Milk =
-  VERSION: "0.0.01"
+exports.Comparable =
+  is_comparable: yes,
 
-Object::mixin = (mixins...) ->
-  for mixin in mixins
-    for own key, value of mixin
-      @[key] = value
-  return this
+  is_greater_than: (value) ->
+    @compare_to(value) == 1
 
-Object::extend_by = (mixins...) ->
-  @prototype.mixin mixins...
+  is_greater_than_or_equal_to: (value) ->
+    result = @compare_to value
+    result == 0 or result == 1
 
-{Collection} = require './collection'
-{Comparable} = require './comparable'
+  is_less_than: (value) ->
+    @compare_to(value) == -1
 
-{ObjectExtensions} = require './object-extensions'
-{NumberExtensions} = require './number-extensions'
-{StringExtensions} = require './string-extensions'
-{FunctionExtensions} = require './function-extensions'
-{RegExpExtensions} = require './reg-exp-extensions'
-{ArrayExtensions} = require './array-extensions'
-
-Object.extend_by ObjectExtensions
-Number.extend_by NumberExtensions
-String.extend_by StringExtensions
-Function.extend_by FunctionExtensions
-RegExp.extend_by RegExpExtensions
-
-Array.extend_by Collection
-Array.extend_by ArrayExtensions
-
-Milk.Comparable = Comparable
+  is_less_than_or_equal_to: (value) ->
+    result = @compare_to value
+    result == 0 or result == -1
