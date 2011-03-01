@@ -37,10 +37,15 @@ exports.Comparable =
     result == 0 or result == 1
 
   is_between: (lower, upper, options = {}) ->
-    return @is_greater_than left and @is_less_than if options['exclude_bounds']
-    return @is_greater_than left and @is_less_than_or_equal_to right if options['exclude_upper_bound']
-    return @is_greater_than_or_equal_to left and @is_less_than right if options['exclude_lower_bound']
-    @is_greater_than_or_equal_to left and @is_less_than_or_equal_to right
+    return @is_greater_than lower and @is_less_than upper if options['exclude_bounds']
+    return @is_greater_than lower and @is_less_than_or_equal_to upper if options['exclude_upper_bound']
+    return @is_greater_than_or_equal_to lower and @is_less_than upper if options['exclude_lower_bound']
+    @is_greater_than_or_equal_to lower and @is_less_than_or_equal_to upper
 
   equals: (value) ->
     @compare_to(value) == 0
+
+  compare_to: (value) ->
+    return -1 if this < value
+    return +1 if this > value
+    0
