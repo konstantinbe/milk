@@ -72,15 +72,6 @@ describe "Milk.ObjectExtensions", ->
       method = -> console.log "I'm a method."
       expect({method: method}.values()).to_equal [method]
 
-  describe "class", ->
-    it "returns the constructor function", ->
-      class Car
-        type: "BMW"
-      car = new Car()
-      expect(car).to_be_defined()
-      expect(car.class()).to_be car.constructor
-      expect(car.class().name).to_be "Car"
-
   describe "responds_to(method)", ->
     it "returns yes if object responds to a method", ->
       method = -> console.log "I'm a method."
