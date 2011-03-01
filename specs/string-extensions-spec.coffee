@@ -124,16 +124,16 @@ describe "Milk.NumberExtensions", ->
     it "returns no otherwise", ->
       expect("Hello World!".ends_with "World").to_be false
 
-  describe "uppercase()", ->
-    it "returns an uppercase copy of the string", ->
-      expect("Hello World!".uppercase()).to_be "HELLO WORLD!"
+  describe "uppercased()", ->
+    it "returns an uppercased copy of the string", ->
+      expect("Hello World!".uppercased()).to_be "HELLO WORLD!"
 
-  describe "lowercase()", ->
-    it "returns a lowercase copy of the string", ->
-      expect("Hello World!".lowercase()).to_be "hello world!"
+  describe "lowercased()", ->
+    it "returns a lowercased copy of the string", ->
+      expect("Hello World!".lowercased()).to_be "hello world!"
 
   describe "capitalized()", ->
-    it "returns a copy of the string with the first letter uppercase and all other letters lowercase", ->
+    it "returns a copy of the string with the first letter uppercased and all other letters lowercased", ->
       expect("hello World!".capitalized()).to_be "Hello world!"
 
   describe "underscorized()", ->
@@ -153,7 +153,7 @@ describe "Milk.NumberExtensions", ->
       expect("Konstantin's macbook pro is Awesome.".titleized()).to_be "Konstantins Macbook Pro is Awesome"
 
   describe "humanized()", ->
-    it "extracts words, makes them all lowercase except the first word", ->
+    it "extracts words, makes them all lowercased except the first word", ->
       expect("Konstantin's-macbook_pro$is#Awesome.".humanized()).to_be "Konstantins macbook pro is awesome"
 
   describe "plural()", ->
