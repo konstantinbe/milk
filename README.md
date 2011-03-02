@@ -18,7 +18,7 @@ Conventions
 * Use underscore notation for everything else (variables, functions, properties,
   methods, JSON, ...):
   `number_of_items`, `compute_number_of_items()`
-* Use dashed notation for file names and directories: 'date-extensions.coffee'
+* Use dashed notation for file names and directories: `date-extensions.coffee`
 * Use dashed notation for XML, HTML and CSS: `person-name`, `table-of-people`, `regular-xml-parser`
 
 Getting Started
