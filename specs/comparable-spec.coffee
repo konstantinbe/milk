@@ -22,7 +22,7 @@
 
 describe "Milk.Comparable", ->
   class Person
-    @mixin Milk.Comparable
+    @extend_by Milk.Comparable
     name: ''
     constructor: (@name) ->
     compare_to: (value) ->
