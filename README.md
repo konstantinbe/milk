@@ -12,13 +12,14 @@ Conventions
 
 * 2 spaces, no tabs.
 * Use CamelCase notation for namespaces, classes, and mixins:
-  `Core.Extensions`, `RegularXMLParser`, `PartiallyFreezeable`.
+  `Core.Extensions`, `RegularXMLParser`, `PartiallyFreezeable`
 * Use UPPERCASE notation for constants:
   `Comparable.GREATER_THAN`
 * Use underscore notation for everything else (variables, functions, properties,
-  methods, ...):
-  `number_of_items`, `compute_number_of_items()`.
-
+  methods, JSON, ...):
+  `number_of_items`, `compute_number_of_items()`
+* Use dashed notation for file names and directories: 'date-extensions.coffee'
+* Use dashed notation for XML, HTML and CSS: `person-name`, `table-of-people`, `regular-xml-parser`
 
 Getting Started
 ---------------
