@@ -26,14 +26,27 @@ describe "Milk.Comparable", ->
     name: ''
     constructor: (@name) ->
     compare_to: (value) ->
-      return +1 if @name > value
-      return -1 if @name < value
+      return +1 if @name > value.name
+      return -1 if @name < value.name
       return 0
 
   person = null
+  peter = null
+  gustav = null
+  pete = null
 
   create_person = -> person = new Person("Peter")
   destroy_person = -> person = null
+
+  create_people = ->
+    peter = new Person "Peter"
+    gustav = new Person "Gustav"
+    pete = new Person "Peter"
+
+  destroy_people = ->
+    peter = null
+    gustav = null
+    pete = null
 
   describe "properties", ->
     describe "is_comparable", ->
@@ -46,8 +59,18 @@ describe "Milk.Comparable", ->
         expect(person.is_comparable).to_be true
 
   describe "methods", ->
+    before_each create_people
+    after_each destroy_people
+
     describe "is_less_than(value)", ->
-      # TODO: specify.
+      it "returns true if receiver is less than value", ->
+        expect(gustav.is_less_than peter).to_be true
+
+      it "returns false if they are equal", ->
+        expect(peter.is_less_than pete).to_be false
+
+      it "returns false if receiver is greater than value", ->
+        expect(peter.is_less_than gustav).to_be false
 
     describe "is_less_than_or_equal_to(value)", ->
       # TODO: specify.
