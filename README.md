@@ -10,7 +10,7 @@ common "conventions" and "best-practices" may be violated.
 Conventions
 -----------
 
-* 2 spaces, no tabs.
+* 2 spaces, no tabs
 * Use CamelCase notation for namespaces, classes, and mixins:
   `Core.Extensions`, `RegularXMLParser`, `PartiallyFreezeable`
 * Use UPPERCASE notation for constants:
