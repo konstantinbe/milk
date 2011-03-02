@@ -39,6 +39,14 @@ describe "Milk.Enumerable", ->
     it "returns all objects for which the block returns false", ->
       expect([1, 2, 3, 4, 5].reject (number) -> number == 3).to_equal [1, 2, 4, 5]
 
+  describe "partition([block])", ->
+    it "Partitions the elements into: [selected, rejected], where selected contains all truthy values and rejected contains all falsy values", ->
+      expect(['hello', null, 42, false, true, undefined, 17].partition()).to_equal [['hello', 42, true, 17], [null, false, undefined]]
+
+    it "also accepts a block that is called for each value returning either true or false", ->
+      expect([1..10].partition (value) -> value % 2 == 0).to_equal [[2, 4, 6, 8, 10], [1, 3, 5, 7, 9]]
+
+
   describe "detect(block, [context])", ->
     it "returns the first object for which the block returns true", ->
       expect([1, 2, 3, 4, 5].detect (number) -> number == 3).to_be 3

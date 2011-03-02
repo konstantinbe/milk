@@ -35,6 +35,14 @@ exports.Enumerable =
     @inject [], (values, value) ->
       unless block value then values.add value else values
 
+  partition: (block) ->
+    block = ((value) -> value) unless block?
+    selected = []
+    rejected = []
+    @each (value) ->
+      if block value then selected.add value else rejected.add value
+    [selected, rejected]
+
   detect: (block, context) ->
     for value in @values()
       return value if block value
