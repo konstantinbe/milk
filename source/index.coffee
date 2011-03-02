@@ -39,8 +39,13 @@ Object::extend_by = (mixins...) ->
 {ArrayExtensions} = require './array-extensions'
 
 Object.extend_by ObjectExtensions
+
 Number.extend_by NumberExtensions
+Number.extend_by Comparable
+
 String.extend_by StringExtensions
+String.extend_by Comparable
+
 Function.extend_by FunctionExtensions
 RegExp.extend_by RegExpExtensions
 
