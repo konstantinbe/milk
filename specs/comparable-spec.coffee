@@ -21,89 +21,59 @@
 
 
 describe "Milk.Comparable", ->
-  class Person
-    @extend_by Milk.Comparable
-    name: ''
-    constructor: (@name) ->
-    compare_to: (value) ->
-      return +1 if @name > value.name
-      return -1 if @name < value.name
-      return 0
-
-  person = null
-  peter = null
-  gustav = null
-  pete = null
-
-  create_person = -> person = new Person("Peter")
-  destroy_person = -> person = null
-
-  create_people = ->
-    peter = new Person "Peter"
-    gustav = new Person "Gustav"
-    pete = new Person "Peter"
-
-  destroy_people = ->
-    peter = null
-    gustav = null
-    pete = null
-
   describe "properties", ->
     describe "is_comparable", ->
-      before_each create_person
-      after_each destroy_person
-
       it "returns yes if object mixes Comparable in", ->
-        expect(person).to_be_defined()
         expect(Milk.Comparable).to_be_defined()
-        expect(person.is_comparable).to_be true
+        expect(5.is_comparable).to_be true
 
   describe "methods", ->
-    before_each create_people
-    after_each destroy_people
-
     describe "is_less_than(value)", ->
       it "returns true if receiver is less than value", ->
-        expect(gustav.is_less_than peter).to_be true
+        expect(3.is_less_than 5).to_be true
 
       it "returns false if they are equal", ->
-        expect(peter.is_less_than pete).to_be false
+        expect(5.is_less_than 5).to_be false
 
       it "returns false if receiver is greater than value", ->
-        expect(peter.is_less_than gustav).to_be false
+        expect(5.is_less_than 3).to_be false
 
     describe "is_less_than_or_equal_to(value)", ->
       it "returns true if receiver is less than or equal to value", ->
-        expect(gustav.is_less_than_or_equal_to peter).to_be true
+        expect(3.is_less_than_or_equal_to 5).to_be true
 
       it "returns true if they are equal", ->
-        expect(peter.is_less_than_or_equal_to pete).to_be true
+        expect(5.is_less_than_or_equal_to 5).to_be true
 
       it "returns false if receiver is greater than or equal to value", ->
-        expect(peter.is_less_than_or_equal_to gustav).to_be false
+        expect(5.is_less_than_or_equal_to 3).to_be false
 
     describe "is_greater_than(value)", ->
       it "returns true if receiver is greater than value", ->
-        expect(peter.is_greater_than gustav).to_be true
+        expect(5.is_greater_than 3).to_be true
 
       it "returns false if they are equal", ->
-        expect(pete.is_greater_than peter).to_be false
+        expect(5.is_greater_than 5).to_be false
 
       it "returns false if receiver is greater than value", ->
-        expect(gustav.is_greater_than peter).to_be false
+        expect(3.is_greater_than 5).to_be false
 
     describe "is_greater_than_or_equal_to(value)", ->
       it "returns true if receiver is greater than or equal to value", ->
-        expect(peter.is_greater_than_or_equal_to gustav).to_be true
+        expect(5.is_greater_than_or_equal_to 3).to_be true
 
       it "returns true if they are equal", ->
-        expect(pete.is_greater_than_or_equal_to peter).to_be true
+        expect(5.is_greater_than_or_equal_to 5).to_be true
 
       it "returns false if receiver is greater than or equal to value", ->
-        expect(gustav.is_greater_than_or_equal_to peter).to_be false
+        expect(3.is_greater_than_or_equal_to 5).to_be false
 
     describe "is_between(lower, upper, [options = {}])", ->
-      # TODO: specify.
+      it "returns true if receiver is between lower and upper bound (inclusive)", ->
+        expect(5.is_between 4, 6).to_be true
+        expect(5.is_between 4, 5).to_be true
+        expect(5.is_between 5, 6).to_be true
+        expect(5.is_between 5, 5).to_be true
 
     describe "equals(value)", ->
       it "returns true if receiver equals value", ->
