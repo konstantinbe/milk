@@ -69,11 +69,31 @@ describe "Milk.Comparable", ->
         expect(3.is_greater_than_or_equal_to 5).to_be false
 
     describe "is_between(lower, upper, [options = {}])", ->
-      it "returns true if receiver is between lower and upper bound (inclusive)", ->
-        expect(5.is_between 4, 6).to_be true
-        expect(5.is_between 4, 5).to_be true
-        expect(5.is_between 5, 6).to_be true
-        expect(5.is_between 5, 5).to_be true
+      describe "without options", ->
+        it "returns true if receiver is between lower and upper bound", ->
+          expect(5.is_between 4, 6).to_be true
+
+        it "returns true if receiver equals lower bound", ->
+          expect(5.is_between 5, 6).to_be true
+
+        it "returns true if receiver equals upper bound", ->
+          expect(5.is_between 4, 5).to_be true
+
+        it "returns true if receiver == upper == lower", ->
+          expect(5.is_between 5, 5).to_be true
+
+      describe "when options exclude_bounds is set to yes", ->
+        it "returns true if receiver is between lower and upper bound", ->
+          expect(5.is_between 4, 6, exclude_bounds: yes).to_be true
+
+        it "returns false if receiver equals lower bound", ->
+          expect(5.is_between 5, 6, exclude_bounds: yes).to_be false
+
+        it "returns false if receiver equals upper bound", ->
+          expect(5.is_between 4, 5, exclude_bounds: yes).to_be false
+
+        it "returns false if receiver == upper == lower", ->
+          expect(5.is_between 5, 5, exclude_bounds: yes).to_be false
 
     describe "equals(value)", ->
       it "returns true if receiver equals value", ->
