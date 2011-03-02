@@ -52,15 +52,14 @@ exports.Enumerable =
   min: ->
     @values().min()
 
-  partition: (block) ->
+  group_by: (key_path_or_block) ->
+    block = if key_path_or_block.is_function() then key_path_or_block else (value) -> value.get key_path_or_block
     @inject {}, (partition, value) ->
       key = block value
       partition[key] = [] unless partition[key]
       partition[key].add value
       partition
 
-  group_by: (key_path_or_block) ->
-    # TODO: implement.
 
   inject: (initial, block) ->
     @values().inject initial, block

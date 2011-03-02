@@ -71,11 +71,24 @@ describe "Milk.Enumerable", ->
     it "returns Infinity if empty", ->
       expect([].min()).to_be Infinity
 
-  describe "partition(block, [context])", ->
-    it "returns a hash containing a partition where the the results of the block are used as keys", ->
-      partition = [0, 1, 2, 3, 4, 5].partition (value) -> if value % 2 == 0 then "even" else "odd"
-      expect(partition["odd"]).to_equal [1, 3, 5]
-      expect(partition["even"]).to_equal [0, 2, 4]
+  describe "group_by(key_path_or_block)", ->
+    describe "when a key is passed", ->
+      it "returns a hash containing groups using the value of object's properties as keys", ->
+        peter = name: "Peter"
+        maxim = name: "Maxim"
+        inna1 = name: "Inna"
+        inna2 = name: "Inna"
+
+        groups = [peter, maxim, inna1, inna2].group_by 'name'
+        expect(groups["Peter"]).to_equal [peter]
+        expect(groups["Maxim"]).to_equal [maxim]
+        expect(groups["Inna"]).to_equal [inna1, inna2]
+
+    describe "when a block is passed", ->
+      it "returns a hash containing groups using the results of the block as keys", ->
+        groups = [0, 1, 2, 3, 4, 5].group_by (value) -> if value % 2 == 0 then "even" else "odd"
+        expect(groups["odd"]).to_equal [1, 3, 5]
+        expect(groups["even"]).to_equal [0, 2, 4]
 
   describe "inject(initial, block)", ->
     it "Forwards to native reduce()", ->
