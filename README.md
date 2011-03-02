@@ -43,6 +43,7 @@ Possible Features
 * Key-value observing
 * Cocoa style bindings
 * Cocoa style key/value validations
+* Cocoa style collection operators: http://bit.ly/f8I9Tl
 
 * Rails style Active Model
 * Rails style validations
