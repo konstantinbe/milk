@@ -106,4 +106,8 @@ describe "Milk.Comparable", ->
       # TODO: specify.
 
     describe "equals(value)", ->
-      # TODO: specify.
+      it "returns true if receiver equals value", ->
+        expect(5.equals 5).to_be true
+
+      it "returns false otherwise", ->
+        expect(5.equals 6).to_be false
