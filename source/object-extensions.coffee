@@ -45,10 +45,12 @@ exports.ObjectExtensions =
     values
 
   properties: ->
-    # TODO: implement.
+    @keys().inject [], (properties, key) =>
+      if this[key].is_function() then properties else properties.add key
 
   methods: ->
-    # TODO: implement.
+    @keys().inject [], (methods, key) =>
+      if this[key].is_function() then methods.add key else methods
 
   responds_to: (method) ->
     @[method]? and @[method].is_function()

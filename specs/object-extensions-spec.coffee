@@ -72,6 +72,16 @@ describe "Milk.ObjectExtensions", ->
       method = -> console.log "I'm a method."
       expect({method: method}.values()).to_equal [method]
 
+  describe "properties()", ->
+    it "returns an array of property names", ->
+      expect({name: "Peter", age: 45}.properties()).to_equal ['name', 'age']
+
+    it "does not include methods", ->
+      expect({name: "Peter", age: 45, cry: -> "AAAAA!"}.properties()).to_equal ['name', 'age']
+
+    it "returns an empty array if the object is empty", ->
+      expect({}.keys()).to_equal []
+
   describe "responds_to(method)", ->
     it "returns yes if object responds to a method", ->
       method = -> console.log "I'm a method."
