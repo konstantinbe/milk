@@ -19,7 +19,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-exports.Collection =
+exports.Enumerable =
+  is_enumerable: yes
+
   each: (block, context) ->
     return @values().each block, context
 

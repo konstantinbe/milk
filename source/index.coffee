@@ -28,7 +28,7 @@ Object::mixin = (mixins...) ->
 Object::extend_by = (mixins...) ->
   @prototype.mixin mixins...
 
-{Collection} = require './collection'
+{Enumerable} = require './enumerable'
 {Comparable} = require './comparable'
 
 {ObjectExtensions} = require './object-extensions'
@@ -44,7 +44,7 @@ String.extend_by StringExtensions
 Function.extend_by FunctionExtensions
 RegExp.extend_by RegExpExtensions
 
-Array.extend_by Collection
+Array.extend_by Enumerable
 Array.extend_by ArrayExtensions
 
 exports.Comparable = Comparable

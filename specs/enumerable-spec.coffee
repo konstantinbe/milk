@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-describe "Milk.Collection", ->
+describe "Milk.Enumerable", ->
 
   describe "each(block, [context])", ->
     it "iterates over all objects in a collection", ->
@@ -101,7 +101,7 @@ describe "Milk.Collection", ->
       expect(people.pluck 'name').to_equal ["Peter", "Esther", "Heinerle"]
 
   describe "values()", ->
-    it "returns an array containing the values of a Collection", ->
+    it "returns an array containing the values of a Enumerable", ->
       expect([1, 2, 3].values()).to_equal [1, 2, 3]
 
     it "returns an empty array if the collection is empty", ->
