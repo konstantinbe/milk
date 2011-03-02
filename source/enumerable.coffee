@@ -59,6 +59,9 @@ exports.Enumerable =
       partition[key].add value
       partition
 
+  group_by: (key_path_or_block) ->
+    # TODO: implement.
+
   inject: (initial, block) ->
     @values().inject initial, block
 
