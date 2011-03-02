@@ -73,7 +73,14 @@ describe "Milk.Comparable", ->
         expect(peter.is_less_than gustav).to_be false
 
     describe "is_less_than_or_equal_to(value)", ->
-      # TODO: specify.
+      it "returns true if receiver is less than value", ->
+        expect(gustav.is_less_than_or_equal_to peter).to_be true
+
+      it "returns true if they are equal", ->
+        expect(peter.is_less_than_or_equal_to pete).to_be true
+
+      it "returns false if receiver is greater than value", ->
+        expect(peter.is_less_than_or_equal_to gustav).to_be false
 
     describe "is_greater_than(value)", ->
       # TODO: specify.
