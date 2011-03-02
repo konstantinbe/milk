@@ -146,6 +146,16 @@ describe "Milk.ArrayExtensions", ->
     it "removes nothing if no collection is given", ->
       expect([1, 2, 3].without_many()).to_equal [1, 2, 3]
 
+  describe "without_at(indexes...)", ->
+    it "removes value at specified index", ->
+      expect([1, 2, 3].remove_at 1).to_equal [1, 3]
+
+    it "removes values at specified indexes", ->
+      expect([1, 2, 3, 4, 5].remove_at 1, 2, 3).to_equal [1, 5]
+
+    it "removes values at specified indexes even if indexes are given unsorted", ->
+      expect([1, 2, 3, 4, 5].remove_at 2, 1, 3).to_equal [1, 5]
+
   describe "unique()", ->
     it "returns a new array without modifying the receiver", ->
       array = [1, 2, 3, 3]
