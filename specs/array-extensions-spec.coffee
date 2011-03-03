@@ -278,6 +278,16 @@ describe "Milk.ArrayExtensions", ->
       array.insert 0, 0
       expect(array).to_equal [0, 1, 2, 3]
 
+    it "inserts the value before the first occurence of a specific value", ->
+      array = [1, 2, 4, 5, 4, 3, 2, 1]
+      array.insert 3, before: 4
+      expect(array).to_equal [1, 2, 3, 4, 5, 4, 3, 2, 1]
+
+    it "inserts the value after the last occurence of a specific value", ->
+      array = [1, 2, 3, 4, 5, 4, 2, 1]
+      array.insert 3, after: 4
+      expect(array).to_equal [1, 2, 3, 4, 5, 4, 3, 2, 1]
+
     it "returns the receiver", ->
       array = [1, 2, 3]
       expect(array.insert 4, at: 0).to_be array
