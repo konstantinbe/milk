@@ -2,9 +2,10 @@
 
 require 'rubygems'
 require 'commander/import'
-require 'milk'
+require 'find'
+require 'FileUtils'
 
-program :version, Milk::VERSION
+program :version, '0.0.01'
 program :description, 'Build utility for the Milk framework'
 
 command :build do |c|
@@ -13,7 +14,30 @@ command :build do |c|
   c.description = ''
   c.example 'description', 'command example'
   c.option '--some-switch', 'Some switch that does something'
+
   c.action do |args, options|
-    # Do something or c.when_called Milk::Commands::Build
+    # find all files
+    files = []
+    Find.find('source') do |path|
+      files << path if File.extname(path) == '.coffee'
+    end
+
+    # determine dependencies
+    dependencies = {}
+    files.each do |file|
+      dependencies[file] = [] # TODO: implement.
+    end
+
+    # build dependency graph
+
+    # if there is a cyclic dependency, abort
+
+    # otherwise wrap the contents of each files by a closure
+
+    # concatenate all files
+
+    # prepend definition of require function
+
+    # compile
   end
 end
