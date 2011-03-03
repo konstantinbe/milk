@@ -267,7 +267,7 @@ describe "Milk.ArrayExtensions", ->
       array = [1, 2, 3]
       expect(array.add_many [4]).to_be array
 
-  describe "insert(value, params = {})", ->
+  describe "insert(value, options = {})", ->
     it "inserts the value at a specified index", ->
       array = [1, 2, 4]
       array.insert 3, at: 2
@@ -292,7 +292,7 @@ describe "Milk.ArrayExtensions", ->
       array = [1, 2, 3]
       expect(array.insert 4, at: 0).to_be array
 
-  describe "insert_many(collection, params = {})", ->
+  describe "insert_many(collection, options = {})", ->
     it "inserts the collection at a specified index", ->
       array = [1, 2, 5]
       array.insert_many [3, 4], at: 2
@@ -372,7 +372,7 @@ describe "Milk.ArrayExtensions", ->
       array = [1, 2, 3]
       expect(array.remove_at 0).to_be array
 
-  describe "replace(value, params = {})", ->
+  describe "replace(value, options = {})", ->
     it "replaces value with value", ->
       array = [1, 4, 3]
       array.replace 4, with: 2
@@ -382,7 +382,7 @@ describe "Milk.ArrayExtensions", ->
       array = [1, 2, 3]
       expect(array.replace 1, with: 5).to_be array
 
-  describe "replace_at(index, params = {})", ->
+  describe "replace_at(index, options = {})", ->
     it "replaces value at index with value", ->
       array = [1, 4, 3]
       array.replace_at 1, with: 2

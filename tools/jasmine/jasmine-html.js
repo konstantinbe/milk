@@ -177,9 +177,9 @@ jasmine.TrivialReporter.prototype.getLocation = function() {
 
 jasmine.TrivialReporter.prototype.specFilter = function(spec) {
   var paramMap = {};
-  var params = this.getLocation().search.substring(1).split('&');
-  for (var i = 0; i < params.length; i++) {
-    var p = params[i].split('=');
+  var options = this.getLocation().search.substring(1).split('&');
+  for (var i = 0; i < options.length; i++) {
+    var p = options[i].split('=');
     paramMap[decodeURIComponent(p[0])] = decodeURIComponent(p[1]);
   }
 

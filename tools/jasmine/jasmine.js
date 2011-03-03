@@ -83,14 +83,14 @@ jasmine.MessageResult.prototype.toString = function() {
   return text;
 };
 
-jasmine.ExpectationResult = function(params) {
+jasmine.ExpectationResult = function(options) {
   this.type = 'expect';
-  this.matcherName = params.matcherName;
-  this.passed_ = params.passed;
-  this.expected = params.expected;
-  this.actual = params.actual;
+  this.matcherName = options.matcherName;
+  this.passed_ = options.passed;
+  this.expected = options.expected;
+  this.actual = options.actual;
 
-  this.message = this.passed_ ? 'Passed.' : params.message;
+  this.message = this.passed_ ? 'Passed.' : options.message;
   this.trace = this.passed_ ? '' : new Error(this.message);
 };
 
@@ -190,7 +190,7 @@ jasmine.any = function(clazz) {
  * Jasmine Spies are test doubles that can act as stubs, spies, fakes or when used in an expecation, mocks.
  *
  * Spies should be created in test setup, before expectations.  They can then be checked, using the standard Jasmine
- * expectation syntax. Spies can be checked if they were called or not and what the calling params were.
+ * expectation syntax. Spies can be checked if they were called or not and what the calling options were.
  *
  * A Spy has the following fields: wasCalled, callCount, mostRecentCall, and argsForCall (see docs).
  *

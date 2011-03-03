@@ -142,31 +142,31 @@ exports.ArrayExtensions =
       offset += 1
     this
 
-  insert: (value, params = {}) ->
-    @insert_many [value], params
+  insert: (value, options = {}) ->
+    @insert_many [value], options
 
-  insert_many: (collection, params = {}) ->
+  insert_many: (collection, options = {}) ->
     at = 0
-    at = params['at'] if params['at']?
-    at = @index_of params['before'] if params['before']?
-    at = 1 + @last_index_of params['after'] if params['after']?
+    at = options['at'] if options['at']?
+    at = @index_of options['before'] if options['before']?
+    at = 1 + @last_index_of options['after'] if options['after']?
     @splice at, 0, collection...
     this
 
-  replace: (value, params = {}) ->
-    params['with'] ?= undefined
-    params['with_many'] ?= undefined
-    replacements = if params['with']? then [params['with']] else params['with_many']
+  replace: (value, options = {}) ->
+    options['with'] ?= undefined
+    options['with_many'] ?= undefined
+    replacements = if options['with']? then [options['with']] else options['with_many']
     throw "InvalidArgumentException" unless replacements
     indexes = @indexes_of value
     indexes.each (index) =>
       @replace_at index, with_many: replacements
     this
 
-  replace_at: (index, params = {}) ->
-    params['with'] ?= undefined
-    params['with_many'] ?= undefined
-    replacements = if params['with']? then [params['with']] else params['with_many']
+  replace_at: (index, options = {}) ->
+    options['with'] ?= undefined
+    options['with_many'] ?= undefined
+    replacements = if options['with']? then [options['with']] else options['with_many']
     @splice index, 1, replacements...
     this
 
