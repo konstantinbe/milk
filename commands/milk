@@ -30,6 +30,8 @@ command :build do |c|
 
     # build dependency graph
 
+    # sort files using the dependency graph
+
     # if there is a cyclic dependency, abort
 
     # otherwise wrap the contents of each files by a closure
