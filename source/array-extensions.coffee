@@ -143,16 +143,14 @@ exports.ArrayExtensions =
     this
 
   insert: (value, params = {}) ->
+    @insert_many [value], params
+
+  insert_many: (collection, params = {}) ->
     at = 0
     at = params['at'] if params['at']?
     at = @index_of params['before'] if params['before']?
     at = 1 + @last_index_of params['after'] if params['after']?
-    @splice at, 0, value
-    this
-
-  insert_many: (collection, params = {}) ->
-    params['at'] ?= 0
-    @splice params['at'], 0, collection...
+    @splice at, 0, collection...
     this
 
   replace: (value, params = {}) ->
