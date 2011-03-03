@@ -387,7 +387,7 @@ describe "Milk.ArrayExtensions", ->
       array = [1, 2, 3]
       expect(array.replace_at 0, with: 5).to_be array
 
-  describe "sort_by(compare, [context])", ->
+  describe "sort_by(compare)", ->
     peter = name: "Peter", age: 23
     maxim = name: "Maxim", age: 40
     jessi = name: "Jessi", age: 54
