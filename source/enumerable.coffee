@@ -22,16 +22,16 @@
 exports.Enumerable =
   is_enumerable: yes
 
-  each: (block, context) ->
-    return @values().each block, context
+  each: (block) ->
+    return @values().each block
 
-  collect: (block, context) ->
-    return @values().collect block, context
+  collect: (block) ->
+    return @values().collect block
 
-  select: (block, context) ->
-    return @values().select block, context
+  select: (block) ->
+    return @values().select block
 
-  reject: (block, context) ->
+  reject: (block) ->
     @inject [], (values, value) ->
       unless block value then values.add value else values
 
@@ -43,16 +43,16 @@ exports.Enumerable =
       if block value then selected.add value else rejected.add value
     [selected, rejected]
 
-  detect: (block, context) ->
+  detect: (block) ->
     for value in @values()
       return value if block value
     false
 
-  all: (block, context) ->
-    return @values().all block, context
+  all: (block) ->
+    return @values().all block
 
-  any: (block, context) ->
-    return @values().any block, context
+  any: (block) ->
+    return @values().any block
 
   max: ->
     @values().max()

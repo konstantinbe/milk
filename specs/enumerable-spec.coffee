@@ -21,21 +21,21 @@
 
 describe "Milk.Enumerable", ->
 
-  describe "each(block, [context])", ->
+  describe "each(block)", ->
     it "iterates over all objects in a collection", ->
       squared = []
       [1, 2, 3].each (number) -> squared.add number * number
       expect(squared).to_equal [1, 4, 9]
 
-  describe "collect(block, [context])", ->
+  describe "collect(block)", ->
     it "returns all objects after applying block on them", ->
       expect([1, 2, 3].collect (number) -> number * number).to_equal [1, 4, 9]
 
-  describe "select(block, [context])", ->
+  describe "select(block)", ->
     it "returns all objects for which the block returns true", ->
       expect([1, 2, 3, 4, 5].select (number) -> number == 3).to_equal [3]
 
-  describe "reject(block, [context])", ->
+  describe "reject(block)", ->
     it "returns all objects for which the block returns false", ->
       expect([1, 2, 3, 4, 5].reject (number) -> number == 3).to_equal [1, 2, 4, 5]
 
@@ -47,18 +47,18 @@ describe "Milk.Enumerable", ->
       expect([1..10].partition (value) -> value % 2 == 0).to_equal [[2, 4, 6, 8, 10], [1, 3, 5, 7, 9]]
 
 
-  describe "detect(block, [context])", ->
+  describe "detect(block)", ->
     it "returns the first object for which the block returns true", ->
       expect([1, 2, 3, 4, 5].detect (number) -> number == 3).to_be 3
 
-  describe "all(block, [context])", ->
+  describe "all(block)", ->
     it "returns true if block returns true for all objects", ->
       expect([1, 2, 3].all (number) -> true).to_be true
 
     it "returns false if block returns false for at least one object", ->
       expect([1, 2, 3].all (number) -> if number == 3 then false else true).to_be false
 
-  describe "any(block, [context])", ->
+  describe "any(block)", ->
     it "returns true if block returns true for at least one object", ->
       expect([1, 2, 3].any (number) -> if number == 2 then true else false).to_be true
 
