@@ -32,7 +32,7 @@ end
 
 task :specs => [:prepare, 'build:milk', 'build:specs'] do
   put "Opening specs in browser ... "
-  run "open resources/specs.html -a 'Google Chrome'"
+  run "open resources/specs.html"
   puts OK
 end
 
