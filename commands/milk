@@ -16,30 +16,6 @@ command :build do |c|
   c.option '--some-switch', 'Some switch that does something'
 
   c.action do |args, options|
-    # find all files
-    files = []
-    Find.find('source') do |path|
-      files << path if File.extname(path) == '.coffee'
-    end
-
-    # determine dependencies
-    dependencies = {}
-    files.each do |file|
-      dependencies[file] = [] # TODO: implement.
-    end
-
-    # build dependency graph
-
-    # sort files using the dependency graph
-
-    # if there is a cyclic dependency, abort
-
-    # otherwise wrap the contents of each files by a closure
-
-    # concatenate all files
-
-    # prepend definition of require function
-
-    # compile
+    # TODO: implement.
   end
 end
