@@ -184,7 +184,7 @@ end
 # ---------------------------------------------------------------- constants ---
 
 REPO = `git config remote.origin.url`.chomp
-NAME = REPO.scan(/\/(.*)\.git/).first.to_s
+NAME = REPO.scan(/\/(.*)\.git/).first.first.to_s
 WIKI = REPO.gsub ".git", ".wiki.git"
 LOGIN = `git config github.user`.chomp
 TOKEN = `git config github.token`.chomp
