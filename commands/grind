@@ -1,0 +1,121 @@
+#!/usr/bin/env ruby
+#
+# Copyright (c) 2011 Konstantin Bender.
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+
+require 'fileutils'
+require 'find'
+require 'tsort'
+
+# ******************************************************************************
+
+class String
+  def underscorize
+    self.to_s.gsub(/::/, '/').
+      gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
+      gsub(/([a-z\d])([A-Z])/,'\1_\2').
+      tr("-", "_").
+      downcase
+  end
+
+  def dasherize
+    gsub "_", "-"
+  end
+end
+
+class Hash
+  include TSort
+  alias tsort_each_node each_key
+  def tsort_each_child(node, &block)
+    fetch(node).each(&block)
+  end
+end
+
+# ******************************************************************************
+
+def grind(args, options = {})
+  source_paths = find_paths_for_source_files_in args
+  dependencies = extract_dependencies_for source_paths
+  sorted_source_paths = sort dependencies
+  puts sorted_paths
+end
+
+def find_paths_for_source_files_in(directories)
+  file_paths = []
+  directories.each do |dir|
+    Find.find(dir) do |path|
+      file_paths << path if File.extname(path) == '.coffee'
+    end
+  end
+  file_paths
+end
+
+def extract_dependencies_for(source_file_paths)
+  dependencies = {}
+  source_file_paths.each do |source_file_path|
+    source = File.open(source_file_path, "r") { |file| file.read }
+    dependencies[source_file_path] = source.scan(/\s*require\s*\(?[\"|\'](.*)[\"|\']/).collect do |dependency|
+      file_path_from dependency.first.to_s
+    end
+  end
+  dependencies
+end
+
+def sort(dependencies)
+  begin
+    dependencies.tsort
+  rescue TSort::Cyclic => cyclic
+    puts "[ERROR] Cycle detected: " + cyclic.message.gsub("topological sort failed: ", "")
+    exit 1
+  end
+end
+
+def file_path_from(namespace_path)
+  namespace_path.to_s.gsub(/::/, '/').
+    gsub('.', '/').
+    gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
+    gsub(/([a-z\d])([A-Z])/,'\1_\2').
+    tr("_", "-").
+    downcase + '.coffee'
+end
+
+def put(string)
+  print string
+  STDOUT.flush
+end
+
+def remove_file_if_exists(file_path)
+  system "rm #{file_path}" if File.exists? file_path
+end
+
+def create_dir_if_not_exists(dir_path)
+  system "mkdir #{dir_path}" unless File.exists? dir_path
+end
+
+def assert_file_exists(file_path)
+  unless File.exists? file_path
+    log :error, "File does not exist: #{file_path}"
+    exit 1
+  end
+end
+
+# ******************************************************************************
+
+grind ARGV
