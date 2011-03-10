@@ -51,10 +51,16 @@ end
 # ******************************************************************************
 
 def grind(args, options = {})
+  check args
   source_paths = find_paths_for_source_files_in args
   dependencies = extract_dependencies_for source_paths
   sorted_source_paths = sort dependencies
   puts sorted_paths
+end
+
+def check(args)
+  error "Usage: grind path [path ...]" if args.size == 0
+  args.each { |path| error "[ERROR] Directory not found: " + path unless File.directory? path }
 end
 
 def find_paths_for_source_files_in(directories)
@@ -99,6 +105,11 @@ end
 def put(string)
   print string
   STDOUT.flush
+end
+
+def error(message)
+  puts message
+  exit 1
 end
 
 def remove_file_if_exists(file_path)
