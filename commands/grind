@@ -50,9 +50,9 @@ end
 
 # ******************************************************************************
 
-def grind(args, options = {})
-  check args
-  source_paths = find_paths_for_source_files_in args
+def grind(frameworks, options = {})
+  check frameworks
+  source_paths = find_paths_for_source_files_in frameworks
   dependencies = extract_dependencies_for source_paths
   sorted_source_paths = sort dependencies
   puts sorted_paths
@@ -88,8 +88,7 @@ def sort(dependencies)
   begin
     dependencies.tsort
   rescue TSort::Cyclic => cyclic
-    puts "[ERROR] Cycle detected: " + cyclic.message.gsub("topological sort failed: ", "")
-    exit 1
+    error "[ERROR] Cycle detected: " + cyclic.message.gsub("topological sort failed: ", "")
   end
 end
 
@@ -110,21 +109,6 @@ end
 def error(message)
   puts message
   exit 1
-end
-
-def remove_file_if_exists(file_path)
-  system "rm #{file_path}" if File.exists? file_path
-end
-
-def create_dir_if_not_exists(dir_path)
-  system "mkdir #{dir_path}" unless File.exists? dir_path
-end
-
-def assert_file_exists(file_path)
-  unless File.exists? file_path
-    log :error, "File does not exist: #{file_path}"
-    exit 1
-  end
 end
 
 # ******************************************************************************
