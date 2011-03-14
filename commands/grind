@@ -26,19 +26,9 @@ require 'tsort'
 
 # ******************************************************************************
 
-class String
-  def underscorize
-    self.to_s.gsub(/::/, '/').
-      gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
-      gsub(/([a-z\d])([A-Z])/,'\1_\2').
-      tr("-", "_").
-      downcase
-  end
+REQUIRE_REGEXP = /^\s*(?:\w+\s*=\s*)?\s*require\s*\(?[\"|\'](.*)[\"|\']/
 
-  def dasherize
-    gsub "_", "-"
-  end
-end
+# ******************************************************************************
 
 class Hash
   include TSort
@@ -50,20 +40,28 @@ end
 
 # ******************************************************************************
 
-def grind(frameworks, options = {})
-  check frameworks
-  source_paths = find_paths_for_source_files_in frameworks
-  dependencies = extract_dependencies_for source_paths
-  sorted_source_paths = sort dependencies
-  puts sorted_paths
+def grind(args, options = {})
+  check args
+
+  file_paths = find_file_paths args
+  sources_by_file_path = load_sources_for file_paths
+
+  required_namespace_paths_by_file_path = extract_required_namespace_paths_from sources_by_file_path
+  required_file_paths_by_file_path = find_required_file_paths_for required_namespace_paths_by_file_path, file_paths
+
+  remove_unused_file_paths_from required_file_paths_by_file_path
+  sorted_file_paths = sort required_file_paths_by_file_path
+
+  wrap_sources_by_closure sources_by_file_path
+  puts sources_by_file_path
 end
 
 def check(args)
   error "Usage: grind path [path ...]" if args.size == 0
-  args.each { |path| error "[ERROR] Directory not found: " + path unless File.directory? path }
+  args.each { |path| error "Directory not found: " + path unless File.directory? path }
 end
 
-def find_paths_for_source_files_in(directories)
+def find_file_paths(directories)
   file_paths = []
   directories.each do |dir|
     Find.find(dir) do |path|
@@ -73,22 +71,54 @@ def find_paths_for_source_files_in(directories)
   file_paths
 end
 
-def extract_dependencies_for(source_file_paths)
-  dependencies = {}
-  source_file_paths.each do |source_file_path|
-    source = File.open(source_file_path, "r") { |file| file.read }
-    dependencies[source_file_path] = source.scan(/\s*require\s*\(?[\"|\'](.*)[\"|\']/).collect do |dependency|
-      file_path_from dependency.first.to_s
-    end
+def load_sources_for(file_paths)
+  file_paths.reduce({}) do |sources_by_file_path, file_path|
+    source = File.open(file_path, "r") {|file| file.read }
+    sources_by_file_path[file_path] = source
+    sources_by_file_path
   end
-  dependencies
 end
 
-def sort(dependencies)
+def extract_required_namespace_paths_from(sources)
+  namespace_paths = {}
+  sources.each_pair do |file_path, source|
+    namespace_paths[file_path] = source.scan(REQUIRE_REGEXP).collect do |dependency|
+      dependency.first.to_s
+    end
+  end
+  namespace_paths
+end
+
+def find_required_file_paths_for(required_namespace_paths_by_file_path, all_file_paths)
+  required_file_paths_by_file_path = {}
+  required_namespace_paths_by_file_path.each_pair do |file_path, required_namespace_paths|
+    required_file_paths_by_file_path[file_path] = required_namespace_paths.map do |required_namespace_path|
+      file_path_for_required_namespace_path = file_path_from required_namespace_path
+      error "Could not find file for module '#{required_namespace_path}' at path '#{file_path_for_required_namespace_path}' required in '#{file_path}'." unless File.exists? file_path_for_required_namespace_path
+      file_path_for_required_namespace_path
+    end
+  end
+  required_file_paths_by_file_path
+end
+
+def remove_unused_file_paths_from(required_file_paths_by_file_path)
+  used_file_paths = []
+  required_file_paths_by_file_path.each_value { |required_file_paths| used_file_paths.concat required_file_paths }
+  required_file_paths_by_file_path.delete_if { |file_path| not file_path.end_with?("core.coffee") and not used_file_paths.include?(file_path) }
+end
+
+def sort(required_file_paths_by_file_path)
   begin
-    dependencies.tsort
+    required_file_paths_by_file_path.tsort
   rescue TSort::Cyclic => cyclic
-    error "[ERROR] Cycle detected: " + cyclic.message.gsub("topological sort failed: ", "")
+    error "Cycle detected: " + cyclic.message.gsub("topological sort failed: ", "")
+  end
+end
+
+def wrap_sources_by_closure(sources_by_file_path)
+  sources_by_file_path.each_value do |source|
+    source.gsub! /^/, "  "
+    source.insert 0, "namespace 'Milk.Controllers.ArrayController', do ->\n"
   end
 end
 
@@ -107,7 +137,7 @@ def put(string)
 end
 
 def error(message)
-  puts message
+  puts "[ERROR] " + message
   exit 1
 end
 
