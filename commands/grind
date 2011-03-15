@@ -40,10 +40,10 @@ end
 
 # ******************************************************************************
 
-def grind(args, options = {})
-  check args
+def grind(search_paths, options = {})
+  ensure_all_search_paths_exist search_paths
 
-  file_paths = find_file_paths args
+  file_paths = find_file_paths search_paths
   sources_by_file_path = load_sources_for file_paths
 
   required_namespace_paths_by_file_path = extract_required_namespace_paths_from sources_by_file_path
@@ -58,9 +58,8 @@ def grind(args, options = {})
   puts concatenated
 end
 
-def check(args)
-  error "Usage: grind path [path ...]" if args.size == 0
-  args.each { |path| error "Directory not found: " + path unless File.directory? path }
+def ensure_all_search_paths_exist(search_paths)
+  search_paths.each { |path| error "No directory found at search path: " + path unless File.directory? path }
 end
 
 def find_file_paths(directories)
@@ -161,6 +160,10 @@ def error(message)
   exit 1
 end
 
+def parse(args)
+  return args, {}
+end
+
 # ******************************************************************************
 
 PREFIX = """
@@ -169,4 +172,5 @@ GLOBAL = this
 
 # ******************************************************************************
 
-grind ARGV
+search_paths, options = parse ARGV
+grind search_paths, options
