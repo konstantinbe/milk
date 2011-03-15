@@ -2,14 +2,28 @@
 
 require 'rubygems'
 require 'commander/import'
+require 'fileutils'
 require 'find'
-require 'FileUtils'
 
 program :version, '0.0.01'
 program :description, 'Build utility for the Milk framework'
 
-command :build do |c|
-  c.syntax = 'milk build [options]'
+# ******************************************************************************
+
+command :join do |c|
+  c.syntax = 'milk join [options]'
+  c.summary = ''
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--some-switch', 'Some switch that does something'
+
+  c.action do |args, options|
+    join args, options
+  end
+end
+
+command :init do |c|
+  c.syntax = 'milk init [options]'
   c.summary = ''
   c.description = ''
   c.example 'description', 'command example'
@@ -19,3 +33,145 @@ command :build do |c|
     # TODO: implement.
   end
 end
+
+# ******************************************************************************
+
+def join(search_paths, options = {})
+  ensure_all_search_paths_exist search_paths
+
+  file_paths = find_file_paths search_paths
+  sources_by_file_path = load_sources_for file_paths
+
+  required_namespace_paths_by_file_path = extract_required_namespace_paths_from sources_by_file_path
+  required_file_paths_by_file_path = find_required_file_paths_for required_namespace_paths_by_file_path, file_paths
+
+  remove_unused_file_paths_from required_file_paths_by_file_path
+  sorted_file_paths = sort required_file_paths_by_file_path
+
+  wrap_sources_by_closure sources_by_file_path
+  concatenated = concatenate_sources sorted_file_paths, sources_by_file_path
+
+  puts concatenated
+end
+
+def ensure_all_search_paths_exist(search_paths)
+  search_paths.each { |path| error "No directory found at search path: " + path unless File.directory? path }
+end
+
+def find_file_paths(directories)
+  file_paths = []
+  directories.each do |dir|
+    Find.find(dir) do |path|
+      file_paths << path if File.extname(path) == '.coffee'
+    end
+  end
+  file_paths
+end
+
+def load_sources_for(file_paths)
+  file_paths.reduce({}) do |sources_by_file_path, file_path|
+    source = File.open(file_path, "r") {|file| file.read }
+    sources_by_file_path[file_path] = source
+    sources_by_file_path
+  end
+end
+
+def extract_required_namespace_paths_from(sources)
+  namespace_paths = {}
+  sources.each_pair do |file_path, source|
+    namespace_paths[file_path] = source.scan(REQUIRE_REGEXP).collect do |dependency|
+      dependency.first.to_s
+    end
+  end
+  namespace_paths
+end
+
+def find_required_file_paths_for(required_namespace_paths_by_file_path, all_file_paths)
+  required_file_paths_by_file_path = {}
+  required_namespace_paths_by_file_path.each_pair do |file_path, required_namespace_paths|
+    required_file_paths_by_file_path[file_path] = required_namespace_paths.map do |required_namespace_path|
+      file_path_for_required_namespace_path = file_path_from required_namespace_path
+      error "Could not find file for module '#{required_namespace_path}' at path '#{file_path_for_required_namespace_path}' required in '#{file_path}'." unless File.exists? file_path_for_required_namespace_path
+      file_path_for_required_namespace_path
+    end
+  end
+  required_file_paths_by_file_path
+end
+
+def remove_unused_file_paths_from(required_file_paths_by_file_path)
+  used_file_paths = []
+  required_file_paths_by_file_path.each_value { |required_file_paths| used_file_paths.concat required_file_paths }
+  required_file_paths_by_file_path.delete_if { |file_path| not file_path.end_with?("core.coffee") and not used_file_paths.include?(file_path) }
+end
+
+def sort(required_file_paths_by_file_path)
+  begin
+    required_file_paths_by_file_path.tsort
+  rescue TSort::Cyclic => cyclic
+    error "Cycle detected: " + cyclic.message.gsub("topological sort failed: ", "")
+  end
+end
+
+def wrap_sources_by_closure(sources_by_file_path)
+  sources_by_file_path.each_pair do |file_path, source|
+    result = source.scan(/\A((?:#.*\n)*)((?:.|\n)*)/)
+    head = result.first[0]
+    tail = result.first[1]
+    tail.gsub! /^/, "  "
+    source.replace head + "\nnamespace '#{namespace_path_from file_path}', ->" + tail
+  end
+end
+
+def concatenate_sources(sorted_file_paths, sources_by_file_path)
+  concatenated = PREFIX + "\n"
+  sorted_file_paths.each do |file_path|
+    title = "file: '#{file_path}'"
+    concatenated << "# #{'-' * (69 - title.length)} #{title} -------\n"
+    concatenated << sources_by_file_path[file_path]
+    concatenated << "\n"
+  end
+  concatenated
+end
+
+def file_path_from(namespace_path)
+  namespace_path.to_s.gsub(/::/, '/').
+    gsub('.', '/').
+    gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
+    gsub(/([a-z\d])([A-Z])/,'\1_\2').
+    tr("_", "-").
+    downcase + '.coffee'
+end
+
+def namespace_path_from(file_path)
+  file_path.gsub(".coffee", "").gsub("/", ".-").gsub(/(^|-)(.)/) { $2.upcase }
+end
+
+def put(string)
+  print string
+  STDOUT.flush
+end
+
+def error(message)
+  puts "[ERROR] " + message
+  exit 1
+end
+
+# ******************************************************************************
+
+REQUIRE_REGEXP = /^\s*(?:\w+\s*=\s*)?\s*require\s*\(?[\"|\'](.*)[\"|\']/
+
+PREFIX = """
+GLOBAL = this
+"""
+
+# ******************************************************************************
+
+class Hash
+  include TSort
+  alias tsort_each_node each_key
+  def tsort_each_child(node, &block)
+    fetch(node).each(&block)
+  end
+end
+
+# ******************************************************************************
