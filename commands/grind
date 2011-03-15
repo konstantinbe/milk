@@ -53,7 +53,9 @@ def grind(args, options = {})
   sorted_file_paths = sort required_file_paths_by_file_path
 
   wrap_sources_by_closure sources_by_file_path
-  puts sources_by_file_path
+  concatenated = concatenate_sources sorted_file_paths, sources_by_file_path
+
+  puts concatenated
 end
 
 def check(args)
@@ -116,10 +118,24 @@ def sort(required_file_paths_by_file_path)
 end
 
 def wrap_sources_by_closure(sources_by_file_path)
-  sources_by_file_path.each_value do |source|
-    source.gsub! /^/, "  "
-    source.insert 0, "namespace 'Milk.Controllers.ArrayController', do ->\n"
+  sources_by_file_path.each_pair do |file_path, source|
+    result = source.scan(/\A((?:#.*\n)*)((?:.|\n)*)/)
+    head = result.first[0]
+    tail = result.first[1]
+    tail.gsub! /^/, "  "
+    source.replace head + "\nnamespace '#{namespace_path_from file_path}', ->" + tail
   end
+end
+
+def concatenate_sources(sorted_file_paths, sources_by_file_path)
+  concatenated = PREFIX + "\n"
+  sorted_file_paths.each do |file_path|
+    title = "file: '#{file_path}'"
+    concatenated << "# #{'-' * (69 - title.length)} #{title} -------\n"
+    concatenated << sources_by_file_path[file_path]
+    concatenated << "\n"
+  end
+  concatenated
 end
 
 def file_path_from(namespace_path)
@@ -131,6 +147,10 @@ def file_path_from(namespace_path)
     downcase + '.coffee'
 end
 
+def namespace_path_from(file_path)
+  file_path.gsub(".coffee", "").gsub("/", ".-").gsub(/(^|-)(.)/) { $2.upcase }
+end
+
 def put(string)
   print string
   STDOUT.flush
@@ -140,6 +160,12 @@ def error(message)
   puts "[ERROR] " + message
   exit 1
 end
+
+# ******************************************************************************
+
+PREFIX = """
+GLOBAL = this
+"""
 
 # ******************************************************************************
 
