@@ -12,11 +12,11 @@ program :description, 'Build utility for the Milk framework'
 # ******************************************************************************
 
 command :join do |c|
-  c.syntax = 'milk join [options] path [path ...]'
+  c.syntax = 'milk join PATH [PATH ...] [options]'
   c.summary = 'joins modules'
   c.description = ''
   c.example 'description', 'command example'
-  c.option '--output FILE', 'output file'
+  c.option '-o, --output FILE', 'output file'
 
   c.action do |args, options|
     join args, options
