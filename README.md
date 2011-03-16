@@ -12,7 +12,7 @@ Conventions
 
 * 2 spaces, no tabs
 * Use CamelCase notation for namespaces, classes, and mixins:
-  `Core.Extensions`, `RegularXMLParser`, `PartiallyFreezeable`
+  `Core.Extensions`, `RegularXmlParser`, `PartiallyFreezeable`
 * Use UPPERCASE notation for constants:
   `Comparable.GREATER_THAN`
 * Use underscore notation for everything else (variables, functions, properties,
