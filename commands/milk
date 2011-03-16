@@ -45,8 +45,10 @@ def join(search_paths, options = {})
 
   required_namespace_paths_by_file_path = extract_required_namespace_paths_from sources_by_file_path
   required_file_paths_by_file_path = find_required_file_paths_for required_namespace_paths_by_file_path, file_paths
-
+  
+  remove_unused_file_paths_from required_file_paths_by_file_path
   sorted_file_paths = sort required_file_paths_by_file_path
+  
   wrap_sources_by_closure sources_by_file_path
   concatenated = concatenate_sources sorted_file_paths, sources_by_file_path
 
@@ -102,9 +104,7 @@ def find_required_file_paths_for(required_namespace_paths_by_file_path, all_file
 end
 
 def remove_unused_file_paths_from(required_file_paths_by_file_path)
-  used_file_paths = []
-  required_file_paths_by_file_path.each_value { |required_file_paths| used_file_paths.concat required_file_paths }
-  required_file_paths_by_file_path.delete_if { |file_path| not file_path.end_with?("core.coffee") and not used_file_paths.include?(file_path) }
+  # TODO: implement.
 end
 
 def sort(required_file_paths_by_file_path)
@@ -176,5 +176,3 @@ class Hash
     fetch(node).each(&block)
   end
 end
-
-# ******************************************************************************
