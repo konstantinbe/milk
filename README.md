@@ -20,6 +20,8 @@ Conventions
 * Use underscore notation for everything else (variables, functions, properties,
   methods, JSON, ...):
   `number_of_items`, `compute_number_of_items()`
+* No arbitrary abbreviations, such as `src`, `mod`, `obj`, ...
+
 
 Getting Started
 ---------------
