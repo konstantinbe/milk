@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-exports.Comparable =
+Comparable =
   is_comparable: yes
 
   is_less_than: (value) ->

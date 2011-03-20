@@ -19,6 +19,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+require 'Milk.Foundation.Enumerable'
+require 'Milk.foundation.Comparable'
+
+require 'Milk.Extensions.ObjectExtensions'
+require 'Milk.Extensions.NumberExtensions'
+require 'Milk.Extensions.StringExtensions'
+require 'Milk.Extensions.FunctionExtensions'
+require 'Milk.Extensions.RegExpExtensions'
+require 'Milk.Extensions.ArrayExtensions'
+
 Object::mixin = (mixins...) ->
   for mixin in mixins
     for own key, value of mixin
@@ -28,28 +38,16 @@ Object::mixin = (mixins...) ->
 Object::extend_by = (mixins...) ->
   @prototype.mixin mixins...
 
-{Enumerable} = require './foundation/enumerable'
-{Comparable} = require './foundation/comparable'
+Object.extend_by Milk.Extensions.ObjectExtensions
 
-{ObjectExtensions} = require './extensions/object-extensions'
-{NumberExtensions} = require './extensions/number-extensions'
-{StringExtensions} = require './extensions/string-extensions'
-{FunctionExtensions} = require './extensions/function-extensions'
-{RegExpExtensions} = require './extensions/reg-exp-extensions'
-{ArrayExtensions} = require './extensions/array-extensions'
+Number.extend_by Milk.Extensions.NumberExtensions
+Number.extend_by Milk.Foundation.Comparable
 
-Object.extend_by ObjectExtensions
+String.extend_by Milk.Extensions.StringExtensions
+String.extend_by Milk.Foundation.Comparable
 
-Number.extend_by NumberExtensions
-Number.extend_by Comparable
+Function.extend_by Milk.Extensions.FunctionExtensions
+RegExp.extend_by Milk.Extensions.RegExpExtensions
 
-String.extend_by StringExtensions
-String.extend_by Comparable
-
-Function.extend_by FunctionExtensions
-RegExp.extend_by RegExpExtensions
-
-Array.extend_by Enumerable
-Array.extend_by ArrayExtensions
-
-exports.Comparable = Comparable
+Array.extend_by Milk.Foundation.Enumerable
+Array.extend_by Milk.Extensions.ArrayExtensions

@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-exports.FunctionExtensions =
+FunctionExtensions =
   curry: (args...) ->
     => this.call(this, args..., arguments...)
 
