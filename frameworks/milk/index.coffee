@@ -28,15 +28,15 @@ Object::mixin = (mixins...) ->
 Object::extend_by = (mixins...) ->
   @prototype.mixin mixins...
 
-{Enumerable} = require './enumerable'
-{Comparable} = require './comparable'
+{Enumerable} = require './foundation/enumerable'
+{Comparable} = require './foundation/comparable'
 
-{ObjectExtensions} = require './object-extensions'
-{NumberExtensions} = require './number-extensions'
-{StringExtensions} = require './string-extensions'
-{FunctionExtensions} = require './function-extensions'
-{RegExpExtensions} = require './reg-exp-extensions'
-{ArrayExtensions} = require './array-extensions'
+{ObjectExtensions} = require './extensions/object-extensions'
+{NumberExtensions} = require './extensions/number-extensions'
+{StringExtensions} = require './extensions/string-extensions'
+{FunctionExtensions} = require './extensions/function-extensions'
+{RegExpExtensions} = require './extensions/reg-exp-extensions'
+{ArrayExtensions} = require './extensions/array-extensions'
 
 Object.extend_by ObjectExtensions
 
