@@ -14,8 +14,9 @@ program :description, 'Build utility for the Milk framework'
 command :join do |c|
   c.syntax = 'milk join PATH [PATH ...] [options]'
   c.summary = 'joins modules'
-  c.description = ''
-  c.example 'description', 'command example'
+  c.description = DESCRIPTION_FOR_JOIN_COMMAND
+  c.example 'Joins the milk framework saving it to milk.coffee file', 'milk join source/milk --output-file milk.coffee'
+  c.example 'Joins the milk framework together with myapp and puts it into', 'milk join source/milk --output-file milk.coffee'
   c.option '--output FILE', 'output file'
 
   c.action do |args, options|
@@ -176,3 +177,11 @@ class Hash
     fetch(node).each(&block)
   end
 end
+
+# ******************************************************************************
+
+DESCRIPTION_FOR_JOIN_COMMAND = """
+
+
+
+"""
