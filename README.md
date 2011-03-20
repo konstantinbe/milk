@@ -12,14 +12,16 @@ Conventions
 
 * 2 spaces, no tabs
 * Use CamelCase notation for namespaces, classes, and mixins:
-  `Core.Extensions`, `RegularXMLParser`, `PartiallyFreezeable`
+  `Core.Extensions`, `RegularXmlParser`, `PartiallyFreezeable`
 * Use UPPERCASE notation for constants:
   `Comparable.GREATER_THAN`
+* Use dashed notation for directories, files, and URLs: `milk/core-extensions`, `date-extensions.coffee`, `http://konstantinbender.com/blog/introducing-the-milk-framework`
+* Use dashed notation for XML, HTML and CSS: `person-name`, `table-of-people`, `regular-xml-parser`
 * Use underscore notation for everything else (variables, functions, properties,
   methods, JSON, ...):
   `number_of_items`, `compute_number_of_items()`
-* Use dashed notation for file names and directories: `date-extensions.coffee`
-* Use dashed notation for XML, HTML and CSS: `person-name`, `table-of-people`, `regular-xml-parser`
+* No arbitrary abbreviations, such as `src`, `mod`, `obj`, ...
+
 
 Getting Started
 ---------------
