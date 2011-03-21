@@ -29,8 +29,6 @@ command :join do |c|
     sorted_file_paths = sort dependency_graph
     concatenated = concatenate path, sorted_file_paths
 
-    prepare_for_nodejs concatenated if
-
     if options.print
       puts concatenated
     else
