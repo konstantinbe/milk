@@ -105,6 +105,12 @@ StringExtensions =
   singularized: ->
     # TODO: implement.
 
+  escaped: (options = {}) ->
+    options['for'] ?= 'reg_exp'
+    if options['for'] is 'reg_exp'
+      return @clone().replace /([\\\.\+\*\?\[\^\]\$\(\)\{\}\=\!\<\>\|\:])/g, "\\$1"
+    this
+
   normalized: ->
     diactrict_mapping_table = @normalized.diactrict_mapping_table ?=
       'À':'A', 'Á':'A', 'Â':'A', 'Ã':'A', 'Ä':'A', 'Å':'A', 'Ā':'A', 'Ă':'A',

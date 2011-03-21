@@ -156,11 +156,60 @@ describe "Milk.NumberExtensions", ->
     it "extracts words, makes them all lowercased except the first word", ->
       expect("Konstantin's-macbook_pro$is#Awesome.".humanized()).to_be "Konstantins macbook pro is awesome"
 
+  describe "escaped()", ->
+    expect('\.+*?[^]$(){}=!<>|:'.escaped for: 'reg_exp').to_be '\\.\\+\\*\\?\\[\\^\\]\\$\\(\\)\\{\\}\\=\\!\\<\\>\\|\\:'
+
   describe "pluralized()", ->
+    it "standard pluralization", ->
+      expect('Goat'.pluralized()).to_be 'Goats'
+
+    it "standard pluralization of a multi-word string", ->
+      expect('There are many goat'.pluralized()).to_be 'There are many goats'
+
+    it "non-standard pluralization", ->
+      expect('Bunny'.pluralized()).to_be 'Bunnies'
+
+    it "non-standard pluralization of a multi-word string", ->
+      expect('I like bunny'.pluralized()).to_be 'I like bunnies'
+
+    it "irregular pluralization", ->
+      expect('child'.pluralized()).to_be 'children'
+
+    it "irregular pluralization of a multi-word string", ->
+      expect('I have three child'.pluralized()).to_be 'I have three children'
+
+    it "uncountable pluralization", ->
+      expect('sheep'.pluralized()).to_be 'sheep'
+
+    it "uncountable pluralization of a multi-word string", ->
+      expect('Please hold this sheep'.pluralized()).to_be 'Please hold this sheep'
 
   describe "singularized()", ->
+    it "standard singularization", ->
+      expect('Vegetables'.singularized()).to_be 'Vegetable'
 
-  describe "normalized", ->
+    it "standard singularization of a multi-word string", ->
+      expect('Broccoli is a vegetables'.singularized()).to_be 'Broccoli is a vegetable'
+
+    it "non-standard singularization", ->
+      expect('Properties'.singularized()).to_be 'Property'
+
+    it "non-standard singularization of a multi-word string", ->
+      expect('Buy a properties'.singularized()).to_be 'Buy a property'
+
+    it "irregular singularization", ->
+      expect('people'.singularized()).to_be 'person'
+
+    it "irregular singularization of a multi-word string", ->
+      expect('The Village People'.singularized()).to_be 'The Village Person'
+
+    it "uncountable singularization", ->
+      expect('money'.singularized()).to_be 'money'
+
+    it "uncountable singularization of a multi-word string", ->
+      expect('Gotta git da money'.singularized()).to_be 'Gotta git da money'
+
+  describe "normalized()", ->
     it "removes diactrics, i.e. converts characters with diactrics to normal characters", ->
       string = "ÀÁÂÃÄÅĀĂĄǍǞǠǺȀȂȦḀẠẢẤẦẨẪẬẮẰẲẴẶÅḂḄḆÇĆĈĊČḈĎḊḌḎḐḒÈÉÊËĒĔĖĘĚȄȆȨḔḖḘḚḜẸẺẼẾỀỂỄỆḞĜĞĠĢǦǴḠĤȞḢḤḦḨḪÌÍÎÏĨĪĬĮİǏȈȊḬḮỈỊĴĶǨḰḲḴĹĻĽḶḸḺḼḾṀṂÑŃŅŇǸṄṆṈṊÒÓÔÕÖŌŎŐƠǑǪǬȌȎȪȬȮȰṌṎṐṒỌỎỐỒỔỖỘỚỜỞỠỢṔṖŔŖŘȐȒṘṚṜṞŚŜŞŠȘṠṢṤṦṨŢŤȚṪṬṮṰÙÚÛÜŨŪŬŮŰŲƯǓǕǗǙǛȔȖṲṴṶṸṺỤỦỨỪỬỮỰṼṾŴẀẂẄẆẈẊẌÝŶŸȲẎỲỴỶỸŹŻŽẐẒẔ`àáâãäåāăąǎǟǡǻȁȃȧḁạảấầẩẫậắằẳẵặḃḅḇçćĉċčḉďḋḍḏḑḓèéêëēĕėęěȅȇȩḕḗḙḛḝẹẻẽếềểễệḟĝğġģǧǵḡĥȟḣḥḧḩḫẖìíîïĩīĭįǐȉȋḭḯỉịĵǰķǩḱḳḵĺļľḷḹḻḽḿṁṃñńņňǹṅṇṉṋòóôõöōŏőơǒǫǭȍȏȫȭȯȱṍṏṑṓọỏốồổỗộớờởỡợṕṗŕŗřȑȓṙṛṝṟśŝşšșṡṣṥṧṩţťțṫṭṯṱẗùúûüũūŭůűųưǔǖǘǚǜȕȗṳṵṷṹṻụủứừửữựṽṿŵẁẃẅẇẉẘẋẍýÿŷȳẏẙỳỵỷỹźżžẑẓẕ"
       normalized = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBCCCCCCDDDDDDEEEEEEEEEEEEEEEEEEEEEEEEEFGGGGGGGHHHHHHHIIIIIIIIIIIIIIIIJKKKKKLLLLLLLMMMNNNNNNNNNOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOPPRRRRRRRRRSSSSSSSSSSTTTTTTTUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUVVWWWWWWXXYYYYYYYYYZZZZZZ`aaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbccccccddddddeeeeeeeeeeeeeeeeeeeeeeeeefggggggghhhhhhhhiiiiiiiiiiiiiiijjkkkkklllllllmmmnnnnnnnnnoooooooooooooooooooooooooooooooooopprrrrrrrrrssssssssssttttttttuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuvvwwwwwwwxxyyyyyyyyyyzzzzzz"
