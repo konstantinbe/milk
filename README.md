@@ -3,8 +3,8 @@ Milk
 
 Milk is a CoffeeScript library inspired by Rails, Cocoa, Prototype and others.
 
-Milk is strongly *opinionated*. *Beaty* and *Clarity* has #1 priority, therefore
-common "conventions" and "best-practices" may be violated.
+Milk is *opinionated*. *Beaty* and *Clarity* has #1 priority, therefore common
+"conventions" and "best-practices" may be violated.
 
 
 Conventions
@@ -36,8 +36,8 @@ Roadmap
 * ...
 
 
-Possible Features
------------------
+Considered Features
+-------------------
 
 * Underscore.js style extensions to native objects ("Utility Belt")
 * Useful stuff from Rails' Active Support
@@ -59,8 +59,6 @@ Possible Features
 * Browser-only additions
 * Server-only additions
 
-* Proper build system
-
 
 Inspiration
 -----------
@@ -68,13 +66,10 @@ Inspiration
 * [Cocoa](http://developer.apple.com/cocoa/)
 * [Prototype](http://www.prototypejs.org/)
 * [Ruby on Rails](http://rubyonrails.org/)
-* [Underscore.js](http://documentcloud.github.com/underscore/)
+* [Underscore](http://documentcloud.github.com/underscore/)
 * [Backbone](http://documentcloud.github.com/backbone/)
 * [Doodle](http://www.rubyinside.com/doodle-a-new-way-to-build-and-define-ruby-classes-795.html)
-
-More specific:
-
-* [Rails Core Extensions](http://guides.rubyonrails.org/active_support_core_extensions.html)
+* [SproutCore](http://documentcloud.github.com/sproutcore/sproutcore/)
 
 
 Acknowledgements
