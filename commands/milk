@@ -12,15 +12,29 @@ program :description, 'Build utility for the Milk framework'
 # ******************************************************************************
 
 command :join do |c|
-  c.syntax = 'milk join PATH [PATH ...] [options]'
+  c.syntax = 'milk join PATH [options]'
   c.summary = 'joins modules'
-  c.description = DESCRIPTION_FOR_JOIN_COMMAND
+  c.description = "TODO: describe."
   c.example 'Joins the milk framework saving it to milk.coffee file', 'milk join source/milk --output-file milk.coffee'
-  c.example 'Joins the milk framework together with myapp and puts it into', 'milk join source/milk --output-file milk.coffee'
-  c.option '--output FILE', 'output file'
+  c.option '--output-dir PATH', 'output directory, default: build'
+  c.option '--print', 'Prints to STDOUT instead of writing to a file'
 
   c.action do |args, options|
-    join args, options
+    options.default :output_dir => "build"
+
+    path = File.dirname(args[0])
+    name = File.basename(args[0])
+
+    dependency_graph = construct_dependency_graph path, name
+    sorted_file_paths = sort dependency_graph
+    concatenated = concatenate path, sorted_file_paths
+
+    if options.print
+      puts concatenated
+    else
+      output_file_path = File.join options.output_dir, name + ".coffee"
+      File.open(output_file_path, "w") { |file| file.write concatenated }
+    end
   end
 end
 
@@ -38,103 +52,59 @@ end
 
 # ******************************************************************************
 
-def join(search_paths, options = {})
-  ensure_all_search_paths_exist search_paths
-
-  file_paths = find_file_paths search_paths
-  sources_by_file_path = load_sources_for file_paths
-
-  required_namespace_paths_by_file_path = extract_required_namespace_paths_from sources_by_file_path
-  required_file_paths_by_file_path = find_required_file_paths_for required_namespace_paths_by_file_path, file_paths
-
-  remove_unused_file_paths_from required_file_paths_by_file_path
-  sorted_file_paths = sort required_file_paths_by_file_path
-
-  wrap_sources_by_closure sources_by_file_path
-  concatenated = concatenate_sources sorted_file_paths, sources_by_file_path
-
-  if options.output
-    File.open(options.output, "w") { |file| file.write concatenated }
-  else
-    puts concatenated
-  end
-end
-
-def ensure_all_search_paths_exist(search_paths)
-  search_paths.each { |path| error "No directory found at search path: " + path unless File.directory? path }
-end
-
-def find_file_paths(directories)
-  file_paths = []
-  directories.each do |dir|
-    Find.find(dir) do |path|
-      file_paths << path if File.extname(path) == '.coffee'
+def construct_dependency_graph(path, name)
+  pwd = Dir.pwd
+  Dir.chdir path
+  dependency_graph = {}
+  Find.find(name) do |file_path|
+    if File.extname(file_path) == ".coffee"
+      required_paths = required_paths_for file_path
+      dependency_graph[file_path] = required_paths
     end
   end
-  file_paths
+  Dir.chdir pwd
+  dependency_graph
 end
 
-def load_sources_for(file_paths)
-  file_paths.reduce({}) do |sources_by_file_path, file_path|
-    source = File.open(file_path, "r") {|file| file.read }
-    sources_by_file_path[file_path] = source
-    sources_by_file_path
+def required_paths_for(path)
+  source = File.open(path, "r") { |file| file.read }
+  source.scan(REQUIRE_REGEXP).collect do |dependency|
+    file_path_from dependency.first.to_s
   end
 end
 
-def extract_required_namespace_paths_from(sources)
-  namespace_paths = {}
-  sources.each_pair do |file_path, source|
-    namespace_paths[file_path] = source.scan(REQUIRE_REGEXP).collect do |dependency|
-      dependency.first.to_s
-    end
-  end
-  namespace_paths
-end
-
-def find_required_file_paths_for(required_namespace_paths_by_file_path, all_file_paths)
-  required_file_paths_by_file_path = {}
-  required_namespace_paths_by_file_path.each_pair do |file_path, required_namespace_paths|
-    required_file_paths_by_file_path[file_path] = required_namespace_paths.map do |required_namespace_path|
-      file_path_for_required_namespace_path = file_path_from required_namespace_path
-      error "Could not find file for module '#{required_namespace_path}' at path '#{file_path_for_required_namespace_path}' required in '#{file_path}'." unless File.exists? file_path_for_required_namespace_path
-      file_path_for_required_namespace_path
-    end
-  end
-  required_file_paths_by_file_path
-end
-
-def remove_unused_file_paths_from(required_file_paths_by_file_path)
-  # TODO: implement.
-end
-
-def sort(required_file_paths_by_file_path)
-  begin
-    required_file_paths_by_file_path.tsort
-  rescue TSort::Cyclic => cyclic
-    error "Cycle detected: " + cyclic.message.gsub("topological sort failed: ", "")
-  end
-end
-
-def wrap_sources_by_closure(sources_by_file_path)
-  sources_by_file_path.each_pair do |file_path, source|
+def concatenate(path, file_paths)
+  pwd = Dir.pwd
+  Dir.chdir path
+  concatenated = ""
+  file_paths.collect do |file_path|
+    source = File.open(file_path, "r") { |file| file.read }
     result = source.scan(/\A((?:#.*\n)*)((?:.|\n)*)/)
     head = result.first[0]
     tail = result.first[1]
     tail.gsub! /^/, "  "
-    source.replace head + "\nnamespace '#{namespace_path_from file_path}', ->" + tail
-  end
-end
-
-def concatenate_sources(sorted_file_paths, sources_by_file_path)
-  concatenated = PREFIX + "\n"
-  sorted_file_paths.each do |file_path|
-    title = "file: '#{file_path}'"
-    concatenated << "# #{'-' * (69 - title.length)} #{title} -------\n"
-    concatenated << sources_by_file_path[file_path]
+    concatenated << "# #{'-' * (63 - file_path.length)} file: #{file_path} -------\n"
+    concatenated << head + "\nnamespace '#{namespace_path_from file_path}', ->" + tail
     concatenated << "\n"
   end
+  Dir.chdir pwd
   concatenated
+end
+
+def ensure_path_exists(path)
+  error "No source directory found at path: " + path unless File.directory? path
+end
+
+def change_working_directory_to(path)
+  Dir.chdir path
+end
+
+def sort(dependency_graph)
+  begin
+    dependency_graph.tsort
+  rescue TSort::Cyclic => cyclic
+    error "Cycle detected: " + cyclic.message.gsub("topological sort failed: ", "")
+  end
 end
 
 def file_path_from(namespace_path)
@@ -177,11 +147,3 @@ class Hash
     fetch(node).each(&block)
   end
 end
-
-# ******************************************************************************
-
-DESCRIPTION_FOR_JOIN_COMMAND = """
-
-
-
-"""
