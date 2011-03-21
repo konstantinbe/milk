@@ -11,7 +11,7 @@ task :build => [:prepare, 'build:milk', 'build:specs', 'build:package']
 
 task 'build:milk' => [:prepare] do
   put "Compiling Milk ... "
-  run "commands/milk join frameworks/milk"
+  run "commands/milk join source/milk"
   run "coffee --compile build/milk.coffee"
   puts OK
 end
