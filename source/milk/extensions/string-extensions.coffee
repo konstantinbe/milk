@@ -19,6 +19,75 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+PLURAL = [
+  [/(quiz)$/i,               "$1zes"  ]
+  [/^(ox)$/i,                "$1en"   ]
+  [/([m|l])ouse$/i,          "$1ice"  ]
+  [/(matr|vert|ind)ix|ex$/i, "$1ices" ]
+  [/(x|ch|ss|sh)$/i,         "$1es"   ]
+  [/([^aeiouy]|qu)y$/i,      "$1ies"  ]
+  [/(hive)$/i,               "$1s"    ]
+  [/(?:([^f])fe|([lr])f)$/i, "$1$2ves"]
+  [/sis$/i,                  "ses"    ]
+  [/([ti])um$/i,             "$1a"    ]
+  [/(buffal|tomat)o$/i,      "$1oes"  ]
+  [/(bu)s$/i,                "$1ses"  ]
+  [/(alias|status)$/i,       "$1es"   ]
+  [/(octop|vir)us$/i,        "$1i"    ]
+  [/(ax|test)is$/i,          "$1es"   ]
+  [/s$/i,                    "s"      ]
+  [/$/,                      "s"      ]
+]
+
+SINGULAR = [
+  [/(quiz)zes$/i,                                                    "$1"     ]
+  [/(matr)ices$/i,                                                   "$1ix"   ]
+  [/(vert|ind)ices$/i,                                               "$1ex"   ]
+  [/^(ox)en/i,                                                       "$1"     ]
+  [/(alias|status)es$/i,                                             "$1"     ]
+  [/(octop|vir)i$/i,                                                 "$1us"   ]
+  [/(cris|ax|test)es$/i,                                             "$1is"   ]
+  [/(shoe)s$/i,                                                      "$1"     ]
+  [/(o)es$/i,                                                        "$1"     ]
+  [/(bus)es$/i,                                                      "$1"     ]
+  [/([m|l])ice$/i,                                                   "$1ouse" ]
+  [/(x|ch|ss|sh)es$/i,                                               "$1"     ]
+  [/(m)ovies$/i,                                                     "$1ovie" ]
+  [/(s)eries$/i,                                                     "$1eries"]
+  [/([^aeiouy]|qu)ies$/i,                                            "$1y"    ]
+  [/([lr])ves$/i,                                                    "$1f"    ]
+  [/(tive)s$/i,                                                      "$1"     ]
+  [/(hive)s$/i,                                                      "$1"     ]
+  [/([^f])ves$/i,                                                    "$1fe"   ]
+  [/(^analy)ses$/i,                                                  "$1sis"  ]
+  [/((a)naly|(b)a|(d)iagno|(p)arenthe|(p)rogno|(s)ynop|(t)he)ses$/i, "$1$2sis"]
+  [/([ti])a$/i,                                                      "$1um"   ]
+  [/(n)ews$/i,                                                       "$1ews"  ]
+  [/s$/i,                                                            ""       ]
+]
+
+IRREGULAR = [
+  ['move',   'moves'   ]
+  ['sex',    'sexes'   ]
+  ['child',  'children']
+  ['man',    'men'     ]
+  ['person', 'people'  ]
+]
+
+UNCOUNTABLE = [
+  "milk"
+  "sheep"
+  "fish"
+  "series"
+  "species"
+  "money"
+  "rice"
+  "information"
+  "info"
+  "equipment"
+  "data"
+]
+
 StringExtensions =
   characters: ->
     @split ""
@@ -100,10 +169,62 @@ StringExtensions =
     words.join " "
 
   pluralized: ->
-    # TODO: implement.
+    # var idx, len,
+    #      compare = this.split(/\s/).pop(), //check only the last word of a string
+    #     restOfString = this.replace(compare,''),
+    #     isCapitalized = compare.charAt(0).match(/[A-Z]/) ? true : false;
+    #
+    # compare = compare.toLowerCase();
+    # for (idx=0, len=SC.INFLECTION_CONSTANTS.UNCOUNTABLE.length; idx < len; idx++) {
+    #     var uncountable = SC.INFLECTION_CONSTANTS.UNCOUNTABLE[idx];
+    #     if (compare == uncountable) {
+    #         return this.toString();
+    #     }
+    # }
+    # for (idx=0, len=SC.INFLECTION_CONSTANTS.IRREGULAR.length; idx < len; idx++) {
+    #     var singular = SC.INFLECTION_CONSTANTS.IRREGULAR[idx][0],
+    #         plural   = SC.INFLECTION_CONSTANTS.IRREGULAR[idx][1];
+    #     if ((compare == singular) || (compare == plural)) {
+    #         if(isCapitalized) plural = plural.capitalize();
+    #         return restOfString + plural;
+    #     }
+    # }
+    # for (idx=0, len=SC.INFLECTION_CONSTANTS.PLURAL.length; idx < len; idx++) {
+    #     var regex          = SC.INFLECTION_CONSTANTS.PLURAL[idx][0],
+    #         replace_string = SC.INFLECTION_CONSTANTS.PLURAL[idx][1];
+    #     if (regex.test(compare)) {
+    #         return this.replace(regex, replace_string);
+    #     }
+    # }
 
   singularized: ->
-    # TODO: implement.
+    # var idx, len,
+    #     compare = this.split(/\s/).pop(), //check only the last word of a string
+    #     restOfString = this.replace(compare,''),
+    #     isCapitalized = compare.charAt(0).match(/[A-Z]/) ? true : false;
+    #
+    # compare = compare.toLowerCase();
+    # for (idx=0, len=SC.INFLECTION_CONSTANTS.UNCOUNTABLE.length; idx < len; idx++) {
+    #     var uncountable = SC.INFLECTION_CONSTANTS.UNCOUNTABLE[idx];
+    #     if (compare == uncountable) {
+    #         return this.toString();
+    #     }
+    # }
+    # for (idx=0, len=SC.INFLECTION_CONSTANTS.IRREGULAR.length; idx < len; idx++) {
+    #     var singular = SC.INFLECTION_CONSTANTS.IRREGULAR[idx][0],
+    #         plural   = SC.INFLECTION_CONSTANTS.IRREGULAR[idx][1];
+    #     if ((compare == singular) || (compare == plural)) {
+    #         if(isCapitalized) singular = singular.capitalize();
+    #         return restOfString + singular;
+    #     }
+    # }
+    # for (idx=0, len=SC.INFLECTION_CONSTANTS.SINGULAR.length; idx < len; idx++) {
+    #     var regex          = SC.INFLECTION_CONSTANTS.SINGULAR[idx][0],
+    #         replace_string = SC.INFLECTION_CONSTANTS.SINGULAR[idx][1];
+    #     if (regex.test(compare)) {
+    #         return this.replace(regex, replace_string);
+    #     }
+    # }
 
   escaped: (options = {}) ->
     options['for'] ?= 'reg_exp'
