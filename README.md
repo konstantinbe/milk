@@ -39,7 +39,7 @@ Roadmap
 Considered Features
 -------------------
 
-* Underscore.js style extensions to native objects ("Utility Belt")
+* Underscore.js style extensions to native objects (Milk 0.1 Utility Belt)
 * Useful stuff from Rails' Active Support
 
 * Key-value coding
