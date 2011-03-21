@@ -12,12 +12,12 @@ program :description, 'Build utility for the Milk framework'
 # ******************************************************************************
 
 command :join do |c|
-  c.syntax = 'milk join PATH [options]'
-  c.summary = 'joins modules'
-  c.description = "TODO: describe."
-  c.example 'Joins the milk framework saving it to milk.coffee file', 'milk join source/milk --output-file milk.coffee'
-  c.option '--output-dir PATH', 'output directory, default: build'
-  c.option '--print', 'Prints to STDOUT instead of writing to a file'
+  c.syntax = "milk join PATH [options]"
+  c.summary = "Concatenate modules into a single file."
+  c.description = "Concatenate modules into a single file."
+  c.example "Joins the milk framework producing build/milk.coffee", "milk join source/milk"
+  c.option "--output-dir PATH", "output directory, default: build."
+  c.option "--print", "Print to STDOUT instead of writing to a file."
 
   c.action do |args, options|
     options.default :output_dir => "build"
@@ -29,6 +29,8 @@ command :join do |c|
     sorted_file_paths = sort dependency_graph
     concatenated = concatenate path, sorted_file_paths
 
+    prepare_for_nodejs concatenated if
+
     if options.print
       puts concatenated
     else
@@ -39,14 +41,13 @@ command :join do |c|
 end
 
 command :init do |c|
-  c.syntax = 'milk init [options]'
-  c.summary = ''
-  c.description = ''
-  c.example 'description', 'command example'
-  c.option '--some-switch', 'Some switch that does something'
+  c.syntax = "milk init NAME"
+  c.summary = "Initialize a new milk project."
+  c.description = "Initialize a new milk project."
+  c.example 'Creates a project named todo', 'milk init todo'
 
   c.action do |args, options|
-    # TODO: implement.
+    Dir.mkdir args[0]
   end
 end
 
