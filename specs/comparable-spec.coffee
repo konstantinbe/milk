@@ -20,11 +20,11 @@
 # THE SOFTWARE.
 
 
-describe "Milk.Comparable", ->
+describe "Milk.Foundation.Comparable", ->
   describe "properties", ->
     describe "is_comparable", ->
       it "returns yes if object mixes Comparable in", ->
-        expect(Milk.Comparable).to_be_defined()
+        expect(Milk.Foundation.Comparable).to_be_defined()
         expect(5.is_comparable).to_be true
 
   describe "methods", ->

@@ -20,7 +20,7 @@
 # THE SOFTWARE.
 
 require 'Milk.Foundation.Enumerable'
-require 'Milk.foundation.Comparable'
+require 'Milk.Foundation.Comparable'
 
 require 'Milk.Extensions.ObjectExtensions'
 require 'Milk.Extensions.NumberExtensions'
@@ -28,6 +28,7 @@ require 'Milk.Extensions.StringExtensions'
 require 'Milk.Extensions.FunctionExtensions'
 require 'Milk.Extensions.RegExpExtensions'
 require 'Milk.Extensions.ArrayExtensions'
+require 'Milk.Extensions.DateExtensions'
 
 Object::mixin = (mixins...) ->
   for mixin in mixins
