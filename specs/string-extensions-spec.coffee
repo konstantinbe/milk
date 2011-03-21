@@ -156,9 +156,15 @@ describe "Milk.NumberExtensions", ->
     it "extracts words, makes them all lowercased except the first word", ->
       expect("Konstantin's-macbook_pro$is#Awesome.".humanized()).to_be "Konstantins macbook pro is awesome"
 
-  describe "plural()", ->
+  describe "pluralized()", ->
 
-  describe "singular()", ->
+  describe "singularized()", ->
+
+  describe "normalized", ->
+    it "removes diactrics, i.e. converts characters with diactrics to normal characters", ->
+      string = "ÀÁÂÃÄÅĀĂĄǍǞǠǺȀȂȦḀẠẢẤẦẨẪẬẮẰẲẴẶÅḂḄḆÇĆĈĊČḈĎḊḌḎḐḒÈÉÊËĒĔĖĘĚȄȆȨḔḖḘḚḜẸẺẼẾỀỂỄỆḞĜĞĠĢǦǴḠĤȞḢḤḦḨḪÌÍÎÏĨĪĬĮİǏȈȊḬḮỈỊĴĶǨḰḲḴĹĻĽḶḸḺḼḾṀṂÑŃŅŇǸṄṆṈṊÒÓÔÕÖŌŎŐƠǑǪǬȌȎȪȬȮȰṌṎṐṒỌỎỐỒỔỖỘỚỜỞỠỢṔṖŔŖŘȐȒṘṚṜṞŚŜŞŠȘṠṢṤṦṨŢŤȚṪṬṮṰÙÚÛÜŨŪŬŮŰŲƯǓǕǗǙǛȔȖṲṴṶṸṺỤỦỨỪỬỮỰṼṾŴẀẂẄẆẈẊẌÝŶŸȲẎỲỴỶỸŹŻŽẐẒẔ`àáâãäåāăąǎǟǡǻȁȃȧḁạảấầẩẫậắằẳẵặḃḅḇçćĉċčḉďḋḍḏḑḓèéêëēĕėęěȅȇȩḕḗḙḛḝẹẻẽếềểễệḟĝğġģǧǵḡĥȟḣḥḧḩḫẖìíîïĩīĭįǐȉȋḭḯỉịĵǰķǩḱḳḵĺļľḷḹḻḽḿṁṃñńņňǹṅṇṉṋòóôõöōŏőơǒǫǭȍȏȫȭȯȱṍṏṑṓọỏốồổỗộớờởỡợṕṗŕŗřȑȓṙṛṝṟśŝşšșṡṣṥṧṩţťțṫṭṯṱẗùúûüũūŭůűųưǔǖǘǚǜȕȗṳṵṷṹṻụủứừửữựṽṿŵẁẃẅẇẉẘẋẍýÿŷȳẏẙỳỵỷỹźżžẑẓẕ"
+      normalized = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBCCCCCCDDDDDDEEEEEEEEEEEEEEEEEEEEEEEEEFGGGGGGGHHHHHHHIIIIIIIIIIIIIIIIJKKKKKLLLLLLLMMMNNNNNNNNNOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOPPRRRRRRRRRSSSSSSSSSSTTTTTTTUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUVVWWWWWWXXYYYYYYYYYZZZZZZ`aaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbccccccddddddeeeeeeeeeeeeeeeeeeeeeeeeefggggggghhhhhhhhiiiiiiiiiiiiiiijjkkkkklllllllmmmnnnnnnnnnoooooooooooooooooooooooooooooooooopprrrrrrrrrssssssssssttttttttuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuvvwwwwwwwxxyyyyyyyyyyzzzzzz"
+      expect(string.normalized()).to_be normalized
 
   describe "clone()", ->
     it "returns a clone of the receiver", ->
