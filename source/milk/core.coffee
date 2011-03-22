@@ -44,6 +44,7 @@ Object.extend_by Milk.Extensions.ObjectExtensions
 Number.extend_by Milk.Extensions.NumberExtensions
 Number.extend_by Milk.Foundation.Comparable
 
+String.extend_by Milk.Foundation.Enumerable
 String.extend_by Milk.Extensions.StringExtensions
 String.extend_by Milk.Foundation.Comparable
 
