@@ -88,6 +88,35 @@ UNCOUNTABLE = [
   "data"
 ]
 
+split_into_prefix_word_and_suffix = (string) ->
+  [whole, prefix, word, suffix] = string.match /^(.*\s)?(\w*)(\W*)$/
+  prefix ?= ""
+  suffix ?= ""
+  [prefix, word, suffix]
+
+is_uncountable = (word) ->
+  UNCOUNTABLE.contains word.lowercased()
+
+pluralize_irregular = (word, capitalize) ->
+  lowercased_word = word.lowercased()
+  entry = IRREGULAR.detect ([singular, plural]) -> singular is lowercased_word
+  if entry then entry.second() else null
+
+pluralize_regular = (word, capitalize) ->
+  for [pattern, replacement] in PLURAL
+    return word.replace(pattern, replacement) if word.search(pattern) >= 0
+  null
+
+singularize_irregular = (word) ->
+  lowercased_word = word.lowercased()
+  entry = IRREGULAR.detect ([singular, plural]) -> plural is lowercased_word
+  if entry then entry.first() else null
+
+singularize_regular = (word) ->
+  for [pattern, replacement] in SINGULAR
+    return word.replace(pattern, replacement) if word.search(pattern) >= 0
+  null
+
 StringExtensions =
   first: (count) ->
     return @[0] unless count?
@@ -190,49 +219,24 @@ StringExtensions =
     words.join " "
 
   pluralized: ->
-    [whole, prefix, word, suffix] = @match /^(.*\s)?(\w*)(\W*)$/
-    prefix ?= ""
-    suffix ?= ""
-
-    return whole if UNCOUNTABLE.contains word
-
-    entry = IRREGULAR.detect ([singular, plural]) -> singular is word
-    return prefix + entry.second() + suffix if entry
-
-    for [pattern, replacement] in PLURAL
-      return prefix + word.replace(pattern, replacement) + suffix if word.search(pattern) >= 0
-    false
-
-    whole # return the whole string if can't pluralize
+    [prefix, word, suffix] = split_into_prefix_word_and_suffix this
+    lowercased_word = word.lowercased()
+    pluralized_word = null
+    pluralized_word ?= lowercased_word if is_uncountable lowercased_word
+    pluralized_word ?= irregular if irregular = pluralize_irregular lowercased_word
+    pluralized_word ?= regular if regular = pluralize_regular lowercased_word
+    pluralized_word ?= lowercased_word
+    prefix + word.first() + pluralized_word.rest() + suffix
 
   singularized: ->
-    # var idx, len,
-    #     compare = this.split(/\s/).pop(), //check only the last word of a string
-    #     restOfString = this.replace(compare,''),
-    #     isCapitalized = compare.charAt(0).match(/[A-Z]/) ? true : false;
-    #
-    # compare = compare.toLowerCase();
-    # for (idx=0, len=SC.INFLECTION_CONSTANTS.UNCOUNTABLE.length; idx < len; idx++) {
-    #     var uncountable = SC.INFLECTION_CONSTANTS.UNCOUNTABLE[idx];
-    #     if (compare == uncountable) {
-    #         return this.toString();
-    #     }
-    # }
-    # for (idx=0, len=SC.INFLECTION_CONSTANTS.IRREGULAR.length; idx < len; idx++) {
-    #     var singular = SC.INFLECTION_CONSTANTS.IRREGULAR[idx][0],
-    #         plural   = SC.INFLECTION_CONSTANTS.IRREGULAR[idx][1];
-    #     if ((compare == singular) || (compare == plural)) {
-    #         if(isCapitalized) singular = singular.capitalize();
-    #         return restOfString + singular;
-    #     }
-    # }
-    # for (idx=0, len=SC.INFLECTION_CONSTANTS.SINGULAR.length; idx < len; idx++) {
-    #     var regex          = SC.INFLECTION_CONSTANTS.SINGULAR[idx][0],
-    #         replace_string = SC.INFLECTION_CONSTANTS.SINGULAR[idx][1];
-    #     if (regex.test(compare)) {
-    #         return this.replace(regex, replace_string);
-    #     }
-    # }
+    [prefix, word, suffix] = split_into_prefix_word_and_suffix this
+    lowercased_word = word.lowercased()
+    singularized_word = null
+    singularized_word ?= lowercased_word if is_uncountable lowercased_word
+    singularized_word ?= irregular if irregular = singularize_irregular lowercased_word
+    singularized_word ?= regular if regular = singularize_regular lowercased_word
+    singularized_word ?= lowercased_word
+    prefix + word.first() + singularized_word.rest() + suffix
 
   escaped: (options = {}) ->
     options['for'] ?= 'reg_exp'
@@ -306,7 +310,7 @@ StringExtensions =
       'ŷ':'y', 'ȳ':'y', 'ẏ':'y', 'ẙ':'y', 'ỳ':'y', 'ỵ':'y', 'ỷ':'y', 'ỹ':'y',
       'ź':'z', 'ż':'z', 'ž':'z', 'ẑ':'z', 'ẓ':'z', 'ẕ':'z'
 
-    @characters().inject "", (normalized, character) ->
+    @inject "", (normalized, character) ->
       normalized_character = diactrict_mapping_table[character]
       normalized += normalized_character or character
 
