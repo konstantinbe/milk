@@ -29,7 +29,7 @@ task 'build:specs' => [:prepare] do
   put "Compiling specs ... "
   run "coffee --join --compile --output build/ specs/*.coffee specs/*/*.coffee"
   run "mv build/concatenation.js build/specs.js"
-  run "cp -r externals/jasmine build/" unless File.exists? "build/jasmine"
+  run "cp -r externals/jasmine/lib build/jasmine" unless File.exists? "build/jasmine"
   run "cp resources/specs.html build/" unless File.exists? "build/specs.html"
   puts OK
 end
