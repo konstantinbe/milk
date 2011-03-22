@@ -20,6 +20,42 @@
 # THE SOFTWARE.
 
 describe "Milk.NumberExtensions", ->
+describe "first([count])", ->
+  it "returns the first character if |count| is not given", ->
+    expect("123".first()).to_be '1'
+    expect("".first()).to_be undefined
+
+  it "returns a new string containing the first N characters if |count| = N is given", ->
+    expect("123".first 0).to_equal ""
+    expect("123".first 1).to_equal "1"
+    expect("123".first 2).to_equal "12"
+    expect("123".first 3).to_equal "123"
+    expect("123".first 10).to_equal "123"
+
+  describe "second()", ->
+    it "returns the second character", ->
+      expect("123".second()).to_be "2"
+
+  describe "third()", ->
+    it "returns the third character", ->
+      expect("123".third()).to_be "3"
+
+  describe "rest()", ->
+    it "returns a new string containing all except the first character", ->
+      expect("123".rest()).to_equal "23"
+
+  describe "last([count])", ->
+    it "returns the last character if |count| is not given", ->
+      expect("123".last()).to_be "3"
+      expect("".last()).to_be undefined
+
+    it "returns a new string containing the last N characters if |count| = N is given", ->
+      expect("123".last 0).to_equal ""
+      expect("123".last 1).to_equal "3"
+      expect("123".last 2).to_equal "23"
+      expect("123".last 3).to_equal "123"
+      expect("123".last 10).to_equal "123"
+
   describe "characters()", ->
     it "returns an array", ->
       expect("".characters()).to_equal []
