@@ -54,6 +54,12 @@ ArrayExtensions =
     return @[0] unless count?
     @slice 0, count
 
+  second: ->
+    @[1]
+
+  third: ->
+    @[2]
+
   rest: ->
     @slice 1
 

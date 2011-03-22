@@ -33,6 +33,14 @@ describe "Milk.ArrayExtensions", ->
       expect([1, 2, 3].first 3).to_equal [1, 2, 3]
       expect([1, 2, 3].first 10).to_equal [1, 2, 3]
 
+  describe "second()", ->
+    it "returns the second element", ->
+      expect([1, 2, 3].second()).to_be 2
+
+  describe "third()", ->
+    it "returns the third element", ->
+      expect([1, 2, 3].third()).to_be 3
+
   describe "rest()", ->
     it "returns a new array containing all except the first element", ->
       expect([1, 2, 3].rest()).to_equal [2, 3]
