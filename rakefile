@@ -13,6 +13,7 @@ task 'build:milk' => [:prepare] do
   put "Compiling Milk ... "
   run "commands/milk join source/milk"
   run "coffee --compile build/milk.coffee"
+  run "cp resources/milk.html build/" unless File.exists? "build/milk.html"
   puts OK
 end
 
@@ -28,18 +29,48 @@ task 'build:specs' => [:prepare] do
   put "Compiling specs ... "
   run "coffee --join --compile --output build/ specs/*.coffee specs/*/*.coffee"
   run "mv build/concatenation.js build/specs.js"
+  run "cp -r externals/jasmine build/" unless File.exists? "build/jasmine"
+  run "cp resources/specs.html build/" unless File.exists? "build/specs.html"
   puts OK
 end
 
 task :specs => [:prepare, 'build:milk', 'build:specs'] do
   put "Opening specs in browser ... "
-  run "open resources/specs.html"
+  run "open build/specs.html"
   puts OK
 end
 
-# --------------------------------------------------------- custom functions ---
+task :serve => [:build] do
+  host = `hostname`.chop
+  puts ""
+  puts "Open in browser:"
+  puts "    * http://#{host}:3001/milk"
+  puts "    * http://#{host}:3001/specs"
+  puts ""
 
-# none.
+  server = """
+    require 'rubygems'
+    require 'sinatra'
+    set :server, %w[webrick]
+    set :port, 3001
+    set :static, true
+    set :root, 'build/'
+    set :public, 'build/'
+
+    get '/' do
+      redirect '/specs'
+    end
+
+    get '/milk', :provides => 'html' do
+      File.open('build/milk.html', 'r') { |file| file.read }
+    end
+
+    get '/specs', :provides => 'html' do
+      File.open('build/specs.html', 'r') { |file| file.read }
+    end
+  """
+  run "ruby -e \"#{server}\""
+end
 
 # ------------------------------------------------------------ default tasks ---
 
