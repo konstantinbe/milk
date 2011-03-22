@@ -20,8 +20,8 @@
 # THE SOFTWARE.
 
 Matchers =
-  to_be_an_object: ->
+  toBe_an_object: ->
     @actual? and @actual instanceof Object
 
-before_each ->
+beforeEach ->
   @addMatchers Matchers

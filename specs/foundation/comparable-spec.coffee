@@ -24,80 +24,80 @@ describe "Milk.Foundation.Comparable", ->
   describe "properties", ->
     describe "is_comparable", ->
       it "returns yes if object mixes Comparable in", ->
-        expect(Milk.Foundation.Comparable).to_be_defined()
-        expect(5.is_comparable).to_be true
+        expect(Milk.Foundation.Comparable).toBeDefined()
+        expect(5.is_comparable).toBe true
 
   describe "methods", ->
     describe "is_less_than(value)", ->
       it "returns true if receiver is less than value", ->
-        expect(3.is_less_than 5).to_be true
+        expect(3.is_less_than 5).toBe true
 
       it "returns false if they are equal", ->
-        expect(5.is_less_than 5).to_be false
+        expect(5.is_less_than 5).toBe false
 
       it "returns false if receiver is greater than value", ->
-        expect(5.is_less_than 3).to_be false
+        expect(5.is_less_than 3).toBe false
 
     describe "is_less_than_or_equal_to(value)", ->
       it "returns true if receiver is less than or equal to value", ->
-        expect(3.is_less_than_or_equal_to 5).to_be true
+        expect(3.is_less_than_or_equal_to 5).toBe true
 
       it "returns true if they are equal", ->
-        expect(5.is_less_than_or_equal_to 5).to_be true
+        expect(5.is_less_than_or_equal_to 5).toBe true
 
       it "returns false if receiver is greater than or equal to value", ->
-        expect(5.is_less_than_or_equal_to 3).to_be false
+        expect(5.is_less_than_or_equal_to 3).toBe false
 
     describe "is_greater_than(value)", ->
       it "returns true if receiver is greater than value", ->
-        expect(5.is_greater_than 3).to_be true
+        expect(5.is_greater_than 3).toBe true
 
       it "returns false if they are equal", ->
-        expect(5.is_greater_than 5).to_be false
+        expect(5.is_greater_than 5).toBe false
 
       it "returns false if receiver is greater than value", ->
-        expect(3.is_greater_than 5).to_be false
+        expect(3.is_greater_than 5).toBe false
 
     describe "is_greater_than_or_equal_to(value)", ->
       it "returns true if receiver is greater than or equal to value", ->
-        expect(5.is_greater_than_or_equal_to 3).to_be true
+        expect(5.is_greater_than_or_equal_to 3).toBe true
 
       it "returns true if they are equal", ->
-        expect(5.is_greater_than_or_equal_to 5).to_be true
+        expect(5.is_greater_than_or_equal_to 5).toBe true
 
       it "returns false if receiver is greater than or equal to value", ->
-        expect(3.is_greater_than_or_equal_to 5).to_be false
+        expect(3.is_greater_than_or_equal_to 5).toBe false
 
     describe "is_between(lower, upper, [options = {}])", ->
       describe "without options", ->
         it "returns true if receiver is between lower and upper bound", ->
-          expect(5.is_between 4, 6).to_be true
+          expect(5.is_between 4, 6).toBe true
 
         it "returns true if receiver equals lower bound", ->
-          expect(5.is_between 5, 6).to_be true
+          expect(5.is_between 5, 6).toBe true
 
         it "returns true if receiver equals upper bound", ->
-          expect(5.is_between 4, 5).to_be true
+          expect(5.is_between 4, 5).toBe true
 
         it "returns true if receiver == upper == lower", ->
-          expect(5.is_between 5, 5).to_be true
+          expect(5.is_between 5, 5).toBe true
 
       describe "when options exclude_bounds is set to yes", ->
         it "returns true if receiver is between lower and upper bound", ->
-          expect(5.is_between 4, 6, exclude_bounds: yes).to_be true
+          expect(5.is_between 4, 6, exclude_bounds: yes).toBe true
 
         it "returns false if receiver equals lower bound", ->
-          expect(5.is_between 5, 6, exclude_bounds: yes).to_be false
+          expect(5.is_between 5, 6, exclude_bounds: yes).toBe false
 
         it "returns false if receiver equals upper bound", ->
-          expect(5.is_between 4, 5, exclude_bounds: yes).to_be false
+          expect(5.is_between 4, 5, exclude_bounds: yes).toBe false
 
         it "returns false if receiver == upper == lower", ->
-          expect(5.is_between 5, 5, exclude_bounds: yes).to_be false
+          expect(5.is_between 5, 5, exclude_bounds: yes).toBe false
 
     describe "equals(value)", ->
       it "returns true if receiver equals value", ->
-        expect(5.equals 5).to_be true
+        expect(5.equals 5).toBe true
 
       it "returns false otherwise", ->
-        expect(5.equals 6).to_be false
+        expect(5.equals 6).toBe false
