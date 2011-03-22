@@ -26,7 +26,7 @@ end
 
 task 'build:specs' => [:prepare] do
   put "Compiling specs ... "
-  run "coffee --join --compile --output build/ specs/*.coffee"
+  run "coffee --join --compile --output build/ specs/*.coffee specs/*/*.coffee"
   run "mv build/concatenation.js build/specs.js"
   puts OK
 end
