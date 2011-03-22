@@ -1,6 +1,3 @@
 [submodule "externals/jasmine-node"]
     path = externals/jasmine-node
     url = https://github.com/mhevery/jasmine-node.git
-[submodule "jasmine"]
-    path = jasmine
-    url = https://github.com/pivotal/jasmine.git
