@@ -80,12 +80,19 @@ def concatenate(path, file_paths)
   file_paths.collect do |file_path|
     source = File.open(file_path, "r") { |file| file.read }
     result = source.scan(/\A((?:#.*\n)*)((?:.|\n)*)/)
+
     head = result.first[0]
     tail = result.first[1]
     tail.gsub! /^/, "  "
+
+    namespace_base_path = namespace_path_from File.dirname(file_path)
+    symbol_name = namespace_path_from File.basename(file_path)
+
     concatenated << "# #{'-' * (63 - file_path.length)} file: #{file_path} -------\n"
-    concatenated << head + "\nmodule '#{module_path_from file_path}', ->" + tail
-    concatenated << "\n"
+    concatenated << head + "\n"
+    concatenated << "exports = namespace '#{namespace_base_path}'\n"
+    concatenated << "exports.#{symbol_name} = do ->\n"
+    concatenated << tail + "\n"
   end
   Dir.chdir pwd
   concatenated
@@ -107,8 +114,8 @@ def sort(dependency_graph)
   end
 end
 
-def file_path_from(module_path)
-  module_path.to_s.gsub(/::/, '/').
+def file_path_from(namespace_path)
+  namespace_path.to_s.gsub(/::/, '/').
     gsub('.', '/').
     gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
     gsub(/([a-z\d])([A-Z])/,'\1_\2').
@@ -116,7 +123,7 @@ def file_path_from(module_path)
     downcase + '.coffee'
 end
 
-def module_path_from(file_path)
+def namespace_path_from(file_path)
   file_path.gsub(".coffee", "").gsub("/", ".-").gsub(/(^|-)(.)/) { $2.upcase }
 end
 
@@ -134,25 +141,24 @@ end
 
 REQUIRE_REGEXP = /^\s*(?:\w+\s*=\s*)?\s*require\s*\(?[\"|\'](.*)[\"|\']/
 
-PREFIX = '''
-#
+PREFIX = '''#
 # Milk framework: http://github.com/konstantinbender/milk
 #
 
 GLOBAL ?= this
 
-GLOBAL.module ?= (path, block) ->
-  [components..., name] = path.split "."
+GLOBAL.namespace ?= (path) ->
+  components = path.split "."
   object = GLOBAL
-  do -> object = object[name] or= {} for name in components
-  object[name] = block()
-
+  object = object[name] or= {} for name in components
+  object
 
 GLOBAL.require ?= (path) ->
   object = GLOBAL
   for name in path.split "."
     throw "[ERROR] Module #{path} not found." unless object?
     object = object[name]
+
 '''
 
 # ******************************************************************************
