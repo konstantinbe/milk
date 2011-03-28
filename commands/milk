@@ -139,7 +139,7 @@ end
 
 # ******************************************************************************
 
-REQUIRE_REGEXP = /^\s*(?:\w+\s*=\s*)?\s*require\s*\(?[\"|\'](.*)[\"|\']/
+REQUIRE_REGEXP = /^\s*(?:\w+\s*=\s*)?\s*requires\s*\(?[\"|\'](.*)[\"|\']/
 
 PREFIX = '''#
 # Milk framework: http://github.com/konstantinbender/milk
@@ -153,7 +153,7 @@ GLOBAL.namespace ?= (path) ->
   object = object[name] or= {} for name in components
   object
 
-GLOBAL.require ?= (path) ->
+GLOBAL.requires ?= (path) ->
   object = GLOBAL
   for name in path.split "."
     throw "[ERROR] Module #{path} not found." unless object?

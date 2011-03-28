@@ -19,16 +19,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require 'Milk.Foundation.Enumerable'
-require 'Milk.Foundation.Comparable'
+requires 'Milk.Foundation.Enumerable'
+requires 'Milk.Foundation.Comparable'
 
-require 'Milk.Extensions.ObjectExtensions'
-require 'Milk.Extensions.NumberExtensions'
-require 'Milk.Extensions.StringExtensions'
-require 'Milk.Extensions.FunctionExtensions'
-require 'Milk.Extensions.RegExpExtensions'
-require 'Milk.Extensions.ArrayExtensions'
-require 'Milk.Extensions.DateExtensions'
+requires 'Milk.Extensions.ObjectExtensions'
+requires 'Milk.Extensions.NumberExtensions'
+requires 'Milk.Extensions.StringExtensions'
+requires 'Milk.Extensions.FunctionExtensions'
+requires 'Milk.Extensions.RegExpExtensions'
+requires 'Milk.Extensions.ArrayExtensions'
+requires 'Milk.Extensions.DateExtensions'
 
 Object::mixin = (mixins...) ->
   for mixin in mixins
