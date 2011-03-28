@@ -145,7 +145,7 @@ PREFIX = '''#
 # Milk framework: http://github.com/konstantinbender/milk
 #
 
-GLOBAL ?= this
+GLOBAL ?= exports ? this
 
 GLOBAL.namespace ?= (path) ->
   components = path.split "."
