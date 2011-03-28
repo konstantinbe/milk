@@ -222,4 +222,4 @@ LOGIN = `git config github.user`.chomp
 TOKEN = `git config github.token`.chomp
 OK = "\33[0m\33[32mOK\33[0m"
 FAILED = "\33[0m\33[31mFAILED\33[0m"
-RELEASE = File.open("README.md", "r") { |file| file.read }.scan(/^### (\d(?:\.\d+)+)\s/).first.to_s
+RELEASE = File.open("README.md", "r") { |file| file.read }.scan(/^### (\d(?:\.\d+)+)\s/).first.first.to_s
