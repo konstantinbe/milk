@@ -172,7 +172,7 @@ end
 task :info do
   puts "Repository URL:         " + REPO
   puts "Repository Name:        " + NAME
-  puts "Repository Wiki URL:    " + WIKI
+  puts "Wiki Repository URL:    " + WIKI
   puts "GitHub User:            " + LOGIN
   puts "GitHub Token:           " + TOKEN
 end
