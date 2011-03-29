@@ -40,6 +40,13 @@ task :specs => [:prepare, 'build:milk', 'build:specs'] do
   puts OK
 end
 
+task :specs_on_node => [:prepare, 'build:milk', 'build:specs'] do
+  put "Running specs on NodeJS ... "
+  run "cp resources/node-spec-runner.js build/"
+  run "cd build/;node node-spec-runner.js"
+  puts OK
+end
+
 task :serve => [:build] do
   host = `hostname`.chop
   puts ""
