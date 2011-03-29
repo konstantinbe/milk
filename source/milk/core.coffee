@@ -19,16 +19,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-requires 'Milk.Foundation.Enumerable'
-requires 'Milk.Foundation.Comparable'
+Enumerable = requires 'Milk.Foundation.Enumerable'
+Comparable = requires 'Milk.Foundation.Comparable'
 
-requires 'Milk.Extensions.ObjectExtensions'
-requires 'Milk.Extensions.NumberExtensions'
-requires 'Milk.Extensions.StringExtensions'
-requires 'Milk.Extensions.FunctionExtensions'
-requires 'Milk.Extensions.RegExpExtensions'
-requires 'Milk.Extensions.ArrayExtensions'
-requires 'Milk.Extensions.DateExtensions'
+ObjectExtensions = requires 'Milk.Extensions.ObjectExtensions'
+NumberExtensions = requires 'Milk.Extensions.NumberExtensions'
+StringExtensions = requires 'Milk.Extensions.StringExtensions'
+FunctionExtensions = requires 'Milk.Extensions.FunctionExtensions'
+RegExpExtensions = requires 'Milk.Extensions.RegExpExtensions'
+ArrayExtensions = requires 'Milk.Extensions.ArrayExtensions'
+DateExtensions = requires 'Milk.Extensions.DateExtensions'
 
 Object::mixin = (mixins...) ->
   for mixin in mixins
@@ -39,17 +39,17 @@ Object::mixin = (mixins...) ->
 Object::extend_by = (mixins...) ->
   @prototype.mixin mixins...
 
-Object.extend_by Milk.Extensions.ObjectExtensions
+Object.extend_by ObjectExtensions
 
-Number.extend_by Milk.Extensions.NumberExtensions
-Number.extend_by Milk.Foundation.Comparable
+Number.extend_by NumberExtensions
+Number.extend_by Comparable
 
-String.extend_by Milk.Foundation.Enumerable
-String.extend_by Milk.Extensions.StringExtensions
-String.extend_by Milk.Foundation.Comparable
+String.extend_by Enumerable
+String.extend_by StringExtensions
+String.extend_by Comparable
 
-Function.extend_by Milk.Extensions.FunctionExtensions
-RegExp.extend_by Milk.Extensions.RegExpExtensions
+Function.extend_by FunctionExtensions
+RegExp.extend_by RegExpExtensions
 
-Array.extend_by Milk.Foundation.Enumerable
-Array.extend_by Milk.Extensions.ArrayExtensions
+Array.extend_by Enumerable
+Array.extend_by ArrayExtensions
