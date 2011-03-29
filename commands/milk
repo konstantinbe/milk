@@ -158,6 +158,7 @@ GLOBAL.requires ?= (path) ->
   for name in path.split "."
     throw "[ERROR] Module #{path} not found." unless object?
     object = object[name]
+  object
 
 '''
 
