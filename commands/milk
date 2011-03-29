@@ -88,11 +88,8 @@ def concatenate(path, file_paths)
     namespace_base_path = namespace_path_from File.dirname(file_path)
     symbol_name = namespace_path_from File.basename(file_path)
 
-    concatenated << "# #{'-' * (63 - file_path.length)} file: #{file_path} -------\n"
-    concatenated << head + "\n"
-    concatenated << "exports = namespace '#{namespace_base_path}'\n"
-    concatenated << "exports.#{symbol_name} = do ->\n"
-    concatenated << tail + "\n"
+    concatenated << "\n# #{'-' * (63 - file_path.length)} file: #{file_path} -------\n"
+    concatenated << head + "\nnamespace('#{namespace_base_path}').#{symbol_name} = do ->\n" + tail
   end
   Dir.chdir pwd
   concatenated
@@ -159,7 +156,6 @@ GLOBAL.requires ?= (path) ->
     throw "[ERROR] Module #{path} not found." unless object?
     object = object[name]
   object
-
 '''
 
 # ******************************************************************************
