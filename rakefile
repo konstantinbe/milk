@@ -42,8 +42,8 @@ end
 
 task :node => [:prepare, 'build:milk', 'build:specs'] do
   put "Running specs on NodeJS ... "
-  run "cp resources/node-spec-runner.js build/"
-  run "cd build/;node node-spec-runner.js"
+  run "cp resources/run-specs-on-node.js build/"
+  run "cd build/;node run-specs-on-node.js"
   puts OK
 end
 

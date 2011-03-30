@@ -1,4 +1,21 @@
-/*globals jasmine */
+/*globals global jasmine process */
+
+var jasmine = require('./jasmine/jasmine.js');
+
+for(var key in jasmine) {
+  global[key] = jasmine[key];
+}
+
+require('./milk.js');
+require('./specs.js');
+
+function print(string) {
+    process.stdout.write(string);
+}
+
+function printLine(string) {
+    print(string + "\n");
+}
 
 function suitesFor(spec) {
     var suites = [];
@@ -23,7 +40,7 @@ function printFailureFor(spec) {
         }
     });
 
-    console.log(message);
+    printLine(message);
 }
 
 jasmine.TrivialReporter = function() {
@@ -40,7 +57,7 @@ jasmine.TrivialReporter.prototype.reportRunnerResults = function(runner) {
     var results = runner.results();
 
     if (results.failedCount > 0) {
-        console.log("\nFailures:");
+        printLine("\nFailures:");
 
         runner.specs().forEach(function(spec) {
             if (!spec.results().passed()) {
@@ -49,8 +66,8 @@ jasmine.TrivialReporter.prototype.reportRunnerResults = function(runner) {
         });
     }
 
-    console.log("\nFinished in " + durationInSeconds + " seconds");
-    console.log(results.totalCount + " examples, " + results.failedCount + " failures\n");
+    printLine("\nFinished in " + durationInSeconds + " seconds");
+    printLine(results.totalCount + " examples, " + results.failedCount + " failures\n");
 };
 
 jasmine.TrivialReporter.prototype.reportSuiteResults = function(suite) {
@@ -65,7 +82,7 @@ jasmine.TrivialReporter.prototype.reportSpecResults = function(spec) {
     var indentation = "";
     suitesFor(spec).forEach(function(suite){
         if (!suite.printed) {
-            console.log("\n" + indentation + suite.description);
+            printLine("\n" + indentation + suite.description);
             suite.printed = true;
         }
         indentation += "    ";
@@ -73,5 +90,8 @@ jasmine.TrivialReporter.prototype.reportSpecResults = function(spec) {
 
     var passed = spec.results().passed();
     var bullet = passed ? "- " : "* ";
-    console.log(indentation + bullet + spec.description);
+    printLine(indentation + bullet + spec.description);
 };
+
+jasmine.jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+jasmine.jasmine.getEnv().execute();
