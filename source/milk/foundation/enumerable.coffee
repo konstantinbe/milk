@@ -61,7 +61,7 @@ Enumerable =
     @values().min()
 
   group_by: (key_path_or_block) ->
-    block = if key_path_or_block.is_function() then key_path_or_block else (value) -> value.get key_path_or_block
+    block = if key_path_or_block.is_function() then key_path_or_block else (value) -> value[key_path_or_block]
     @inject {}, (partition, value) ->
       key = block value
       partition[key] = [] unless partition[key]
