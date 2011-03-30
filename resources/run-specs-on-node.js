@@ -1,5 +1,7 @@
 /*globals global jasmine process */
 
+var verbose = false;
+
 var jasmine = require('./jasmine/jasmine.js');
 
 for(var key in jasmine) {
@@ -56,6 +58,10 @@ jasmine.TrivialReporter.prototype.reportRunnerResults = function(runner) {
     var durationInSeconds = (finishedAt - this.startedAt) / 1000.0;
     var results = runner.results();
 
+    if (!verbose) {
+        printLine("");
+    }
+
     if (results.failedCount > 0) {
         printLine("\nFailures:");
 
@@ -78,11 +84,15 @@ jasmine.TrivialReporter.prototype.reportSpecStarting = function(spec) {
     // do nothing
 };
 
+var counter = 0;
+
 jasmine.TrivialReporter.prototype.reportSpecResults = function(spec) {
     var indentation = "";
     suitesFor(spec).forEach(function(suite){
         if (!suite.printed) {
-            printLine("\n" + indentation + suite.description);
+            if (verbose) {
+                printLine("\n" + indentation + suite.description);
+            }
             suite.printed = true;
         }
         indentation += "    ";
@@ -90,8 +100,19 @@ jasmine.TrivialReporter.prototype.reportSpecResults = function(spec) {
 
     var passed = spec.results().passed();
     var bullet = passed ? "- " : "* ";
-    printLine(indentation + bullet + spec.description);
+
+    if (verbose) {
+        printLine(indentation + bullet + spec.description);
+    } else {
+        print(passed ? "." : "F");
+        counter = counter >= 80 ? 0 : counter + 1;
+        if (counter === 0) {
+            print("\n");
+        }
+    }
 };
+
+printLine("\n");
 
 jasmine.jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
 jasmine.jasmine.getEnv().execute();
