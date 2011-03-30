@@ -105,7 +105,7 @@ jasmine.TrivialReporter.prototype.reportSpecResults = function(spec) {
         printLine(indentation + bullet + spec.description);
     } else {
         print(passed ? "." : "F");
-        counter = counter >= 80 ? 0 : counter + 1;
+        counter = counter >= 100 ? 0 : counter + 1;
         if (counter === 0) {
             print("\n");
         }
