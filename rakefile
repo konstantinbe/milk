@@ -34,10 +34,21 @@ task 'build:specs' => [:prepare] do
   puts OK
 end
 
-task :specs => [:prepare, 'build:milk', 'build:specs'] do
+task 'specs:browser' => [:prepare, 'build:milk', 'build:specs'] do
   put "Opening specs in browser ... "
   run "open build/specs.html"
   puts OK
+end
+
+task 'specs:node' => [:prepare, 'build:milk', 'build:specs'] do
+  put "Preparing specs ... "
+  run "cp resources/run-specs-on-node.js build/"
+  puts OK
+  run "cd build/;node run-specs-on-node.js"
+end
+
+task :specs => ['specs:node'] do
+
 end
 
 task :serve => [:build] do

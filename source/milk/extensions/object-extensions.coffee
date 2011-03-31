@@ -25,16 +25,6 @@ native_is_sealed = Object.isSealed
 native_is_frozen = Object.isFrozen
 
 ObjectExtensions =
-  get: (key) ->
-    value = @[key]
-    throw "[ERROR] Property '#{key}' not found." if value == undefined
-    @[key]
-
-  set: (key, value) ->
-    throw "[ERROR] Property '#{key}' not found." if @[key] == undefined
-    @[key] = value
-    this
-
   keys: ->
     Object.keys this
 

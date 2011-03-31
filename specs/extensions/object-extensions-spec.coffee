@@ -20,14 +20,14 @@
 # THE SOFTWARE.
 
 describe "Milk.ObjectExtensions", ->
-  describe "get(key)", ->
+  xdescribe "get(key)", ->
     it "returns value for key", ->
       expect({name: "Peter"}.get 'name').toBe "Peter"
 
     it "throws if no value for key exists", ->
       expect(-> {name: "Peter"}.get 'city').toThrow()
 
-  describe "set(key, value)", ->
+  xdescribe "set(key, value)", ->
     it "sets value for key", ->
       person = name: "Peter"
       person.set 'name', "Peter Pan"
