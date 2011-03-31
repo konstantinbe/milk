@@ -4,7 +4,7 @@
 
 /*globals global jasmine process */
 
-var verbose = true;
+var verbose = false;
 
 var jasmine = require('./jasmine/jasmine.js');
 
@@ -15,45 +15,42 @@ for(var key in jasmine) {
 require('./milk.js');
 require('./specs.js');
 
-function colorize(string, color) {
-    var color_code_begin = "\33[0m";
-    var color_code_end = "\33[0m";
+function stylize(string, style) {
+    var styleCodeBegin = "\33[";
+    var styleCodeEnd = "\33[0m";
+    var styleCode = "0m";
 
-    switch (color) {
+    switch (style) {
         case 'red':
-        color_code_begin = "\33[31m";
+        styleCode = "31m";
         break;
 
         case 'green':
-        color_code_begin = "\33[32m";
+        styleCode = "32m";
         break;
 
         case 'yellow':
-        color_code_begin = "\33[33m";
+        styleCode = "33m";
         break;
 
         case 'blue':
-        color_code_begin = "\33[34m";
+        styleCode = "34m";
         break;
 
-        case 'magenta':
-        color_code_begin = "\33[35m";
-        break;
-
-        case 'cyan':
-        color_code_begin = "\33[36m";
+        case 'bold':
+        styleCode = "1m";
         break;
 
         default:
         break;
     }
 
-    return color_code_begin + string + color_code_end;
+    return styleCodeBegin + styleCode + string + styleCodeEnd;
 }
 
 function print(string, color) {
     if (color) {
-        string = colorize(string, color);
+        string = stylize(string, color);
     }
     process.stdout.write(string);
 }
@@ -80,7 +77,7 @@ function failureMessageFor(spec) {
     message += spec.description;
 
     spec.results().getItems().forEach(function(result) {
-        if (result.type == 'expect' && !result.passed()) {
+        if (!result.passed()) {
             message += "\n        - " + result.message;
         }
     });
@@ -99,7 +96,7 @@ jasmine.CommandLineReporter = function() {
 
 jasmine.CommandLineReporter.prototype.reportRunnerStarting = function(runner) {
     this.startedAt = new Date();
-    printLine("\n");
+    printLine("");
 };
 
 jasmine.CommandLineReporter.prototype.reportRunnerResults = function(runner) {
@@ -113,7 +110,7 @@ jasmine.CommandLineReporter.prototype.reportRunnerResults = function(runner) {
     }
 
     if (results.failedCount > 0) {
-        printLine("\nFailures:");
+        printLine(stylize("\nFAILURES:", 'bold'));
 
         runner.specs().forEach(function(spec) {
             if (!spec.results().passed()) {
@@ -126,7 +123,7 @@ jasmine.CommandLineReporter.prototype.reportRunnerResults = function(runner) {
     color = results.failedCount > 0 ? 'red' : 'green';
     examples = this.numberOfExamples === 1 ? 'example' : 'examples';
     failures = this.numberOfFailedExamples === 1 ? 'failure' : 'failures';
-    printLine(this.numberOfExamples + " " + examples + ", " + colorize(this.numberOfFailedExamples + " " + failures + "\n", color));
+    printLine(this.numberOfExamples + " " + examples + ", " + stylize(this.numberOfFailedExamples + " " + failures + "\n", color));
 };
 
 jasmine.CommandLineReporter.prototype.reportSuiteResults = function(suite) {
@@ -162,12 +159,12 @@ jasmine.CommandLineReporter.prototype.reportSpecResults = function(spec) {
 
     if (verbose) {
         if (!spec.printed) {
-            printLine(indentation + "- " + spec.description + (passed ? "" : colorize(" FAILED", 'red')));
+            printLine(indentation + "- " + spec.description + (passed ? "" : stylize(" FAILED", 'red')));
             spec.printed = true;
         }
 
     } else {
-        print(passed ? "." : colorize("F", 'red'));
+        print(passed ? "." : stylize("F", 'red'));
         counter = counter >= 100 ? 0 : counter + 1;
         if (counter === 0) {
             print("\n");
