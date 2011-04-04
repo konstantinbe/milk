@@ -18,6 +18,9 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
+#
+# Methods singularized(), pluralized(), escaped(), and normalized() are based on
+# code from SproutCore: http://github/sproutcore/sproutcore
 
 PLURAL = [
   [/(quiz)$/i,               "$1zes"  ]
