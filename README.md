@@ -7,6 +7,21 @@ Milk is *opinionated*. *Beaty* and *Clarity* has #1 priority, therefore common
 "conventions" and "best-practices" may be violated.
 
 
+Getting Started
+---------------
+
+* Install [Git](http://git-scm.com/)
+* Install [RubyGems](https://rubygems.org/)
+* Install [Rake](http://rake.rubyforge.org/)
+* Install [ruby-net-github-upload](https://github.com/Constellation/ruby-net-github-upload) gem: `gem install net-github-upload`
+* Clone the Milk repository
+* Add the `commands` directory to your path, so that the `milk` is available
+* Initialize the repository: `rake init`
+* Run specs: `rake specs`
+* Build: `rake build`
+* Use: `milk.coffee` or `milk.js` from the `build` directory
+
+
 Conventions
 -----------
 
@@ -21,12 +36,6 @@ Conventions
   methods, JSON, ...):
   `number_of_items`, `compute_number_of_items()`
 * No arbitrary abbreviations, such as `src`, `mod`, `obj`, ...
-
-
-Getting Started
----------------
-
-* TODO: document.
 
 
 Roadmap
