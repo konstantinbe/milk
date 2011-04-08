@@ -173,6 +173,11 @@ task :init do
   run "git config --unset core.ignorecase" if `git config core.ignorecase`.length > 0
   puts OK
 
+  put "Initializing submodules ... "
+  run "git submodule init"
+  run "git submodule update"
+  puts OK
+
   put "Setting up wiki ... "
   run "git clone #{WIKI} wiki" unless File.exists? "wiki"
   run "mv wiki/.git/hooks/pre-commit.sample wiki/.git/hooks/pre-commit" unless File.exists? "wiki/.git/hooks/pre-commit"
