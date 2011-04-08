@@ -14,6 +14,7 @@ Getting Started
 * Install [RubyGems](https://rubygems.org/)
 * Install [Rake](http://rake.rubyforge.org/)
 * Install [ruby-net-github-upload](https://github.com/Constellation/ruby-net-github-upload) gem: `gem install net-github-upload`
+* Install [CoffeeScript](https://github.com/jashkenas/coffeescript)
 * Clone the Milk repository
 * Add the `commands` directory to your path, so that the `milk` is available
 * Initialize the repository: `rake init`
