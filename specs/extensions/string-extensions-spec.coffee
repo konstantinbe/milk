@@ -251,6 +251,16 @@ describe "Milk.StringExtensions", ->
         normalized = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBCCCCCCDDDDDDEEEEEEEEEEEEEEEEEEEEEEEEEFGGGGGGGHHHHHHHIIIIIIIIIIIIIIIIJKKKKKLLLLLLLMMMNNNNNNNNNOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOPPRRRRRRRRRSSSSSSSSSSTTTTTTTUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUVVWWWWWWXXYYYYYYYYYZZZZZZ`aaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbccccccddddddeeeeeeeeeeeeeeeeeeeeeeeeefggggggghhhhhhhhiiiiiiiiiiiiiiijjkkkkklllllllmmmnnnnnnnnnoooooooooooooooooooooooooooooooooopprrrrrrrrrssssssssssttttttttuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuvvwwwwwwwxxyyyyyyyyyyzzzzzz"
         expect(string.normalized()).toBe normalized
 
+    describe "sha1()", ->
+      it "generates a string", ->
+        expect("1".sha1()).toBeDefined()
+
+      it "has 40 characters", ->
+        expect("1".sha1().length).toBe(40)
+
+      it "is HEX, i.e. contains only digits and letters A - F", ->
+        expect("1".sha1()).toMatch(/[0-9a-fA-F]+/)
+
     describe "clone()", ->
       it "returns a clone of the receiver", ->
         string = "String"
