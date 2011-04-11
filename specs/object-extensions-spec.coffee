@@ -183,3 +183,6 @@ describe "Milk.ObjectExtensions", ->
     it "returns no if object is not the same", ->
       person = name: "Peter"
       expect(person.equals name: "Peter").toBe false
+
+  describe "has(name, options = {})", ->
+    # TODO: describe.
