@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-describe "Milk.NumberExtensions", ->
+describe "Milk.StringExtensions", ->
   describe "first([count])", ->
     it "returns the first character if |count| is not given", ->
       expect("123".first()).toBe '1'
