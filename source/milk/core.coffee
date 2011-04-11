@@ -30,6 +30,8 @@ RegExpExtensions = requires 'Milk.RegExpExtensions'
 ArrayExtensions = requires 'Milk.ArrayExtensions'
 DateExtensions = requires 'Milk.DateExtensions'
 
+# ------------------------------------------------------------------------------
+
 Object::mixin = (mixins...) ->
   for mixin in mixins
     for own key, value of mixin
@@ -38,6 +40,8 @@ Object::mixin = (mixins...) ->
 
 Object::extend_by = (mixins...) ->
   @prototype.mixin mixins...
+
+# ------------------------------------------------------------------------------
 
 Object.extend_by ObjectExtensions
 

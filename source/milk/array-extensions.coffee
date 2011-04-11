@@ -49,7 +49,8 @@ ArrayExtensions =
   count: ->
     @length
 
-  # array-only methods
+  # ----------------------------------------------------------------------------
+
   first: (count) ->
     return @[0] unless count?
     @slice 0, count
@@ -192,6 +193,8 @@ ArrayExtensions =
         return -1 if object1[key] < object2[key]
       0
 
+  # ----------------------------------------------------------------------------
+
   clone: ->
     [].concat this
 
@@ -203,10 +206,3 @@ ArrayExtensions =
 
   description: ->
     "[" + @toString() + "]"
-
-  # native array methods:
-  # * reverse
-  # * join
-  # * concat
-  # * slice
-  # * ...

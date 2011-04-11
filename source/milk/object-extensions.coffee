@@ -86,6 +86,8 @@ ObjectExtensions =
   is_reg_exp: (value) ->
     @test? and @exec? and (@ignoreCase? or @ignoreCase == no)
 
+  # ----------------------------------------------------------------------------
+
   clone: ->
     clone = {}
     for own key, value of this
@@ -97,3 +99,5 @@ ObjectExtensions =
 
   description: ->
     if @toString? then @toString() else "Object"
+
+  # ----------------------------------------------------------------------------

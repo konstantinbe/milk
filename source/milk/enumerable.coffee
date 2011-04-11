@@ -68,7 +68,6 @@ Enumerable =
       partition[key].add value
       partition
 
-
   inject: (initial, block) ->
     @values().inject initial, block
 
