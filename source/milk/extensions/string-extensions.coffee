@@ -331,7 +331,7 @@ StringExtensions =
       }
 
       function lsb_hex(value) {
-        var str= ""
+        var string = ""
         var i
         var vh
         var vl
@@ -339,21 +339,21 @@ StringExtensions =
         for(i = 0; i <= 6; i += 2) {
           vh = (value >>> (i * 4 + 4)) & 0x0f
           vl = (value >>> (i * 4)) & 0x0f
-          str += vh.toString(16) + vl.toString(16)
+          string += vh.toString(16) + vl.toString(16)
         }
-        return str
+        return string
       }
 
       function cvt_hex(value) {
-        var str = ""
+        var string = ""
         var i
         var v
 
         for(i = 7; i >= 0; i--) {
           v = (value >>> (i * 4)) & 0x0f
-          str += v.toString(16)
+          string += v.toString(16)
         }
-        return str
+        return string
       }
 
 
