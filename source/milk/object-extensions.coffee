@@ -113,29 +113,34 @@ ObjectExtensions =
     options['getter'] ?= 'get_' + name
     options['setter'] ?= 'set_' + name
 
-    readable = options.access.begins_with 'read'
-    writeable = options.access.ends_with 'write'
+    readable = options['access'].begins_with 'read'
+    writeable = options['access'].ends_with 'write'
 
-    default_getter = -> @[options['variable']]
-    default_setter = (value) ->  @[options['variable']] = value
+    getter = options['getter']
+    setter = options['setter']
+    variable = options['variable']
 
-    custom_getter = @[options['getter']]
-    custom_setter = @[options['setter']]
+    getter_function = ->
+      @will_access_value_for name
+      if @[getter] then @[getter] else @[variable]
+      @did_access_value_for name
 
-    getter = custom_getter or default_getter
-    setter = custom_setter or default_setter
+    setter_function = (value) ->
+      @will_change_value_for name
+      if @[setter] then @[setter](value) else @[variable] = value
+      @did_change_value_for name
+      @
 
     config =
       writeable: writeable
-      getter: getter if readable
-      setter: setter if writeable
+      getter: getter_function if readable
+      setter: setter_function if writeable
       configurable: no
       enumerable: yes
 
-    using_only_default_accessors = not (custom_getter or custom_setter)
-    @prototype[options['variable']] = options['default'] if using_only_default_accessors
+    @prototype[options['variable']] = options['default']
     Object.defineProperty @prototype, name, config
-    this
+    @
 
   has_one: (name, options = {}) ->
     # TODO: implement.
