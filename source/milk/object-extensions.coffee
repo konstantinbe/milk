@@ -103,7 +103,7 @@ ObjectExtensions =
   description: ->
     if @toString? then @toString() else "Object"
 
-  # ----------------------------------------------------------------------------
+  # ------------------------------- defining properties and relationships ------
 
   has: (name, options = {}) ->
     options['access'] ?= 'readwrite'
@@ -166,6 +166,8 @@ ObjectExtensions =
     @did_access_value_for key
     @
 
+  # ----------------------------------------- change notification methods ------
+
   will_access_value_for: (key, options = {}) ->
     @ # do nothing for now, will be used later for key-value observing.
 
@@ -176,6 +178,18 @@ ObjectExtensions =
     @ # do nothing for now, will be used later for key-value observing.
 
   did_change_value_for: (key, options = {}) ->
+    @ # do nothing for now, will be used later for key-value observing.
+
+  will_insert_values_into: (key, options = {}) ->
+    @ # do nothing for now, will be used later for key-value observing.
+
+  did_insert_values_into: (key, options = {}) ->
+    @ # do nothing for now, will be used later for key-value observing.
+
+  will_remove_values_from: (key, options = {}) ->
+    @ # do nothing for now, will be used later for key-value observing.
+
+  did_remove_values_from: (key, options = {}) ->
     @ # do nothing for now, will be used later for key-value observing.
 
   # ----------------------- generic to-many relationship accessor methods ------
