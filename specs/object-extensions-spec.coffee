@@ -184,5 +184,32 @@ describe "Milk.ObjectExtensions", ->
       person = name: "Peter"
       expect(person.equals name: "Peter").toBe false
 
+  describe "key-value coding", ->
+    describe "get_value(key, options = {})", ->
+      # TODO: describe.
+
+    describe "set_value(value, options = {})", ->
+      # TODO: describe.
+
+    describe "will_access_value_for(key, options = {})", ->
+      it "returns itself", ->
+        object = {}
+        expect(object.will_access_value_for 'test').toBe object
+
+    describe "did_access_value_for(key, options = {})", ->
+      it "returns itself", ->
+        object = {}
+        expect(object.did_access_value_for 'test').toBe object
+
+    describe "will_change_value_for(key, options = {})", ->
+      it "returns itself", ->
+        object = {}
+        expect(object.will_change_value_for 'test').toBe object
+
+    describe "did_change_value_for(key, options = {})", ->
+      it "returns itself", ->
+        object = {}
+        expect(object.did_change_value_for 'test').toBe object
+
   describe "has(name, options = {})", ->
     # TODO: describe.

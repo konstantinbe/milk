@@ -45,6 +45,9 @@ ObjectExtensions =
   responds_to: (method) ->
     @[method]? and @[method].is_function()
 
+  send: (method, parameters...) ->
+    @[method](parameters...)
+
   merge: (objects...) ->
     for object in objects
       for own key, value of object
@@ -149,18 +152,31 @@ ObjectExtensions =
   # -------------------------------------------- key-value-coding methods ------
 
   value_for: (key) ->
-    # TODO: implement.
-    # example: book.value_for: 'title'
+    getter = 'get_' + key
+    @will_access_value_for key
+    value = if @responds_to getter then @send getter else @[key]
+    @did_access_value_for key
+    value
 
   set_value: (value, options = {}) ->
-    # TODO: implement.
-    # example: book.set_value: "Tom Sawyer in Wonderland", for: 'title'
+    key = options['for']
+    setter = 'set_' + key
+    @will_access_value_for key
+    if @responds_to setter then @send setter, value else @[key] = value
+    @did_access_value_for key
+    @
+
+  will_access_value_for: (key, options = {}) ->
+    @ # do nothing for now, will be used later for key-value observing.
+
+  did_access_value_for: (key, options = {}) ->
+    @ # do nothing for now, will be used later for key-value observing.
 
   will_change_value_for: (key, options = {}) ->
-    # TODO: implement.
+    @ # do nothing for now, will be used later for key-value observing.
 
   did_change_value_for: (key, options = {}) ->
-    # TODO: implement.
+    @ # do nothing for now, will be used later for key-value observing.
 
   # ----------------------- generic to-many relationship accessor methods ------
 
