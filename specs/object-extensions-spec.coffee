@@ -186,7 +186,25 @@ describe "Milk.ObjectExtensions", ->
 
   describe "key-value coding", ->
     describe "get_value(key, options = {})", ->
-      # TODO: describe.
+      it "returns the value for the given key of an object", ->
+        expect({name: "Rick"}.value_for 'name').toBe "Rick"
+
+      it "calls the corresponding getter method if available", ->
+        person = get_name: -> "Rick"
+        expect(person.value_for 'name').toBe "Rick"
+
+      it "calls will_access_value_for() before accessing the value", ->
+        person =
+          name: null
+          get_name: -> @['name']
+          will_access_value_for: (key) -> @['name'] = "Rick"
+        expect(person.value_for 'name').toBe "Rick"
+
+      it "calls did_access_value_for() after accessing the value", ->
+        person = name: "Rick"
+        spyOn person, 'did_access_value_for'
+        expect(person.value_for 'name').toBe "Rick"
+        expect(person.did_access_value_for).toHaveBeenCalled()
 
     describe "set_value(value, options = {})", ->
       # TODO: describe.
