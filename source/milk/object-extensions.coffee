@@ -166,9 +166,9 @@ ObjectExtensions =
   set_value: (value, options = {}) ->
     key = options['for']
     setter = 'set_' + key
-    @will_access_value_for key
+    @will_change_value_for key
     if @responds_to setter then @send setter, value else @[key] = value
-    @did_access_value_for key
+    @did_change_value_for key
     @
 
   # ------------------------ key-value coding change notification methods ------
