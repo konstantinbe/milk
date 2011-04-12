@@ -184,7 +184,7 @@ describe "Milk.ObjectExtensions", ->
       person = name: "Peter"
       expect(person.equals name: "Peter").toBe false
 
-  describe "key-value coding", ->
+  describe "key-value coding accessor methods", ->
     describe "get_value(key, options = {})", ->
       it "returns the value for the given key of an object", ->
         expect({name: "Rick"}.value_for 'name').toBe "Rick"
@@ -207,7 +207,29 @@ describe "Milk.ObjectExtensions", ->
         expect(person.did_access_value_for).toHaveBeenCalled()
 
     describe "set_value(value, options = {})", ->
-      # TODO: describe.
+      it "sets the value for the given key of an object", ->
+        person = name: 'Unknown'
+        person.set_value "Rick", for: 'name'
+        expect(person.name).toBe "Rick"
+
+      it "calls the corresponding setter method if available", ->
+        person = set_name: (value) -> @['name'] = "Rick"
+        person.set_value "Rick", for: 'name'
+        expect(person.name).toBe "Rick"
+
+      it "calls will_change_value_for() before changing the value", ->
+        person =
+          name: null
+          set_name: (value) -> # do nothing
+          will_change_value_for: (key) -> @['name'] = "Rick"
+        person.set_value "Rick", for: 'name'
+        expect(person.name).toBe "Rick"
+
+      it "calls did_change_value_for() after changing the value", ->
+        person = name: null
+        spyOn person, 'did_change_value_for'
+        person.set_value 'Rick', for: 'name'
+        expect(person.did_change_value_for).toHaveBeenCalled()
 
   describe "key-value coding change notification methods", ->
     describe "will_access_value_for(key, options = {})", ->
