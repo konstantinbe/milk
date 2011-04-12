@@ -22,7 +22,8 @@
 # Methods singularized(), pluralized(), escaped(), and normalized() are based
 # on code from SproutCore: http://github/sproutcore/sproutcore
 #
-# Method sha1() is based on code from ttp://www.webtoolkit.info/
+# Method sha1() is based on code from ttp://www.webtoolkit.info/ and the SHA-1
+# implementation in JavaScript by Chris Veness, http://www.movable-type.co.uk/
 
 PLURAL = [
   [/(quiz)$/i,               "$1zes"  ]
@@ -325,30 +326,31 @@ StringExtensions =
   sha1: ->
     rotate_left = (n, s) -> (n << s) | (n >>> (32 - s))
 
+    f = (s, x, y, z) ->
+      switch s
+        when 0 then (x & y) ^ (~x & z)
+        when 1 then x ^ y ^ z
+        when 2 then (x & y) ^ (x & z) ^ (y & z)
+        when 3 then x ^ y ^ z
+
     lsb_hex = (value) ->
       [0, 2, 4, 6].inject "", (string, i) ->
         vh = (value >>> (i * 4 + 4)) & 0x0f
         vl = (value >>> (i * 4)) & 0x0f
         string += vh.toString(16) + vl.toString(16)
 
-    cvt_hex = (value) ->
+    convert_number_to_hex = (number) ->
       [7..0].inject "", (string, i) ->
-        v = (value >>> (i * 4)) & 0x0f
-        string += v.toString(16)
+        intermediate = (number >>> (i * 4)) & 0x0f
+        string += intermediate.toString(16)
 
-    utf8_encode = (string) ->
-      codes = string.replace(/\r\n/g, "\n").codes()
-      codes.inject "", (utf8, code) ->
-        if code < 128
-          utf8 += String.fromCharCode code
-        else if (code > 127) && (code < 2048)
-          utf8 += String.fromCharCode (code >> 6) | 192
-          utf8 += String.fromCharCode (code & 63) | 128
-        else
-          utf8 += String.fromCharCode (code >> 12) | 224
-          utf8 += String.fromCharCode ((code >> 6) & 63) | 128
-          utf8 += String.fromCharCode (code & 63) | 128
-        utf8
+    encode_string_utf8 = (string) ->
+      utf8 = string.replace /[\u0080-\u07ff]/g, (character) ->
+        code = character.charCodeAt 0
+        String.fromCharCode 0xc0 | code >> 6, 0x80 | code & 0x3f
+      utf8.replace /[\u0800-\uffff]/g, (character) ->
+        code = character.charCodeAt 0
+        String.fromCharCode 0xe0 | code >> 12, 0x80 | code >> 6 & 0x3F, 0x80 | code & 0x3f
 
     sha1 = `function SHA1(string) {
 
@@ -368,7 +370,7 @@ StringExtensions =
         E
         var temp
 
-         string = utf8_encode(string)
+         string = encode_string_utf8(string)
 
          var length = string.length
 
@@ -466,7 +468,11 @@ StringExtensions =
 
         }
 
-        var temp = cvt_hex(H0) + cvt_hex(H1) + cvt_hex(H2) + cvt_hex(H3) + cvt_hex(H4)
+        var temp = convert_number_to_hex(H0)
+                 + convert_number_to_hex(H1)
+                 + convert_number_to_hex(H2)
+                 + convert_number_to_hex(H3)
+                 + convert_number_to_hex(H4)
 
         return temp.toLowerCase()
     }`
