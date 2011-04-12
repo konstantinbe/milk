@@ -134,16 +134,16 @@ ObjectExtensions =
     Object.defineProperty @prototype, name, config
     this
 
-  has_one: (name, options = {}) -> null
+  has_one: (name, options = {}) ->
     # TODO: implement.
 
-  has_many: (name, options = {}) -> null
+  has_many: (name, options = {}) ->
     # TODO: implement.
 
-  belongs_to: (name, options = {}) -> null
+  belongs_to: (name, options = {}) ->
     # TODO: implement.
 
-  has_and_belongs_to_many: (name, options = {}) -> null
+  has_and_belongs_to_many: (name, options = {}) ->
     # TODO: Implement this.
 
   # -------------------------------------------- key-value-coding methods ------
@@ -156,13 +156,19 @@ ObjectExtensions =
     # TODO: implement.
     # example: book.set_value: "Tom Sawyer in Wonderland", for: 'title'
 
+  will_change_value_for: (key, options = {}) ->
+    # TODO: implement.
+
+  did_change_value_for: (key, options = {}) ->
+    # TODO: implement.
+
   # ----------------------- generic to-many relationship accessor methods ------
 
   add_object: (object, options = {}) ->
     # TODO: implement.
     # example: book.add_object: page, to: 'pages'
 
-  add__many_objects: (objects, options = {}) ->
+  add_many_objects: (objects, options = {}) ->
     # TODO: implement.
     # example: book.add_many_objects: page, to: 'pages'
 
