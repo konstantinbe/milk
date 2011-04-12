@@ -166,7 +166,7 @@ ObjectExtensions =
     @did_access_value_for key
     @
 
-  # ----------------------------------------- change notification methods ------
+  # ------------------------ key-value coding change notification methods ------
 
   will_access_value_for: (key, options = {}) ->
     @ # do nothing for now, will be used later for key-value observing.
