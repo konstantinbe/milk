@@ -185,7 +185,7 @@ describe "Milk.ObjectExtensions", ->
       expect(person.equals name: "Peter").toBe false
 
   describe "key-value coding accessor methods", ->
-    describe "get_value(key, options = {})", ->
+    describe "value_for(key, options = {})", ->
       it "returns the value for the given key of an object", ->
         expect({name: "Rick"}.value_for 'name').toBe "Rick"
 
