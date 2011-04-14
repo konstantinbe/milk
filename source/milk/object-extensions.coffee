@@ -231,7 +231,7 @@ ObjectExtensions =
     # example: book.remove_object_at: 2, from: 'pages'
     # take Array's remove_at method as an example for this
 
-  remove_many_objects_at: (indexes, options) ->
+  remove_many_objects_at: (indexes, options = {}) ->
     # TODO: implement.
     # example: book.remove_many_objects_at: [2, 3, 4, 5], from: 'pages'
     # take Array's remove_at method as an example for this
