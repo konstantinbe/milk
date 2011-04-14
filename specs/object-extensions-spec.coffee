@@ -277,8 +277,14 @@ describe "Milk.ObjectExtensions", ->
 
   describe "generic to-many relationship accessor methods", ->
     describe "add_object(object, options = {})", ->
-      # TODO: implement.
-      # example: book.add_object: page, to: 'pages'
+      it "adds an object to the end of a to-many relationship", ->
+        company = employees: ["Ashton", "Bud"]
+        company.add_object "Cyndia", to: 'employees'
+        expect(company.employees).toEqual(["Ashton", "Bud", "Cyndia"])
+
+      it "returns the receiver", ->
+        company = employees: ["Ashton", "Bud"]
+        expect(company.add_object "Cyndia", to: 'employees').toBe company
 
     describe "add_many_objects(objects, options = {})", ->
       # TODO: implement.
