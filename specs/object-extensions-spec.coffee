@@ -276,44 +276,44 @@ describe "Milk.ObjectExtensions", ->
     # TODO: describe.
 
   describe "generic to-many relationship accessor methods", ->
-    describe "add_object(object, options = {})", ->
+    describe "add_value(object, options = {})", ->
       it "adds an object to the end of a to-many relationship", ->
         company = employees: ["Ashton", "Bud"]
-        company.add_object "Cyndia", to: 'employees'
+        company.add_value "Cyndia", to: 'employees'
         expect(company.employees).toEqual(["Ashton", "Bud", "Cyndia"])
 
       it "returns the receiver", ->
         company = employees: ["Ashton", "Bud"]
-        expect(company.add_object "Cyndia", to: 'employees').toBe company
+        expect(company.add_value "Cyndia", to: 'employees').toBe company
 
-    describe "add_many_objects(objects, options = {})", ->
+    describe "add_many_values(values, options = {})", ->
       # TODO: implement.
-      # example: book.add_many_objects: page, to: 'pages'
+      # example: book.add_many_values: page, to: 'pages'
 
-    describe "remove_object(object, options = {})", ->
+    describe "remove_value(value, options = {})", ->
       # TODO: implement.
-      # example: book.remove_object: page, from: 'pages'
+      # example: book.remove_value: page, from: 'pages'
 
-    describe "remove_many_objects(objects, options = {})", ->
+    describe "remove_many_values(values, options = {})", ->
       # TODO: implement.
-      # example: book.remove_many_objects: page, from: 'pages'
+      # example: book.remove_many_values: page, from: 'pages'
 
-    describe "insert_object(object, options = {})", ->
+    describe "insert_value(value, options = {})", ->
       # TODO: implement.
-      # example: book.insert_object: page, into: 'pages', at: 2
+      # example: book.insert_value: page, into: 'pages', at: 2
       # take Array's insert method as an example for this
 
-    describe "insert_many_objects(objects, options = {})", ->
+    describe "insert_many_values(values, options = {})", ->
       # TODO: implement.
-      # example: book.insert_many_objects: pages, into: 'pages', at: 2
+      # example: book.insert_many_values: pages, into: 'pages', at: 2
       # take Array's insert method as an example for this
 
-    describe "remove_object_at(index, options = {})", ->
+    describe "remove_value_at(index, options = {})", ->
       # TODO: implement.
-      # example: book.remove_object_at: 2, from: 'pages'
+      # example: book.remove_value_at: 2, from: 'pages'
       # take Array's remove_at method as an example for this
 
-    describe "remove_many_objects_at(indexes, options = {})", ->
+    describe "remove_many_values_at(indexes, options = {})", ->
       # TODO: implement.
-      # example: book.remove_many_objects_at: [2, 3, 4, 5], from: 'pages'
+      # example: book.remove_many_values_at: [2, 3, 4, 5], from: 'pages'
       # take Array's remove_at method as an example for this

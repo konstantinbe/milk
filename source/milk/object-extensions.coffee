@@ -200,36 +200,35 @@ ObjectExtensions =
 
   # ----------------------- generic to-many relationship accessor methods ------
 
-  add_object: (object, options = {}) ->
-    @add_many_objects [object], options
+  add_value: (value, options = {}) ->
+    @add_many_values [value], options
 
-  add_many_objects: (objects, options = {}) ->
+  add_many_values: (values, options = {}) ->
+    to = options['to']
+    @insert_many_values values, into: to, at: @[to].length
+
+  remove_value: (value, options = {}) ->
+    @remove_many_values [value], options
+
+  remove_many_values: (values, options = {}) ->
     # TODO: implement.
-    # example: book.add_many_objects: page, to: 'pages'
+    # example: book.remove_many_values: page, from: 'pages'
     @
 
-  remove_object: (object, options = {}) ->
-    @remove_many_objects [object], options
+  insert_value: (value, options = {}) ->
+    @insert_many_values [value], options
 
-  remove_many_objects: (objects, options = {}) ->
+  insert_many_values: (values, options = {}) ->
     # TODO: implement.
-    # example: book.remove_many_objects: page, from: 'pages'
-    @
-
-  insert_object: (object, options = {}) ->
-    @insert_many_objects [object], options
-
-  insert_many_objects: (objects, options = {}) ->
-    # TODO: implement.
-    # example: book.insert_many_objects: pages, into: 'pages', at: 2
+    # example: book.insert_many_values: pages, into: 'pages', at: 2
     # take Array's insert method as an example for this
     @
 
-  remove_object_at: (index, options = {}) ->
-    @remove_many_objects_at [index], options
+  remove_value_at: (index, options = {}) ->
+    @remove_many_values_at [index], options
 
-  remove_many_objects_at: (indexes, options = {}) ->
+  remove_many_values_at: (indexes, options = {}) ->
     # TODO: implement.
-    # example: book.remove_many_objects_at: [2, 3, 4, 5], from: 'pages'
+    # example: book.remove_many_values_at: [2, 3, 4, 5], from: 'pages'
     # take Array's remove_at method as an example for this
     @
