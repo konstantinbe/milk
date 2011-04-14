@@ -203,35 +203,43 @@ ObjectExtensions =
   add_object: (object, options = {}) ->
     # TODO: implement.
     # example: book.add_object: page, to: 'pages'
+    @
 
   add_many_objects: (objects, options = {}) ->
     # TODO: implement.
     # example: book.add_many_objects: page, to: 'pages'
+    @
 
   remove_object: (object, options = {}) ->
     # TODO: implement.
     # example: book.remove_object: page, from: 'pages'
+    @
 
   remove_many_objects: (objects, options = {}) ->
     # TODO: implement.
     # example: book.remove_many_objects: page, from: 'pages'
+    @
 
   insert_object: (object, options = {}) ->
     # TODO: implement.
     # example: book.insert_object: page, into: 'pages', at: 2
     # take Array's insert method as an example for this
+    @
 
   insert_many_objects: (objects, options = {}) ->
     # TODO: implement.
     # example: book.insert_many_objects: pages, into: 'pages', at: 2
     # take Array's insert method as an example for this
+    @
 
   remove_object_at: (index, options = {}) ->
     # TODO: implement.
     # example: book.remove_object_at: 2, from: 'pages'
     # take Array's remove_at method as an example for this
+    @
 
   remove_many_objects_at: (indexes, options = {}) ->
     # TODO: implement.
     # example: book.remove_many_objects_at: [2, 3, 4, 5], from: 'pages'
     # take Array's remove_at method as an example for this
+    @
