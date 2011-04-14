@@ -116,14 +116,15 @@ ObjectExtensions =
     readable = options['access'].begins_with 'read'
     writeable = options['access'].ends_with 'write'
 
-    getter = options['getter']
+    getter_ = options['getter']
     setter = options['setter']
     variable = options['variable']
 
     getter_function = ->
       @will_access_value_for name
-      if @[getter] then @[getter] else @[variable]
+      value = if @[getter] then @[getter]() else @[variable]
       @did_access_value_for name
+      value
 
     setter_function = (value) ->
       @will_change_value_for name
