@@ -284,6 +284,9 @@ describe "Milk.ObjectExtensions", ->
         company.add_many_values ["Cyndia", "Didi"], to: 'employees'
         expect(company.employees).toEqual ["Ashton", "Bud", "Cyndia", "Didi"]
 
+      it "forwards to insert_many_values() method", ->
+        # TODO: specify.
+
       it "returns the receiver", ->
         expect(company.add_many_values ["Cyndia", "Didi"], to: 'employees').toBe company
 
@@ -291,6 +294,9 @@ describe "Milk.ObjectExtensions", ->
       it "removes many values from a to-many relationship", ->
         company.remove_many_values ["Ashton", "Bud"], from: 'employees'
         expect(company.employees).toEqual []
+
+      it "forwards to remove_many_values_at() method", ->
+        # TODO: specify.
 
       it "returns the receiver", ->
         expect(company.remove_many_values ["Bud"], from: 'employees').toBe company
@@ -303,6 +309,12 @@ describe "Milk.ObjectExtensions", ->
       it "returns the receiver", ->
         expect(company.insert_many_values ["Cyndia", "Didi"], into: 'employees', at: 2).toBe company
 
+      it "calls will_insert_values() before inserting the values", ->
+        # TODO: specify.
+
+      it "calls did_insert_values() after inserting the values", ->
+        # TODO: specify.
+
     describe "remove_many_values_at(indexes, options = {})", ->
       it "removes many values at specified indexes from a to-many relationship", ->
         company.remove_many_values_at [0, 1], from: 'employees'
@@ -310,3 +322,9 @@ describe "Milk.ObjectExtensions", ->
 
       it "returns the receiver", ->
         expect(company.remove_many_values_at [0, 1], from: 'employees').toBe company
+
+      it "calls will_remove_values() before removing the values", ->
+        # TODO: specify.
+
+      it "calls did_remove_values() after removing the values", ->
+        # TODO: specify.
