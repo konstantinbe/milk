@@ -239,5 +239,5 @@ ObjectExtensions =
 
   remove_many_values_at: (indexes, options = {}) ->
     key = options['from']
-    @[key].remove_many_at indexes
+    @[key].remove_at indexes...
     @

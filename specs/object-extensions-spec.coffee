@@ -299,7 +299,7 @@ describe "Milk.ObjectExtensions", ->
     describe "remove_many_values(values, options = {})", ->
       it "returns the receiver", ->
         company = employees: ["Ashton", "Bud"]
-        expect(company.remove_many_values ["Bud"], to: 'employees').toBe company
+        expect(company.remove_many_values ["Bud"], from: 'employees').toBe company
 
     describe "insert_value(value, options = {})", ->
       it "returns the receiver", ->
