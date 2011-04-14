@@ -205,10 +205,8 @@ ObjectExtensions =
 
   add_many_values: (values, options = {}) ->
     key = options['to']
-    array = @[key]
-    index = array.length
-    array.add_many values
-    @
+    index = @[key].length
+    @insert_many_values values, into: key, at: index
 
   remove_value: (value, options = {}) ->
     @remove_many_values [value], options
