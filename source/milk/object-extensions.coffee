@@ -201,19 +201,17 @@ ObjectExtensions =
   # ----------------------- generic to-many relationship accessor methods ------
 
   add_value: (value, options = {}) ->
-    key = options['to']
-    @[key].add value
-    @
+    @add_many_values [value], options
 
   add_many_values: (values, options = {}) ->
     key = options['to']
-    @[key].add_many values
+    array = @[key]
+    index = array.length
+    array.add_many values
     @
 
   remove_value: (value, options = {}) ->
-    key = options['from']
-    @[key].remove value
-    @
+    @remove_many_values [value], options
 
   remove_many_values: (values, options = {}) ->
     key = options['from']
@@ -221,10 +219,7 @@ ObjectExtensions =
     @
 
   insert_value: (value, options = {}) ->
-    key = options['into']
-    index = options['at']
-    @[key].insert value, at: index
-    @
+    @insert_many_values [value], options
 
   insert_many_values: (values, options = {}) ->
     key = options['into']
@@ -233,9 +228,7 @@ ObjectExtensions =
     @
 
   remove_value_at: (index, options = {}) ->
-    key = options['from']
-    @[key].remove_at index
-    @
+    @remove_many_values_at [index], options
 
   remove_many_values_at: (indexes, options = {}) ->
     key = options['from']
