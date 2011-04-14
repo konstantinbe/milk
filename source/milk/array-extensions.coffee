@@ -127,7 +127,7 @@ ArrayExtensions =
     collections.each (collection) =>
       collection.each (value) =>
         @push value
-    this
+    @
 
   remove: (values...) ->
     @remove_many values
@@ -139,7 +139,7 @@ ArrayExtensions =
         while index >= 0
           @splice index, 1
           index = @index_of value
-    this
+    @
 
   remove_at: (indexes...) ->
     indexes.sort()
@@ -147,7 +147,7 @@ ArrayExtensions =
     indexes.each (index) =>
       @splice(index - offset, 1)
       offset += 1
-    this
+    @
 
   insert: (value, options = {}) ->
     @insert_many [value], options
@@ -158,7 +158,7 @@ ArrayExtensions =
     at = @index_of options['before'] if options['before']?
     at = 1 + @last_index_of options['after'] if options['after']?
     @splice at, 0, collection...
-    this
+    @
 
   replace: (value, options = {}) ->
     options['with'] ?= undefined
@@ -168,14 +168,14 @@ ArrayExtensions =
     indexes = @indexes_of value
     indexes.each (index) =>
       @replace_at index, with_many: replacements
-    this
+    @
 
   replace_at: (index, options = {}) ->
     options['with'] ?= undefined
     options['with_many'] ?= undefined
     replacements = if options['with']? then [options['with']] else options['with_many']
     @splice index, 1, replacements...
-    this
+    @
 
   index_of: native_array_index_of
   last_index_of: native_array_last_index_of
