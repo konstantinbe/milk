@@ -186,16 +186,16 @@ ObjectExtensions =
   did_change_value_for: (key, options = {}) ->
     @ # do nothing for now, will be used later for key-value observing.
 
-  will_insert_values_into: (key, options = {}) ->
+  will_insert_values: (key, options = {}) ->
     @ # do nothing for now, will be used later for key-value observing.
 
-  did_insert_values_into: (key, options = {}) ->
+  did_insert_values: (key, options = {}) ->
     @ # do nothing for now, will be used later for key-value observing.
 
-  will_remove_values_from: (key, options = {}) ->
+  will_remove_values: (key, options = {}) ->
     @ # do nothing for now, will be used later for key-value observing.
 
-  did_remove_values_from: (key, options = {}) ->
+  did_remove_values: (key, options = {}) ->
     @ # do nothing for now, will be used later for key-value observing.
 
   # ----------------------- generic to-many relationship accessor methods ------

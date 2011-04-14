@@ -255,22 +255,22 @@ describe "Milk.ObjectExtensions", ->
     describe "will_insert_values_into(key, options = {})", ->
       it "returns itself", ->
         object = {}
-        expect(object.will_insert_values_into 'test').toBe object
+        expect(object.will_insert_values []).toBe object
 
     describe "did_insert_values_into(key, options = {})", ->
       it "returns itself", ->
         object = {}
-        expect(object.did_insert_values_into 'test').toBe object
+        expect(object.did_insert_values []).toBe object
 
     describe "will_remove_values_from(key, options = {})", ->
       it "returns itself", ->
         object = {}
-        expect(object.will_remove_values_from 'test').toBe object
+        expect(object.will_remove_values []).toBe object
 
     describe "did_remove_values_from(key, options = {})", ->
       it "returns itself", ->
         object = {}
-        expect(object.did_remove_values_from 'test').toBe object
+        expect(object.did_remove_values []).toBe object
 
   describe "has(name, options = {})", ->
     # TODO: describe.
