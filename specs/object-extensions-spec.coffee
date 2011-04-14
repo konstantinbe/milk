@@ -287,33 +287,36 @@ describe "Milk.ObjectExtensions", ->
         expect(company.add_value "Cyndia", to: 'employees').toBe company
 
     describe "add_many_values(values, options = {})", ->
-      # TODO: implement.
-      # example: book.add_many_values: page, to: 'pages'
+      it "returns the receiver", ->
+        company = employees: ["Ashton", "Bud"]
+        expect(company.add_many_values ["Cyndia", "Didi"], to: 'employees').toBe company
 
     describe "remove_value(value, options = {})", ->
-      # TODO: implement.
-      # example: book.remove_value: page, from: 'pages'
+      it "returns the receiver", ->
+        company = employees: ["Ashton", "Bud"]
+        expect(company.remove_value "Bud", from: 'employees').toBe company
 
     describe "remove_many_values(values, options = {})", ->
-      # TODO: implement.
-      # example: book.remove_many_values: page, from: 'pages'
+      it "returns the receiver", ->
+        company = employees: ["Ashton", "Bud"]
+        expect(company.remove_many_values ["Bud"], to: 'employees').toBe company
 
     describe "insert_value(value, options = {})", ->
-      # TODO: implement.
-      # example: book.insert_value: page, into: 'pages', at: 2
-      # take Array's insert method as an example for this
+      it "returns the receiver", ->
+        company = employees: ["Ashton", "Bud"]
+        expect(company.insert_value "Cyndia", into: 'employees', at: 2).toBe company
 
     describe "insert_many_values(values, options = {})", ->
-      # TODO: implement.
-      # example: book.insert_many_values: pages, into: 'pages', at: 2
-      # take Array's insert method as an example for this
+      it "returns the receiver", ->
+        company = employees: ["Ashton", "Bud"]
+        expect(company.insert_many_values ["Cyndia", "Didi"], into: 'employees', at: 2).toBe company
 
     describe "remove_value_at(index, options = {})", ->
-      # TODO: implement.
-      # example: book.remove_value_at: 2, from: 'pages'
-      # take Array's remove_at method as an example for this
+      it "returns the receiver", ->
+        company = employees: ["Ashton", "Bud"]
+        expect(company.remove_value_at 1, from: 'employees').toBe company
 
     describe "remove_many_values_at(indexes, options = {})", ->
-      # TODO: implement.
-      # example: book.remove_many_values_at: [2, 3, 4, 5], from: 'pages'
-      # take Array's remove_at method as an example for this
+      it "returns the receiver", ->
+        company = employees: ["Ashton", "Bud"]
+        expect(company.remove_many_values_at [0, 1], from: 'employees').toBe company
