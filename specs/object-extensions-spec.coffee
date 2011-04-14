@@ -302,7 +302,7 @@ describe "Milk.ObjectExtensions", ->
         spyOn(company, 'remove_many_values_at')
         people = ["Ashton", "Bud"]
         company.remove_many_values people, from: 'employees'
-        expect(company.remove_many_values_at).toHaveBeenCalledWith [0, 1], from: 'employees', values: people
+        expect(company.remove_many_values_at).toHaveBeenCalledWith [0, 1], from: 'employees', passed_through_values: people
 
       it "returns the receiver", ->
         expect(company.remove_many_values ["Bud"], from: 'employees').toBe company
@@ -316,10 +316,16 @@ describe "Milk.ObjectExtensions", ->
         expect(company.insert_many_values ["Cyndia", "Didi"], into: 'employees', at: 2).toBe company
 
       it "calls will_insert_values() before inserting the values", ->
-        # TODO: specify.
+        spyOn(company, 'will_insert_values')
+        people = ["Cyndia", "Didi"]
+        company.insert_many_values people, into: 'employees', at: 2
+        expect(company.will_insert_values).toHaveBeenCalledWith people, into: 'employees', at: 2
 
       it "calls did_insert_values() after inserting the values", ->
-        # TODO: specify.
+        spyOn(company, 'did_insert_values')
+        people = ["Cyndia", "Didi"]
+        company.insert_many_values people, into: 'employees', at: 2
+        expect(company.did_insert_values).toHaveBeenCalledWith people, into: 'employees', at: 2
 
     describe "remove_many_values_at(indexes, options = {})", ->
       it "removes many values at specified indexes from a to-many relationship", ->
@@ -330,7 +336,9 @@ describe "Milk.ObjectExtensions", ->
         expect(company.remove_many_values_at [0, 1], from: 'employees').toBe company
 
       it "calls will_remove_values() before removing the values", ->
-        # TODO: specify.
+        spyOn(company, 'will_remove_values')
+        company.remove_many_values_at [0, 1], from: 'employees'
+        expect(company.will_remove_values).toHaveBeenCalledWith ["Ashton", "Bud"], from: 'employees', at: [0, 1]
 
       it "calls did_remove_values() after removing the values", ->
         # TODO: specify.

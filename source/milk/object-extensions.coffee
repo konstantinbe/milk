@@ -215,12 +215,12 @@ ObjectExtensions =
     key = options['from']
     array = @[key]
     indexes = values.inject [], (indexes, value) -> indexes.add_many array.indexes_of value
-    @remove_many_values_at indexes, from: key, values: values
+    @remove_many_values_at indexes, from: key, passed_through_values: values
 
   remove_many_values_at: (indexes, options = {}) ->
     key = options['from']
     array = @[key]
-    values = options['values'] or indexes.collect (index) -> array[index]
+    values = options['passed_through_values'] or indexes.collect (index) -> array[index]
     @will_remove_values values, from: key, at: indexes
     array.remove_at indexes...
     @did_remove_values values, from: key, at: indexes
