@@ -203,33 +203,41 @@ ObjectExtensions =
   add_value: (value, options = {}) ->
     key = options['to']
     @[key].add value
+    @
 
   add_many_values: (values, options = {}) ->
     key = options['to']
     @[key].add_many values
+    @
 
   remove_value: (value, options = {}) ->
     key = options['from']
     @[key].remove value
+    @
 
   remove_many_values: (values, options = {}) ->
     key = options['from']
     @[key].remove_many values
+    @
 
   insert_value: (value, options = {}) ->
     key = options['into']
     index = options['at']
     @[key].insert value, at: index
+    @
 
   insert_many_values: (values, options = {}) ->
     key = options['into']
     index = options['at']
     @[key].insert_many values, at: index
+    @
 
   remove_value_at: (index, options = {}) ->
     key = options['from']
     @[key].remove_at index
+    @
 
   remove_many_values_at: (indexes, options = {}) ->
     key = options['from']
     @[key].remove_many_at indexes
+    @
