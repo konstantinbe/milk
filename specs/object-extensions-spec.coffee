@@ -274,3 +274,40 @@ describe "Milk.ObjectExtensions", ->
 
   describe "has(name, options = {})", ->
     # TODO: describe.
+
+  describe "generic to-many relationship accessor methods", ->
+    describe "add_object(object, options = {})", ->
+      # TODO: implement.
+      # example: book.add_object: page, to: 'pages'
+
+    describe "add_many_objects(objects, options = {})", ->
+      # TODO: implement.
+      # example: book.add_many_objects: page, to: 'pages'
+
+    describe "remove_object(object, options = {})", ->
+      # TODO: implement.
+      # example: book.remove_object: page, from: 'pages'
+
+    describe "remove_many_objects(objects, options = {})", ->
+      # TODO: implement.
+      # example: book.remove_many_objects: page, from: 'pages'
+
+    describe "insert_object(object, options = {})", ->
+      # TODO: implement.
+      # example: book.insert_object: page, into: 'pages', at: 2
+      # take Array's insert method as an example for this
+
+    describe "insert_many_objects(objects, options = {})", ->
+      # TODO: implement.
+      # example: book.insert_many_objects: pages, into: 'pages', at: 2
+      # take Array's insert method as an example for this
+
+    describe "remove_object_at(index, options = {})", ->
+      # TODO: implement.
+      # example: book.remove_object_at: 2, from: 'pages'
+      # take Array's remove_at method as an example for this
+
+    describe "remove_many_objects_at(indexes, options = {})", ->
+      # TODO: implement.
+      # example: book.remove_many_objects_at: [2, 3, 4, 5], from: 'pages'
+      # take Array's remove_at method as an example for this
