@@ -207,7 +207,7 @@ ObjectExtensions =
   remove_many_values: (values, options = {}) ->
     key = options['from']
     array = @[key]
-    indexes = values.inject [], (indexes, value) -> indexes.add array.indexes_of value
+    indexes = values.inject [], (indexes, value) -> indexes.add_many array.indexes_of value
     @remove_many_values_at indexes, from: key, values: values
 
   insert_many_values: (values, options = {}) ->
