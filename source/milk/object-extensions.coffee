@@ -204,18 +204,18 @@ ObjectExtensions =
     key = options['to']
     @insert_many_values values, into: key, at: @[key].length
 
-  remove_many_values: (values, options = {}) ->
-    key = options['from']
-    array = @[key]
-    indexes = values.inject [], (indexes, value) -> indexes.add_many array.indexes_of value
-    @remove_many_values_at indexes, from: key, values: values
-
   insert_many_values: (values, options = {}) ->
     key = options['into']
     index = options['at']
     @will_insert_values values, options
     @[key].insert_many values, at: index
     @did_insert_values values, options
+
+  remove_many_values: (values, options = {}) ->
+    key = options['from']
+    array = @[key]
+    indexes = values.inject [], (indexes, value) -> indexes.add_many array.indexes_of value
+    @remove_many_values_at indexes, from: key, values: values
 
   remove_many_values_at: (indexes, options = {}) ->
     key = options['from']
