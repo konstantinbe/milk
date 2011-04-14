@@ -201,9 +201,7 @@ ObjectExtensions =
   # ----------------------- generic to-many relationship accessor methods ------
 
   add_object: (object, options = {}) ->
-    # TODO: implement.
-    # example: book.add_object: page, to: 'pages'
-    @
+    @add_many_objects [object], options
 
   add_many_objects: (objects, options = {}) ->
     # TODO: implement.
@@ -211,9 +209,7 @@ ObjectExtensions =
     @
 
   remove_object: (object, options = {}) ->
-    # TODO: implement.
-    # example: book.remove_object: page, from: 'pages'
-    @
+    @remove_many_objects [object], options
 
   remove_many_objects: (objects, options = {}) ->
     # TODO: implement.
@@ -221,10 +217,7 @@ ObjectExtensions =
     @
 
   insert_object: (object, options = {}) ->
-    # TODO: implement.
-    # example: book.insert_object: page, into: 'pages', at: 2
-    # take Array's insert method as an example for this
-    @
+    @insert_many_objects [object], options
 
   insert_many_objects: (objects, options = {}) ->
     # TODO: implement.
@@ -233,10 +226,7 @@ ObjectExtensions =
     @
 
   remove_object_at: (index, options = {}) ->
-    # TODO: implement.
-    # example: book.remove_object_at: 2, from: 'pages'
-    # take Array's remove_at method as an example for this
-    @
+    @remove_many_objects_at [index], options
 
   remove_many_objects_at: (indexes, options = {}) ->
     # TODO: implement.
