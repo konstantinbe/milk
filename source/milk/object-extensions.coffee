@@ -200,35 +200,28 @@ ObjectExtensions =
 
   # ----------------------- generic to-many relationship accessor methods ------
 
-  add_value: (value, options = {}) ->
-    @add_many_values [value], options
-
   add_many_values: (values, options = {}) ->
     key = options['to']
-    index = @[key].length
-    @insert_many_values values, into: key, at: index
-
-  remove_value: (value, options = {}) ->
-    @remove_many_values [value], options
+    @insert_many_values values, into: key, at: @[key].length
 
   remove_many_values: (values, options = {}) ->
     key = options['from']
     @[key].remove_many values
     @
 
-  insert_value: (value, options = {}) ->
-    @insert_many_values [value], options
-
   insert_many_values: (values, options = {}) ->
     key = options['into']
     index = options['at']
+    @will_insert_values values, options
     @[key].insert_many values, at: index
+    @did_insert_values values, options
     @
-
-  remove_value_at: (index, options = {}) ->
-    @remove_many_values_at [index], options
 
   remove_many_values_at: (indexes, options = {}) ->
     key = options['from']
-    @[key].remove_at indexes...
+    array = @[key]
+    values = indexes.collect (index) -> array[index]
+    @will_remove_values values, from: key, at: indexes
+    array.remove_at indexes...
+    @did_remove_values values, from: key, at: indexes
     @

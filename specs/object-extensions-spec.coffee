@@ -279,14 +279,6 @@ describe "Milk.ObjectExtensions", ->
     company = null
     beforeEach -> company = employees: ["Ashton", "Bud"]
 
-    describe "add_value(object, options = {})", ->
-      it "adds a value to the end of a to-many relationship", ->
-        company.add_value "Cyndia", to: 'employees'
-        expect(company.employees).toEqual ["Ashton", "Bud", "Cyndia"]
-
-      it "returns the receiver", ->
-        expect(company.add_value "Cyndia", to: 'employees').toBe company
-
     describe "add_many_values(values, options = {})", ->
       it "adds many values to the end of a to-many relationship", ->
         company.add_many_values ["Cyndia", "Didi"], to: 'employees'
@@ -294,14 +286,6 @@ describe "Milk.ObjectExtensions", ->
 
       it "returns the receiver", ->
         expect(company.add_many_values ["Cyndia", "Didi"], to: 'employees').toBe company
-
-    describe "remove_value(value, options = {})", ->
-      it "removes a value from a to-many relationship", ->
-        company.remove_value "Bud", from: 'employees'
-        expect(company.employees).toEqual ["Ashton"]
-
-      it "returns the receiver", ->
-        expect(company.remove_value "Bud", from: 'employees').toBe company
 
     describe "remove_many_values(values, options = {})", ->
       it "removes many values from a to-many relationship", ->
@@ -311,14 +295,6 @@ describe "Milk.ObjectExtensions", ->
       it "returns the receiver", ->
         expect(company.remove_many_values ["Bud"], from: 'employees').toBe company
 
-    describe "insert_value(value, options = {})", ->
-      it "inserts a value into a to-many relationship at a specified index", ->
-        company.insert_value "Cyndia", into: 'employees', at: 2
-        expect(company.employees).toEqual ["Ashton", "Bud", "Cyndia"]
-
-      it "returns the receiver", ->
-        expect(company.insert_value "Cyndia", into: 'employees', at: 2).toBe company
-
     describe "insert_many_values(values, options = {})", ->
       it "inserts many values into a to-many relationship at a specified index", ->
         company.insert_many_values ["Cyndia", "Didi"], into: 'employees', at: 2
@@ -326,14 +302,6 @@ describe "Milk.ObjectExtensions", ->
 
       it "returns the receiver", ->
         expect(company.insert_many_values ["Cyndia", "Didi"], into: 'employees', at: 2).toBe company
-
-    describe "remove_value_at(index, options = {})", ->
-      it "removes a value at a specified index from a to-many relationship", ->
-        company.remove_value_at 1, from: 'employees'
-        expect(company.employees).toEqual ["Ashton"]
-
-      it "returns the receiver", ->
-        expect(company.remove_value_at 1, from: 'employees').toBe company
 
     describe "remove_many_values_at(indexes, options = {})", ->
       it "removes many values at specified indexes from a to-many relationship", ->
