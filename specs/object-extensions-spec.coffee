@@ -276,47 +276,53 @@ describe "Milk.ObjectExtensions", ->
     # TODO: describe.
 
   describe "generic to-many relationship accessor methods", ->
+    company = null
+    beforeEach -> company = employees: ["Ashton", "Bud"]
+
     describe "add_value(object, options = {})", ->
-      it "adds an object to the end of a to-many relationship", ->
-        company = employees: ["Ashton", "Bud"]
+      it "adds a value to the end of a to-many relationship", ->
         company.add_value "Cyndia", to: 'employees'
-        expect(company.employees).toEqual(["Ashton", "Bud", "Cyndia"])
+        expect(company.employees).toEqual ["Ashton", "Bud", "Cyndia"]
 
       it "returns the receiver", ->
-        company = employees: ["Ashton", "Bud"]
         expect(company.add_value "Cyndia", to: 'employees').toBe company
 
     describe "add_many_values(values, options = {})", ->
+      it "adds many values to the end of a to-many relationship", ->
+        company.add_many_values ["Cyndia", "Didi"], to: 'employees'
+        expect(company.employees).toEqual ["Ashton", "Bud", "Cyndia", "Didi"]
+
       it "returns the receiver", ->
-        company = employees: ["Ashton", "Bud"]
         expect(company.add_many_values ["Cyndia", "Didi"], to: 'employees').toBe company
 
     describe "remove_value(value, options = {})", ->
+      it "removes a value from a to-many relationship", ->
+        company.remove_value "Bud", from: 'employees'
+        expect(company.employees).toEqual ["Ashton"]
+
       it "returns the receiver", ->
-        company = employees: ["Ashton", "Bud"]
         expect(company.remove_value "Bud", from: 'employees').toBe company
 
     describe "remove_many_values(values, options = {})", ->
+      it "removes a value from a to-many relationship", ->
+        company.remove_many_values ["Ashton", "Bud"], from: 'employees'
+        expect(company.employees).toEqual []
+
       it "returns the receiver", ->
-        company = employees: ["Ashton", "Bud"]
         expect(company.remove_many_values ["Bud"], from: 'employees').toBe company
 
     describe "insert_value(value, options = {})", ->
       it "returns the receiver", ->
-        company = employees: ["Ashton", "Bud"]
         expect(company.insert_value "Cyndia", into: 'employees', at: 2).toBe company
 
     describe "insert_many_values(values, options = {})", ->
       it "returns the receiver", ->
-        company = employees: ["Ashton", "Bud"]
         expect(company.insert_many_values ["Cyndia", "Didi"], into: 'employees', at: 2).toBe company
 
     describe "remove_value_at(index, options = {})", ->
       it "returns the receiver", ->
-        company = employees: ["Ashton", "Bud"]
         expect(company.remove_value_at 1, from: 'employees').toBe company
 
     describe "remove_many_values_at(indexes, options = {})", ->
       it "returns the receiver", ->
-        company = employees: ["Ashton", "Bud"]
         expect(company.remove_many_values_at [0, 1], from: 'employees').toBe company
