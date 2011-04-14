@@ -216,7 +216,6 @@ ObjectExtensions =
     @will_insert_values values, options
     @[key].insert_many values, at: index
     @did_insert_values values, options
-    @
 
   remove_many_values_at: (indexes, options = {}) ->
     key = options['from']
@@ -225,4 +224,3 @@ ObjectExtensions =
     @will_remove_values values, from: key, at: indexes
     array.remove_at indexes...
     @did_remove_values values, from: key, at: indexes
-    @
