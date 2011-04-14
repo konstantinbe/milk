@@ -285,7 +285,10 @@ describe "Milk.ObjectExtensions", ->
         expect(company.employees).toEqual ["Ashton", "Bud", "Cyndia", "Didi"]
 
       it "forwards to insert_many_values() method", ->
-        # TODO: specify.
+        spyOn(company, 'insert_many_values')
+        people = ["Cyndia", "Didi"]
+        company.add_many_values people, to: 'employees'
+        expect(company.insert_many_values).toHaveBeenCalledWith people, into: 'employees', at: 2
 
       it "returns the receiver", ->
         expect(company.add_many_values ["Cyndia", "Didi"], to: 'employees').toBe company
@@ -296,7 +299,10 @@ describe "Milk.ObjectExtensions", ->
         expect(company.employees).toEqual []
 
       it "forwards to remove_many_values_at() method", ->
-        # TODO: specify.
+        spyOn(company, 'remove_many_values_at')
+        people = ["Ashton", "Bud"]
+        company.remove_many_values people, from: 'employees'
+        expect(company.remove_many_values_at).toHaveBeenCalledWith [0, 1], from: 'employees', values: people
 
       it "returns the receiver", ->
         expect(company.remove_many_values ["Bud"], from: 'employees').toBe company
