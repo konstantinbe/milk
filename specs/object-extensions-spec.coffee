@@ -87,7 +87,7 @@ describe "Milk.ObjectExtensions", ->
       method = -> console.log "I'm a method."
       expect({method: method}.responds_to 'method').toBe yes
 
-    it "returns no if object does not respond to a method (i.e. method does not exist)", ->
+    it "returns no if object does not respond to a method", ->
       method = -> console.log "I'm a method."
       expect({method: method}.responds_to 'not_existing_method').toBe no
 
@@ -169,7 +169,7 @@ describe "Milk.ObjectExtensions", ->
       expect(clone.keys()).toEqual ['name', 'age']
       expect(clone.values()).toEqual ["Peter", 45]
 
-    it "makes a shallow copy, i.e. does not copy objects recursively, just references them", ->
+    it "doesn't copy objects recursively, just references them", ->
       address = street: "Rhode-Island-Alley", city: "Karlsruhe"
       person = name: "Peter", age: 45, address: address
       clone = person.clone()
