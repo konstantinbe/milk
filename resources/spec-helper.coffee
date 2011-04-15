@@ -19,19 +19,40 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-# ------------------------------------------------------- custom matchers ------
-
-Matchers =
-  toBe_an_object: ->
-    @actual? and @actual instanceof Object
-
-beforeEach ->
-  @addMatchers Matchers
-
-# --------------------------------------------------------------- aliases ------
-
 context = describe
+spy_on = spyOn
+
+# ---------------------------------------- before- and after each aliases ------
 
 before_each = beforeEach
 after_each = afterEach
-spy_on = spyOn
+
+# ------------------------------------------------------ aliased matchers ------
+
+AliasedMatchers =
+  to_be: jasmine.Matchers.prototype.toBe
+  to_equal: jasmine.Matchers.prototype.toEqual
+  to_match: jasmine.Matchers.prototype.toMatch
+  to_be_defined: jasmine.Matchers.prototype.toBeDefined
+  to_be_undefined: jasmine.Matchers.prototype.toBeUndefined
+  to_be_null: jasmine.Matchers.prototype.toBeNull
+  to_be_truthy: jasmine.Matchers.prototype.toBeTruthy
+  to_be_falsy: jasmine.Matchers.prototype.toBeFalsy
+  to_have_been_called: jasmine.Matchers.prototype.toHaveBeenCalled
+  to_have_been_called_with: jasmine.Matchers.prototype.toHaveBeenCalledWith
+  to_contain: jasmine.Matchers.prototype.toContain
+  to_be_less_than: jasmine.Matchers.prototype.toBeLessThan
+  to_be_greater_than: jasmine.Matchers.prototype.toBeGreaterThan
+  to_throw: jasmine.Matchers.prototype.toThrow
+
+before_each ->
+  @addMatchers AliasedMatchers
+
+# ------------------------------------------------------- custom matchers ------
+
+CustomMatchers =
+  to_be_an_object: ->
+    @actual? and @actual instanceof Object
+
+before_each ->
+  @addMatchers CustomMatchers

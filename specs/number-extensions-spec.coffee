@@ -23,9 +23,9 @@ describe "Milk.NumberExtensions", ->
   describe "#clone()", ->
     it "returns a clone of the receiver", ->
       five = 5
-      expect(five.clone()).toEqual 5
+      expect(five.clone()).to_equal 5
 
     it "which is not the same instance", ->
       five = 5
       five.unique_five_instance = "Unique Five Instance"
-      expect(five.clone().unique_five_instance).toBe undefined
+      expect(five.clone().unique_five_instance).to_be undefined
