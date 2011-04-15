@@ -20,7 +20,7 @@
 # THE SOFTWARE.
 
 describe "Milk.NumberExtensions", ->
-  describe "#first([count])", ->
+  describe "#first()", ->
     it "returns the first character if |count| is not given", ->
       expect("123".first()).toBe '1'
       expect("".first()).toBe undefined
@@ -44,7 +44,7 @@ describe "Milk.NumberExtensions", ->
       it "returns a new string containing all except the first character", ->
         expect("123".rest()).toEqual "23"
 
-    describe "#last([count])", ->
+    describe "#last()", ->
       it "returns the last character if |count| is not given", ->
         expect("123".last()).toBe "3"
         expect("".last()).toBe undefined
@@ -120,40 +120,40 @@ describe "Milk.NumberExtensions", ->
       it "returns an array of strings by splitting the receiver at double new lines \\n\\n", ->
         expect("Hello\n\nWorld!".paragraphs()).toEqual ["Hello", "World!"]
 
-    describe "#prepend(strings...)", ->
+    describe "#prepend()", ->
       it "prepends one string", ->
         expect("World!".prepend "Hello ").toBe "Hello World!"
 
       it "appends many strings", ->
         expect("!".prepend "Hello", " ", "World").toBe "Hello World!"
 
-    describe "#append(strings...)", ->
+    describe "#append()", ->
       it "appends one string", ->
         expect("Hello ".append "World!").toBe "Hello World!"
 
       it "appends many strings", ->
         expect("Hello".append " ", "World", "!").toBe "Hello World!"
 
-    describe "#index_of(string)", ->
+    describe "#index_of()", ->
       it "returns the index of the first occurence of string", ->
         expect("Hello World!".index_of "l").toBe 2
 
-    describe "#last_index_of(string)", ->
+    describe "#last_index_of()", ->
       it "returns the index for the last occurence of string", ->
         expect("Hello World!".last_index_of "l").toBe 9
 
-    describe "#indexes_of(string)", ->
+    describe "#indexes_of()", ->
       it "returns an array of indexes for all occurences of the string", ->
         expect("Hello World!".indexes_of "l").toEqual [2, 3, 9]
 
-    describe "#begins_with(string)", ->
+    describe "#begins_with()", ->
       it "returns yes if receiver begins with string", ->
         expect("Hello World!".begins_with "Hello").toBe true
 
       it "returns no otherwise", ->
         expect("Hello World!".begins_with "Hellow").toBe false
 
-    describe "#ends_with(string)", ->
+    describe "#ends_with()", ->
       it "returns yes if receiver ends with string", ->
         expect("Hello World!".ends_with "World!").toBe true
 

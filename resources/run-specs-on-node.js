@@ -4,7 +4,7 @@
 
 /*globals global jasmine process */
 
-var verbose = false;
+var verbose = true;
 
 var jasmine = require('./jasmine/jasmine.js');
 

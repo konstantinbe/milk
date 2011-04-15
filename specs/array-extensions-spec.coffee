@@ -21,7 +21,7 @@
 
 describe "Milk.ArrayExtensions", ->
 
-  describe "#first([count])", ->
+  describe "#first()", ->
     it "returns the first element if |count| is not given", ->
       expect([1, 2, 3].first()).toBe 1
       expect([].first()).toBe undefined
@@ -45,7 +45,7 @@ describe "Milk.ArrayExtensions", ->
     it "returns a new array containing all except the first element", ->
       expect([1, 2, 3].rest()).toEqual [2, 3]
 
-  describe "#last([count])", ->
+  describe "#last()", ->
     it "returns the last element if |count| is not given", ->
       expect([1, 2, 3].last()).toBe 3
       expect([].last()).toBe undefined
@@ -88,7 +88,7 @@ describe "Milk.ArrayExtensions", ->
       array = [1, 2, 3]
       expect(array.reversed()).toEqual [3, 2, 1]
 
-  describe "#with(values...)", ->
+  describe "#with()", ->
     it "returns a new array without modifying the receiver", ->
       array = [1, 2, 3]
       expect(array.with 4).not.toBe array
@@ -103,7 +103,7 @@ describe "Milk.ArrayExtensions", ->
     it "adds nothing to the end if no value is given", ->
       expect([1, 2, 3].with()).toEqual [1, 2, 3]
 
-  describe "#with_many(collections...)", ->
+  describe "#with_many()", ->
     it "returns a new array without modifying the receiver", ->
       array = [1, 2, 3]
       expect(array.with_many [4]).not.toBe array
@@ -118,7 +118,7 @@ describe "Milk.ArrayExtensions", ->
     it "adds nothing to the end if no collection is given", ->
       expect([1, 2, 3].with_many()).toEqual [1, 2, 3]
 
-  describe "#without(values...)", ->
+  describe "#without()", ->
     it "returns a new array without modifying the receiver", ->
       array = [1, 2, 3]
       expect(array.without 3).not.toBe array
@@ -136,7 +136,7 @@ describe "Milk.ArrayExtensions", ->
     it "removes nothing if no value is given", ->
       expect([1, 2, 3].without()).toEqual [1, 2, 3]
 
-  describe "#without_many(collections...)", ->
+  describe "#without_many()", ->
     it "returns a new array without modifying the receiver", ->
       array = [1, 2, 3]
       expect(array.without_many [3]).not.toBe array
@@ -154,7 +154,7 @@ describe "Milk.ArrayExtensions", ->
     it "removes nothing if no collection is given", ->
       expect([1, 2, 3].without_many()).toEqual [1, 2, 3]
 
-  describe "#without_at(indexes...)", ->
+  describe "#without_at()", ->
     it "removes value at specified index", ->
       expect([1, 2, 3].remove_at 1).toEqual [1, 3]
 
@@ -173,7 +173,7 @@ describe "Milk.ArrayExtensions", ->
     it "removes all duplicates in an array", ->
       expect([1, 1, 1, 2, 2, 2, 3, 3, 3].unique()).toEqual [1, 2, 3]
 
-  describe "#intersect(array)", ->
+  describe "#intersect()", ->
     it "returns the intersection between the receiver and an array", ->
       expect([0, 1, 2, 3, 4, 5].intersect([1, 2, 3, 6])).toEqual [1, 2, 3]
 
@@ -183,7 +183,7 @@ describe "Milk.ArrayExtensions", ->
     it "removes duplicates", ->
       expect([1, 2, 2, 3, 3, 3].intersect([1, 2, 3])).toEqual [1, 2, 3]
 
-  describe "#unite(arrays...)", ->
+  describe "#unite()", ->
     it "returns a new array without modifying the receiver", ->
       array = [1, 2, 3]
       expect(array.unite [4, 5]).not.toBe array
@@ -198,7 +198,7 @@ describe "Milk.ArrayExtensions", ->
     it "removes duplicates after uniting all arrays", ->
       expect([1, 1, 2, 2, 3, 3].unite [4, 4], [5, 5, 6, 6]).toEqual [1, 2, 3, 4, 5, 6]
 
-  describe "#zip(arrays...)", ->
+  describe "#zip()", ->
     it "zips receiver with an array of the same length", ->
       expect([1, 2, 3].zip ['one', 'two', 'three']).toEqual [[1, 'one'], [2, 'two'], [3, 'three']]
 
@@ -208,7 +208,7 @@ describe "Milk.ArrayExtensions", ->
     it "fills up with undefined if arrays are of different length", ->
       expect([1, 2, 3].zip ['one', 'two'], ['uno']).toEqual [[1, 'one', 'uno'], [2, 'two', undefined], [3, undefined, undefined]]
 
-  describe "#index_of(value)", ->
+  describe "#index_of()", ->
     it "returns the index of value", ->
       expect([1, 2, 3].index_of 2).toBe 1
 
@@ -218,7 +218,7 @@ describe "Milk.ArrayExtensions", ->
     it "returns -1 if the value is not contained in the array", ->
       expect([1, 2, 3].index_of 4).toBe -1
 
-  describe "#last_index_of(value)", ->
+  describe "#last_index_of()", ->
     it "returns the index of value", ->
       expect([1, 2, 3].last_index_of 2).toBe 1
 
@@ -228,14 +228,14 @@ describe "Milk.ArrayExtensions", ->
     it "returns -1 if the value is not contained in the array", ->
       expect([1, 2, 3].last_index_of 4).toBe -1
 
-  describe "#indexes_of(value)", ->
+  describe "#indexes_of()", ->
     it "returns all indexes of a value", ->
       expect([1, 2, 3, 2, 4].indexes_of 2).toEqual [1, 3]
 
     it "returns empty array if the value is not contained in the array", ->
       expect([1, 2, 3].indexes_of 4).toEqual []
 
-  describe "#add(values...)", ->
+  describe "#add()", ->
     it "adds one value to the end", ->
       array = [1, 2, 3]
       array.add 4
@@ -255,7 +255,7 @@ describe "Milk.ArrayExtensions", ->
       array = [1, 2, 3]
       expect(array.add 4).toBe array
 
-  describe "#add_many(collections...)", ->
+  describe "#add_many()", ->
     it "adds all values from one collection to the end", ->
       array = [1, 2, 3]
       array.add_many [4, 5, 6]
@@ -275,7 +275,7 @@ describe "Milk.ArrayExtensions", ->
       array = [1, 2, 3]
       expect(array.add_many [4]).toBe array
 
-  describe "#insert(value, options = {})", ->
+  describe "#insert()", ->
     it "inserts the value at a specified index", ->
       array = [1, 2, 4]
       array.insert 3, at: 2
@@ -300,7 +300,7 @@ describe "Milk.ArrayExtensions", ->
       array = [1, 2, 3]
       expect(array.insert 4, at: 0).toBe array
 
-  describe "#insert_many(collection, options = {})", ->
+  describe "#insert_many()", ->
     it "inserts the collection at a specified index", ->
       array = [1, 2, 5]
       array.insert_many [3, 4], at: 2
@@ -315,7 +315,7 @@ describe "Milk.ArrayExtensions", ->
       array = [1, 2, 3]
       expect(array.insert_many [4], at: 0).toBe array
 
-  describe "#remove(values...)", ->
+  describe "#remove()", ->
     it "removes all occurences of one value", ->
       array = [1, 2, 3, 2]
       array.remove 2
@@ -335,7 +335,7 @@ describe "Milk.ArrayExtensions", ->
       array = [1, 2, 3]
       expect(array.remove 3).toBe array
 
-  describe "#remove_many(collections...)", ->
+  describe "#remove_many()", ->
     it "removes all occurences of all values from one collection", ->
       array = [1, 2, 3, 2]
       array.remove_many [2, 3]
@@ -360,7 +360,7 @@ describe "Milk.ArrayExtensions", ->
       array = [1, 2, 3]
       expect(array.remove_many [3]).toBe array
 
-  describe "#remove_at(indexes...)", ->
+  describe "#remove_at()", ->
     it "removes value at specified index", ->
       array = [1, 2, 3]
       array.remove_at 1
@@ -380,7 +380,7 @@ describe "Milk.ArrayExtensions", ->
       array = [1, 2, 3]
       expect(array.remove_at 0).toBe array
 
-  describe "#replace(value, options = {})", ->
+  describe "#replace()", ->
     it "replaces value with value", ->
       array = [1, 4, 3]
       array.replace 4, with: 2
@@ -390,7 +390,7 @@ describe "Milk.ArrayExtensions", ->
       array = [1, 2, 3]
       expect(array.replace 1, with: 5).toBe array
 
-  describe "#replace_at(index, options = {})", ->
+  describe "#replace_at()", ->
     it "replaces value at index with value", ->
       array = [1, 4, 3]
       array.replace_at 1, with: 2
@@ -405,7 +405,7 @@ describe "Milk.ArrayExtensions", ->
       array = [1, 2, 3]
       expect(array.replace_at 0, with: 5).toBe array
 
-  describe "#sort_by(compare)", ->
+  describe "#sort_by()", ->
     peter = name: "Peter", age: 23
     maxim = name: "Maxim", age: 40
     jessi = name: "Jessi", age: 54
@@ -439,7 +439,7 @@ describe "Milk.ArrayExtensions", ->
       expect(clone).not.toBe array
       expect(clone).toEqual array
 
-  describe "#equals(array)", ->
+  describe "#equals()", ->
     it "returns true for an array with the same values", ->
       expect([1, 2, 3].equals [1, 2, 3]).toBe true
 

@@ -20,14 +20,14 @@
 # THE SOFTWARE.
 
 describe "Milk.ObjectExtensions", ->
-  xdescribe "#get(key)", ->
+  xdescribe "#get()", ->
     it "returns value for key", ->
       expect({name: "Peter"}.get 'name').toBe "Peter"
 
     it "throws if no value for key exists", ->
       expect(-> {name: "Peter"}.get 'city').toThrow()
 
-  xdescribe "#set(key, value)", ->
+  xdescribe "#set()", ->
     it "sets value for key", ->
       person = name: "Peter"
       person.set 'name', "Peter Pan"
@@ -82,7 +82,7 @@ describe "Milk.ObjectExtensions", ->
     it "returns an empty array if the object is empty", ->
       expect({}.keys()).toEqual []
 
-  describe "#responds_to(method)", ->
+  describe "#responds_to()", ->
     it "returns yes if object responds to a method", ->
       method = -> console.log "I'm a method."
       expect({method: method}.responds_to 'method').toBe yes
@@ -131,35 +131,35 @@ describe "Milk.ObjectExtensions", ->
       person.freeze()
       expect(person.is_frozen()).toBe true
 
-  describe "#is_function(value)", ->
+  describe "#is_function()", ->
     it "returns yes if receiver is a function", ->
       expect((->).is_function()).toBe true
 
-  describe "#is_string(value)", ->
+  describe "#is_string()", ->
     it "returns yes if receiver is a string", ->
       expect("".is_string()).toBe true
 
-  describe "#is_boolean(value)", ->
+  describe "#is_boolean()", ->
     it "returns yes if receiver is a boolean", ->
       expect(yes.is_boolean()).toBe true
 
-  describe "#is_number(value)", ->
+  describe "#is_number()", ->
     it "returns yes if receiver is a number", ->
       expect(1.is_number()).toBe true
 
-  describe "#is_array(value)", ->
+  describe "#is_array()", ->
     it "returns yes if receiver is an array", ->
       expect([].is_array()).toBe true
 
-  describe "#is_date(value)", ->
+  describe "#is_date()", ->
     it "returns yes if receiver is a date", ->
       expect((new Date()).is_date()).toBe true
 
-  describe "#is_reg_exp(value)", ->
+  describe "#is_reg_exp()", ->
     it "returns yes if receiver is a regular expression", ->
       expect(//.is_reg_exp()).toBe true
 
-  describe "#clone(options = {})", ->
+  describe "#clone()", ->
     it "returns a new object", ->
       expect({}.clone()).toBe_an_object()
 
@@ -175,7 +175,7 @@ describe "Milk.ObjectExtensions", ->
       clone = person.clone()
       expect(clone.address).toBe address
 
-  describe "#equals(object)", ->
+  describe "#equals()", ->
     it "returns yes if object is the same", ->
       person = name: "Peter"
       expect(person.equals person).toBe true
@@ -185,7 +185,7 @@ describe "Milk.ObjectExtensions", ->
       expect(person.equals name: "Peter").toBe false
 
   describe "key-value coding accessor methods", ->
-    describe "#value_for(key, options = {})", ->
+    describe "#value_for()", ->
       it "returns the value for the given key of an object", ->
         expect({name: "Rick"}.value_for 'name').toBe "Rick"
 
@@ -206,7 +206,7 @@ describe "Milk.ObjectExtensions", ->
         expect(person.value_for 'name').toBe "Rick"
         expect(person.did_access_value_for).toHaveBeenCalled()
 
-    describe "#set_value(value, options = {})", ->
+    describe "#set_value()", ->
       it "sets the value for the given key of an object", ->
         person = name: 'Unknown'
         person.set_value "Rick", for: 'name'
@@ -232,54 +232,54 @@ describe "Milk.ObjectExtensions", ->
         expect(person.did_change_value_for).toHaveBeenCalled()
 
   describe "key-value coding change notification methods", ->
-    describe "#will_access_value_for(key, options = {})", ->
+    describe "#will_access_value_for()", ->
       it "returns itself", ->
         object = {}
         expect(object.will_access_value_for 'test').toBe object
 
-    describe "#did_access_value_for(key, options = {})", ->
+    describe "#did_access_value_for()", ->
       it "returns itself", ->
         object = {}
         expect(object.did_access_value_for 'test').toBe object
 
-    describe "#will_change_value_for(key, options = {})", ->
+    describe "#will_change_value_for()", ->
       it "returns itself", ->
         object = {}
         expect(object.will_change_value_for 'test').toBe object
 
-    describe "#did_change_value_for(key, options = {})", ->
+    describe "#did_change_value_for()", ->
       it "returns itself", ->
         object = {}
         expect(object.did_change_value_for 'test').toBe object
 
-    describe "#will_insert_values_into(key, options = {})", ->
+    describe "#will_insert_values_into()", ->
       it "returns itself", ->
         object = {}
         expect(object.will_insert_values []).toBe object
 
-    describe "#did_insert_values_into(key, options = {})", ->
+    describe "#did_insert_values_into()", ->
       it "returns itself", ->
         object = {}
         expect(object.did_insert_values []).toBe object
 
-    describe "#will_remove_values_from(key, options = {})", ->
+    describe "#will_remove_values_from()", ->
       it "returns itself", ->
         object = {}
         expect(object.will_remove_values []).toBe object
 
-    describe "#did_remove_values_from(key, options = {})", ->
+    describe "#did_remove_values_from()", ->
       it "returns itself", ->
         object = {}
         expect(object.did_remove_values []).toBe object
 
-  describe "#has(name, options = {})", ->
+  describe "#has()", ->
     # TODO: describe.
 
   describe "generic to-many relationship accessor methods", ->
     company = null
     beforeEach -> company = employees: ["Ashton", "Bud"]
 
-    describe "#add_many_values(values, options = {})", ->
+    describe "#add_many_values()", ->
       it "adds many values to the end of a to-many relationship", ->
         company.add_many_values ["Cyndia", "Didi"], to: 'employees'
         expect(company.employees).toEqual ["Ashton", "Bud", "Cyndia", "Didi"]
@@ -293,7 +293,7 @@ describe "Milk.ObjectExtensions", ->
       it "returns the receiver", ->
         expect(company.add_many_values ["Cyndia", "Didi"], to: 'employees').toBe company
 
-    describe "#remove_many_values(values, options = {})", ->
+    describe "#remove_many_values()", ->
       it "removes many values from a to-many relationship", ->
         company.remove_many_values ["Ashton", "Bud"], from: 'employees'
         expect(company.employees).toEqual []
@@ -307,7 +307,7 @@ describe "Milk.ObjectExtensions", ->
       it "returns the receiver", ->
         expect(company.remove_many_values ["Bud"], from: 'employees').toBe company
 
-    describe "#insert_many_values(values, options = {})", ->
+    describe "#insert_many_values()", ->
       it "inserts many values into a to-many relationship at a specified index", ->
         company.insert_many_values ["Cyndia", "Didi"], into: 'employees', at: 2
         expect(company.employees).toEqual ["Ashton", "Bud", "Cyndia", "Didi"]
@@ -327,7 +327,7 @@ describe "Milk.ObjectExtensions", ->
         company.insert_many_values people, into: 'employees', at: 2
         expect(company.did_insert_values).toHaveBeenCalledWith people, into: 'employees', at: 2
 
-    describe "#remove_many_values_at(indexes, options = {})", ->
+    describe "#remove_many_values_at()", ->
       it "removes many values at specified indexes from a to-many relationship", ->
         company.remove_many_values_at [0, 1], from: 'employees'
         expect(company.employees).toEqual []
