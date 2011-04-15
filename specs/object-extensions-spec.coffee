@@ -341,4 +341,6 @@ describe "Milk.ObjectExtensions", ->
         expect(company.will_remove_values).toHaveBeenCalledWith ["Ashton", "Bud"], from: 'employees', at: [0, 1]
 
       it "calls #did_remove_values() after removing the values", ->
-        # TODO: specify.
+        spyOn(company, 'did_remove_values')
+        company.remove_many_values_at [0, 1], from: 'employees'
+        expect(company.did_remove_values).toHaveBeenCalledWith ["Ashton", "Bud"], from: 'employees', at: [0, 1]
