@@ -4,7 +4,7 @@
 
 /*globals global jasmine process */
 
-var verbose = true;
+var verbose = false;
 
 var jasmine = require('./jasmine/jasmine.js');
 
@@ -159,7 +159,7 @@ jasmine.CommandLineReporter.prototype.reportSpecResults = function(spec) {
 
     if (verbose) {
         if (!spec.printed) {
-            printLine(indentation + "- " + spec.description + (passed ? "" : stylize(" FAILED", 'red')));
+            printLine(indentation + spec.description + (passed ? "" : stylize(" FAILED", 'red')));
             spec.printed = true;
         }
 
