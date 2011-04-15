@@ -66,7 +66,7 @@ describe "Milk.NumberExtensions", ->
       it "also works with control characters", ->
         expect("Hello World!\n".characters()).toEqual ["H", "e", "l", "l", "o", " ", "W", "o", "r", "l", "d", "!", "\n"]
 
-    describe "codes", ->
+    describe "codes()", ->
       it "returns an array", ->
         expect("".codes()).toEqual []
 
@@ -124,7 +124,7 @@ describe "Milk.NumberExtensions", ->
       it "prepends one string", ->
         expect("World!".prepend "Hello ").toBe "Hello World!"
 
-      it "appends many strings", ->
+      it "prepends many strings", ->
         expect("!".prepend "Hello", " ", "World").toBe "Hello World!"
 
     describe "#append()", ->
@@ -135,11 +135,11 @@ describe "Milk.NumberExtensions", ->
         expect("Hello".append " ", "World", "!").toBe "Hello World!"
 
     describe "#index_of()", ->
-      it "returns the index of the first occurence of string", ->
+      it "returns the index of the first occurence of a string", ->
         expect("Hello World!".index_of "l").toBe 2
 
     describe "#last_index_of()", ->
-      it "returns the index for the last occurence of string", ->
+      it "returns the index for the last occurence of a string", ->
         expect("Hello World!".last_index_of "l").toBe 9
 
     describe "#indexes_of()", ->
@@ -147,14 +147,14 @@ describe "Milk.NumberExtensions", ->
         expect("Hello World!".indexes_of "l").toEqual [2, 3, 9]
 
     describe "#begins_with()", ->
-      it "returns yes if receiver begins with string", ->
+      it "returns yes if receiver begins with a string", ->
         expect("Hello World!".begins_with "Hello").toBe true
 
       it "returns no otherwise", ->
         expect("Hello World!".begins_with "Hellow").toBe false
 
     describe "#ends_with()", ->
-      it "returns yes if receiver ends with string", ->
+      it "returns yes if receiver ends with a string", ->
         expect("Hello World!".ends_with "World!").toBe true
 
       it "returns no otherwise", ->
@@ -196,53 +196,53 @@ describe "Milk.NumberExtensions", ->
       expect('\.+*?[^]$(){}=!<>|:'.escaped for: 'reg_exp').toBe '\\.\\+\\*\\?\\[\\^\\]\\$\\(\\)\\{\\}\\=\\!\\<\\>\\|\\:'
 
     describe "#pluralized()", ->
-      it "standard pluralization", ->
+      it "performs standard pluralization", ->
         expect('Goat'.pluralized()).toBe 'Goats'
 
-      it "standard pluralization of a multi-word string", ->
+      it "performs standard pluralization of a multi-word string", ->
         expect('There are many goat'.pluralized()).toBe 'There are many goats'
 
-      it "non-standard pluralization", ->
+      it "performs non-standard pluralization", ->
         expect('Bunny'.pluralized()).toBe 'Bunnies'
 
-      it "non-standard pluralization of a multi-word string", ->
+      it "performs non-standard pluralization of a multi-word string", ->
         expect('I like bunny'.pluralized()).toBe 'I like bunnies'
 
-      it "irregular pluralization", ->
+      it "performs irregular pluralization", ->
         expect('child'.pluralized()).toBe 'children'
 
-      it "irregular pluralization of a multi-word string", ->
+      it "performs irregular pluralization of a multi-word string", ->
         expect('I have three child'.pluralized()).toBe 'I have three children'
 
-      it "uncountable pluralization", ->
+      it "performs uncountable pluralization", ->
         expect('sheep'.pluralized()).toBe 'sheep'
 
-      it "uncountable pluralization of a multi-word string", ->
+      it "performs uncountable pluralization of a multi-word string", ->
         expect('Please hold this sheep'.pluralized()).toBe 'Please hold this sheep'
 
     describe "#singularized()", ->
-      it "standard singularization", ->
+      it "performs standard singularization", ->
         expect('Vegetables'.singularized()).toBe 'Vegetable'
 
-      it "standard singularization of a multi-word string", ->
+      it "performs standard singularization of a multi-word string", ->
         expect('Broccoli is a vegetables'.singularized()).toBe 'Broccoli is a vegetable'
 
-      it "non-standard singularization", ->
+      it "performs non-standard singularization", ->
         expect('Properties'.singularized()).toBe 'Property'
 
-      it "non-standard singularization of a multi-word string", ->
+      it "performs non-standard singularization of a multi-word string", ->
         expect('Buy a properties'.singularized()).toBe 'Buy a property'
 
-      it "irregular singularization", ->
+      it "performs irregular singularization", ->
         expect('people'.singularized()).toBe 'person'
 
-      it "irregular singularization of a multi-word string", ->
+      it "performs irregular singularization of a multi-word string", ->
         expect('The Village People'.singularized()).toBe 'The Village Person'
 
-      it "uncountable singularization", ->
+      it "performs uncountable singularization", ->
         expect('money'.singularized()).toBe 'money'
 
-      it "uncountable singularization of a multi-word string", ->
+      it "performs uncountable singularization of a multi-word string", ->
         expect('Gotta git da money'.singularized()).toBe 'Gotta git da money'
 
     describe "#normalized()", ->
