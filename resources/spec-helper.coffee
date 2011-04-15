@@ -19,6 +19,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+# ------------------------------------------------------- custom matchers ------
+
 Matchers =
   toBe_an_object: ->
     @actual? and @actual instanceof Object
@@ -26,4 +28,10 @@ Matchers =
 beforeEach ->
   @addMatchers Matchers
 
+# --------------------------------------------------------------- aliases ------
+
 context = describe
+
+before_each = beforeEach
+after_each = afterEach
+spy_on = spyOn

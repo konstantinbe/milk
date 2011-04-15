@@ -202,7 +202,7 @@ describe "Milk.ObjectExtensions", ->
 
       it "calls did_access_value_for() after accessing the value", ->
         person = name: "Rick"
-        spyOn person, 'did_access_value_for'
+        spy_on person, 'did_access_value_for'
         expect(person.value_for 'name').toBe "Rick"
         expect(person.did_access_value_for).toHaveBeenCalled()
 
@@ -227,7 +227,7 @@ describe "Milk.ObjectExtensions", ->
 
       it "calls did_change_value_for() after changing the value", ->
         person = name: null
-        spyOn person, 'did_change_value_for'
+        spy_on person, 'did_change_value_for'
         person.set_value 'Rick', for: 'name'
         expect(person.did_change_value_for).toHaveBeenCalled()
 
@@ -277,7 +277,7 @@ describe "Milk.ObjectExtensions", ->
 
   describe "generic to-many relationship accessor methods", ->
     company = null
-    beforeEach -> company = employees: ["Ashton", "Bud"]
+    before_each -> company = employees: ["Ashton", "Bud"]
 
     describe "#add_many_values()", ->
       it "adds many values to the end of a to-many relationship", ->
@@ -285,7 +285,7 @@ describe "Milk.ObjectExtensions", ->
         expect(company.employees).toEqual ["Ashton", "Bud", "Cyndia", "Didi"]
 
       it "forwards to insert_many_values() method", ->
-        spyOn(company, 'insert_many_values')
+        spy_on(company, 'insert_many_values')
         people = ["Cyndia", "Didi"]
         company.add_many_values people, to: 'employees'
         expect(company.insert_many_values).toHaveBeenCalledWith people, into: 'employees', at: 2
@@ -299,7 +299,7 @@ describe "Milk.ObjectExtensions", ->
         expect(company.employees).toEqual []
 
       it "forwards to remove_many_values_at() method", ->
-        spyOn(company, 'remove_many_values_at')
+        spy_on(company, 'remove_many_values_at')
         people = ["Ashton", "Bud"]
         company.remove_many_values people, from: 'employees'
         expect(company.remove_many_values_at).toHaveBeenCalledWith [0, 1], from: 'employees', passed_through_values: people
@@ -316,13 +316,13 @@ describe "Milk.ObjectExtensions", ->
         expect(company.insert_many_values ["Cyndia", "Didi"], into: 'employees', at: 2).toBe company
 
       it "calls #will_insert_many_values() before inserting the values", ->
-        spyOn(company, 'will_insert_many_values')
+        spy_on(company, 'will_insert_many_values')
         people = ["Cyndia", "Didi"]
         company.insert_many_values people, into: 'employees', at: 2
         expect(company.will_insert_many_values).toHaveBeenCalledWith people, into: 'employees', at: 2
 
       it "calls #did_insert_many_values() after inserting the values", ->
-        spyOn(company, 'did_insert_many_values')
+        spy_on(company, 'did_insert_many_values')
         people = ["Cyndia", "Didi"]
         company.insert_many_values people, into: 'employees', at: 2
         expect(company.did_insert_many_values).toHaveBeenCalledWith people, into: 'employees', at: 2
@@ -336,11 +336,11 @@ describe "Milk.ObjectExtensions", ->
         expect(company.remove_many_values_at [0, 1], from: 'employees').toBe company
 
       it "calls #will_remove_many_values() before removing the values", ->
-        spyOn(company, 'will_remove_many_values')
+        spy_on(company, 'will_remove_many_values')
         company.remove_many_values_at [0, 1], from: 'employees'
         expect(company.will_remove_many_values).toHaveBeenCalledWith ["Ashton", "Bud"], from: 'employees', at: [0, 1]
 
       it "calls #did_remove_many_values() after removing the values", ->
-        spyOn(company, 'did_remove_many_values')
+        spy_on(company, 'did_remove_many_values')
         company.remove_many_values_at [0, 1], from: 'employees'
         expect(company.did_remove_many_values).toHaveBeenCalledWith ["Ashton", "Bud"], from: 'employees', at: [0, 1]
