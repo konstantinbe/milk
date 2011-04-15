@@ -80,7 +80,7 @@ describe "Milk.Enumerable", ->
       expect([].min()).toBe Infinity
 
   describe "#group_by()", ->
-    describe "when a key is passed", ->
+    context "when a key is passed", ->
       it "returns a hash containing groups using the value of object's properties as keys", ->
         peter = name: "Peter"
         maxim = name: "Maxim"
@@ -92,7 +92,7 @@ describe "Milk.Enumerable", ->
         expect(groups["Maxim"]).toEqual [maxim]
         expect(groups["Inna"]).toEqual [inna1, inna2]
 
-    describe "when a block is passed", ->
+    context "when a block is passed", ->
       it "returns a hash containing groups using the results of the block as keys", ->
         groups = [0, 1, 2, 3, 4, 5].group_by (value) -> if value % 2 == 0 then "even" else "odd"
         expect(groups["odd"]).toEqual [1, 3, 5]

@@ -82,7 +82,7 @@ describe "Milk.Comparable", ->
         it "returns true if receiver == upper == lower", ->
           expect(5.is_between 5, 5).toBe true
 
-      describe "when options exclude_bounds is set to yes", ->
+      context "when options exclude_bounds is set to yes", ->
         it "returns true if receiver is between lower and upper bound", ->
           expect(5.is_between 4, 6, exclude_bounds: yes).toBe true
 
