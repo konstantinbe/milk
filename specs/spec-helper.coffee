@@ -25,3 +25,5 @@ Matchers =
 
 beforeEach ->
   @addMatchers Matchers
+
+context = describe
