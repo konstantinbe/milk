@@ -20,7 +20,7 @@
 # THE SOFTWARE.
 
 describe "Milk.NumberExtensions", ->
-  describe "#clone", ->
+  describe "#clone()", ->
     it "returns a clone of the receiver", ->
       five = 5
       expect(five.clone()).toEqual 5

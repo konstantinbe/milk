@@ -20,7 +20,7 @@
 # THE SOFTWARE.
 
 describe "Milk.NumberExtensions", ->
-  describe "#first", ->
+  describe "#first()", ->
     it "returns the first character if |count| is not given", ->
       expect("123".first()).toBe '1'
       expect("".first()).toBe undefined
@@ -32,19 +32,19 @@ describe "Milk.NumberExtensions", ->
       expect("123".first 3).toEqual "123"
       expect("123".first 10).toEqual "123"
 
-    describe "#second", ->
+    describe "#second()", ->
       it "returns the second character", ->
         expect("123".second()).toBe "2"
 
-    describe "#third", ->
+    describe "#third()", ->
       it "returns the third character", ->
         expect("123".third()).toBe "3"
 
-    describe "#rest", ->
+    describe "#rest()", ->
       it "returns a new string containing all except the first character", ->
         expect("123".rest()).toEqual "23"
 
-    describe "#last", ->
+    describe "#last()", ->
       it "returns the last character if |count| is not given", ->
         expect("123".last()).toBe "3"
         expect("".last()).toBe undefined
@@ -56,7 +56,7 @@ describe "Milk.NumberExtensions", ->
         expect("123".last 3).toEqual "123"
         expect("123".last 10).toEqual "123"
 
-    describe "#characters", ->
+    describe "#characters()", ->
       it "returns an array", ->
         expect("".characters()).toEqual []
 
@@ -76,7 +76,7 @@ describe "Milk.NumberExtensions", ->
       it "also works with control characters", ->
         expect("Hello World!\n".codes()).toEqual [72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33, 10]
 
-    describe "#words", ->
+    describe "#words()", ->
       it "splits a string into words", ->
         expect("HTML5 is great".words()).toEqual ["HTML5", "is", "great"]
 
@@ -106,7 +106,7 @@ describe "Milk.NumberExtensions", ->
         expect("RegularHTMLReader".words()).toEqual ["Regular", "HTML", "Reader"]
         expect("RegularHTML5Reader".words()).toEqual ["Regular", "HTML5", "Reader"]
 
-    describe "#lines", ->
+    describe "#lines()", ->
       it "returns an array of strings by splitting the receiver at \\n", ->
         expect("Hello\nWorld!".lines()).toEqual ["Hello", "World!"]
 
@@ -116,86 +116,86 @@ describe "Milk.NumberExtensions", ->
       it "returns an array with one empty string if the string is empty", ->
         expect("".lines()).toEqual [""]
 
-    describe "#paragraphs", ->
+    describe "#paragraphs()", ->
       it "returns an array of strings by splitting the receiver at double new lines \\n\\n", ->
         expect("Hello\n\nWorld!".paragraphs()).toEqual ["Hello", "World!"]
 
-    describe "#prepend", ->
+    describe "#prepend()", ->
       it "prepends one string", ->
         expect("World!".prepend "Hello ").toBe "Hello World!"
 
       it "appends many strings", ->
         expect("!".prepend "Hello", " ", "World").toBe "Hello World!"
 
-    describe "#append", ->
+    describe "#append()", ->
       it "appends one string", ->
         expect("Hello ".append "World!").toBe "Hello World!"
 
       it "appends many strings", ->
         expect("Hello".append " ", "World", "!").toBe "Hello World!"
 
-    describe "#index_of", ->
+    describe "#index_of()", ->
       it "returns the index of the first occurence of string", ->
         expect("Hello World!".index_of "l").toBe 2
 
-    describe "#last_index_of", ->
+    describe "#last_index_of()", ->
       it "returns the index for the last occurence of string", ->
         expect("Hello World!".last_index_of "l").toBe 9
 
-    describe "#indexes_of", ->
+    describe "#indexes_of()", ->
       it "returns an array of indexes for all occurences of the string", ->
         expect("Hello World!".indexes_of "l").toEqual [2, 3, 9]
 
-    describe "#begins_with", ->
+    describe "#begins_with()", ->
       it "returns yes if receiver begins with string", ->
         expect("Hello World!".begins_with "Hello").toBe true
 
       it "returns no otherwise", ->
         expect("Hello World!".begins_with "Hellow").toBe false
 
-    describe "#ends_with", ->
+    describe "#ends_with()", ->
       it "returns yes if receiver ends with string", ->
         expect("Hello World!".ends_with "World!").toBe true
 
       it "returns no otherwise", ->
         expect("Hello World!".ends_with "World").toBe false
 
-    describe "#uppercased", ->
+    describe "#uppercased()", ->
       it "returns an uppercased copy of the string", ->
         expect("Hello World!".uppercased()).toBe "HELLO WORLD!"
 
-    describe "#lowercased", ->
+    describe "#lowercased()", ->
       it "returns a lowercased copy of the string", ->
         expect("Hello World!".lowercased()).toBe "hello world!"
 
-    describe "#capitalized", ->
+    describe "#capitalized()", ->
       it "returns a copy of the string with the first letter uppercased and all other letters lowercased", ->
         expect("hello World!".capitalized()).toBe "Hello world!"
 
-    describe "#underscorized", ->
+    describe "#underscorized()", ->
       it "splits into words and concatenates with underscores while lowercasing everything", ->
         expect("Hello World!".underscorized()).toBe "hello_world"
 
-    describe "#dasherized", ->
+    describe "#dasherized()", ->
       it "splits into words and concatenates with dashes while lowercasing everything", ->
         expect("Hello World!".dasherized()).toBe "hello-world"
 
-    describe "#camelized", ->
+    describe "#camelized()", ->
       it "splits into words and concatenates with by capitalizing every word", ->
         expect("hello World!".camelized()).toBe "HelloWorld"
 
-    describe "#titleized", ->
+    describe "#titleized()", ->
       it "extracts words and capitalizes every word unless it's insignificant", ->
         expect("Konstantin's macbook pro is Awesome.".titleized()).toBe "Konstantins Macbook Pro is Awesome"
 
-    describe "#humanized", ->
+    describe "#humanized()", ->
       it "extracts words, makes them all lowercased except the first word", ->
         expect("Konstantin's-macbook_pro$is#Awesome.".humanized()).toBe "Konstantins macbook pro is awesome"
 
-    describe "#escaped", ->
+    describe "#escaped()", ->
       expect('\.+*?[^]$(){}=!<>|:'.escaped for: 'reg_exp').toBe '\\.\\+\\*\\?\\[\\^\\]\\$\\(\\)\\{\\}\\=\\!\\<\\>\\|\\:'
 
-    describe "#pluralized", ->
+    describe "#pluralized()", ->
       it "standard pluralization", ->
         expect('Goat'.pluralized()).toBe 'Goats'
 
@@ -220,7 +220,7 @@ describe "Milk.NumberExtensions", ->
       it "uncountable pluralization of a multi-word string", ->
         expect('Please hold this sheep'.pluralized()).toBe 'Please hold this sheep'
 
-    describe "#singularized", ->
+    describe "#singularized()", ->
       it "standard singularization", ->
         expect('Vegetables'.singularized()).toBe 'Vegetable'
 
@@ -245,13 +245,13 @@ describe "Milk.NumberExtensions", ->
       it "uncountable singularization of a multi-word string", ->
         expect('Gotta git da money'.singularized()).toBe 'Gotta git da money'
 
-    describe "#normalized", ->
+    describe "#normalized()", ->
       it "converts characters with diactrics to normal characters", ->
         string = "ÀÁÂÃÄÅĀĂĄǍǞǠǺȀȂȦḀẠẢẤẦẨẪẬẮẰẲẴẶÅḂḄḆÇĆĈĊČḈĎḊḌḎḐḒÈÉÊËĒĔĖĘĚȄȆȨḔḖḘḚḜẸẺẼẾỀỂỄỆḞĜĞĠĢǦǴḠĤȞḢḤḦḨḪÌÍÎÏĨĪĬĮİǏȈȊḬḮỈỊĴĶǨḰḲḴĹĻĽḶḸḺḼḾṀṂÑŃŅŇǸṄṆṈṊÒÓÔÕÖŌŎŐƠǑǪǬȌȎȪȬȮȰṌṎṐṒỌỎỐỒỔỖỘỚỜỞỠỢṔṖŔŖŘȐȒṘṚṜṞŚŜŞŠȘṠṢṤṦṨŢŤȚṪṬṮṰÙÚÛÜŨŪŬŮŰŲƯǓǕǗǙǛȔȖṲṴṶṸṺỤỦỨỪỬỮỰṼṾŴẀẂẄẆẈẊẌÝŶŸȲẎỲỴỶỸŹŻŽẐẒẔ`àáâãäåāăąǎǟǡǻȁȃȧḁạảấầẩẫậắằẳẵặḃḅḇçćĉċčḉďḋḍḏḑḓèéêëēĕėęěȅȇȩḕḗḙḛḝẹẻẽếềểễệḟĝğġģǧǵḡĥȟḣḥḧḩḫẖìíîïĩīĭįǐȉȋḭḯỉịĵǰķǩḱḳḵĺļľḷḹḻḽḿṁṃñńņňǹṅṇṉṋòóôõöōŏőơǒǫǭȍȏȫȭȯȱṍṏṑṓọỏốồổỗộớờởỡợṕṗŕŗřȑȓṙṛṝṟśŝşšșṡṣṥṧṩţťțṫṭṯṱẗùúûüũūŭůűųưǔǖǘǚǜȕȗṳṵṷṹṻụủứừửữựṽṿŵẁẃẅẇẉẘẋẍýÿŷȳẏẙỳỵỷỹźżžẑẓẕ"
         normalized = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBCCCCCCDDDDDDEEEEEEEEEEEEEEEEEEEEEEEEEFGGGGGGGHHHHHHHIIIIIIIIIIIIIIIIJKKKKKLLLLLLLMMMNNNNNNNNNOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOPPRRRRRRRRRSSSSSSSSSSTTTTTTTUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUVVWWWWWWXXYYYYYYYYYZZZZZZ`aaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbccccccddddddeeeeeeeeeeeeeeeeeeeeeeeeefggggggghhhhhhhhiiiiiiiiiiiiiiijjkkkkklllllllmmmnnnnnnnnnoooooooooooooooooooooooooooooooooopprrrrrrrrrssssssssssttttttttuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuvvwwwwwwwxxyyyyyyyyyyzzzzzz"
         expect(string.normalized()).toBe normalized
 
-    describe "#clone", ->
+    describe "#clone()", ->
       it "returns a clone of the receiver", ->
         string = "String"
         expect(string.clone()).toEqual "String"
