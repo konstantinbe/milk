@@ -252,25 +252,25 @@ describe "Milk.ObjectExtensions", ->
         object = {}
         expect(object.did_change_value_for 'test').toBe object
 
-    describe "#will_insert_values_into()", ->
+    describe "#will_insert_many_values_into()", ->
       it "returns itself", ->
         object = {}
-        expect(object.will_insert_values []).toBe object
+        expect(object.will_insert_many_values []).toBe object
 
-    describe "#did_insert_values_into()", ->
+    describe "#did_insert_many_values_into()", ->
       it "returns itself", ->
         object = {}
-        expect(object.did_insert_values []).toBe object
+        expect(object.did_insert_many_values []).toBe object
 
-    describe "#will_remove_values_from()", ->
+    describe "#will_remove_many_values_from()", ->
       it "returns itself", ->
         object = {}
-        expect(object.will_remove_values []).toBe object
+        expect(object.will_remove_many_values []).toBe object
 
-    describe "#did_remove_values_from()", ->
+    describe "#did_remove_many_values_from()", ->
       it "returns itself", ->
         object = {}
-        expect(object.did_remove_values []).toBe object
+        expect(object.did_remove_many_values []).toBe object
 
   describe "#has()", ->
     # TODO: describe.
@@ -315,17 +315,17 @@ describe "Milk.ObjectExtensions", ->
       it "returns the receiver", ->
         expect(company.insert_many_values ["Cyndia", "Didi"], into: 'employees', at: 2).toBe company
 
-      it "calls #will_insert_values() before inserting the values", ->
-        spyOn(company, 'will_insert_values')
+      it "calls #will_insert_many_values() before inserting the values", ->
+        spyOn(company, 'will_insert_many_values')
         people = ["Cyndia", "Didi"]
         company.insert_many_values people, into: 'employees', at: 2
-        expect(company.will_insert_values).toHaveBeenCalledWith people, into: 'employees', at: 2
+        expect(company.will_insert_many_values).toHaveBeenCalledWith people, into: 'employees', at: 2
 
-      it "calls #did_insert_values() after inserting the values", ->
-        spyOn(company, 'did_insert_values')
+      it "calls #did_insert_many_values() after inserting the values", ->
+        spyOn(company, 'did_insert_many_values')
         people = ["Cyndia", "Didi"]
         company.insert_many_values people, into: 'employees', at: 2
-        expect(company.did_insert_values).toHaveBeenCalledWith people, into: 'employees', at: 2
+        expect(company.did_insert_many_values).toHaveBeenCalledWith people, into: 'employees', at: 2
 
     describe "#remove_many_values_at()", ->
       it "removes many values at specified indexes from a to-many relationship", ->
@@ -335,12 +335,12 @@ describe "Milk.ObjectExtensions", ->
       it "returns the receiver", ->
         expect(company.remove_many_values_at [0, 1], from: 'employees').toBe company
 
-      it "calls #will_remove_values() before removing the values", ->
-        spyOn(company, 'will_remove_values')
+      it "calls #will_remove_many_values() before removing the values", ->
+        spyOn(company, 'will_remove_many_values')
         company.remove_many_values_at [0, 1], from: 'employees'
-        expect(company.will_remove_values).toHaveBeenCalledWith ["Ashton", "Bud"], from: 'employees', at: [0, 1]
+        expect(company.will_remove_many_values).toHaveBeenCalledWith ["Ashton", "Bud"], from: 'employees', at: [0, 1]
 
-      it "calls #did_remove_values() after removing the values", ->
-        spyOn(company, 'did_remove_values')
+      it "calls #did_remove_many_values() after removing the values", ->
+        spyOn(company, 'did_remove_many_values')
         company.remove_many_values_at [0, 1], from: 'employees'
-        expect(company.did_remove_values).toHaveBeenCalledWith ["Ashton", "Bud"], from: 'employees', at: [0, 1]
+        expect(company.did_remove_many_values).toHaveBeenCalledWith ["Ashton", "Bud"], from: 'employees', at: [0, 1]

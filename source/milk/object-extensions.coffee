@@ -186,16 +186,16 @@ ObjectExtensions =
   did_change_value_for: (key, options = {}) ->
     @ # do nothing for now, will be used later for key-value observing.
 
-  will_insert_values: (key, options = {}) ->
+  will_insert_many_values: (key, options = {}) ->
     @ # do nothing for now, will be used later for key-value observing.
 
-  did_insert_values: (key, options = {}) ->
+  did_insert_many_values: (key, options = {}) ->
     @ # do nothing for now, will be used later for key-value observing.
 
-  will_remove_values: (key, options = {}) ->
+  will_remove_many_values: (key, options = {}) ->
     @ # do nothing for now, will be used later for key-value observing.
 
-  did_remove_values: (key, options = {}) ->
+  did_remove_many_values: (key, options = {}) ->
     @ # do nothing for now, will be used later for key-value observing.
 
   # ----------------------- generic to-many relationship accessor methods ------
@@ -207,9 +207,9 @@ ObjectExtensions =
   insert_many_values: (values, options = {}) ->
     key = options['into']
     index = options['at']
-    @will_insert_values values, options
+    @will_insert_many_values values, options
     @[key].insert_many values, at: index
-    @did_insert_values values, options
+    @did_insert_many_values values, options
 
   remove_many_values: (values, options = {}) ->
     key = options['from']
@@ -221,6 +221,6 @@ ObjectExtensions =
     key = options['from']
     array = @[key]
     values = options['passed_through_values'] or indexes.collect (index) -> array[index]
-    @will_remove_values values, from: key, at: indexes
+    @will_remove_many_values values, from: key, at: indexes
     array.remove_at indexes...
-    @did_remove_values values, from: key, at: indexes
+    @did_remove_many_values values, from: key, at: indexes
