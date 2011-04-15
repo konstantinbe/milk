@@ -20,7 +20,7 @@
 # THE SOFTWARE.
 
 describe "Milk.FunctionExtensions", ->
-  describe "curry(args...)", ->
+  describe "#curry(args...)", ->
     it "curries arguments passed in at bind time", ->
       concatenate = (arrays...) -> arrays.inject [], (memo, array) -> memo.add_many array
       one_two_three = concatenate.curry([1], [2], [3])
@@ -31,7 +31,7 @@ describe "Milk.FunctionExtensions", ->
       one_two_three = concatenate.curry([1], [2], [3])
       expect(one_two_three([4, 5], [6])).toEqual [1, 2, 3, 4, 5, 6]
 
-  describe "bind_to(object, [args...])", ->
+  describe "#bind_to(object, [args...])", ->
     it "returns a new function which calls the receiver by passing object as the first argument", ->
       plus_one = ((number) -> number + 1)
       five = plus_one.bind_to(4)
@@ -47,22 +47,22 @@ describe "Milk.FunctionExtensions", ->
       one_two_three = concatenate.bind_to([1], [2], [3])
       expect(one_two_three([4, 5], [6])).toEqual [1, 2, 3, 4, 5, 6]
 
-  describe "methodize()", ->
+  describe "#methodize()", ->
     it "returns a new function that pushes this as the first argument at call time", ->
       concatenate = (array, arrays...) -> array.concat arrays...
       array = [1, 2, 3]
       array.concatenate = concatenate.methodize()
       expect(array.concatenate [4], [5, 6]).toEqual [1, 2, 3, 4, 5, 6]
 
-  describe "wrap(wrapper)", ->
+  describe "#wrap(wrapper)", ->
     it "returns a function", ->
       generate_text = -> "I should be wrapped by a div."
       div = generate_text.wrap (func) -> "<div>" + func() + "</div>"
       expect(div()).toBe "<div>I should be wrapped by a div.</div>"
 
-  describe "compose(functions...)", ->
+  describe "#compose(functions...)", ->
 
-  describe "clone()", ->
+  describe "#clone()", ->
     it "returns the same instance of a function", ->
       func = -> 1 + 1
       expect(func.clone()).toBe func

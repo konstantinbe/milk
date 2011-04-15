@@ -20,7 +20,7 @@
 # THE SOFTWARE.
 
 describe "Milk.RegExpExtensions", ->
-  describe "clone()", ->
+  describe "#clone()", ->
     it "returns a clone of the receiver", ->
       reg_exp = /.*/
       expect(reg_exp.clone().toString()).toEqual /.*/.toString()
