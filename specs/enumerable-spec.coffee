@@ -21,25 +21,25 @@
 
 describe "Milk.Enumerable", ->
 
-  describe "#each()", ->
+  describe "#each", ->
     it "iterates over all objects in a collection", ->
       squared = []
       [1, 2, 3].each (number) -> squared.add number * number
       expect(squared).toEqual [1, 4, 9]
 
-  describe "#collect()", ->
+  describe "#collect", ->
     it "returns all objects after applying block on them", ->
       expect([1, 2, 3].collect (number) -> number * number).toEqual [1, 4, 9]
 
-  describe "#select()", ->
+  describe "#select", ->
     it "returns all objects for which the block returns true", ->
       expect([1, 2, 3, 4, 5].select (number) -> number == 3).toEqual [3]
 
-  describe "#reject()", ->
+  describe "#reject", ->
     it "returns all objects for which the block returns false", ->
       expect([1, 2, 3, 4, 5].reject (number) -> number == 3).toEqual [1, 2, 4, 5]
 
-  describe "#partition()", ->
+  describe "#partition", ->
     it "Partitions the elements into: [selected, rejected], where selected contains all truthy values and rejected contains all falsy values", ->
       expect(['hello', null, 42, false, true, undefined, 17].partition()).toEqual [['hello', 42, true, 17], [null, false, undefined]]
 
@@ -47,39 +47,39 @@ describe "Milk.Enumerable", ->
       expect([1..10].partition (value) -> value % 2 == 0).toEqual [[2, 4, 6, 8, 10], [1, 3, 5, 7, 9]]
 
 
-  describe "#detect()", ->
+  describe "#detect", ->
     it "returns the first object for which the block returns true", ->
       expect([1, 2, 3, 4, 5].detect (number) -> number == 3).toBe 3
 
-  describe "#all()", ->
+  describe "#all", ->
     it "returns true if block returns true for all objects", ->
       expect([1, 2, 3].all (number) -> true).toBe true
 
     it "returns false if block returns false for at least one object", ->
       expect([1, 2, 3].all (number) -> if number == 3 then false else true).toBe false
 
-  describe "#any()", ->
+  describe "#any", ->
     it "returns true if block returns true for at least one object", ->
       expect([1, 2, 3].any (number) -> if number == 2 then true else false).toBe true
 
     it "returns false if block returns false for all objects", ->
       expect([1, 2, 3].any (number) -> false).toBe false
 
-  describe "#max()", ->
+  describe "#max", ->
     it "returns the max value", ->
       expect([1, 3, 2, 4, 1].max()).toBe 4
 
     it "returns -Infinity if empty", ->
       expect([].max()).toBe -Infinity
 
-  describe "#min()", ->
+  describe "#min", ->
     it "returns the min value", ->
       expect([1, 3, 2, -1, 1].min()).toBe -1
 
     it "returns Infinity if empty", ->
       expect([].min()).toBe Infinity
 
-  describe "#group_by()", ->
+  describe "#group_by", ->
     describe "when a key is passed", ->
       it "returns a hash containing groups using the value of object's properties as keys", ->
         peter = name: "Peter"
@@ -98,43 +98,43 @@ describe "Milk.Enumerable", ->
         expect(groups["odd"]).toEqual [1, 3, 5]
         expect(groups["even"]).toEqual [0, 2, 4]
 
-  describe "#inject()", ->
+  describe "#inject", ->
     it "Forwards to native reduce()", ->
       expect(true).toBe true
 
-  describe "#contains()", ->
+  describe "#contains", ->
     it "returns true if collection contains value", ->
       expect([1, 2, 3].contains 2).toBe true
 
     it "returns false if collection does not contain the value", ->
       expect([1, 2, 3].contains 4).toBe false
 
-  describe "#invoke()", ->
+  describe "#invoke", ->
     it "collects the results after invoking method on every item", ->
       expect([1, 2, 3].invoke('toFixed')).toEqual ['1', '2', '3']
 
     it "also forwards arguments", ->
       expect([1, 2, 3].invoke('toFixed', 2)).toEqual ['1.00', '2.00', '3.00']
 
-  describe "#pluck()", ->
+  describe "#pluck", ->
     it "returns an array collecting the values for the given key", ->
       people = [{name: "Peter", age: 59}, {name: "Esther", age: 45}, {name: "Heinerle", age: 4}]
       expect(people.pluck 'name').toEqual ["Peter", "Esther", "Heinerle"]
 
-  describe "#values()", ->
+  describe "#values", ->
     it "returns an array containing the values of a Enumerable", ->
       expect([1, 2, 3].values()).toEqual [1, 2, 3]
 
     it "returns an empty array if the collection is empty", ->
       expect([].values()).toEqual []
 
-  describe "#count()", ->
+  describe "#count", ->
     it "returns the number of elements in a collection", ->
       expect([].count()).toBe 0
       expect([1, 2, 3].count()).toBe 3
       expect([1, 2, 3, 3, 3].count()).toBe 5
 
-  describe "#empty()", ->
+  describe "#empty", ->
     it "returns true if collection is empty", ->
       expect([].empty()).toBe true
 
