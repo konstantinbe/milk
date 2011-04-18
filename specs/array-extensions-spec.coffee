@@ -415,10 +415,10 @@ describe "Milk.ArrayExtensions", ->
 
     people = null
 
-    beforeEach ->
+    before_each ->
       people = [peter, maxim, jessi, kevin, inna1, inna2]
 
-    afterEach ->
+    after_each ->
       people = null
 
     it "sorts by one property name", ->
