@@ -120,13 +120,13 @@ ObjectExtensions =
     setter = options['setter']
     variable = options['variable']
 
-    getter_function = ->
+    getter_method = ->
       @will_access_value_for name
       value = if @[getter] then @[getter]() else @[variable]
       @did_access_value_for name
       value
 
-    setter_function = (value) ->
+    setter_method = (value) ->
       @will_change_value_for name
       if @[setter] then @[setter](value) else @[variable] = value
       @did_change_value_for name
@@ -134,8 +134,8 @@ ObjectExtensions =
 
     config =
       writeable: writeable
-      getter: getter_function if readable
-      setter: setter_function if writeable
+      getter: getter_method if readable
+      setter: setter_method if writeable
       configurable: no
       enumerable: yes
 
