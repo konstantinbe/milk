@@ -145,15 +145,44 @@ ObjectExtensions =
 
   has_one: (name, options = {}) ->
     # TODO: implement.
+    @
 
   has_many: (name, options = {}) ->
-    # TODO: implement.
+    singular = name.singularized()
+    plural = name
+
+    @prototype['add_' + singular] = ->
+      # TODO: implement.
+
+    @prototype['add_many_' + plural] = ->
+      # TODO: implement.
+
+    @prototype['insert_' + singular] = ->
+      # TODO: implement.
+
+    @prototype['insert_many_' + plural] = ->
+      # TODO: implement.
+
+    @prototype['remove_' + singular] = ->
+      # TODO: implement.
+
+    @prototype['remove_many_' + plural] = ->
+      # TODO: implement.
+
+    @prototype['remove_' + singular + '_at'] = ->
+      # TODO: implement.
+
+    @prototype['remove_many_' + plural + '_at'] = ->
+      # TODO: implement.
+    @
 
   belongs_to: (name, options = {}) ->
     # TODO: implement.
+    @
 
   has_and_belongs_to_many: (name, options = {}) ->
-    # TODO: Implement this.
+    # TODO: Implement.
+    @
 
   # -------------------------------------------- key-value-coding methods ------
 

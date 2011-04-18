@@ -185,17 +185,69 @@ describe "Milk.ObjectExtensions", ->
       expect(person.equals name: "Peter").to_be false
 
   describe "property and relationship definition methods", ->
-    describe "#has()", ->
+    describe ".has()", ->
       # TODO: specify.
 
-    describe "#has_one()", ->
+    describe ".has_one()", ->
       # TODO: specify.
 
-    describe "#belongs_to()", ->
+    describe ".belongs_to()", ->
       # TODO: specify.
 
-    describe "#has_many()", ->
-      # TODO: specify.
+    describe ".has_many()", ->
+      book = null
+      page = "single page"
+      pages = ["page 1", "page 2", "page 3"]
+      before_each ->
+        class Book
+          @has_many 'pages'
+        book = new Book()
+        spy_on book, 'add_many_values'
+        spy_on book, 'insert_many_values'
+        spy_on book, 'remove_many_values'
+        spy_on book, 'remove_many_values_at'
+
+      it "adds to_many relationship methods", ->
+        expect(book).to_respond_to 'add_page'
+        expect(book).to_respond_to 'add_many_pages'
+        expect(book).to_respond_to 'insert_page'
+        expect(book).to_respond_to 'insert_many_pages'
+        expect(book).to_respond_to 'remove_page'
+        expect(book).to_respond_to 'remove_many_pages'
+        expect(book).to_respond_to 'remove_page_at'
+        expect(book).to_respond_to 'remove_many_pages_at'
+
+      it "redirects #add_<singular>() method to add_many_values()", ->
+        book.add_page page
+        expect(book.add_many_values).toHaveBeenCalled()
+
+      it "redirects #add_many_<plural>() method to add_many_values()", ->
+        book.add_many_pages pages
+        expect(book.add_many_values).toHaveBeenCalled()
+
+      it "redirects #insert_<singular>() method to insert_many_values()", ->
+        book.insert_page page
+        expect(book.insert_many_values).toHaveBeenCalled()
+
+      it "redirects #insert_many_<plural>() method to insert_many_values()", ->
+        book.insert_many_pages pages
+        expect(book.insert_many_values).toHaveBeenCalled()
+
+      it "redirects #remove_<singular>() method to remove_many_values()", ->
+        book.remove_page page
+        expect(book.remove_many_values).toHaveBeenCalled()
+
+      it "redirects #remove_many_<plural>() method to remove_many_values()", ->
+        book.remove_many_pages pages
+        expect(book.remove_many_values).toHaveBeenCalled()
+
+      it "redirects #remove_<singular>_at() method to remove_many_values_at()", ->
+        book.remove_page_at 0
+        expect(book.remove_many_values_at).toHaveBeenCalled()
+
+      it "redirects #remove_many_<plural>_at() method to remove_many_values_at()", ->
+        book.remove_many_pages_at [0, 1]
+        expect(book.remove_many_values_at).toHaveBeenCalled()
 
     describe "#has_and_belongs_to_many()", ->
       # TODO: specify.
