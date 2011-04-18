@@ -345,12 +345,12 @@ StringExtensions =
         vl = (value >>> (i * 4)) & 0x0f
         string += vh.toString(16) + vl.toString(16)
 
-    convert_number_to_hex = (number) ->
+    convert_to_hex = (number) ->
       [7..0].inject "", (string, i) ->
         intermediate = (number >>> (i * 4)) & 0x0f
         string += intermediate.toString(16)
 
-    encode_string_utf8 = (string) ->
+    encode_utf8 = (string) ->
       utf8 = string.replace /[\u0080-\u07ff]/g, (character) ->
         code = character.charCodeAt 0
         String.fromCharCode 0xc0 | code >> 6, 0x80 | code & 0x3f
@@ -358,128 +358,83 @@ StringExtensions =
         code = character.charCodeAt 0
         String.fromCharCode 0xe0 | code >> 12, 0x80 | code >> 6 & 0x3F, 0x80 | code & 0x3f
 
-    sha1 = `function SHA1(string) {
+    msg = encode_utf8 this
 
-        var blockstart
-        var i,
-        j
-        var W = new Array(80)
-         var H0 = 0x67452301
-        var H1 = 0xEFCDAB89
-        var H2 = 0x98BADCFE
-        var H3 = 0x10325476
-        var H4 = 0xC3D2E1F0
-        var A,
-        B,
-        C,
-        D,
-        E
-        var temp
+    # constants [§4.2.1]
+    K = [0x5a827999, 0x6ed9eba1, 0x8f1bbcdc, 0xca62c1d6]
 
-         string = encode_string_utf8(string)
+    sha1 = ""
 
-         var length = string.length
+    # PREPROCESSING
+    msg += String.fromCharCode 0x80
+    # add trailing '1' bit (+ 0's padding) to string [§5.1.1]
+    # convert string msg into 512-bit/16-integer blocks arrays of ints [§5.2.1]
+    l = msg.length / 4 + 2
 
-        var word_array = new Array()
-         for (i = 0; i < length - 3; i += 4) {
-            j = string.charCodeAt(i) << 24 | string.charCodeAt(i + 1) << 16 |
-            string.charCodeAt(i + 2) << 8 | string.charCodeAt(i + 3)
-            word_array.push(j)
-        }
+    # length (in 32-bit integers) of msg + ‘1’ + appended length
+    N = Math.ceil l / 16
 
-        switch (length % 4) {
-        case 0:
-            i = 0x080000000
-            break
-        case 1:
-            i = string.charCodeAt(length - 1) << 24 | 0x0800000
-            break
+    # number of 16-integer-blocks required to hold 'l' ints
+    M = new Array(N)
 
-        case 2:
-            i = string.charCodeAt(length - 2) << 24 | string.charCodeAt(length - 1) << 16 | 0x08000
-            break
+    for i in [0...N]
+      M[i] = new Array(16)
+      for j in [0...16]
+        # encode 4 chars per integer, big-endian encoding
+        M[i][j] = (msg.charCodeAt(i * 64 + j * 4) << 24) | (msg.charCodeAt(i * 64 + j * 4 + 1) << 16) | (msg.charCodeAt(i * 64 + j * 4 + 2) << 8) | (msg.charCodeAt(i * 64 + j * 4 + 3))
+        # note running off the end of msg is ok 'cos bitwise ops on NaN return 0
 
-        case 3:
-            i = string.charCodeAt(length - 3) << 24 | string.charCodeAt(length - 2) << 16 | string.charCodeAt(length - 1) << 8 | 0x80
-            break
-        }
+    # add length (in bits) into final pair of 32-bit integers (big-endian) [§5.1.1]
+    # note: most significant word would be (len-1)*8 >>> 32, but since JS converts
+    # bitwise-op args to 32 bits, we need to simulate this by arithmetic operators
+    M[N - 1][14] = (msg.length - 1) * 8 / Math.pow 2, 32
+    M[N - 1][14] = Math.floor M[N - 1][14]
+    M[N - 1][15] = ((msg.length - 1) * 8) & 0xffffffff
 
-        word_array.push(i)
+    # set initial hash value [§5.3.1]
+    H0 = 0x67452301
+    H1 = 0xefcdab89
+    H2 = 0x98badcfe
+    H3 = 0x10325476
+    H4 = 0xc3d2e1f0
 
-         while ((word_array.length % 16) != 14) {
-            word_array.push(0)
-        }
+    # HASH COMPUTATION [§6.1.2]
+    W = new Array(80)
+    a = null
+    b = null
+    c = null
+    d = null
+    e = null
 
-        word_array.push(length >>> 29)
-         word_array.push((length << 3) & 0x0ffffffff)
+    for i in [0...N]
+      # 1 - prepare message schedule 'W'
+      W[t] = M[i][t] for t in [0...16]
+      W[t] = rotate_left(W[t - 3] ^ W[t - 8] ^ W[t - 14] ^ W[t - 16], 1) for t in [16...80]
 
+      # 2 - initialise five working variables a, b, c, d, e with previous hash value
+      a = H0;
+      b = H1;
+      c = H2;
+      d = H3;
+      e = H4;
 
-         for (blockstart = 0; blockstart < word_array.length; blockstart += 16) {
+      # 3 - main loop
+      for t in [0...80]
+        s = Math.floor t / 20
+        # seq for blocks of 'f' functions and 'K' constants
+        T = (rotate_left(a, 5) + f(s, b, c, d) + e + K[s] + W[t]) & 0xffffffff
+        e = d
+        d = c
+        c = rotate_left b, 30
+        b = a
+        a = T
 
-            for (i = 0; i < 16; i++) {
-                W[i] = word_array[blockstart + i]
-            }
+      # 4 - compute the new intermediate hash value
+      H0 = (H0 + a) & 0xffffffff
+      # note 'addition modulo 2^32'
+      H1 = (H1 + b) & 0xffffffff
+      H2 = (H2 + c) & 0xffffffff
+      H3 = (H3 + d) & 0xffffffff
+      H4 = (H4 + e) & 0xffffffff
 
-            for (i = 16; i <= 79; i++) {
-                W[i] = rotate_left(W[i - 3] ^ W[i - 8] ^ W[i - 14] ^ W[i - 16], 1)
-            }
-
-            A = H0
-            B = H1
-            C = H2
-            D = H3
-            E = H4
-
-            for (i = 0; i <= 19; i++) {
-                temp = (rotate_left(A, 5) + ((B & C) | (~B & D)) + E + W[i] + 0x5A827999) & 0x0ffffffff
-                E = D
-                D = C
-                C = rotate_left(B, 30)
-                B = A
-                A = temp
-            }
-
-            for (i = 20; i <= 39; i++) {
-                temp = (rotate_left(A, 5) + (B ^ C ^ D) + E + W[i] + 0x6ED9EBA1) & 0x0ffffffff
-                E = D
-                D = C
-                C = rotate_left(B, 30)
-                B = A
-                A = temp
-            }
-
-            for (i = 40; i <= 59; i++) {
-                temp = (rotate_left(A, 5) + ((B & C) | (B & D) | (C & D)) + E + W[i] + 0x8F1BBCDC) & 0x0ffffffff
-                E = D
-                D = C
-                C = rotate_left(B, 30)
-                B = A
-                A = temp
-            }
-
-            for (i = 60; i <= 79; i++) {
-                temp = (rotate_left(A, 5) + (B ^ C ^ D) + E + W[i] + 0xCA62C1D6) & 0x0ffffffff
-                E = D
-                D = C
-                C = rotate_left(B, 30)
-                B = A
-                A = temp
-            }
-
-            H0 = (H0 + A) & 0x0ffffffff
-            H1 = (H1 + B) & 0x0ffffffff
-            H2 = (H2 + C) & 0x0ffffffff
-            H3 = (H3 + D) & 0x0ffffffff
-            H4 = (H4 + E) & 0x0ffffffff
-
-        }
-
-        var temp = convert_number_to_hex(H0)
-                 + convert_number_to_hex(H1)
-                 + convert_number_to_hex(H2)
-                 + convert_number_to_hex(H3)
-                 + convert_number_to_hex(H4)
-
-        return temp.toLowerCase()
-    }`
-    return sha1(this)
+    convert_to_hex(H0) + convert_to_hex(H1) + convert_to_hex(H2) + convert_to_hex(H3) + convert_to_hex(H4)
