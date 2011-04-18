@@ -54,5 +54,8 @@ CustomMatchers =
   to_be_an_object: ->
     @actual? and @actual instanceof Object
 
+  to_respond_to: (method) ->
+    @actual? and @actual.responds_to method
+
 before_each ->
   @addMatchers CustomMatchers
