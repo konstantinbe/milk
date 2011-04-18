@@ -151,29 +151,37 @@ ObjectExtensions =
     singular = name.singularized()
     plural = name
 
-    @prototype['add_' + singular] = ->
-      # TODO: implement.
+    @prototype['add_' + singular] = (value, options = {}) ->
+      options['to'] = plural
+      @add_many_values [value], options
 
-    @prototype['add_many_' + plural] = ->
-      # TODO: implement.
+    @prototype['add_many_' + plural] = (values, options = {}) ->
+      options['to'] = plural
+      @add_many_values values, options
 
-    @prototype['insert_' + singular] = ->
-      # TODO: implement.
+    @prototype['insert_' + singular] = (value, options = {}) ->
+      options['into'] = plural
+      @insert_many_values [value], options
 
-    @prototype['insert_many_' + plural] = ->
-      # TODO: implement.
+    @prototype['insert_many_' + plural] = (value, options = {}) ->
+      options['into'] = plural
+      @insert_many_values values, options
 
-    @prototype['remove_' + singular] = ->
-      # TODO: implement.
+    @prototype['remove_' + singular] = (value, options = {}) ->
+      options['from'] = plural
+      @remove_many_values [value], options
 
-    @prototype['remove_many_' + plural] = ->
-      # TODO: implement.
+    @prototype['remove_many_' + plural] = (value, options = {}) ->
+      options['from'] = plural
+      @remove_many_values values, options
 
-    @prototype['remove_' + singular + '_at'] = ->
-      # TODO: implement.
+    @prototype['remove_' + singular + '_at'] = (index, options = {}) ->
+      options['from'] = plural
+      @remove_many_values_at [index], options
 
-    @prototype['remove_many_' + plural + '_at'] = ->
-      # TODO: implement.
+    @prototype['remove_many_' + plural + '_at'] =  (indexes, options = {}) ->
+      options['from'] = plural
+      @remove_many_values_at indexes, options
     @
 
   belongs_to: (name, options = {}) ->
