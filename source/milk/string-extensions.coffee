@@ -142,6 +142,8 @@ StringExtensions =
     return "" if count is 0
     @slice -count
 
+  # ----------------------------------------------------------------------------
+
   values: ->
     @characters()
 
@@ -162,6 +164,8 @@ StringExtensions =
 
   paragraphs: ->
     @split "\n\n"
+
+  # ----------------------------------------------------------------------------
 
   prepend: (strings...) ->
     "".concat strings..., this
@@ -188,6 +192,8 @@ StringExtensions =
 
   ends_with: (string) ->
     @index_of(string) == this.length - string.length
+
+  # ----------------------------------------------------------------------------
 
   uppercased: ->
     @toUpperCase()

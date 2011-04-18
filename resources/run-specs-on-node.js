@@ -124,10 +124,6 @@ jasmine.CommandLineReporter.prototype.reportRunnerResults = function(runner) {
     examples = this.numberOfExamples === 1 ? 'example' : 'examples';
     failures = this.numberOfFailedExamples === 1 ? 'failure' : 'failures';
     printLine(this.numberOfExamples + " " + examples + ", " + stylize(this.numberOfFailedExamples + " " + failures + "\n", color));
-
-    if (this.numberOfFailedExamples > 0) {
-        process.exit(1);
-    }
 };
 
 jasmine.CommandLineReporter.prototype.reportSuiteResults = function(suite) {
@@ -163,7 +159,7 @@ jasmine.CommandLineReporter.prototype.reportSpecResults = function(spec) {
 
     if (verbose) {
         if (!spec.printed) {
-            printLine(indentation + "- " + spec.description + (passed ? "" : stylize(" FAILED", 'red')));
+            printLine(indentation + spec.description + (passed ? "" : stylize(" FAILED", 'red')));
             spec.printed = true;
         }
 

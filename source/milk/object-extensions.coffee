@@ -45,6 +45,9 @@ ObjectExtensions =
   responds_to: (method) ->
     @[method]? and @[method].is_function()
 
+  send: (method, parameters...) ->
+    @[method](parameters...)
+
   merge: (objects...) ->
     for object in objects
       for own key, value of object
@@ -86,6 +89,8 @@ ObjectExtensions =
   is_reg_exp: (value) ->
     @test? and @exec? and (@ignoreCase? or @ignoreCase == no)
 
+  # ----------------------------------------------------------------------------
+
   clone: ->
     clone = {}
     for own key, value of this
@@ -97,3 +102,162 @@ ObjectExtensions =
 
   description: ->
     if @toString? then @toString() else "Object"
+
+  # ------------------------------- defining properties and relationships ------
+
+  has: (name, options = {}) ->
+    options['access'] ?= 'readwrite'
+    options['default'] ?= null
+    options['type'] ?= 'Object'
+    options['variable'] ?= '_' + name
+    options['getter'] ?= 'get_' + name
+    options['setter'] ?= 'set_' + name
+
+    readable = options['access'].begins_with 'read'
+    writeable = options['access'].ends_with 'write'
+
+    getter_ = options['getter']
+    setter = options['setter']
+    variable = options['variable']
+
+    getter_method = ->
+      @will_access_value_for name
+      value = if @[getter] then @[getter]() else @[variable]
+      @did_access_value_for name
+      value
+
+    setter_method = (value) ->
+      @will_change_value_for name
+      if @[setter] then @[setter](value) else @[variable] = value
+      @did_change_value_for name
+      @
+
+    config =
+      writeable: writeable
+      getter: getter_method if readable
+      setter: setter_method if writeable
+      configurable: no
+      enumerable: yes
+
+    @prototype[options['variable']] = options['default']
+    Object.defineProperty @prototype, name, config
+    @
+
+  has_one: (name, options = {}) ->
+    # TODO: implement.
+    @
+
+  has_many: (name, options = {}) ->
+    singular = name.singularized()
+    plural = name
+
+    @prototype['add_' + singular] = (value, options = {}) ->
+      options['to'] = plural
+      @add_many_values [value], options
+
+    @prototype['add_many_' + plural] = (values, options = {}) ->
+      options['to'] = plural
+      @add_many_values values, options
+
+    @prototype['insert_' + singular] = (value, options = {}) ->
+      options['into'] = plural
+      @insert_many_values [value], options
+
+    @prototype['insert_many_' + plural] = (value, options = {}) ->
+      options['into'] = plural
+      @insert_many_values values, options
+
+    @prototype['remove_' + singular] = (value, options = {}) ->
+      options['from'] = plural
+      @remove_many_values [value], options
+
+    @prototype['remove_many_' + plural] = (value, options = {}) ->
+      options['from'] = plural
+      @remove_many_values values, options
+
+    @prototype['remove_' + singular + '_at'] = (index, options = {}) ->
+      options['from'] = plural
+      @remove_many_values_at [index], options
+
+    @prototype['remove_many_' + plural + '_at'] =  (indexes, options = {}) ->
+      options['from'] = plural
+      @remove_many_values_at indexes, options
+    @
+
+  belongs_to: (name, options = {}) ->
+    # TODO: implement.
+    @
+
+  has_and_belongs_to_many: (name, options = {}) ->
+    # TODO: Implement.
+    @
+
+  # -------------------------------------------- key-value-coding methods ------
+
+  value_for: (key) ->
+    getter = 'get_' + key
+    @will_access_value_for key
+    value = if @responds_to getter then @send getter else @[key]
+    @did_access_value_for key
+    value
+
+  set_value: (value, options = {}) ->
+    key = options['for']
+    setter = 'set_' + key
+    @will_change_value_for key
+    if @responds_to setter then @send setter, value else @[key] = value
+    @did_change_value_for key
+    @
+
+  # ------------------------ key-value coding change notification methods ------
+
+  will_access_value_for: (key, options = {}) ->
+    @ # do nothing for now, will be used later for key-value observing.
+
+  did_access_value_for: (key, options = {}) ->
+    @ # do nothing for now, will be used later for key-value observing.
+
+  will_change_value_for: (key, options = {}) ->
+    @ # do nothing for now, will be used later for key-value observing.
+
+  did_change_value_for: (key, options = {}) ->
+    @ # do nothing for now, will be used later for key-value observing.
+
+  will_insert_many_values: (key, options = {}) ->
+    @ # do nothing for now, will be used later for key-value observing.
+
+  did_insert_many_values: (key, options = {}) ->
+    @ # do nothing for now, will be used later for key-value observing.
+
+  will_remove_many_values: (key, options = {}) ->
+    @ # do nothing for now, will be used later for key-value observing.
+
+  did_remove_many_values: (key, options = {}) ->
+    @ # do nothing for now, will be used later for key-value observing.
+
+  # ----------------------- generic to-many relationship accessor methods ------
+
+  add_many_values: (values, options = {}) ->
+    key = options['to']
+    @insert_many_values values, into: key, at: @[key].length
+
+  insert_many_values: (values, options = {}) ->
+    key = options['into']
+    index = options['at']
+    @will_insert_many_values values, options
+    @[key].insert_many values, at: index
+    @did_insert_many_values values, options
+
+  remove_many_values: (values, options = {}) ->
+    key = options['from']
+    array = @[key]
+    indexes = values.inject [], (indexes, value) -> indexes.add_many array.indexes_of value
+    @remove_many_values_at indexes, from: key, passed_through_values: values
+
+  remove_many_values_at: (indexes, options = {}) ->
+    key = options['from']
+    array = @[key]
+    values = options['passed_through_values'] or indexes.collect (index) -> array[index]
+    @will_remove_many_values values, from: key, at: indexes
+    array.remove_at indexes...
+    @did_remove_many_values values, from: key, at: indexes

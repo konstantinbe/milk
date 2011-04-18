@@ -20,256 +20,257 @@
 # THE SOFTWARE.
 
 describe "Milk.StringExtensions", ->
-  describe "first([count])", ->
+  describe "#first()", ->
     it "returns the first character if |count| is not given", ->
-      expect("123".first()).toBe '1'
-      expect("".first()).toBe undefined
+      expect("123".first()).to_equal '1'
+      expect("".first()).to_be_undefined()
 
     it "returns a new string containing the first N characters if |count| = N is given", ->
-      expect("123".first 0).toEqual ""
-      expect("123".first 1).toEqual "1"
-      expect("123".first 2).toEqual "12"
-      expect("123".first 3).toEqual "123"
-      expect("123".first 10).toEqual "123"
+      expect("123".first 0).to_equal ""
+      expect("123".first 1).to_equal "1"
+      expect("123".first 2).to_equal "12"
+      expect("123".first 3).to_equal "123"
+      expect("123".first 10).to_equal "123"
 
-    describe "second()", ->
-      it "returns the second character", ->
-        expect("123".second()).toBe "2"
+  describe "#second()", ->
+    it "returns the second character", ->
+      expect("123".second()).to_be "2"
 
-    describe "third()", ->
-      it "returns the third character", ->
-        expect("123".third()).toBe "3"
+  describe "#third()", ->
+    it "returns the third character", ->
+      expect("123".third()).to_be "3"
 
-    describe "rest()", ->
-      it "returns a new string containing all except the first character", ->
-        expect("123".rest()).toEqual "23"
+  describe "#rest()", ->
+    it "returns a new string containing all except the first character", ->
+      expect("123".rest()).to_equal "23"
 
-    describe "last([count])", ->
-      it "returns the last character if |count| is not given", ->
-        expect("123".last()).toBe "3"
-        expect("".last()).toBe undefined
+  describe "#last()", ->
+    it "returns the last character if |count| is not given", ->
+      expect("123".last()).to_be "3"
+      expect("".last()).to_be_undefined()
 
-      it "returns a new string containing the last N characters if |count| = N is given", ->
-        expect("123".last 0).toEqual ""
-        expect("123".last 1).toEqual "3"
-        expect("123".last 2).toEqual "23"
-        expect("123".last 3).toEqual "123"
-        expect("123".last 10).toEqual "123"
+    it "returns a new string containing the last N characters if |count| = N is given", ->
+      expect("123".last 0).to_equal ""
+      expect("123".last 1).to_equal "3"
+      expect("123".last 2).to_equal "23"
+      expect("123".last 3).to_equal "123"
+      expect("123".last 10).to_equal "123"
 
-    describe "characters()", ->
-      it "returns an array", ->
-        expect("".characters()).toEqual []
+  describe "#characters()", ->
+    it "returns an array", ->
+      expect("".characters()).to_equal []
 
-      it "contaiing individual characters", ->
-        expect("Hello World!".characters()).toEqual ["H", "e", "l", "l", "o", " ", "W", "o", "r", "l", "d", "!"]
+    it "contaiing individual characters", ->
+      expect("Hello World!".characters()).to_equal ["H", "e", "l", "l", "o", " ", "W", "o", "r", "l", "d", "!"]
 
-      it "also works with control characters", ->
-        expect("Hello World!\n".characters()).toEqual ["H", "e", "l", "l", "o", " ", "W", "o", "r", "l", "d", "!", "\n"]
+    it "also works with control characters", ->
+      expect("Hello World!\n".characters()).to_equal ["H", "e", "l", "l", "o", " ", "W", "o", "r", "l", "d", "!", "\n"]
 
-    describe "codes", ->
-      it "returns an array", ->
-        expect("".codes()).toEqual []
+  describe "codes()", ->
+    it "returns an array", ->
+      expect("".codes()).to_equal []
 
-      it "containing the char codes for individual characters", ->
-        expect("Hello World!".codes()).toEqual [72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33]
+    it "containing the char codes for individual characters", ->
+      expect("Hello World!".codes()).to_equal [72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33]
 
-      it "also works with control characters", ->
-        expect("Hello World!\n".codes()).toEqual [72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33, 10]
+    it "also works with control characters", ->
+      expect("Hello World!\n".codes()).to_equal [72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 33, 10]
 
-    describe "words()", ->
-      it "splits a string into words", ->
-        expect("HTML5 is great".words()).toEqual ["HTML5", "is", "great"]
+  describe "#words()", ->
+    it "splits a string into words", ->
+      expect("HTML5 is great".words()).to_equal ["HTML5", "is", "great"]
 
-      it "removes all non-word characters", ->
-        expect("HTML5 is great! <> : {} [] | + =".words()).toEqual ["HTML5", "is", "great"]
+    it "removes all non-word characters", ->
+      expect("HTML5 is great! <> : {} [] | + =".words()).to_equal ["HTML5", "is", "great"]
 
-      it "doesn't split at apostrophes", ->
-        expect("Konstantin's MacBook Pro".words()).toEqual ["Konstantins", "Mac", "Book", "Pro"]
+    it "doesn't split at apostrophes", ->
+      expect("Konstantin's MacBook Pro".words()).to_equal ["Konstantins", "Mac", "Book", "Pro"]
 
-      it "also removes underscores", ->
-        expect("HTML5_is_great".words()).toEqual ["HTML5", "is", "great"]
+    it "also removes underscores", ->
+      expect("HTML5_is_great".words()).to_equal ["HTML5", "is", "great"]
 
-      it "doesn't include empty strings", ->
-        expect("".words()).toEqual []
+    it "doesn't include empty strings", ->
+      expect("".words()).to_equal []
 
-      it "works with came cased strings", ->
-        expect("HelloWorld!".words()).toEqual ["Hello", "World"]
-        expect("helloWorld!".words()).toEqual ["hello", "World"]
+    it "works with came cased strings", ->
+      expect("HelloWorld!".words()).to_equal ["Hello", "World"]
+      expect("helloWorld!".words()).to_equal ["hello", "World"]
 
-      it "preserves acronyms", ->
-        expect("HTML".words()).toEqual ["HTML"]
-        expect("HTML5 is great!".words()).toEqual ["HTML5", "is", "great"]
-        expect("HTML5_is_great!".words()).toEqual ["HTML5", "is", "great"]
-        expect("HTML5-is-great!".words()).toEqual ["HTML5", "is", "great"]
+    it "preserves acronyms", ->
+      expect("HTML".words()).to_equal ["HTML"]
+      expect("HTML5 is great!".words()).to_equal ["HTML5", "is", "great"]
+      expect("HTML5_is_great!".words()).to_equal ["HTML5", "is", "great"]
+      expect("HTML5-is-great!".words()).to_equal ["HTML5", "is", "great"]
 
-      it "preserves acronyms in camel cased strings", ->
-        expect("RegularHTMLReader".words()).toEqual ["Regular", "HTML", "Reader"]
-        expect("RegularHTML5Reader".words()).toEqual ["Regular", "HTML5", "Reader"]
+    it "preserves acronyms in camel cased strings", ->
+      expect("RegularHTMLReader".words()).to_equal ["Regular", "HTML", "Reader"]
+      expect("RegularHTML5Reader".words()).to_equal ["Regular", "HTML5", "Reader"]
 
-    describe "lines()", ->
-      it "returns an array of strings by splitting the receiver at \\n", ->
-        expect("Hello\nWorld!".lines()).toEqual ["Hello", "World!"]
+  describe "#lines()", ->
+    it "returns an array of strings by splitting the receiver at \\n", ->
+      expect("Hello\nWorld!".lines()).to_equal ["Hello", "World!"]
 
-      it "returns empty strings for empty lines", ->
-        expect("Hello\n\nWorld!".lines()).toEqual ["Hello", "", "World!"]
+    it "returns empty strings for empty lines", ->
+      expect("Hello\n\nWorld!".lines()).to_equal ["Hello", "", "World!"]
 
-      it "returns an array with one empty string if the string is empty", ->
-        expect("".lines()).toEqual [""]
+    it "returns an array with one empty string if the string is empty", ->
+      expect("".lines()).to_equal [""]
 
-    describe "paragraphs()", ->
-      it "returns an array of strings by splitting the receiver at double new lines \\n\\n", ->
-        expect("Hello\n\nWorld!".paragraphs()).toEqual ["Hello", "World!"]
+  describe "#paragraphs()", ->
+    it "returns an array of strings by splitting the receiver at double new lines \\n\\n", ->
+      expect("Hello\n\nWorld!".paragraphs()).to_equal ["Hello", "World!"]
 
-    describe "prepend(strings...)", ->
-      it "prepends one string", ->
-        expect("World!".prepend "Hello ").toBe "Hello World!"
+  describe "#prepend()", ->
+    it "prepends one string", ->
+      expect("World!".prepend "Hello ").to_be "Hello World!"
 
-      it "appends many strings", ->
-        expect("!".prepend "Hello", " ", "World").toBe "Hello World!"
+    it "prepends many strings", ->
+      expect("!".prepend "Hello", " ", "World").to_be "Hello World!"
 
-    describe "append(strings...)", ->
-      it "appends one string", ->
-        expect("Hello ".append "World!").toBe "Hello World!"
+  describe "#append()", ->
+    it "appends one string", ->
+      expect("Hello ".append "World!").to_be "Hello World!"
 
-      it "appends many strings", ->
-        expect("Hello".append " ", "World", "!").toBe "Hello World!"
+    it "appends many strings", ->
+      expect("Hello".append " ", "World", "!").to_be "Hello World!"
 
-    describe "index_of(string)", ->
-      it "returns the index of the first occurence of string", ->
-        expect("Hello World!".index_of "l").toBe 2
+  describe "#index_of()", ->
+    it "returns the index of the first occurence of a string", ->
+      expect("Hello World!".index_of "l").to_be 2
 
-    describe "last_index_of(string)", ->
-      it "returns the index for the last occurence of string", ->
-        expect("Hello World!".last_index_of "l").toBe 9
+  describe "#last_index_of()", ->
+    it "returns the index for the last occurence of a string", ->
+      expect("Hello World!".last_index_of "l").to_be 9
 
-    describe "indexes_of(string)", ->
-      it "returns an array of indexes for all occurences of the string", ->
-        expect("Hello World!".indexes_of "l").toEqual [2, 3, 9]
+  describe "#indexes_of()", ->
+    it "returns an array of indexes for all occurences of the string", ->
+      expect("Hello World!".indexes_of "l").to_equal [2, 3, 9]
 
-    describe "begins_with(string)", ->
-      it "returns yes if receiver begins with string", ->
-        expect("Hello World!".begins_with "Hello").toBe true
+  describe "#begins_with()", ->
+    it "returns yes if receiver begins with a string", ->
+      expect("Hello World!".begins_with "Hello").to_be true
 
-      it "returns no otherwise", ->
-        expect("Hello World!".begins_with "Hellow").toBe false
+    it "returns no otherwise", ->
+      expect("Hello World!".begins_with "Hellow").to_be false
 
-    describe "ends_with(string)", ->
-      it "returns yes if receiver ends with string", ->
-        expect("Hello World!".ends_with "World!").toBe true
+  describe "#ends_with()", ->
+    it "returns yes if receiver ends with a string", ->
+      expect("Hello World!".ends_with "World!").to_be true
 
-      it "returns no otherwise", ->
-        expect("Hello World!".ends_with "World").toBe false
+    it "returns no otherwise", ->
+      expect("Hello World!".ends_with "World").to_be false
 
-    describe "uppercased()", ->
-      it "returns an uppercased copy of the string", ->
-        expect("Hello World!".uppercased()).toBe "HELLO WORLD!"
+  describe "#uppercased()", ->
+    it "returns an uppercased copy of the string", ->
+      expect("Hello World!".uppercased()).to_be "HELLO WORLD!"
 
-    describe "lowercased()", ->
-      it "returns a lowercased copy of the string", ->
-        expect("Hello World!".lowercased()).toBe "hello world!"
+  describe "#lowercased()", ->
+    it "returns a lowercased copy of the string", ->
+      expect("Hello World!".lowercased()).to_be "hello world!"
 
-    describe "capitalized()", ->
-      it "returns a copy of the string with the first letter uppercased and all other letters lowercased", ->
-        expect("hello World!".capitalized()).toBe "Hello world!"
+  describe "#capitalized()", ->
+    it "returns a copy of the string with the first letter uppercased and all other letters lowercased", ->
+      expect("hello World!".capitalized()).to_be "Hello world!"
 
-    describe "underscorized()", ->
-      it "splits into words and concatenates with underscores while lowercasing everything", ->
-        expect("Hello World!".underscorized()).toBe "hello_world"
+  describe "#underscorized()", ->
+    it "splits into words and concatenates with underscores while lowercasing everything", ->
+      expect("Hello World!".underscorized()).to_be "hello_world"
 
-    describe "dasherized()", ->
-      it "splits into words and concatenates with dashes while lowercasing everything", ->
-        expect("Hello World!".dasherized()).toBe "hello-world"
+  describe "#dasherized()", ->
+    it "splits into words and concatenates with dashes while lowercasing everything", ->
+      expect("Hello World!".dasherized()).to_be "hello-world"
 
-    describe "camelized()", ->
-      it "splits into words and concatenates with by capitalizing every word", ->
-        expect("hello World!".camelized()).toBe "HelloWorld"
+  describe "#camelized()", ->
+    it "splits into words and concatenates with by capitalizing every word", ->
+      expect("hello World!".camelized()).to_be "HelloWorld"
 
-    describe "titleized()", ->
-      it "extracts words and capitalizes every word unless it's insignificant", ->
-        expect("Konstantin's macbook pro is Awesome.".titleized()).toBe "Konstantins Macbook Pro is Awesome"
+  describe "#titleized()", ->
+    it "extracts words and capitalizes every word unless it's insignificant", ->
+      expect("Konstantin's macbook pro is Awesome.".titleized()).to_be "Konstantins Macbook Pro is Awesome"
 
-    describe "humanized()", ->
-      it "extracts words, makes them all lowercased except the first word", ->
-        expect("Konstantin's-macbook_pro$is#Awesome.".humanized()).toBe "Konstantins macbook pro is awesome"
+  describe "#humanized()", ->
+    it "extracts words, makes them all lowercased except the first word", ->
+      expect("Konstantin's-macbook_pro$is#Awesome.".humanized()).to_be "Konstantins macbook pro is awesome"
 
-    describe "escaped()", ->
-      expect('\.+*?[^]$(){}=!<>|:'.escaped for: 'reg_exp').toBe '\\.\\+\\*\\?\\[\\^\\]\\$\\(\\)\\{\\}\\=\\!\\<\\>\\|\\:'
+  describe "#escaped()", ->
+    it "escapes all 'control' characters", ->
+      expect('\.+*?[^]$(){}=!<>|:'.escaped for: 'reg_exp').to_be '\\.\\+\\*\\?\\[\\^\\]\\$\\(\\)\\{\\}\\=\\!\\<\\>\\|\\:'
 
-    describe "pluralized()", ->
-      it "standard pluralization", ->
-        expect('Goat'.pluralized()).toBe 'Goats'
+  describe "#pluralized()", ->
+    it "performs standard pluralization", ->
+      expect('Goat'.pluralized()).to_be 'Goats'
 
-      it "standard pluralization of a multi-word string", ->
-        expect('There are many goat'.pluralized()).toBe 'There are many goats'
+    it "performs standard pluralization of a multi-word string", ->
+      expect('There are many goat'.pluralized()).to_be 'There are many goats'
 
-      it "non-standard pluralization", ->
-        expect('Bunny'.pluralized()).toBe 'Bunnies'
+    it "performs non-standard pluralization", ->
+      expect('Bunny'.pluralized()).to_be 'Bunnies'
 
-      it "non-standard pluralization of a multi-word string", ->
-        expect('I like bunny'.pluralized()).toBe 'I like bunnies'
+    it "performs non-standard pluralization of a multi-word string", ->
+      expect('I like bunny'.pluralized()).to_be 'I like bunnies'
 
-      it "irregular pluralization", ->
-        expect('child'.pluralized()).toBe 'children'
+    it "performs irregular pluralization", ->
+      expect('child'.pluralized()).to_be 'children'
 
-      it "irregular pluralization of a multi-word string", ->
-        expect('I have three child'.pluralized()).toBe 'I have three children'
+    it "performs irregular pluralization of a multi-word string", ->
+      expect('I have three child'.pluralized()).to_be 'I have three children'
 
-      it "uncountable pluralization", ->
-        expect('sheep'.pluralized()).toBe 'sheep'
+    it "performs uncountable pluralization", ->
+      expect('sheep'.pluralized()).to_be 'sheep'
 
-      it "uncountable pluralization of a multi-word string", ->
-        expect('Please hold this sheep'.pluralized()).toBe 'Please hold this sheep'
+    it "performs uncountable pluralization of a multi-word string", ->
+      expect('Please hold this sheep'.pluralized()).to_be 'Please hold this sheep'
 
-    describe "singularized()", ->
-      it "standard singularization", ->
-        expect('Vegetables'.singularized()).toBe 'Vegetable'
+  describe "#singularized()", ->
+    it "performs standard singularization", ->
+      expect('Vegetables'.singularized()).to_be 'Vegetable'
 
-      it "standard singularization of a multi-word string", ->
-        expect('Broccoli is a vegetables'.singularized()).toBe 'Broccoli is a vegetable'
+    it "performs standard singularization of a multi-word string", ->
+      expect('Broccoli is a vegetables'.singularized()).to_be 'Broccoli is a vegetable'
 
-      it "non-standard singularization", ->
-        expect('Properties'.singularized()).toBe 'Property'
+    it "performs non-standard singularization", ->
+      expect('Properties'.singularized()).to_be 'Property'
 
-      it "non-standard singularization of a multi-word string", ->
-        expect('Buy a properties'.singularized()).toBe 'Buy a property'
+    it "performs non-standard singularization of a multi-word string", ->
+      expect('Buy a properties'.singularized()).to_be 'Buy a property'
 
-      it "irregular singularization", ->
-        expect('people'.singularized()).toBe 'person'
+    it "performs irregular singularization", ->
+      expect('people'.singularized()).to_be 'person'
 
-      it "irregular singularization of a multi-word string", ->
-        expect('The Village People'.singularized()).toBe 'The Village Person'
+    it "performs irregular singularization of a multi-word string", ->
+      expect('The Village People'.singularized()).to_be 'The Village Person'
 
-      it "uncountable singularization", ->
-        expect('money'.singularized()).toBe 'money'
+    it "performs uncountable singularization", ->
+      expect('money'.singularized()).to_be 'money'
 
-      it "uncountable singularization of a multi-word string", ->
-        expect('Gotta git da money'.singularized()).toBe 'Gotta git da money'
+    it "performs uncountable singularization of a multi-word string", ->
+      expect('Gotta git da money'.singularized()).to_be 'Gotta git da money'
 
-    describe "normalized()", ->
-      it "removes diactrics, i.e. converts characters with diactrics to normal characters", ->
-        string = "ÀÁÂÃÄÅĀĂĄǍǞǠǺȀȂȦḀẠẢẤẦẨẪẬẮẰẲẴẶÅḂḄḆÇĆĈĊČḈĎḊḌḎḐḒÈÉÊËĒĔĖĘĚȄȆȨḔḖḘḚḜẸẺẼẾỀỂỄỆḞĜĞĠĢǦǴḠĤȞḢḤḦḨḪÌÍÎÏĨĪĬĮİǏȈȊḬḮỈỊĴĶǨḰḲḴĹĻĽḶḸḺḼḾṀṂÑŃŅŇǸṄṆṈṊÒÓÔÕÖŌŎŐƠǑǪǬȌȎȪȬȮȰṌṎṐṒỌỎỐỒỔỖỘỚỜỞỠỢṔṖŔŖŘȐȒṘṚṜṞŚŜŞŠȘṠṢṤṦṨŢŤȚṪṬṮṰÙÚÛÜŨŪŬŮŰŲƯǓǕǗǙǛȔȖṲṴṶṸṺỤỦỨỪỬỮỰṼṾŴẀẂẄẆẈẊẌÝŶŸȲẎỲỴỶỸŹŻŽẐẒẔ`àáâãäåāăąǎǟǡǻȁȃȧḁạảấầẩẫậắằẳẵặḃḅḇçćĉċčḉďḋḍḏḑḓèéêëēĕėęěȅȇȩḕḗḙḛḝẹẻẽếềểễệḟĝğġģǧǵḡĥȟḣḥḧḩḫẖìíîïĩīĭįǐȉȋḭḯỉịĵǰķǩḱḳḵĺļľḷḹḻḽḿṁṃñńņňǹṅṇṉṋòóôõöōŏőơǒǫǭȍȏȫȭȯȱṍṏṑṓọỏốồổỗộớờởỡợṕṗŕŗřȑȓṙṛṝṟśŝşšșṡṣṥṧṩţťțṫṭṯṱẗùúûüũūŭůűųưǔǖǘǚǜȕȗṳṵṷṹṻụủứừửữựṽṿŵẁẃẅẇẉẘẋẍýÿŷȳẏẙỳỵỷỹźżžẑẓẕ"
-        normalized = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBCCCCCCDDDDDDEEEEEEEEEEEEEEEEEEEEEEEEEFGGGGGGGHHHHHHHIIIIIIIIIIIIIIIIJKKKKKLLLLLLLMMMNNNNNNNNNOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOPPRRRRRRRRRSSSSSSSSSSTTTTTTTUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUVVWWWWWWXXYYYYYYYYYZZZZZZ`aaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbccccccddddddeeeeeeeeeeeeeeeeeeeeeeeeefggggggghhhhhhhhiiiiiiiiiiiiiiijjkkkkklllllllmmmnnnnnnnnnoooooooooooooooooooooooooooooooooopprrrrrrrrrssssssssssttttttttuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuvvwwwwwwwxxyyyyyyyyyyzzzzzz"
-        expect(string.normalized()).toBe normalized
+  describe "#normalized()", ->
+    it "converts characters with diactrics to normal characters", ->
+      string = "ÀÁÂÃÄÅĀĂĄǍǞǠǺȀȂȦḀẠẢẤẦẨẪẬẮẰẲẴẶÅḂḄḆÇĆĈĊČḈĎḊḌḎḐḒÈÉÊËĒĔĖĘĚȄȆȨḔḖḘḚḜẸẺẼẾỀỂỄỆḞĜĞĠĢǦǴḠĤȞḢḤḦḨḪÌÍÎÏĨĪĬĮİǏȈȊḬḮỈỊĴĶǨḰḲḴĹĻĽḶḸḺḼḾṀṂÑŃŅŇǸṄṆṈṊÒÓÔÕÖŌŎŐƠǑǪǬȌȎȪȬȮȰṌṎṐṒỌỎỐỒỔỖỘỚỜỞỠỢṔṖŔŖŘȐȒṘṚṜṞŚŜŞŠȘṠṢṤṦṨŢŤȚṪṬṮṰÙÚÛÜŨŪŬŮŰŲƯǓǕǗǙǛȔȖṲṴṶṸṺỤỦỨỪỬỮỰṼṾŴẀẂẄẆẈẊẌÝŶŸȲẎỲỴỶỸŹŻŽẐẒẔ`àáâãäåāăąǎǟǡǻȁȃȧḁạảấầẩẫậắằẳẵặḃḅḇçćĉċčḉďḋḍḏḑḓèéêëēĕėęěȅȇȩḕḗḙḛḝẹẻẽếềểễệḟĝğġģǧǵḡĥȟḣḥḧḩḫẖìíîïĩīĭįǐȉȋḭḯỉịĵǰķǩḱḳḵĺļľḷḹḻḽḿṁṃñńņňǹṅṇṉṋòóôõöōŏőơǒǫǭȍȏȫȭȯȱṍṏṑṓọỏốồổỗộớờởỡợṕṗŕŗřȑȓṙṛṝṟśŝşšșṡṣṥṧṩţťțṫṭṯṱẗùúûüũūŭůűųưǔǖǘǚǜȕȗṳṵṷṹṻụủứừửữựṽṿŵẁẃẅẇẉẘẋẍýÿŷȳẏẙỳỵỷỹźżžẑẓẕ"
+      normalized = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBCCCCCCDDDDDDEEEEEEEEEEEEEEEEEEEEEEEEEFGGGGGGGHHHHHHHIIIIIIIIIIIIIIIIJKKKKKLLLLLLLMMMNNNNNNNNNOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOPPRRRRRRRRRSSSSSSSSSSTTTTTTTUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUVVWWWWWWXXYYYYYYYYYZZZZZZ`aaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbccccccddddddeeeeeeeeeeeeeeeeeeeeeeeeefggggggghhhhhhhhiiiiiiiiiiiiiiijjkkkkklllllllmmmnnnnnnnnnoooooooooooooooooooooooooooooooooopprrrrrrrrrssssssssssttttttttuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuvvwwwwwwwxxyyyyyyyyyyzzzzzz"
+      expect(string.normalized()).to_be normalized
 
-    describe "sha1()", ->
-      it "generates a string", ->
-        expect("1".sha1()).toBeDefined()
+  describe "sha1()", ->
+    it "generates a string", ->
+      expect("1".sha1()).toBeDefined()
 
-      it "has 40 characters", ->
-        expect("1".sha1().length).toBe 40
+    it "has 40 characters", ->
+      expect("1".sha1().length).toBe 40
 
-      it "is HEX, i.e. contains only digits and letters A - F", ->
-        expect("1".sha1()).toMatch /[0-9a-fA-F]+/
+    it "is HEX, i.e. contains only digits and letters A - F", ->
+      expect("1".sha1()).toMatch /[0-9a-fA-F]+/
 
-      it "generates correct digests for some example strings", ->
-          expect("The quick brown fox jumps over the lazy dog".sha1()).toBe "2fd4e1c67a2d28fced849ee1bb76e7391b93eb12"
+    it "generates correct digests for some example strings", ->
+        expect("The quick brown fox jumps over the lazy dog".sha1()).toBe "2fd4e1c67a2d28fced849ee1bb76e7391b93eb12"
 
-    describe "clone()", ->
-      it "returns a clone of the receiver", ->
-        string = "String"
-        expect(string.clone()).toEqual "String"
+  describe "clone()", ->
+    it "returns a clone of the receiver", ->
+      string = "String"
+      expect(string.clone()).toEqual "String"
 
-      it "which is not the same instance", ->
-        string = "String"
-        string.unique_string_instance = "Unique String Instance"
-        expect(string.clone().unique_string_instance).toBe undefined
+    it "which is not the same instance", ->
+      string = "String"
+      string.unique_string_instance = "Unique String Instance"
+      expect(string.clone().unique_string_instance).to_be undefined

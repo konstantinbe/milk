@@ -20,49 +20,49 @@
 # THE SOFTWARE.
 
 describe "Milk.FunctionExtensions", ->
-  describe "curry(args...)", ->
+  describe "#curry()", ->
     it "curries arguments passed in at bind time", ->
       concatenate = (arrays...) -> arrays.inject [], (memo, array) -> memo.add_many array
       one_two_three = concatenate.curry([1], [2], [3])
-      expect(one_two_three()).toEqual [1, 2, 3]
+      expect(one_two_three()).to_equal [1, 2, 3]
 
     it "passes in regular arguments", ->
       concatenate = (arrays...) -> arrays.inject [], (memo, array) -> memo.add_many array
       one_two_three = concatenate.curry([1], [2], [3])
-      expect(one_two_three([4, 5], [6])).toEqual [1, 2, 3, 4, 5, 6]
+      expect(one_two_three([4, 5], [6])).to_equal [1, 2, 3, 4, 5, 6]
 
-  describe "bind_to(object, [args...])", ->
+  describe "#bind_to()", ->
     it "returns a new function which calls the receiver by passing object as the first argument", ->
       plus_one = ((number) -> number + 1)
       five = plus_one.bind_to(4)
-      expect(five()).toBe 5
+      expect(five()).to_be 5
 
     it "curries arguments passed in at bind time", ->
       concatenate = ((array, arrays...) -> array.concat arrays...)
       one_two_three = concatenate.bind_to([1], [2], [3])
-      expect(one_two_three()).toEqual [1, 2, 3]
+      expect(one_two_three()).to_equal [1, 2, 3]
 
     it "passes in regular arguments", ->
       concatenate = ((array, arrays...) -> array.concat arrays...)
       one_two_three = concatenate.bind_to([1], [2], [3])
-      expect(one_two_three([4, 5], [6])).toEqual [1, 2, 3, 4, 5, 6]
+      expect(one_two_three([4, 5], [6])).to_equal [1, 2, 3, 4, 5, 6]
 
-  describe "methodize()", ->
+  describe "#methodize()", ->
     it "returns a new function that pushes this as the first argument at call time", ->
       concatenate = (array, arrays...) -> array.concat arrays...
       array = [1, 2, 3]
       array.concatenate = concatenate.methodize()
-      expect(array.concatenate [4], [5, 6]).toEqual [1, 2, 3, 4, 5, 6]
+      expect(array.concatenate [4], [5, 6]).to_equal [1, 2, 3, 4, 5, 6]
 
-  describe "wrap(wrapper)", ->
+  describe "#wrap()", ->
     it "returns a function", ->
       generate_text = -> "I should be wrapped by a div."
       div = generate_text.wrap (func) -> "<div>" + func() + "</div>"
-      expect(div()).toBe "<div>I should be wrapped by a div.</div>"
+      expect(div()).to_be "<div>I should be wrapped by a div.</div>"
 
-  describe "compose(functions...)", ->
+  describe "#compose()", ->
 
-  describe "clone()", ->
+  describe "#clone()", ->
     it "returns the same instance of a function", ->
       func = -> 1 + 1
-      expect(func.clone()).toBe func
+      expect(func.clone()).to_be func
