@@ -184,6 +184,22 @@ describe "Milk.ObjectExtensions", ->
       person = name: "Peter"
       expect(person.equals name: "Peter").to_be false
 
+  describe "property and relationship definition methods", ->
+    describe "#has()", ->
+      # TODO: specify.
+
+    describe "#has_one()", ->
+      # TODO: specify.
+
+    describe "#belongs_to()", ->
+      # TODO: specify.
+
+    describe "#has_many()", ->
+      # TODO: specify.
+
+    describe "#has_and_belongs_to_many()", ->
+      # TODO: specify.
+
   describe "key-value coding accessor methods", ->
     describe "#value_for()", ->
       it "returns the value for the given key of an object", ->
@@ -271,9 +287,6 @@ describe "Milk.ObjectExtensions", ->
       it "returns itself", ->
         object = {}
         expect(object.did_remove_many_values []).to_be object
-
-  describe "#has()", ->
-    # TODO: describe.
 
   describe "generic to-many relationship accessor methods", ->
     company = null
