@@ -219,35 +219,35 @@ describe "Milk.ObjectExtensions", ->
 
       it "redirects #add_<singular>() method to add_many_values()", ->
         book.add_page page
-        expect(book.add_many_values).toHaveBeenCalled()
+        expect(book.add_many_values).to_have_been_called()
 
       it "redirects #add_many_<plural>() method to add_many_values()", ->
         book.add_many_pages pages
-        expect(book.add_many_values).toHaveBeenCalled()
+        expect(book.add_many_values).to_have_been_called()
 
       it "redirects #insert_<singular>() method to insert_many_values()", ->
         book.insert_page page
-        expect(book.insert_many_values).toHaveBeenCalled()
+        expect(book.insert_many_values).to_have_been_called()
 
       it "redirects #insert_many_<plural>() method to insert_many_values()", ->
         book.insert_many_pages pages
-        expect(book.insert_many_values).toHaveBeenCalled()
+        expect(book.insert_many_values).to_have_been_called()
 
       it "redirects #remove_<singular>() method to remove_many_values()", ->
         book.remove_page page
-        expect(book.remove_many_values).toHaveBeenCalled()
+        expect(book.remove_many_values).to_have_been_called()
 
       it "redirects #remove_many_<plural>() method to remove_many_values()", ->
         book.remove_many_pages pages
-        expect(book.remove_many_values).toHaveBeenCalled()
+        expect(book.remove_many_values).to_have_been_called()
 
       it "redirects #remove_<singular>_at() method to remove_many_values_at()", ->
         book.remove_page_at 0
-        expect(book.remove_many_values_at).toHaveBeenCalled()
+        expect(book.remove_many_values_at).to_have_been_called()
 
       it "redirects #remove_many_<plural>_at() method to remove_many_values_at()", ->
         book.remove_many_pages_at [0, 1]
-        expect(book.remove_many_values_at).toHaveBeenCalled()
+        expect(book.remove_many_values_at).to_have_been_called()
 
     describe "#has_and_belongs_to_many()", ->
       # TODO: specify.
