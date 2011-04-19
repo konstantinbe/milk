@@ -39,7 +39,6 @@ task 'specs:all' => ['specs:node', 'specs:v8', 'specs:nitro', 'specs:browser']
 
 task 'specs:prepare' => [:prepare, 'build:milk', 'build:specs'] do
   put "Preparing specs ... "
-  run "cp resources/spec-runner-node.js build/"
   run "cp resources/driver.js build/"
   run "cp resources/spec-runner.js build/"
   puts OK
@@ -53,7 +52,8 @@ end
 
 task 'specs:node' => ['specs:prepare'] do
   puts "Running specs on NodeJS ..."
-  run "cd build/;node spec-runner-node.js"
+  run "cd build/;cat jasmine/jasmine.js milk.js specs.js spec-runner.js > all-in-one.js"
+  run "cd build; node all-in-one.js"
 end
 
 task 'specs:v8' => [:prepare, 'specs:prepare'] do
