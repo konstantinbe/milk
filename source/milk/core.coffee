@@ -29,6 +29,7 @@ FunctionExtensions = requires 'Milk.FunctionExtensions'
 RegExpExtensions = requires 'Milk.RegExpExtensions'
 ArrayExtensions = requires 'Milk.ArrayExtensions'
 DateExtensions = requires 'Milk.DateExtensions'
+MathExtensions = requires 'Milk.MathExtensions'
 
 # ------------------------------------------------------------------------------
 
@@ -57,3 +58,5 @@ RegExp.extend_by RegExpExtensions
 
 Array.extend_by Enumerable
 Array.extend_by ArrayExtensions
+
+Math.mixin MathExtensions
