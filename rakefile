@@ -13,7 +13,7 @@ task 'build:milk' => [:prepare] do
   put "Compiling Milk ... "
   run "commands/milk join source/milk"
   run "coffee --compile build/milk.coffee"
-  run "cp resources/milk.html build/" unless File.exists? "build/milk.html"
+  run "cp resources/milk.html build/"
   puts OK
 end
 
@@ -29,26 +29,43 @@ task 'build:specs' => [:prepare] do
   put "Compiling specs ... "
   run "coffee --join --compile --output build/ resources/spec-helper.coffee specs/*.coffee"
   run "mv build/concatenation.js build/specs.js"
-  run "cp -r externals/jasmine/lib build/jasmine" unless File.exists? "build/jasmine"
-  run "cp resources/specs.html build/" unless File.exists? "build/specs.html"
+  run "cp -r externals/jasmine/lib build/jasmine"
+  run "cp resources/specs.html build/"
   puts OK
 end
 
-task :specs => ['specs:node'] do
+task :specs => ['specs:v8'] do
 
 end
 
-task 'specs:browser' => [:prepare, 'build:milk', 'build:specs'] do
+task 'specs:prepare' => [:prepare, 'build:milk', 'build:specs'] do
+  put "Preparing specs ... "
+  run "cp resources/run-specs-on-node.js build/"
+  run "cp resources/driver.js build/"
+  run "cp resources/spec-runner.js build/"
+  puts OK
+end
+
+task 'specs:browser' => ['specs:prepare'] do
   put "Opening specs in browser ... "
   run "open build/specs.html"
   puts OK
 end
 
-task 'specs:node' => [:prepare, 'build:milk', 'build:specs'] do
-  put "Preparing specs ... "
-  run "cp resources/run-specs-on-node.js build/"
-  puts OK
+task 'specs:node' => ['specs:prepare'] do
+  puts "Running specs on NodeJS ..."
   run "cd build/;node run-specs-on-node.js"
+end
+
+task 'specs:v8' => [:prepare, 'build:milk', 'build:specs'] do
+  puts "Running specs on V8 ..."
+  run "cd build/;v8 driver.js jasmine/jasmine.js milk.js specs.js spec-runner.js"
+end
+
+task 'specs:nitro' => [:prepare, 'build:milk', 'build:specs'] do
+  puts "Running specs on Nitro ..."
+  jsc = if `which jsc`.size > 0 then "jsc" else "/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc" end
+  run "cd build/;#{jsc} driver.js jasmine/jasmine.js milk.js specs.js spec-runner.js"
 end
 
 task :serve => [:build] do
