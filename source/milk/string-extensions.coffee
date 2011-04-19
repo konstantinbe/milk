@@ -24,6 +24,10 @@
 #
 # Method sha1() is based on code from ttp://www.webtoolkit.info/ and the SHA-1
 # implementation in JavaScript by Chris Veness, http://www.movable-type.co.uk/
+#
+# Methods utf8() and utf16() are using the brilliant URL encoding/decoding trick
+# described here:
+# http://ecmanaut.blogspot.com/2006/07/encoding-decoding-utf8-in-javascript.html
 
 PLURAL = [
   [/(quiz)$/i,               "$1zes"  ]
@@ -329,6 +333,12 @@ StringExtensions =
   clone: ->
     new String(this)
 
+  utf8: ->
+    unescape encodeURIComponent this
+
+  utf16: ->
+    decodeURIComponent escape this
+
   sha1: ->
     rotate_left = (n, s) -> (n << s) | (n >>> (32 - s))
 
@@ -344,16 +354,7 @@ StringExtensions =
         intermediate = (number >>> (i * 4)) & 0x0f
         string += intermediate.toString 16
 
-    to_utf8 = (string) ->
-      utf8 = string.replace /[\u0080-\u07ff]/g, (character) ->
-        code = character.charCodeAt 0
-        String.fromCharCode 0xc0 | code >> 6, 0x80 | code & 0x3f
-
-      utf8.replace /[\u0800-\uffff]/g, (character) ->
-        code = character.charCodeAt 0
-        String.fromCharCode 0xe0 | code >> 12, 0x80 | code >> 6 & 0x3F, 0x80 | code & 0x3f
-
-    string = to_utf8 this
+    string = this.utf8()
     string += String.fromCharCode 0x80
 
     K = [0x5a827999, 0x6ed9eba1, 0x8f1bbcdc, 0xca62c1d6]
