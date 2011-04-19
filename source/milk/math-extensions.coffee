@@ -21,10 +21,8 @@
 
 MathExtensions =
   generate_unique_id: ->
-    `
-    var unique_id = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-      return v.toString(16);
-    });
-    `
+    unique_id = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace /[xy]/g, (character) ->
+      random = Math.random() * 16 | 0
+      number = if character == 'x' then random else (random & 0x3 | 0x8)
+      number.toString 16
     unique_id.uppercased()
