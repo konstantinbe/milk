@@ -34,13 +34,12 @@ task 'build:specs' => [:prepare] do
   puts OK
 end
 
-task :specs => ['specs:v8'] do
-
-end
+task :specs => ['specs:nitro']
+task 'specs:all' => ['specs:node', 'specs:v8', 'specs:nitro', 'specs:browser']
 
 task 'specs:prepare' => [:prepare, 'build:milk', 'build:specs'] do
   put "Preparing specs ... "
-  run "cp resources/run-specs-on-node.js build/"
+  run "cp resources/spec-runner-node.js build/"
   run "cp resources/driver.js build/"
   run "cp resources/spec-runner.js build/"
   puts OK
@@ -54,10 +53,10 @@ end
 
 task 'specs:node' => ['specs:prepare'] do
   puts "Running specs on NodeJS ..."
-  run "cd build/;node run-specs-on-node.js"
+  run "cd build/;node spec-runner-node.js"
 end
 
-task 'specs:v8' => [:prepare, 'build:milk', 'build:specs'] do
+task 'specs:v8' => [:prepare, 'specs:prepare'] do
   puts "Running specs on V8 ..."
   run "cd build/;v8 driver.js jasmine/jasmine.js milk.js specs.js spec-runner.js"
 end
@@ -67,6 +66,7 @@ task 'specs:nitro' => [:prepare, 'build:milk', 'build:specs'] do
   jsc = if `which jsc`.size > 0 then "jsc" else "/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc" end
   run "cd build/;#{jsc} driver.js jasmine/jasmine.js milk.js specs.js spec-runner.js"
 end
+
 
 task :serve => [:build] do
   host = `hostname`.chop
