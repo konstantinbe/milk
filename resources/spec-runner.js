@@ -8,16 +8,23 @@ var verbose = false;
 var numberOfColumns = 80;
 
 var put = null;
+var colorOutputSupported = false;
 
 // Add a print function 'put()' required by the spec runner.
 if (typeof process !== 'undefined') {
     // We are on NodeJS
+    colorOutputSupported = true;
     put = function(string) {
         process.stdout.write(string);
+    };
+} else if (typeof document !== 'undefined' && document.body && document.body.innerHTML) {
+    put = function(string) {
+        document.body.innerHTML += string;
     };
 } else {
     // Because vanilla V8 can only print full lines, we use a buffer
     // and flush it as soon as there is a newline.
+    colorOutputSupported = true;
     var putBuffer = "";
     put = function(string) {
         putBuffer += string;
@@ -32,6 +39,10 @@ if (typeof process !== 'undefined') {
 }
 
 function stylize(string, style) {
+    if (!colorOutputSupported) {
+        return string;
+    }
+
     var styleCodeBegin = "\033[";
     var styleCodeEnd = "\033[0m";
     var styleCode = "0m";

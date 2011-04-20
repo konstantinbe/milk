@@ -29,7 +29,7 @@ task 'build:specs' => [:prepare] do
   put "Compiling specs ... "
   run "coffee --join --compile --output build/ resources/spec-helper.coffee specs/*.coffee"
   run "mv build/concatenation.js build/specs.js"
-  run "cp -r externals/jasmine/lib build/jasmine"
+  run "cp -r externals/jasmine/lib/jasmine.js build/"
   run "cp resources/specs.html build/"
   puts OK
 end
@@ -52,19 +52,19 @@ end
 
 task 'specs:node' => ['specs:prepare'] do
   puts "Running specs on NodeJS ..."
-  run "cd build/;cat jasmine/jasmine.js milk.js specs.js spec-runner.js > all-in-one.js"
+  run "cd build/;cat jasmine.js milk.js specs.js spec-runner.js > all-in-one.js"
   run "cd build; node all-in-one.js"
 end
 
 task 'specs:v8' => [:prepare, 'specs:prepare'] do
   puts "Running specs on V8 ..."
-  run "cd build/;v8 driver.js jasmine/jasmine.js milk.js specs.js spec-runner.js"
+  run "cd build/;v8 driver.js jasmine.js milk.js specs.js spec-runner.js"
 end
 
 task 'specs:nitro' => [:prepare, 'build:milk', 'build:specs'] do
   puts "Running specs on Nitro ..."
   jsc = if `which jsc`.size > 0 then "jsc" else "/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc" end
-  run "cd build/;#{jsc} driver.js jasmine/jasmine.js milk.js specs.js spec-runner.js"
+  run "cd build/;#{jsc} driver.js jasmine.js milk.js specs.js spec-runner.js"
 end
 
 
