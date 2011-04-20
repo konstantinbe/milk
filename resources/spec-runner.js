@@ -5,7 +5,7 @@
 /*globals global jasmine process */
 
 var verbose = false;
-var numberOfColumns = 80;
+var numberOfColumns = 50;
 
 var put = null;
 var colorOutputSupported = false;
