@@ -192,7 +192,7 @@ ObjectExtensions =
     # TODO: Implement.
     @
 
-  # -------------------------------------------- key-value-coding methods ------
+  # ---------------------------------------------------- key-value coding ------
 
   value_for: (key) ->
     getter = 'get_' + key
@@ -209,7 +209,9 @@ ObjectExtensions =
     @did_change_value_for key
     @
 
-  # ------------------------ key-value coding change notification methods ------
+  # ------------------------------------------------ key-value validation ------
+
+  # -------------------------------- key-value coding change notification ------
 
   will_access_value_for: (key, options = {}) ->
     @ # do nothing for now, will be used later for key-value observing.
@@ -235,7 +237,7 @@ ObjectExtensions =
   did_remove_many_values: (key, options = {}) ->
     @ # do nothing for now, will be used later for key-value observing.
 
-  # ----------------------- generic to-many relationship accessor methods ------
+  # ------------------------------ generic to-many relationship accessors ------
 
   add_many_values: (values, options = {}) ->
     key = options['to']
