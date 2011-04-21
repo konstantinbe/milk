@@ -211,6 +211,11 @@ ObjectExtensions =
 
   # ------------------------------------------------ key-value validation ------
 
+  validate_value: (value, options = {}) ->
+    validation_method_name = 'validate_' + options['for']
+    validation_method_exists = @[validation_method_name]?
+    if validation_method_exists then @[validation_method_name](value) else null # TODO: return validation result here.
+
   # -------------------------------- key-value coding change notification ------
 
   will_access_value_for: (key, options = {}) ->
