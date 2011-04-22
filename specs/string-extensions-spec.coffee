@@ -19,6 +19,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+requires 'Specs.Helper'
+
 describe "Milk.StringExtensions", ->
   describe "#first()", ->
     it "returns the first character if |count| is not given", ->
