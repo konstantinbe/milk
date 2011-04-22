@@ -21,5 +21,5 @@
 
 Matcher = requires 'Milk.Matcher'
 
-class ToThrow extends Milk.Matcher
+class ToThrow extends Matcher
   # TODO: implement.

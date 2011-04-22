@@ -21,5 +21,5 @@
 
 Matcher = requires 'Milk.Matcher'
 
-class ToHaveAtMost extends Milk.Matcher
+class ToHaveAtMost extends Matcher
   # TODO: implement.
