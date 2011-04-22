@@ -45,7 +45,7 @@ ObjectExtensions =
   responds_to: (method) ->
     @[method]? and @[method].is_function()
 
-  send: (method, parameters...) ->
+  invoke: (method, parameters...) ->
     @[method](parameters...)
 
   merge: (objects...) ->
@@ -197,7 +197,7 @@ ObjectExtensions =
   value_for: (key) ->
     getter = 'get_' + key
     @will_access_value_for key
-    value = if @responds_to getter then @send getter else @[key]
+    value = if @responds_to getter then @invoke getter else @[key]
     @did_access_value_for key
     value
 
@@ -205,7 +205,7 @@ ObjectExtensions =
     key = options['for']
     setter = 'set_' + key
     @will_change_value_for key
-    if @responds_to setter then @send setter, value else @[key] = value
+    if @responds_to setter then @invoke setter, value else @[key] = value
     @did_change_value_for key
     @
 
