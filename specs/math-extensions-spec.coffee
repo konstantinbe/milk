@@ -19,6 +19,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+requires 'Specs.Helper'
+
 describe "Milk.MathExtensions", ->
   describe ".generate_unique_id()", ->
     it "generates an RFC4122 version 4 ID", ->

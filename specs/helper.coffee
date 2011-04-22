@@ -19,13 +19,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-context = describe
-spy_on = spyOn
+GLOBAL.context ?= describe
+GLOBAL.spy_on ?= spyOn
 
 # ---------------------------------------- before- and after each aliases ------
 
-before_each = beforeEach
-after_each = afterEach
+GLOBAL.before_each ?= beforeEach
+GLOBAL.after_each ?= afterEach
 
 # ------------------------------------------------------ aliased matchers ------
 

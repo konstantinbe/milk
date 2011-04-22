@@ -19,6 +19,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+requires 'Specs.Helper'
+
 describe "Milk.ObjectExtensions", ->
   xdescribe "#get()", ->
     it "returns value for key", ->

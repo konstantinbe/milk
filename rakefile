@@ -27,8 +27,8 @@ end
 
 task 'build:specs' => [:prepare] do
   put "Compiling specs ... "
-  run "coffee --join --compile --output build/ resources/spec-helper.coffee specs/*.coffee"
-  run "mv build/concatenation.js build/specs.js"
+  run "commands/milk join specs"
+  run "coffee --compile build/specs.coffee"
   run "cp -r externals/jasmine/jasmine.js build/"
   run "cp resources/specs.html build/"
   puts OK
