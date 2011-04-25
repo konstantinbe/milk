@@ -22,8 +22,8 @@ command :join do |c|
   c.action do |args, options|
     options.default :output_dir => "build"
 
-    path = File.dirname(args[0])
-    name = File.basename(args[0])
+    path = File.dirname args[0]
+    name = File.basename args[0]
 
     dependency_graph = construct_dependency_graph path, name
     sorted_file_paths = sort dependency_graph
