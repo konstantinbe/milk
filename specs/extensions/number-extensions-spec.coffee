@@ -21,20 +21,13 @@
 
 requires 'Specs.Helper'
 
-describe "Milk.MathExtensions", ->
-  describe ".generate_unique_id()", ->
-    it "generates an RFC4122 version 4 ID", ->
-      expect(Math.generate_unique_id()).to_match /^.+$/
+describe "Milk.Extensions.NumberExtensions", ->
+  describe "#clone()", ->
+    it "returns a clone of the receiver", ->
+      five = 5
+      expect(five.clone()).to_equal 5
 
-    it "contains 36 characters", ->
-      expect(Math.generate_unique_id().length).to_be 36
-
-    it "is divided by dashes at indexes 8, 13, 18, and 23", ->
-      expect(Math.generate_unique_id()).to_match "^........-....-....-....-............$"
-
-    it "has a 4 at index 14", ->
-      expect(Math.generate_unique_id()).to_match "^........-....-4...-....-............$"
-
-    it "has only HEX numbers besides the dashes", ->
-      unique_id = Math.generate_unique_id().replace /-/g, ""
-      expect(unique_id).to_match /^(\d|A|B|C|D|E|F)+$/
+    it "which is not the same instance", ->
+      five = 5
+      five.unique_five_instance = "Unique Five Instance"
+      expect(five.clone().unique_five_instance).to_be undefined

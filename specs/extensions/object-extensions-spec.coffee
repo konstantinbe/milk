@@ -21,7 +21,7 @@
 
 requires 'Specs.Helper'
 
-describe "Milk.ObjectExtensions", ->
+describe "Milk.Extensions.ObjectExtensions", ->
   xdescribe "#get()", ->
     it "returns value for key", ->
       expect({name: "Peter"}.get 'name').to_be "Peter"

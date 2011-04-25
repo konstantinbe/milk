@@ -21,7 +21,7 @@
 
 requires 'Specs.Helper'
 
-describe "Milk.StringExtensions", ->
+describe "Milk.Extensions.StringExtensions", ->
   describe "#first()", ->
     it "returns the first character if |count| is not given", ->
       expect("123".first()).to_equal '1'

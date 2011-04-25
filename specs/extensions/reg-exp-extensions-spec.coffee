@@ -21,7 +21,7 @@
 
 requires 'Specs.Helper'
 
-describe "Milk.RegExpExtensions", ->
+describe "Milk.Extensions.RegExpExtensions", ->
   describe "#clone()", ->
     it "returns a clone of the receiver", ->
       reg_exp = /.*/

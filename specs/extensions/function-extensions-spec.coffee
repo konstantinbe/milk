@@ -21,7 +21,7 @@
 
 requires 'Specs.Helper'
 
-describe "Milk.FunctionExtensions", ->
+describe "Milk.Extensions.FunctionExtensions", ->
   describe "#curry()", ->
     it "curries arguments passed in at bind time", ->
       concatenate = (arrays...) -> arrays.inject [], (memo, array) -> memo.add_many array

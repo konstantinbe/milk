@@ -21,7 +21,7 @@
 
 requires 'Specs.Helper'
 
-describe "Milk.Enumerable", ->
+describe "Milk.Mixins.Enumerable", ->
 
   describe "#each()", ->
     it "iterates over all objects in a collection", ->
