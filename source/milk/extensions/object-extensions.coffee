@@ -25,6 +25,9 @@ native_is_sealed = Object.isSealed
 native_is_frozen = Object.isFrozen
 
 ObjectExtensions =
+  new: (args...) ->
+    new @(args...)
+
   keys: ->
     Object.keys this
 
