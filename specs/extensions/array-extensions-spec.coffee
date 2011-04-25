@@ -21,7 +21,7 @@
 
 requires 'Specs.Helper'
 
-describe "Milk.ArrayExtensions", ->
+describe "Milk.Extensions.ArrayExtensions", ->
 
   describe "#first()", ->
     it "returns the first element if |count| is not given", ->

@@ -19,17 +19,17 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-Enumerable = requires 'Milk.Enumerable'
-Comparable = requires 'Milk.Comparable'
+Enumerable = requires 'Milk.Mixins.Enumerable'
+Comparable = requires 'Milk.Mixins.Comparable'
 
-ObjectExtensions = requires 'Milk.ObjectExtensions'
-NumberExtensions = requires 'Milk.NumberExtensions'
-StringExtensions = requires 'Milk.StringExtensions'
-FunctionExtensions = requires 'Milk.FunctionExtensions'
-RegExpExtensions = requires 'Milk.RegExpExtensions'
-ArrayExtensions = requires 'Milk.ArrayExtensions'
-DateExtensions = requires 'Milk.DateExtensions'
-MathExtensions = requires 'Milk.MathExtensions'
+ObjectExtensions = requires 'Milk.Extensions.ObjectExtensions'
+NumberExtensions = requires 'Milk.Extensions.NumberExtensions'
+StringExtensions = requires 'Milk.Extensions.StringExtensions'
+FunctionExtensions = requires 'Milk.Extensions.FunctionExtensions'
+RegExpExtensions = requires 'Milk.Extensions.RegExpExtensions'
+ArrayExtensions = requires 'Milk.Extensions.ArrayExtensions'
+DateExtensions = requires 'Milk.Extensions.DateExtensions'
+MathExtensions = requires 'Milk.Extensions.MathExtensions'
 
 # ------------------------------------------------------------------------------
 
