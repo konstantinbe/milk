@@ -12,7 +12,7 @@ program :description, 'Build utility for the Milk framework'
 # ******************************************************************************
 
 command :join do |c|
-  c.syntax = "milk join PATH [options]"
+  c.syntax = "milk join NAME PATH [options]"
   c.summary = "Concatenate modules into a single file."
   c.description = "Concatenates source files in the right order fulfilling their dependencies."
   c.example "Joins the milk framework producing build/milk.coffee", "milk join source/milk"
@@ -26,8 +26,9 @@ command :join do |c|
     name = File.basename args[0]
 
     dependency_graph = construct_dependency_graph path, name
+    not_found_file_paths = extract_not_found_file_paths_from dependency_graph
     sorted_file_paths = sort dependency_graph
-    concatenated = concatenate path, sorted_file_paths
+    concatenated = concatenate path, sorted_file_paths, not_found_file_paths
 
     if options.print
       puts concatenated
@@ -65,6 +66,19 @@ def construct_dependency_graph(path, name)
   dependency_graph
 end
 
+def extract_not_found_file_paths_from(dependency_graph)
+  not_found_file_paths = []
+  dependency_graph.each_value do |file_paths|
+    file_paths.each do |file_path|
+      unless dependency_graph[file_path]
+        not_found_file_paths << file_path
+        file_paths.delete file_path
+      end
+    end
+  end
+  not_found_file_paths
+end
+
 def required_paths_for(path)
   source = File.open(path, "r") { |file| file.read }
   source.scan(REQUIRE_REGEXP).collect do |dependency|
@@ -72,11 +86,24 @@ def required_paths_for(path)
   end
 end
 
-def concatenate(path, file_paths)
+def concatenate(path, file_paths, not_found_file_paths)
   pwd = Dir.pwd
   Dir.chdir path
+
+  # add prefix
   concatenated = ""
   concatenated << PREFIX
+
+  # list not found files
+  if not_found_file_paths.size > 0
+    concatenated << NOT_FOUND_FILES_PREFIX
+    not_found_file_paths.each do |file_path|
+      concatenated << "#    #{file_path}\n"
+    end
+    concatenated << "#\n"
+  end
+
+  # concatenate each file according to their topological sorting
   file_paths.collect do |file_path|
     source = File.open(file_path, "r") { |file| file.read }
     result = source.scan(/\A((?:#.*\n)*)((?:.|\n)*)/)
@@ -96,7 +123,7 @@ def concatenate(path, file_paths)
 end
 
 def ensure_path_exists(path)
-  error "No source directory found at path: " + path unless File.directory? path
+  error "No directory found at path: " + path unless File.directory? path
 end
 
 def change_working_directory_to(path)
@@ -156,6 +183,13 @@ GLOBAL.requires ?= (path) ->
     throw "[ERROR] Module #{path} not found." unless object?
     object = object[name]
   object
+'''
+
+NOT_FOUND_FILES_PREFIX = '''
+# The following files were required but could not be found. Make sure they are
+# loaded before they are used, otherwise there will be a runtime error thrown
+# by the requires() method. Not found files:
+#
 '''
 
 # ******************************************************************************
