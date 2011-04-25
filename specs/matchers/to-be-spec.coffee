@@ -19,13 +19,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-requires 'Specs.Helper'
+Helper = requires 'Specs.Helper'
+ToBe = requires 'Milk.Matchers.ToBe'
 
 describe "Milk.Matchers.ToBe", ->
   describe "#matches()", ->
     context "when created only with expected, no options", ->
       to_be = null
-      before_each -> to_be = Milk.Matchers.ToBe.new "Hello World!"
+      before_each -> to_be = ToBe.new "Hello World!"
 
       it "returns true if actual == expected", ->
         expect(to_be.matches "Hello World!").to_be true
@@ -39,7 +40,7 @@ describe "Milk.Matchers.ToBe", ->
 
       before_each ->
         person = name: "Peter", age: 5
-        to_be = Milk.Matchers.ToBe.new 'name', of: person
+        to_be = ToBe.new 'name', of: person
 
       it "returns true if actual == <property of target>", ->
         expect(to_be.matches "Peter").to_be true
