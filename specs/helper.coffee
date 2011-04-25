@@ -20,6 +20,7 @@
 # THE SOFTWARE.
 
 GLOBAL.context ?= describe
+GLOBAL.xcontext ?= xdescribe
 GLOBAL.spy_on ?= spyOn
 
 # ---------------------------------------- before- and after each aliases ------

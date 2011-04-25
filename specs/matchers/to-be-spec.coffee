@@ -19,12 +19,30 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-class ToBe
-  expected: undefined
+requires 'Specs.Helper'
 
-  constructor: (@value_or_key, @options = {}) -> # nothing todo.
+describe "Milk.Matchers.ToBe", ->
+  describe "#matches()", ->
+    context "when created only with expected, no options", ->
+      to_be = null
+      before_each -> to_be = Milk.Matchers.ToBe.new "Hello World!"
 
-  matches: (actual) ->
-    target = @options['of']
-    value = if target? then target.value_for @value_or_key else @value_or_key
-    actual == value
+      it "returns true if actual == expected", ->
+        expect(to_be.matches "Hello World!").to_be true
+
+      it "returns false if actual != expected", ->
+        expect(to_be.matches "Something else than Hello World!").to_be false
+
+    context "when created with a target option 'of'", ->
+      person = null
+      to_be = null
+
+      before_each ->
+        person = name: "Peter", age: 5
+        to_be = Milk.Matchers.ToBe.new 'name', of: person
+
+      it "returns true if actual == <property of target>", ->
+        expect(to_be.matches "Peter").to_be true
+
+      it "returns false if actual != <property of target>", ->
+        expect(to_be.matches "Anna").to_be false
