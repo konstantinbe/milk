@@ -19,7 +19,5 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-Matcher = requires 'Milk.Matcher'
-
-class ToBeAKindOf extends Matcher
+class ToBeAKindOf
   # TODO: implement.

@@ -19,7 +19,5 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-Matcher = requires 'Milk.Matcher'
-
-class ToHaveAtLeast extends Matcher
+class ToHaveAtLeast
   # TODO: implement.
