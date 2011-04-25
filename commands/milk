@@ -76,7 +76,7 @@ def extract_not_found_file_paths_from(dependency_graph)
       end
     end
   end
-  not_found_file_paths
+  not_found_file_paths.sort
 end
 
 def required_paths_for(path)
@@ -100,7 +100,6 @@ def concatenate(path, file_paths, not_found_file_paths)
     not_found_file_paths.each do |file_path|
       concatenated << "#    #{file_path}\n"
     end
-    concatenated << "#\n"
   end
 
   # concatenate each file according to their topological sorting
@@ -187,7 +186,7 @@ GLOBAL.requires ?= (path) ->
 
 NOT_FOUND_FILES_PREFIX = '''
 # The following files were required but could not be found. Make sure they are
-# loaded before they are used, otherwise there will be a runtime error thrown
+# loaded before they are used. Otherwise there will be a runtime error thrown
 # by the requires() method. Not found files:
 #
 '''
