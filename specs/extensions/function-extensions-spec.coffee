@@ -20,6 +20,7 @@
 # THE SOFTWARE.
 
 SpecHelper = requires 'Specs.SpecHelper'
+FunctionExtensions = requires 'Milk.Extensions.FunctionExtensions'
 
 describe "Milk.Extensions.FunctionExtensions", ->
   describe "#curry()", ->

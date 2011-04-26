@@ -20,6 +20,7 @@
 # THE SOFTWARE.
 
 SpecHelper = requires 'Specs.SpecHelper'
+StringExtensions = requires 'Milk.Extensions.StringExtensions'
 
 describe "Milk.Extensions.StringExtensions", ->
   describe "#first()", ->

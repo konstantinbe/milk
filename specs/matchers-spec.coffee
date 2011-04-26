@@ -20,3 +20,4 @@
 # THE SOFTWARE.
 
 SpecHelper = requires 'Specs.SpecHelper'
+Matchers = requires 'Milk.Matchers'

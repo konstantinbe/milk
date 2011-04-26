@@ -20,6 +20,7 @@
 # THE SOFTWARE.
 
 SpecHelper = requires 'Specs.SpecHelper'
+Enumerable = requires 'Milk.Mixins.Enumerable'
 
 describe "Milk.Mixins.Enumerable", ->
 

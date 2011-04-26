@@ -20,12 +20,13 @@
 # THE SOFTWARE.
 
 SpecHelper = requires 'Specs.SpecHelper'
+Comparable = requires 'Milk.Mixins.Comparable'
 
 describe "Milk.Mixins.Comparable", ->
   describe "properties", ->
     describe "is_comparable", ->
       it "returns yes if object mixes Comparable in", ->
-        expect(Milk.Mixins.Comparable).to_be_defined()
+        expect(Comparable).to_be_defined()
         expect(5.is_comparable).to_be true
 
   describe "methods", ->

@@ -20,6 +20,7 @@
 # THE SOFTWARE.
 
 SpecHelper = requires 'Specs.SpecHelper'
+ObjectExtensions = requires 'Milk.Extensions.ObjectExtensions'
 
 describe "Milk.Extensions.ObjectExtensions", ->
   xdescribe "#get()", ->

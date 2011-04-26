@@ -20,6 +20,7 @@
 # THE SOFTWARE.
 
 SpecHelper = requires 'Specs.SpecHelper'
+ArrayExtensions = requires 'Milk.Extensions.ArrayExtensions'
 
 describe "Milk.Extensions.ArrayExtensions", ->
 

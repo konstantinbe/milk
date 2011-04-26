@@ -20,6 +20,7 @@
 # THE SOFTWARE.
 
 SpecHelper = requires 'Specs.SpecHelper'
+RegExpExtensions = requires 'Milk.Extensions.RegExpExtensions'
 
 describe "Milk.Extensions.RegExpExtensions", ->
   describe "#clone()", ->

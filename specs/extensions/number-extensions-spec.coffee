@@ -20,6 +20,7 @@
 # THE SOFTWARE.
 
 SpecHelper = requires 'Specs.SpecHelper'
+NumberExtensions = requires 'Milk.Extensions.NumberExtensions'
 
 describe "Milk.Extensions.NumberExtensions", ->
   describe "#clone()", ->

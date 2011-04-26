@@ -20,6 +20,7 @@
 # THE SOFTWARE.
 
 SpecHelper = requires 'Specs.SpecHelper'
+MathExtensions = requires 'Milk.Extensions.MathExtensions'
 
 describe "Milk.Extensions.MathExtensions", ->
   describe ".generate_unique_id()", ->
