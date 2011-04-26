@@ -21,3 +21,18 @@
 
 SpecHelper = requires 'Specs.SpecHelper'
 Matchers = requires 'Milk.Matchers'
+
+describe "Milk.Matchers", ->
+  describe ".to_be()", ->
+    it "returns true if subject == value", ->
+      expect(Matchers.match 1, to_be: 1).to_be true
+
+    it "returns false if subject != value", ->
+      expect(Matchers.match 1, to_be: 2).to_be false
+
+    describe ".to_equal()", ->
+      it "returns true if subject equals value", ->
+        expect(Matchers.match [1, 2, 3], to_equal: [1, 2, 3]).to_be true
+
+      it "returns false if subject does not equal value", ->
+        expect(Matchers.match [1, 2, 3], to_equal: [1, 2]).to_be false
