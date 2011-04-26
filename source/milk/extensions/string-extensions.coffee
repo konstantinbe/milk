@@ -260,6 +260,9 @@ StringExtensions =
   clone: ->
     new String(this)
 
+  description: ->
+    "'" + this + "'"
+
   utf8: ->
     unescape encodeURIComponent this
 

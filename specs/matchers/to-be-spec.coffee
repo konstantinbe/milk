@@ -35,8 +35,8 @@ describe "Milk.Matchers.ToBe", ->
 
   describe "#failure_message_for_to()", ->
     it "returns 'expected <actual> to be <expected>'", ->
-      expect(to_be.failure_message_for_to "ho").to_be "expected ho to be hey"
+      expect(to_be.failure_message_for_to "ho").to_be "expected 'ho' to be 'hey'"
 
   describe "#description()", ->
     it "returns a message of the form 'be <expected>'", ->
-      expect(to_be.description()).to_be "be hey"
+      expect(to_be.description()).to_be "be 'hey'"
