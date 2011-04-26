@@ -26,10 +26,10 @@ class ToBe
     actual == @expected
 
   failure_message_for_to: (actual) ->
-    "expected #{actual} to be #{@expected}"
+    "expected #{actual.description()} to be #{@expected.description()}"
 
   failure_message_for_not_to: (actual) ->
-    "expected #{actual} not to be #{@expected}"
+    "expected #{actual.description()} not to be #{@expected.description()}"
 
   description: ->
     "be #{@expected.description()}"
