@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-requires 'Specs.SpecHelper'
+SpecHelper = requires 'Specs.SpecHelper'
 
 describe "Milk.Extensions.NumberExtensions", ->
   describe "#clone()", ->
