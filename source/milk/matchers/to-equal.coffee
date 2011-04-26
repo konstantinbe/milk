@@ -20,4 +20,16 @@
 # THE SOFTWARE.
 
 class ToEqual
-  # TODO: implement.
+  constructor: (@expected) -> # nothing todo.
+
+  matches: (actual) ->
+    actual.equals @expected
+
+  failure_message_for_to: (actual) ->
+    "expected #{actual.description()} to equal #{@expected.description()}"
+
+  failure_message_for_not_to: (actual) ->
+    "expected #{actual.description()} not to equal #{@expected.description()}"
+
+  description: ->
+    "equal #{@expected.description()}"

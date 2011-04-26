@@ -23,4 +23,20 @@ Helper = requires 'Specs.Helper'
 ToEqual = requires 'Milk.Matchers.ToEqual'
 
 describe "Milk.Matchers.ToEqual", ->
-  # TODO: specify.
+  to_equal = null
+  before_each -> to_equal = ToEqual.new [1, 2, 3]
+
+  describe "#matches()", ->
+    it "returns true if actual equals expected", ->
+      expect(to_equal.matches [1, 2, 3]).to_equal true
+
+    it "returns false if actual doesn't equal expected", ->
+      expect(to_equal.matches [1, 2]).to_equal false
+
+  describe "#failure_message_for_to()", ->
+    it "returns 'expected <actual> to equal <expected>'", ->
+      expect(to_equal.failure_message_for_to [1, 2]).to_equal "expected [1, 2] to equal [1, 2, 3]"
+
+  describe "#description()", ->
+    it "returns a message of the form 'equal <expected>'", ->
+      expect(to_equal.description()).to_equal "equal [1, 2, 3]"
