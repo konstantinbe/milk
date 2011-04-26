@@ -20,4 +20,16 @@
 # THE SOFTWARE.
 
 class ToContain
-  # TODO: implement.
+  constructor: (@expected) -> # nothing todo.
+
+  matches: (actual) ->
+    actual.contains @expected
+
+  failure_message_for_to: (actual) ->
+    "expected #{actual.description()} to contain #{@expected.description()}"
+
+  failure_message_for_not_to: (actual) ->
+    "expected #{actual.description()} not to contain #{@expected.description()}"
+
+  description: ->
+    "contain #{@expected.description()}"

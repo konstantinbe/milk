@@ -23,4 +23,20 @@ Helper = requires 'Specs.Helper'
 ToContain = requires 'Milk.Matchers.ToContain'
 
 describe "Milk.Matchers.ToContain", ->
-  # TODO: specify.
+  to_contain = null
+  before_each -> to_contain = ToContain.new 2
+
+  describe "#matches()", ->
+    it "returns true if actual equals expected", ->
+      expect(to_contain.matches [1, 2, 3]).to_be true
+
+    it "returns false if actual doesn't equal expected", ->
+      expect(to_contain.matches [1, 3]).to_be false
+
+  describe "#failure_message_for_to()", ->
+    it "returns 'expected <actual> to contain <expected>'", ->
+      expect(to_contain.failure_message_for_to [1, 3]).to_be "expected [1, 3] to contain 2"
+
+  describe "#description()", ->
+    it "returns a message of the form 'contain <expected>'", ->
+      expect(to_contain.description()).to_be "contain 2"
