@@ -205,4 +205,5 @@ ArrayExtensions =
     yes
 
   description: ->
-    "[" + @toString() + "]"
+    descriptions = @collect (value) -> if value.description? then value.description() else value
+    "[" + descriptions.join(", ") + "]"
