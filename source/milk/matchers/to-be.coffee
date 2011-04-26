@@ -22,9 +22,10 @@
 class ToBe
   expected: undefined
 
-  constructor: (@value_or_key, @options = {}) -> # nothing todo.
+  constructor: (@expected) -> # nothing todo.
 
   matches: (actual) ->
-    target = @options['of']
-    value = if target? then target.value_for @value_or_key else @value_or_key
-    actual == value
+    actual == @expected
+
+  description: ->
+    "should be #{@expected.description()}"

@@ -23,27 +23,16 @@ Helper = requires 'Specs.Helper'
 ToBe = requires 'Milk.Matchers.ToBe'
 
 describe "Milk.Matchers.ToBe", ->
+  to_be = null
+  before_each -> to_be = ToBe.new "Hello World!"
+
   describe "#matches()", ->
-    context "when created only with expected, no options", ->
-      to_be = null
-      before_each -> to_be = ToBe.new "Hello World!"
+    it "returns true if actual == expected", ->
+      expect(to_be.matches "Hello World!").to_be true
 
-      it "returns true if actual == expected", ->
-        expect(to_be.matches "Hello World!").to_be true
+    it "returns false if actual != expected", ->
+      expect(to_be.matches "Something else than Hello World!").to_be false
 
-      it "returns false if actual != expected", ->
-        expect(to_be.matches "Something else than Hello World!").to_be false
-
-    context "when created with a target option 'of'", ->
-      person = null
-      to_be = null
-
-      before_each ->
-        person = name: "Peter", age: 5
-        to_be = ToBe.new 'name', of: person
-
-      it "returns true if actual == <property of target>", ->
-        expect(to_be.matches "Peter").to_be true
-
-      it "returns false if actual != <property of target>", ->
-        expect(to_be.matches "Anna").to_be false
+  describe "#description()", ->
+    it "returns a message of the form 'should be <expected>'", ->
+      expect(to_be.description()).to_be "should be Hello World!"
