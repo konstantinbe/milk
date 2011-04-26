@@ -23,4 +23,23 @@ Helper = requires 'Specs.Helper'
 ToExist = requires 'Milk.Matchers.ToExist'
 
 describe "Milk.Matchers.ToExist", ->
-  # TODO: specify.
+  to_exist = null
+  before_each -> to_exist = ToExist.new()
+
+  describe "#matches()", ->
+    it "returns true if actual exists", ->
+      expect(to_exist.matches [1, 2, 3]).to_be true
+
+    it "returns false if actual is null", ->
+      expect(to_exist.matches null).to_be false
+
+    it "returns false if actual is undefined", ->
+      expect(to_exist.matches undefined).to_be false
+
+  describe "#failure_message_for_to()", ->
+    it "returns 'expected <actual> to exist'", ->
+      expect(to_exist.failure_message_for_to [1, 2]).to_be "expected [1, 2] to exist"
+
+  describe "#description()", ->
+    it "returns a message of the form 'exist'", ->
+      expect(to_exist.description()).to_be "exist"

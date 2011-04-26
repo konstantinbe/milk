@@ -20,4 +20,14 @@
 # THE SOFTWARE.
 
 class ToExist
-  # TODO: implement.
+  matches: (actual) ->
+    actual?
+
+  failure_message_for_to: (actual) ->
+    "expected #{actual.description()} to exist"
+
+  failure_message_for_not_to: (actual) ->
+    "expected #{actual.description()} not to exist"
+
+  description: ->
+    "exist"
