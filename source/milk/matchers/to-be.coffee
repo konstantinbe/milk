@@ -20,12 +20,16 @@
 # THE SOFTWARE.
 
 class ToBe
-  expected: undefined
-
   constructor: (@expected) -> # nothing todo.
 
   matches: (actual) ->
     actual == @expected
 
+  failure_message_for_to: (actual) ->
+    "expected #{actual} to be #{@expected}"
+
+  failure_message_for_not_to: (actual) ->
+    "expected #{actual} not to be #{@expected}"
+
   description: ->
-    "should be #{@expected.description()}"
+    "be #{@expected.description()}"
