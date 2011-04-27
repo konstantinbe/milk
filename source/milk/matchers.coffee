@@ -73,6 +73,12 @@ class Matchers
     return lower < size < upper if options['excluding_bounds']
     lower <= size <= upper
 
+  @to_have_one: (key, options = {}) ->
+    # TODO: implement.
+
+  @to_have_many: (key, options = {}) ->
+    # TODO: implement.
+
   @to_match: (reg_exp) ->
     @subject.match reg_exp
 
