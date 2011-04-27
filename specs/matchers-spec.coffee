@@ -23,6 +23,10 @@ SpecHelper = requires 'Specs.SpecHelper'
 Matchers = requires 'Milk.Matchers'
 
 describe "Milk.Matchers", ->
+
+  describe ".to_exist()", ->
+    # TODO: specify.
+
   describe ".to_be()", ->
     it "returns true if subject == value", ->
       expect(Matchers.match 1, to_be: 1).to_be true
@@ -30,9 +34,57 @@ describe "Milk.Matchers", ->
     it "returns false if subject != value", ->
       expect(Matchers.match 1, to_be: 2).to_be false
 
-    describe ".to_equal()", ->
-      it "returns true if subject equals value", ->
-        expect(Matchers.match [1, 2, 3], to_equal: [1, 2, 3]).to_be true
+  describe ".to_a_kind_of()", ->
+    # TODO: specify.
 
-      it "returns false if subject does not equal value", ->
-        expect(Matchers.match [1, 2, 3], to_equal: [1, 2]).to_be false
+  describe ".to_be_an_instance_of()", ->
+    # TODO: specify.
+
+  describe ".to_equal()", ->
+    it "returns true if subject equals value", ->
+      expect(Matchers.match [1, 2, 3], to_equal: [1, 2, 3]).to_be true
+
+    it "returns false if subject does not equal value", ->
+      expect(Matchers.match [1, 2, 3], to_equal: [1, 2]).to_be false
+
+  describe ".to_contain()", ->
+    # TODO: specify.
+
+  describe ".to_contain_all()", ->
+    # TODO: specify.
+
+  describe ".to_contain_any()", ->
+    # TODO: specify.
+
+  describe ".to_have()", ->
+    # TODO: specify.
+
+  describe ".to_have_at_least()", ->
+    # TODO: specify.
+
+  describe ".to_have_at_most()", ->
+    # TODO: specify.
+
+  describe ".to_have_more_than()", ->
+    # TODO: specify.
+
+  describe ".to_have_less_than()", ->
+    # TODO: specify.
+
+  describe ".to_have_between()", ->
+    # TODO: specify.
+
+  describe ".to_have_one()", ->
+    # TODO: specify.
+
+  describe ".to_have_many()", ->
+    # TODO: specify.
+
+  describe ".to_match()", ->
+    # TODO: specify.
+
+  describe ".to_respond_to()", ->
+    # TODO: specify.
+
+  describe ".to_throw()", ->
+    # TODO: specify.
