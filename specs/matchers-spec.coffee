@@ -48,13 +48,28 @@ describe "Milk.Matchers", ->
       expect(Matchers.match [1, 2, 3], to_equal: [1, 2]).to_be false
 
   describe ".to_contain()", ->
-    # TODO: specify.
+    it "returns true if subject contains value", ->
+      expect(Matchers.match [1, 2, 3], to_contain: 2).to_be true
+
+    it "returns false if subject does not contain the value", ->
+      expect(Matchers.match [1, 2, 3], to_contain: 4).to_be false
 
   describe ".to_contain_all()", ->
-    # TODO: specify.
+    it "returns true if subject contains all values", ->
+      expect(Matchers.match [1, 2, 3], to_contain_all: [1, 2]).to_be true
+
+    it "returns true if subject contains all values, even if they are in different order", ->
+      expect(Matchers.match [1, 2, 3], to_contain_all: [1, 3, 2]).to_be true
+
+    it "returns false if one of the values is not contained in subject", ->
+      expect(Matchers.match [1, 2, 3], to_contain_all: [4]).to_be false
 
   describe ".to_contain_any()", ->
-    # TODO: specify.
+    it "returns true if subject contains at least one of the values but not the others", ->
+      expect(Matchers.match [1, 2, 3], to_contain_any: [1, 4]).to_be true
+
+    it "returns false if not one of the values is contained in subject", ->
+      expect(Matchers.match [1, 2, 3], to_contain_any: [4, 5]).to_be false
 
   describe ".to_have()", ->
     # TODO: specify.

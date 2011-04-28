@@ -45,10 +45,10 @@ class Matchers
     @subject.contains value
 
   @to_contain_all: (values) ->
-    @subject.all values
+    values.all (value) => @subject.contains value
 
   @to_contain_any: (values) ->
-    @subject.any values
+    values.any (value) => @subject.contains value
 
   @to_have: (count, options = {}) ->
     @subject.size() == count
