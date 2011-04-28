@@ -73,29 +73,29 @@ describe "Milk.Mixins.Comparable", ->
     describe "#is_between()", ->
       describe "without options", ->
         it "returns true if receiver is between lower and upper bound", ->
-          expect(5.is_between 4, 6).to_be true
+          expect(5.is_between [4, 6]).to_be true
 
         it "returns true if receiver equals lower bound", ->
-          expect(5.is_between 5, 6).to_be true
+          expect(5.is_between [5, 6]).to_be true
 
         it "returns true if receiver equals upper bound", ->
-          expect(5.is_between 4, 5).to_be true
+          expect(5.is_between [4, 5]).to_be true
 
         it "returns true if receiver == upper == lower", ->
-          expect(5.is_between 5, 5).to_be true
+          expect(5.is_between [5, 5]).to_be true
 
       context "when options exclude_bounds is set to yes", ->
         it "returns true if receiver is between lower and upper bound", ->
-          expect(5.is_between 4, 6, exclude_bounds: yes).to_be true
+          expect(5.is_between [4, 6], exclude_bounds: yes).to_be true
 
         it "returns false if receiver equals lower bound", ->
-          expect(5.is_between 5, 6, exclude_bounds: yes).to_be false
+          expect(5.is_between [5, 6], exclude_bounds: yes).to_be false
 
         it "returns false if receiver equals upper bound", ->
-          expect(5.is_between 4, 5, exclude_bounds: yes).to_be false
+          expect(5.is_between [4, 5], exclude_bounds: yes).to_be false
 
         it "returns false if receiver == upper == lower", ->
-          expect(5.is_between 5, 5, exclude_bounds: yes).to_be false
+          expect(5.is_between [5, 5], exclude_bounds: yes).to_be false
 
     describe "#equals()", ->
       it "returns true if receiver equals value", ->

@@ -36,7 +36,8 @@ Comparable =
     result = @compare_to value
     result == 0 or result == 1
 
-  is_between: (lower, upper, options = {}) ->
+  is_between: (bounds, options = {}) ->
+    [lower, upper] = bounds
     include_lower_bound = not (options['exclude_bounds'] or options['exclude_lower_bound'])
     include_upper_bound = not (options['exclude_bounds'] or options['exclude_upper_bound'])
     compared_to_lower = @compare_to lower
