@@ -38,13 +38,13 @@ Comparable =
 
   is_between: (bounds, options = {}) ->
     [lower, upper] = bounds
-    include_lower_bound = not (options['exclude_bounds'] or options['exclude_lower_bound'])
-    include_upper_bound = not (options['exclude_bounds'] or options['exclude_upper_bound'])
+    include_lower = not (options['excluding_bounds'] or options['excluding_lower'])
+    include_upper = not (options['excluding_bounds'] or options['excluding_upper'])
     compared_to_lower = @compare_to lower
     compared_to_upper = @compare_to upper
-    meets_lower_bound = compared_to_lower == +1 or include_lower_bound and compared_to_lower == 0
-    meets_upper_bound = compared_to_upper == -1 or include_upper_bound and compared_to_upper == 0
-    meets_lower_bound and meets_upper_bound
+    meets_lower = compared_to_lower == +1 or include_lower and compared_to_lower == 0
+    meets_upper = compared_to_upper == -1 or include_upper and compared_to_upper == 0
+    meets_lower and meets_upper
 
   equals: (value) ->
     @compare_to(value) == 0
