@@ -8,23 +8,28 @@ var verbose = false;
 var numberOfColumns = 50;
 
 var put = null;
-var colorOutputSupported = false;
+var colorOutputSupported = true;
 
 // Add a print function 'put()' required by the spec runner.
 if (typeof process !== 'undefined') {
     // We are on NodeJS
-    colorOutputSupported = true;
     put = function(string) {
         process.stdout.write(string);
     };
 } else if (typeof document !== 'undefined' && document.body && document.body.innerHTML) {
     put = function(string) {
+        string = string.replace(/\n/g, "<br />");
+        string = string.replace(/\[31m/g, "<span style='color:#ff6c60'>");
+        string = string.replace(/\[32m/g, "<span style='color:#a8ff60'>");
+        string = string.replace(/\[33m/g, "<span style='color:#ffffb6'>");
+        string = string.replace(/\[34m/g, "<span style='color:#96cbfe'>");
+        string = string.replace(/\[1m/g, "<span style='color:white; font-weight:bold'>");
+        string = string.replace(/\[0m/, "</span>");
         document.body.innerHTML += string;
     };
 } else {
     // Because vanilla V8 can only print full lines, we use a buffer
     // and flush it as soon as there is a newline.
-    colorOutputSupported = true;
     var putBuffer = "";
     put = function(string) {
         putBuffer += string;
