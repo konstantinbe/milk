@@ -96,10 +96,19 @@ describe "Milk.Matchers", ->
     # TODO: specify.
 
   describe ".to_match()", ->
-    # TODO: specify.
+    it "returns true of subject matches reg exp", ->
+      expect(Matchers.match "Hello World!", to_match: /ello/).to_be true
+
+    it "returns false of subject doesn't match reg exp", ->
+      expect(Matchers.match "Hello World!", to_match: /elo/).to_be false
 
   describe ".to_respond_to()", ->
-    # TODO: specify.
+    car = drive: -> "Bruuuum..."
+    it "returns true if subject repsonds to the method", ->
+      expect(Matchers.match car, to_respond_to: 'drive').to_be true
+
+    it "returns false if subject does not repsond to the method", ->
+      expect(Matchers.match car, to_respond_to: 'fly').to_be false
 
   describe ".to_throw()", ->
     # TODO: specify.
