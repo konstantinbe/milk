@@ -22,6 +22,7 @@
 class Matchers
   @match: (subject, options = {}) ->
     matcher_name = options.keys().detect (key) -> key.begins_with "to_"
+    matcher_name = ("to_" + options['to']) if options['to']?
     matcher_parameter = options[matcher_name]
     matcher = @[matcher_name]
     matcher.call {subject: subject}, matcher_parameter, options
