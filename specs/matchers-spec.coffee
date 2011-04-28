@@ -167,7 +167,27 @@ describe "Milk.Matchers", ->
       expect(Matchers.match [1, 2, 3], to_have_less_than: 2).to_be false
 
   describe ".to_have_between()", ->
-    # TODO: specify.
+    context "when no options are given", ->
+      it "returns true when subject has lower < N < upper values", ->
+        expect(Matchers.match [1], to_have_between: [1, 3]).to_be true
+
+      it "returns true when subject has lower == N == upper values", ->
+        expect(Matchers.match [1, 2], to_have_between: [2, 2]).to_be true
+
+      it "returns false when subject has lower > N values", ->
+        expect(Matchers.match [], to_have_between: [1, 3]).to_be false
+
+      it "returns false when subject has upper < N values", ->
+        expect(Matchers.match [1, 2, 3, 4], to_have_between: [1, 3]).to_be false
+
+    context "when option given: excluding_lower:yes", ->
+      # TODO: specify.
+
+    context "when option given: excluding_upper:yes", ->
+      # TODO: specify.
+
+    context "when option given: excluding_bounds:yes", ->
+      # TODO: specify.
 
   describe ".to_have()", ->
     # TODO: specify.
