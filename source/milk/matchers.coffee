@@ -50,28 +50,31 @@ class Matchers
   @to_contain_any: (values) ->
     values.any (value) => @subject.contains value
 
-  @to_have: (count, options = {}) ->
-    @subject.size() == count
+  @to_have_exactly: (count, options = {}) ->
+    @subject.count() == count
 
   @to_have_at_least: (count) ->
-    @subject.size() >= count
+    @subject.count() >= count
 
   @to_have_at_most: (count) ->
-    @subject.size() <= count
+    @subject.count() <= count
 
   @to_have_more_than: (count) ->
-    @subject.size() > count
+    @subject.count() > count
 
   @to_have_less_than: (count) ->
-    @subject.size() < count
+    @subject.count() < count
 
   @to_have_between: (bounds, options = {}) ->
     [lower, upper] = bounds.sort()
-    size = @subject.size()
-    return lower < size <= upper if options['excluding_lower']
-    return lower <= size < upper if options['excluding_upper']
-    return lower < size < upper if options['excluding_bounds']
-    lower <= size <= upper
+    count = @subject.count()
+    return lower < count <= upper if options['excluding_lower']
+    return lower <= count < upper if options['excluding_upper']
+    return lower < count < upper if options['excluding_bounds']
+    lower <= count <= upper
+
+  @to_have: (key, options = {}) ->
+    # TODO: implement.
 
   @to_have_one: (key, options = {}) ->
     # TODO: implement.
