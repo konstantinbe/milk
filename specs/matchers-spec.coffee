@@ -25,7 +25,17 @@ Matchers = requires 'Milk.Matchers'
 describe "Milk.Matchers", ->
 
   describe ".to_exist()", ->
-    # TODO: specify.
+    it "returns true for an existing object (using the '?' operator)", ->
+      expect(Matchers.match 1, to: 'exist').to_be true
+
+    it "returns true for a falsy object", ->
+      expect(Matchers.match 0, to: 'exist').to_be true
+
+    it "returns false for undefined", ->
+      expect(Matchers.match undefined, to: 'exist').to_be false
+
+    it "returns false for null", ->
+      expect(Matchers.match null, to: 'exist').to_be false
 
   describe ".to_be()", ->
     it "returns true if subject == value", ->
