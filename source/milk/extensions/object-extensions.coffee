@@ -92,6 +92,12 @@ ObjectExtensions =
   is_reg_exp: (value) ->
     @test? and @exec? and (@ignoreCase? or @ignoreCase == no)
 
+  is_kind_of: (klass) ->
+    @ instanceof klass
+
+  is_instance_of: (klass) ->
+    @constructor == klass
+
   # ----------------------------------------------------------------------------
 
   clone: ->

@@ -162,6 +162,48 @@ describe "Milk.Extensions.ObjectExtensions", ->
     it "returns yes if receiver is a regular expression", ->
       expect(//.is_reg_exp()).to_be true
 
+  describe "#is_kind_of()", ->
+    class Vehicle
+      type: ""
+
+    class Car extends Vehicle
+      drive: -> "Bruuuum..."
+
+    car = Car.new()
+
+    it "returns true of an object is an instance of class", ->
+      expect(car.is_kind_of Car).to_be true
+
+    it "returns true of an object is an instance of subclass of class", ->
+      expect(car.is_kind_of Vehicle).to_be true
+
+    it "returns true for Object", ->
+      expect(car.is_kind_of Object).to_be true
+
+    it "returns false if an object is an instance of a different class which is not a subclass of class", ->
+      expect(car.is_kind_of Array).to_be false
+
+  describe "#is_instance_of()", ->
+    class Vehicle
+      type: ""
+
+    class Car extends Vehicle
+      drive: -> "Bruuuum..."
+
+    car = Car.new()
+
+    it "returns true of an object is an instance of class", ->
+      expect(car.is_instance_of Car).to_be true
+
+    it "returns false of an object is an instance of subclass of class", ->
+      expect(car.is_instance_of Vehicle).to_be false
+
+    it "returns false for Object", ->
+      expect(car.is_instance_of Object).to_be false
+
+    it "returns false if an object is an instance of a different class which is not a subclass of class", ->
+      expect(car.is_instance_of Array).to_be false
+
   describe "#clone()", ->
     it "returns a new object", ->
       expect({}.clone()).to_be_an_object()
