@@ -195,7 +195,7 @@ describe "Milk.Matchers", ->
 
   describe ".to_throw()", ->
     it "returns true if subject is a block and throws when executing it", ->
-      expect(Matchers.match (-> throw "Exception to test to_throw() matcher"), to_throw: null).to_be true
+      expect(Matchers.match (-> throw "Exception to test to_throw() matcher"), to: 'throw').to_be true
 
     it "returns false if subject is a block but doesn't throw when executing it", ->
-      expect(Matchers.match (-> "no exception here, just a string"), to_throw: null).to_be false
+      expect(Matchers.match (-> "no exception here, just a string"), to: 'throw').to_be false
