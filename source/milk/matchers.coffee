@@ -80,7 +80,7 @@ class Matchers
     # TODO: implement.
 
   @to_match: (reg_exp) ->
-    @subject.match reg_exp
+    Boolean @subject.match reg_exp
 
   @to_respond_to: (method) ->
     @subject.responds_to method
