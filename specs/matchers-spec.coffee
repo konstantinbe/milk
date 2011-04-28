@@ -71,22 +71,57 @@ describe "Milk.Matchers", ->
     it "returns false if not one of the values is contained in subject", ->
       expect(Matchers.match [1, 2, 3], to_contain_any: [4, 5]).to_be false
 
-  describe ".to_have()", ->
-    # TODO: specify.
+  describe ".to_have_exactly()", ->
+    it "returns true if subject has exactly N values", ->
+      expect(Matchers.match [1, 2, 3], to_have_exactly: 3).to_be true
+
+    it "returns false if subject has not exactly N values", ->
+      expect(Matchers.match [1, 2, 3], to_have_exactly: 4).to_be false
 
   describe ".to_have_at_least()", ->
-    # TODO: specify.
+    it "returns true if subject has exactly N values", ->
+      expect(Matchers.match [1, 2, 3], to_have_at_least: 3).to_be true
+
+    it "returns false if subject has less than N values", ->
+      expect(Matchers.match [1, 2, 3], to_have_at_least: 2).to_be true
+
+    it "returns true if subject has more than N values", ->
+      expect(Matchers.match [1, 2, 3], to_have_at_least: 4).to_be false
 
   describe ".to_have_at_most()", ->
-    # TODO: specify.
+    it "returns true if subject has exactly N values", ->
+      expect(Matchers.match [1, 2, 3], to_have_at_most: 3).to_be true
+
+    it "returns true if subject has more than N values", ->
+      expect(Matchers.match [1, 2, 3], to_have_at_most: 4).to_be true
+
+    it "returns false if subject has less than N values", ->
+      expect(Matchers.match [1, 2, 3], to_have_at_most: 2).to_be false
 
   describe ".to_have_more_than()", ->
-    # TODO: specify.
+    it "returns true if subject has more than N values", ->
+      expect(Matchers.match [1, 2, 3], to_have_more_than: 2).to_be true
+
+    it "returns false if subject has exactly N values", ->
+      expect(Matchers.match [1, 2, 3], to_have_more_than: 3).to_be false
+
+    it "returns false if subject has less than N values", ->
+      expect(Matchers.match [1, 2, 3], to_have_more_than: 4).to_be false
 
   describe ".to_have_less_than()", ->
-    # TODO: specify.
+    it "returns true if subject has less than N values", ->
+      expect(Matchers.match [1, 2, 3], to_have_less_than: 4).to_be true
+
+    it "returns false if subject has exactly N values", ->
+      expect(Matchers.match [1, 2, 3], to_have_less_than: 3).to_be false
+
+    it "returns false if subject has more than N values", ->
+      expect(Matchers.match [1, 2, 3], to_have_less_than: 2).to_be false
 
   describe ".to_have_between()", ->
+    # TODO: specify.
+
+  describe ".to_have()", ->
     # TODO: specify.
 
   describe ".to_have_one()", ->
