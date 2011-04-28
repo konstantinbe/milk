@@ -111,4 +111,8 @@ describe "Milk.Matchers", ->
       expect(Matchers.match car, to_respond_to: 'fly').to_be false
 
   describe ".to_throw()", ->
-    # TODO: specify.
+    it "returns true if subject is a block and throws when executing it", ->
+      expect(Matchers.match (-> throw "Exception to test to_throw() matcher"), to_throw: null).to_be true
+
+    it "returns false if subject is a block but doesn't throw when executing it", ->
+      expect(Matchers.match (-> "no exception here, just a string"), to_throw: null).to_be false
