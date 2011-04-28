@@ -34,11 +34,49 @@ describe "Milk.Matchers", ->
     it "returns false if subject != value", ->
       expect(Matchers.match 1, to_be: 2).to_be false
 
-  describe ".to_a_kind_of()", ->
-    # TODO: specify.
+  describe ".to_be_a_kind_of()", ->
+    class Vehicle
+      type: ""
+
+    class Car extends Vehicle
+      drive: -> "Bruuuum..."
+
+    car = Car.new()
+
+    it "returns true of subject is an instance of class", ->
+      expect(Matchers.match car, to_be_a_kind_of: Car).to_be true
+
+    it "returns true of subject is an instance of subclass of class", ->
+      expect(Matchers.match car, to_be_a_kind_of: Vehicle).to_be true
+
+    it "returns true for Object", ->
+      expect(Matchers.match car, to_be_a_kind_of: Object).to_be true
+
+    it "returns false if subject is an instance of a different class which is not a subclass of class", ->
+      expect(Matchers.match car, to_be_a_kind_of: Array).to_be false
 
   describe ".to_be_an_instance_of()", ->
-    # TODO: specify.
+    context "when object is an instance of a built in class", ->
+      it "returns true if subject is an instance of class", ->
+        expect(Matchers.match [1, 2, 3], to_be_an_instance_of: Array).to_be true
+
+      it "returns false if subject is not an instance of class", ->
+        expect(Matchers.match [1, 2, 3], to_be_an_instance_of: Object).to_be false
+
+    context "when object is an instance of a custom class", ->
+      class Vehicle
+        type: ""
+
+      class Car extends Vehicle
+        drive: -> "Bruuuum..."
+
+      car = Car.new()
+
+      it "returns true if subject is an instance of class", ->
+        expect(Matchers.match car, to_be_an_instance_of: Car).to_be true
+
+      it "returns false if subject is not an instance of class", ->
+        expect(Matchers.match car, to_be_an_instance_of: Vehicle).to_be false
 
   describe ".to_equal()", ->
     it "returns true if subject equals value", ->

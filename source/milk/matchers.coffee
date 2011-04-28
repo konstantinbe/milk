@@ -33,10 +33,10 @@ class Matchers
     @subject == value
 
   @to_be_a_kind_of: (klass) ->
-    # TODO: implement.
+    @subject.is_kind_of klass
 
   @to_be_an_instance_of: (klass) ->
-    @subject instanceof klass
+    @subject.is_instance_of klass
 
   @to_equal: (object) ->
     @subject.equals object
