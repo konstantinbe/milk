@@ -156,7 +156,7 @@ describe "Milk.Extensions.ObjectExtensions", ->
 
   describe "#is_date()", ->
     it "returns yes if receiver is a date", ->
-      expect((new Date()).is_date()).to_be true
+      expect(Date.new().is_date()).to_be true
 
   describe "#is_reg_exp()", ->
     it "returns yes if receiver is a regular expression", ->
@@ -246,7 +246,7 @@ describe "Milk.Extensions.ObjectExtensions", ->
       before_each ->
         class Book
           @has_many 'pages'
-        book = new Book()
+        book = Book.new()
         spy_on book, 'add_many_values'
         spy_on book, 'insert_many_values'
         spy_on book, 'remove_many_values'
