@@ -134,6 +134,48 @@ describe "Milk.Extensions.ObjectExtensions", ->
       person.freeze()
       expect(person.is_frozen()).to_be true
 
+  describe "#is_class()", ->
+    it "returns true for a class", ->
+      class Vehicle
+      expect(Vehicle.is_class()).to_be true
+
+    it "returns true for a subclass", ->
+      class Vehicle
+      class Car extends Vehicle
+      expect(Car.is_class()).to_be true
+
+    it "returns true for Object", ->
+      expect(Object.is_class()).to_be true
+
+    it "returns true for Date", ->
+      expect(Date.is_class()).to_be true
+
+    it "returns true for Array", ->
+      expect(Array.is_class()).to_be true
+
+    it "returns true for Function", ->
+      expect(Array.is_class()).to_be true
+
+    it "returns false for a hash", ->
+      expect({}.is_class()).to_be false
+
+    it "returns false for an array", ->
+      expect([].is_class()).to_be false
+
+    it "returns false for an instance of a class", ->
+      class Vehicle
+      vehicle = Vehicle.new()
+      expect(vehicle.is_class()).to_be false
+
+    it "returns false for an instance of a subclass", ->
+      class Vehicle
+      class Car
+      car = Car.new()
+      expect(car.is_class()).to_be false
+
+    it "returns false for a function", ->
+      expect((->).is_class()).to_be false
+
   describe "#is_function()", ->
     it "returns yes if receiver is a function", ->
       expect((->).is_function()).to_be true
@@ -230,6 +272,35 @@ describe "Milk.Extensions.ObjectExtensions", ->
       expect(person.equals name: "Peter").to_be false
 
   describe "property and relationship definition methods", ->
+    book = null
+    another_book = null
+    special_book = null
+
+    before_each ->
+      class Book
+      book = Book.new()
+      another_book = Book.new()
+
+      class SpecialBook extends Book
+      special_book = SpecialBook.new()
+
+    describe "#meta()", ->
+      it "returns a hash", ->
+        expect(book.meta()).to_be_a_hash()
+
+      it "contains an empty hash for keys: has, has_one, has_many, belongs_to, has_and_belongs_to_many", ->
+        expect(book.meta()['has']).to_equal {}
+        expect(book.meta()['has_one']).to_equal {}
+        expect(book.meta()['has_many']).to_equal {}
+        expect(book.meta()['belongs_to']).to_equal {}
+        expect(book.meta()['has_and_belongs_to_many']).to_equal {}
+
+      it "is shared across many instances of the same class", ->
+        expect(book.meta()).to_be another_book.meta()
+
+      it "is shared across many instances of the same kind but not the same ", ->
+        expect(book.meta()).to_be another_book.meta()
+
     describe ".has()", ->
       # TODO: specify.
 

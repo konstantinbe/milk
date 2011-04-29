@@ -79,6 +79,9 @@ ObjectExtensions =
   is_sealed: ->
     if native_is_sealed? then native_is_sealed(this) else no
 
+  is_class: () ->
+    (typeof @) is 'function'
+
   is_array: ->
     Array.isArray this
 
@@ -122,11 +125,22 @@ ObjectExtensions =
 
   # ------------------------------- defining properties and relationships ------
 
+  meta: ->
+    target = if @is_class() then @ else @constructor
+    unless target.meta$?
+      target.meta$ =
+        has: {}
+        has_one: {}
+        has_many: {}
+        belongs_to: {}
+        has_and_belongs_to_many: {}
+    target.meta$
+
   has: (name, options = {}) ->
     options['access'] ?= 'readwrite'
     options['default'] ?= null
     options['type'] ?= 'Object'
-    options['variable'] ?= '_' + name
+    options['variable'] ?= name + '$'
     options['getter'] ?= 'get_' + name
     options['setter'] ?= 'set_' + name
 
