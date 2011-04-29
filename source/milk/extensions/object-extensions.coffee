@@ -27,7 +27,7 @@ native_is_frozen = Object.isFrozen
 ObjectExtensions =
   new: (args...) ->
     instance = new @(args...)
-    instance.init(args...)
+    instance.init args...
     instance
 
   init: (args...) ->

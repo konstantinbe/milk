@@ -21,4 +21,4 @@
 
 DateExtensions =
   clone: ->
-    new Date(this)
+    Date.new this

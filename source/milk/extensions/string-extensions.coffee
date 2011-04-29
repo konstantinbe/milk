@@ -291,8 +291,8 @@ StringExtensions =
     l = string.length / 4 + 2
     N = Math.ceil l / 16
 
-    M = new Array(N)
-    W = new Array(80)
+    M = Array.new N
+    W = Array.new 80
 
     H0 = 0x67452301
     H1 = 0xefcdab89
@@ -301,7 +301,7 @@ StringExtensions =
     H4 = 0xc3d2e1f0
 
     for i in [0...N]
-      M[i] = new Array(16)
+      M[i] = Array.new 16
       for j in [0...16]
         M[i][j] = (string.charCodeAt(i * 64 + j * 4) << 24) |
                   (string.charCodeAt(i * 64 + j * 4 + 1) << 16) |

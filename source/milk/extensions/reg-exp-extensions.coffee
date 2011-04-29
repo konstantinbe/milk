@@ -21,4 +21,4 @@
 
 RegExpExtensions =
   clone: ->
-    new RegExp(this)
+    new RegExp this

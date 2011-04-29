@@ -21,4 +21,4 @@
 
 NumberExtensions =
   clone: ->
-    new Number(this)
+    new Number this
