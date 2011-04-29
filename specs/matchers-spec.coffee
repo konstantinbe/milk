@@ -167,27 +167,81 @@ describe "Milk.Matchers", ->
       expect(Matchers.match [1, 2, 3], to_have_less_than: 2).to_be false
 
   describe ".to_have_between()", ->
-    context "when no options are given", ->
-      it "returns true when subject has lower < N < upper values", ->
-        expect(Matchers.match [1], to_have_between: [1, 3]).to_be true
+    context "without options", ->
+      it "returns true if subject has N values, where lower < N < upper", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [2, 4]).to_be true
 
-      it "returns true when subject has lower == N == upper values", ->
-        expect(Matchers.match [1, 2], to_have_between: [2, 2]).to_be true
+      it "returns true if subject has N values, where N == lower", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [3, 4]).to_be true
 
-      it "returns false when subject has lower > N values", ->
-        expect(Matchers.match [], to_have_between: [1, 3]).to_be false
+      it "returns true if subject has N values, where N == upper", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [2, 3]).to_be true
 
-      it "returns false when subject has upper < N values", ->
-        expect(Matchers.match [1, 2, 3, 4], to_have_between: [1, 3]).to_be false
+      it "returns true if subject has N values, where N == upper == lower", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [3, 3]).to_be true
 
-    context "when option given: excluding_lower:yes", ->
-      # TODO: specify.
+      it "returns false if subject has N values, where N < lower", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [4, 6]).to_be false
 
-    context "when option given: excluding_upper:yes", ->
-      # TODO: specify.
+      it "returns false if subject has N values, where N > upper", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [0, 2]).to_be false
 
-    context "when option given: excluding_bounds:yes", ->
-      # TODO: specify.
+    context "when given option excluding_bounds:yes", ->
+      it "returns true if subject has N values, where lower < N < upper", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [2, 4], excluding_bounds: yes).to_be true
+
+      it "returns false if subject has N values, where N == lower", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [3, 4], excluding_bounds: yes).to_be false
+
+      it "returns false if subject has N values, where N == upper", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [2, 3], excluding_bounds: yes).to_be false
+
+      it "returns false if subject has N values, where N == upper == lower", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [3, 3], excluding_bounds: yes).to_be false
+
+      it "returns false if subject has N values, where N < lower", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [4, 6], excluding_bounds: yes).to_be false
+
+      it "returns false if subject has N values, where N > upper", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [0, 2], excluding_bounds: yes).to_be false
+
+    context "when given option excluding_lower:yes", ->
+      it "returns true if subject has N values, where lower < N < upper", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [2, 4], excluding_lower: yes).to_be true
+
+      it "returns false if subject has N values, where N == lower", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [3, 4], excluding_lower: yes).to_be false
+
+      it "returns true if subject has N values, where N == upper", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [2, 3], excluding_lower: yes).to_be true
+
+      it "returns false if subject has N values, where N == upper == lower", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [3, 3], excluding_lower: yes).to_be false
+
+      it "returns false if subject has N values, where N < lower", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [4, 6], excluding_lower: yes).to_be false
+
+      it "returns false if subject has N values, where N > upper", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [0, 2], excluding_lower: yes).to_be false
+
+    context "when given option excluding_upper:yes", ->
+      it "returns true if subject has N values, where lower < N < upper", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [2, 4], excluding_upper: yes).to_be true
+
+      it "returns true if subject has N values, where N == lower", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [3, 4], excluding_upper: yes).to_be true
+
+      it "returns false if subject has N values, where N == upper", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [2, 3], excluding_upper: yes).to_be false
+
+      it "returns false if subject has N values, where N == upper == lower", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [3, 3], excluding_upper: yes).to_be false
+
+      it "returns false if subject has N values, where N < lower", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [4, 6], excluding_upper: yes).to_be false
+
+      it "returns false if subject has N values, where N > upper", ->
+        expect(Matchers.match [1, 2, 3], to_have_between: [0, 2], excluding_upper: yes).to_be false
 
   describe ".to_have()", ->
     # TODO: specify.
