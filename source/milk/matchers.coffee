@@ -95,6 +95,12 @@ class Matchers
   @to_have_many: (key, options = {}) ->
     # TODO: implement.
 
+  @to_belong_to: (key, options = {}) ->
+    # TODO: implement.
+
+  @to_have_and_belong_to_many: (key, options = {}) ->
+    # TODO: implement.
+
   @to_match: (reg_exp) ->
     Boolean @subject.match reg_exp
 

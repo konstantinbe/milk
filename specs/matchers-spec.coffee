@@ -275,6 +275,12 @@ describe "Milk.Matchers", ->
   describe ".to_have_many()", ->
     # TODO: specify.
 
+  describe ".to_belong_to()", ->
+    # TODO: specify.
+
+  describe ".to_have_and_belong_to_many()", ->
+    # TODO: specify.
+
   describe ".to_match()", ->
     it "returns true of subject matches reg exp", ->
       expect(Matchers.match "Hello World!", to_match: /ello/).to_be true
