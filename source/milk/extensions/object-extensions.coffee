@@ -26,7 +26,15 @@ native_is_frozen = Object.isFrozen
 
 ObjectExtensions =
   new: (args...) ->
-    new @(args...)
+    instance = new @(args...)
+    instance.init(args...)
+    instance
+
+  init: (args...) ->
+    # do nothing, subclasses override this.
+
+  destroy: ->
+    # do nothing, subclasses override this.
 
   keys: ->
     Object.keys this
