@@ -55,6 +55,9 @@ CustomMatchers =
   to_be_an_object: ->
     @actual? and @actual instanceof Object
 
+  to_be_a_hash: ->
+    @actual? and @actual instanceof Object
+
   to_respond_to: (method) ->
     @actual? and @actual.responds_to method
 
