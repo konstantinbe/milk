@@ -21,11 +21,23 @@
 
 class Matchers
   @match: (subject, options = {}) ->
-    matcher_name = options.keys().detect (key) -> key.begins_with "to_"
-    matcher_name = ("to_" + options['to']) if options['to']?
-    matcher_parameter = options[matcher_name]
+    key = options.keys().detect (key) -> key.match /^(not_)?to/
+    value = options[key]
+    delete options[key]
+
+    unary = key.match /^(not_)?to$/
+
+    matcher_name_possibly_negated = key
+    matcher_name_possibly_negated += "_" + value if unary
+
+    negated = matcher_name_possibly_negated.begins_with 'not'
+
+    matcher_name = matcher_name_possibly_negated.replace /^not_/, ""
     matcher = @[matcher_name]
-    matcher.call {subject: subject}, matcher_parameter, options
+    argument = if unary then undefined else value
+
+    result = matcher.call {subject: subject}, argument, options
+    if negated then not result else result
 
   @to_exist: ->
     @subject?

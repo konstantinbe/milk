@@ -23,6 +23,29 @@ SpecHelper = requires 'Specs.SpecHelper'
 Matchers = requires 'Milk.Matchers'
 
 describe "Milk.Matchers", ->
+  describe ".match()", ->
+    it "calls the corresponding matcher method while passing all parameters", ->
+      spy_on Matchers, 'to_be'
+      Matchers.match 3, to_be: 5
+      expect(Matchers.to_be).to_have_been_called_with(5, {})
+
+    it "calls the corresponding matcher method while passing all parameters when the matcher is prefixed with 'not_to'", ->
+      spy_on Matchers, 'to_be'
+      Matchers.match 3, not_to_be: 5
+      expect(Matchers.to_be).to_have_been_called_with(5, {})
+
+    it "negates the result if the matcher was called negated (i.e. prefixed with 'not_')", ->
+      expect(Matchers.match 5, not_to_be: 5).to_be false
+
+    it "calls an unary matcher when passing it as string like to: '<matcher_name>'", ->
+      spy_on Matchers, 'to_exist'
+      Matchers.match null, to: 'exist'
+      expect(Matchers.to_exist).to_have_been_called_with(undefined, {})
+
+    it "calls an unary matcher negated when passing it as string like not_to: '<matcher_name>'", ->
+      spy_on Matchers, 'to_exist'
+      Matchers.match null, not_to: 'exist'
+      expect(Matchers.to_exist).to_have_been_called_with(undefined, {})
 
   describe ".to_exist()", ->
     it "returns true for an existing object (using the '?' operator)", ->
