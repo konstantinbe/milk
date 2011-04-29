@@ -80,7 +80,7 @@ ObjectExtensions =
     if native_is_sealed? then native_is_sealed(this) else no
 
   is_class: () ->
-    (typeof @) is 'function'
+    Boolean (typeof @) is 'function' and @name.match /^[A-Z]/
 
   is_array: ->
     Array.isArray this
