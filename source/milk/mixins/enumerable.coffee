@@ -46,7 +46,7 @@ Enumerable =
   detect: (block) ->
     for value in @values()
       return value if block value
-    false
+    null
 
   all: (block) ->
     return @values().all block
