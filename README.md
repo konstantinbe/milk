@@ -3,7 +3,7 @@ Milk
 
 Milk is a CoffeeScript library inspired by Rails, Cocoa, Prototype and others.
 
-Milk is *opinionated*. *Beaty* and *Clarity* has #1 priority, therefore common
+Milk is *opinionated*. *Beauty* and *Clarity* has #1 priority, therefore common
 "conventions" and "best-practices" may be violated.
 
 
