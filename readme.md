@@ -1,9 +1,13 @@
 # Milk
 
-Milk is a CoffeeScript library inspired by Cocoa, Rails, Prototype and others.
+Milk is a little utility-belt library for CoffeeScript mainly inspired by
+underscore.js while borrowing ideas from Cocoa, Rails, jQuery, Prototype, and
+others.
 
-Milk is *opinionated*. *Beauty* and *Clarity* has top priority, therefore
-alledged "conventions" and "best-practices" may be violated.
+Milk is *opinionated*. *Beauty* and *clarity* have top priority, therefore
+alledged "conventions" and "best-practices" may be violated. In particular,
+milk uses underscore notation like ruby and makes heavy use of monkey matching
+to extend the core JavaScript classes.
 
 ## Conventions
 
@@ -26,12 +30,10 @@ alledged "conventions" and "best-practices" may be violated.
 
 ## Inspiration
 
-* [Cocoa](http://developer.apple.com/cocoa/)
-* [Prototype](http://www.prototypejs.org/)
-* [Ruby on Rails](http://rubyonrails.org/)
 * [Underscore](http://documentcloud.github.com/underscore/)
-* [Backbone](http://documentcloud.github.com/backbone/)
-* [Doodle](http://www.rubyinside.com/doodle-a-new-way-to-build-and-define-ruby-classes-795.html)
+* [Cocoa](http://developer.apple.com/cocoa/)
+* [Ruby on Rails](http://rubyonrails.org/)
+* [Prototype](http://www.prototypejs.org/)
 
 ## Acknowledgements
 
