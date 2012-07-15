@@ -1,0 +1,13 @@
+{
+    "name": "milk-node",
+    "url": "http://konstantinbender.github.com/milk",
+    "description": "Completely opinionated & unconventional utility-belt library for CoffeeScript",
+    "version": "0.1.0-alpha-004",
+    "author": "Konstantin Bender <http://konstantinbender.com>",
+    "engines": ["node >= 0.8.0"],
+    "main": "milk-node.js",
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/konstantinbender/milk.git"
+    }
+}
