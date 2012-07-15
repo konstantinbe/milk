@@ -4,10 +4,18 @@ Milk is a little utility-belt library for CoffeeScript mainly inspired by
 underscore.js while borrowing ideas from Cocoa, Rails, jQuery, Prototype, and
 others.
 
-Milk is *opinionated*. *Beauty* and *clarity* have top priority, therefore
-alledged "conventions" and "best-practices" may be violated. In particular,
-milk uses underscore notation like ruby and makes heavy use of monkey matching
-to extend the core JavaScript classes.
+Milk is *opinionated*, alledged "conventions" and "best-practices" may be
+violated. In particular, milk uses underscore notation like *Ruby* and makes
+heavy use of monkey patching to extend the core JavaScript classes.
+
+## Getting Started
+
+* Install [Git](http://git-scm.com/)
+* Install [CoffeeScript](http://coffeescript.org)
+* Install `shell.js`
+* Clone the Milk repository
+* Build & run specs: `cake test`
+* Use: `milk.js` from the `build` directory
 
 ## Conventions
 
