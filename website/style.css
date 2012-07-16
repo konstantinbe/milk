@@ -1,0 +1,52 @@
+body {
+    background: #d4e9ec;
+    color: #000;
+    font-family: "Myriad Pro", "Lucida Grande", Verdana, Arial, Sans-Serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a:link, a:visited {
+    color: #00688B;
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    text-decoration: underline;
+}
+
+h1 {
+    font-weight: normal;
+    font-size: 4em;
+}
+
+hr {
+    height: 2px;
+    border-top: 1px solid hsla(0, 0%, 0%, 20%);
+    border-bottom: 1px solid hsla(0, 100%, 100%, 20%);
+}
+
+#fork-me {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 140px;
+    height: 140px;
+    text-indent: -9999px;
+    background-image: url("fork-me.png");
+}
+
+@media (-webkit-min-device-pixel-ratio: 2) {
+    #fork-me {
+        background-image: url("fork-me@2x.png") !important;
+        -webkit-background-size: 140px 140px;
+    }
+}
+
+.content {
+    max-width: 760px;
+    margin: 0px auto;
+    text-align: center;
+}
