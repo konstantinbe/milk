@@ -398,21 +398,6 @@ describe "Object core extensions", ->
     it "returns the class object", ->
       expect(person.class()).to_be person_class
 
-  describe "#token()", ->
-    it "returns a runtime unique number identifying an instance (think of it as the value of a pointer in C)", ->
-      token = {}.token()
-      expect(token.is_number()).to_be true
-
-    it "stores the token for the rest of the life time of this object in an instance variable '_token'", ->
-      object = {}
-      token = object.token()
-      expect(object['@token']).to_be token
-
-    it "always returns the same token for the same object throughout its life time", ->
-      object = {}
-      token = object.token()
-      expect(object.token()).to_be token for i in [0..10]
-
   describe "#keys()", ->
     it "returns an array of keys", ->
       expect({name: "Peter", age: 45}.keys()).to_equal ['name', 'age']

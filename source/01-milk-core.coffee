@@ -307,14 +307,6 @@ Object::includes = (mixins...) ->
     native_has_own_property = Object::hasOwnProperty
     native_to_string = Object::toString
 
-    next_token = ->
-      instance_variable_name = @instance_variable_name_for 'next_token'
-      @[instance_variable_name] ?= 0
-      @[instance_variable_name] += 1
-
-    token: ->
-      @['@token'] or= next_token()
-
     class: ->
       return @constructor
 
