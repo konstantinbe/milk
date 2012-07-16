@@ -19,8 +19,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-Match = @import 'Milk.Match'
-
 # ----------------------------------------------------- Aliased Functions ------
 
 spy = spyOn
@@ -45,8 +43,62 @@ AliasedMatchers =
   to_be_greater_than: jasmine.Matchers.prototype.toBeGreaterThan
   to_throw: jasmine.Matchers.prototype.toThrow
 
+# ------------------------------------------------------- Custom Matchers ------
+
+CustomMatchers =
+
+  to_exist: ->
+    @actual?
+
+  to_be_a_dictionary: ->
+    @actual? and @actual instanceof Object
+
+  to_be_a_kind_of: (klass) ->
+    @actual.is_kind_of klass
+
+  to_be_an_instance_of: (klass) ->
+    @actual.is_instance_of klass
+
+  to_equal: (object) ->
+    @actual.equals object
+
+  to_contain: (value) ->
+    @actual.contains value
+
+  to_contain_all: (values) ->
+    values.all (value) => @actual.contains value
+
+  to_contain_any: (values) ->
+    values.any (value) => @actual.contains value
+
+  to_have_exactly: (count, options = {}) ->
+    @actual.count() == count
+
+  to_have_at_least: (count) ->
+    @actual.count() >= count
+
+  to_have_at_most: (count) ->
+    @actual.count() <= count
+
+  to_have_more_than: (count) ->
+    @actual.count() > count
+
+  to_have_less_than: (count) ->
+    @actual.count() < count
+
+  to_have_between: (bounds, options = {}) ->
+    [lower, upper] = bounds.sort()
+    count = @actual.count()
+    return lower < count <= upper if options.own 'excluding_lower'
+    return lower <= count < upper if options.own 'excluding_upper'
+    return lower < count < upper if options.own 'excluding_bounds'
+    lower <= count <= upper
+
+  to_respond_to: (method) ->
+    @actual.responds_to method
+
 # ----------------------------------------------------- Register Matchers ------
 
 before ->
   @addMatchers AliasedMatchers
-  @addMatchers Match.MATCHERS
+  @addMatchers CustomMatchers
