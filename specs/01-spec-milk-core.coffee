@@ -143,7 +143,17 @@ describe "Object (comparing)", ->
         expect(5.is_between [5, 5], excluding_upper: yes).to_be false
 
   describe "#is_comparable()", ->
-    # TODO: specify.
+    it "returns true for numbers", ->
+      number = 5
+      expect(number.is_comparable()).to_be true
+
+    it "returns true for strings", ->
+      string = "Test"
+      expect(string.is_comparable()).to_be true
+
+    it "returns false for arrays", ->
+      array = []
+      expect(array.is_comparable()).to_be false
 
   describe "#compare_to()", ->
     # TODO: specify.
