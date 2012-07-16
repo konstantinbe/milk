@@ -62,7 +62,7 @@ Object::includes = (mixins...) ->
 
 # ------------------------------------------------------------------------------
 
-@module 'Milk.Core', ->
+@module 'Milk', ->
 
   class Comparing
 

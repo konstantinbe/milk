@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-@module 'Milk.Core', ->
+@module 'Milk', ->
 
   class ArrayExtensions
 
