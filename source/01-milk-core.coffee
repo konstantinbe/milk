@@ -363,6 +363,7 @@ Object::includes = (mixins...) ->
       yes
 
     compare_to: (object, options = {}) ->
+      throw "Can't compare number '#{this}' to #{object}" unless object?.is_number()
       return -1 if this < object
       return +1 if this > object
       0
@@ -382,7 +383,7 @@ Object::includes = (mixins...) ->
       yes
 
     compare_to: (object, options = {}) ->
-      throw "Can't regexp to #{object}." unless object?.is_reg_exp()
+      throw "Can't compare regexp '#{this}' to #{object}" unless object?.is_reg_exp()
       return -1 if this < object
       return +1 if this > object
       0
@@ -402,7 +403,7 @@ Object::includes = (mixins...) ->
       yes
 
     compare_to: (object, options = {}) ->
-      throw "Can't compare date to #{object}." unless object?.is_date()
+      throw "Can't compare date '#{this}' to #{object}." unless object?.is_date()
       return -1 if this < object
       return +1 if this > object
       0
@@ -459,6 +460,7 @@ Object::includes = (mixins...) ->
       yes
 
     compare_to: (object, options = {}) ->
+      throw "Can't compare string '#{this}' to #{object}." unless object?.is_string()
       return -1 if this < object
       return +1 if this > object
       0

@@ -156,7 +156,40 @@ describe "Object (comparing)", ->
       expect(array.is_comparable()).to_be false
 
   describe "#compare_to()", ->
-    # TODO: specify.
+    examples = [
+      {type: "booleans", left: no, right: yes, result: -1}
+      {type: "booleans", left: yes, right: yes, result: 0}
+      {type: "booleans", left: yes, right: no, result: +1}
+      {type: "numbers", left: 1, right: 2, result: -1}
+      {type: "numbers", left: 2, right: 2, result: 0}
+      {type: "numbers", left: 3, right: 2, result: +1}
+      {type: "strings", left: "a", right: "b", result: -1}
+      {type: "strings", left: "b", right: "b", result: 0}
+      {type: "strings", left: "c", right: "b", result: +1}
+      {type: "dates", left: no, right: yes, result: -1}
+      {type: "dates", left: yes, right: yes, result: 0}
+      {type: "dates", left: yes, right: no, result: +1}
+      {type: "regular expressions", left: /a/, right: /b/, result: -1}
+      {type: "regular expressions", left: /b/, right: /b/, result: 0}
+      {type: "regular expressions", left: /c/, right: /b/, result: +1}
+    ]
+
+    examples_with_different_types = [
+      {left: no, right: 5}
+      {left: 5, right: no}
+      {left: "string", right: 3}
+      {left: "string", right: /regexp/}
+    ]
+
+    do ->
+      for example in examples
+        it "returns #{example['result']} when comparing #{example['left']} with #{example['right']} of type #{example['type']}", ->
+          expect(example['left'].compare_to example['right']).to_equal example['result']
+
+    do ->
+      for example in examples_with_different_types
+        it "throws when comparing #{example['left']} with #{example['right']} of of different types", ->
+          expect(-> example['left'].compare_to example['right']).to_throw()
 
   describe "#equals()", ->
     it "returns yes if object is the same", ->
