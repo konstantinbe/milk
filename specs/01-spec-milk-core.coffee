@@ -169,7 +169,21 @@ describe "Object (comparing)", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Object copying", ->
+describe "Object (copying)", ->
+
+  describe "#is_copyable()", ->
+    copyable_objects = [
+      yes
+      1
+      "String"
+      /RegExp/
+      {a_dictianary_object_should_be_copyable: yes}
+      new Date
+    ]
+
+    for object in copyable_objects
+      it "returns true for #{object}", ->
+        expect(object.is_copyable()).to_be true
 
   describe "#copy()", ->
     it "returns a new object", ->
@@ -186,9 +200,6 @@ describe "Object copying", ->
       person = name: "Peter", age: 45, address: address
       copy = person.copy()
       expect(copy.address).to_be address
-
-  describe "#is_copyable", ->
-    # TODO: specify.
 
 # ------------------------------------------------------------------------------
 
