@@ -100,8 +100,7 @@ describe "Array", ->
         expect(groups["even"]).to_equal [0, 2, 4]
 
     describe "#inject()", ->
-      it "TODO: specify", ->
-        expect(true).to_be true
+      # TODO: specify.
 
     describe "#contains()", ->
       it "returns true if collection contains value", ->

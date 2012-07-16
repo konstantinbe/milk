@@ -236,7 +236,7 @@ describe "Object (copying)", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Object mixing & merging", ->
+describe "Object (mixing & merging)", ->
 
   describe "#mixin()", ->
     # TODO: specify
@@ -249,7 +249,7 @@ describe "Object mixing & merging", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Object freezing & sealing", ->
+describe "Object (freezing & sealing)", ->
 
   describe "#seal()", ->
     it "seals the receiver", ->
@@ -285,7 +285,7 @@ describe "Object freezing & sealing", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Object key-value coding", ->
+describe "Object (key-value coding)", ->
 
   describe "#value_for()", ->
     # TODO: specify.
@@ -304,7 +304,7 @@ describe "Object key-value coding", ->
 
 # ------------------------------------------------------------------------------
 
-describe "type checking", ->
+describe "Object (type checking)", ->
 
   describe "#is_class()", ->
     it "returns true for a class", ->
@@ -420,7 +420,7 @@ describe "type checking", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Object messaging", ->
+describe "Object (messaging)", ->
 
   describe "#responds_to()", ->
     it "returns yes if object responds to a method", ->
@@ -444,7 +444,7 @@ describe "Object messaging", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Object core extensions", ->
+describe "Object (core extensions)", ->
   describe "#class()", ->
     person_class = class Person
     person = new Person()
@@ -475,7 +475,7 @@ describe "Object core extensions", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Array", ->
+describe "Array (core extensions)", ->
   describe "#copy()", ->
     it "copys an array", ->
       array = [1, 2, 3]
@@ -495,7 +495,7 @@ describe "Array", ->
 
 # ------------------------------------------------------------------------------
 
-describe "String", ->
+describe "String (core extensions)", ->
   describe "#copy()", ->
     it "returns a copy of the receiver", ->
       string = "String"
@@ -508,7 +508,7 @@ describe "String", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Number", ->
+describe "Number (core extensions)", ->
   describe "#copy()", ->
     it "returns a copy of the receiver", ->
       five = 5
@@ -521,7 +521,7 @@ describe "Number", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Date", ->
+describe "Date (core extensions)", ->
   describe "#copy()", ->
     it "returns a copy of the receiver", ->
       five = 5
@@ -534,7 +534,7 @@ describe "Date", ->
 
 # ------------------------------------------------------------------------------
 
-describe "RegExp", ->
+describe "RegExp (core extensions)", ->
   describe "#copy()", ->
     it "returns a copy of the receiver", ->
       reg_exp = /.*/
@@ -542,7 +542,7 @@ describe "RegExp", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Math", ->
+describe "Math (core extensions)", ->
   describe ".generate_unique_id()", ->
     it "generates an RFC4122 version 4 ID", ->
       expect(Math.generate_unique_id()).to_match /^.+$/
