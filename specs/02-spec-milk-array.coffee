@@ -100,7 +100,11 @@ describe "Array", ->
         expect(groups["even"]).to_equal [0, 2, 4]
 
     describe "#inject()", ->
-      # TODO: specify.
+      it "behaves like reduce() while taking the initial parameter as the first argument", ->
+        expect([1, 2, 4].inject 0, (sum, number) -> sum + number).to_be 7
+
+      it "returns the initial parameter if array is empty", ->
+        expect([].inject 123, (sum, number) -> sum + number).to_be 123
 
     describe "#contains()", ->
       it "returns true if collection contains value", ->
