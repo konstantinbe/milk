@@ -260,7 +260,7 @@ Object::includes = (mixins...) ->
     responds_to: (method) ->
       method? and @[method]? and @[method].is_function()
 
-    invoke: (method, args...) ->
+    invoke: (method, args = []) ->
       @[method](args...)
 
   # ----------------------------------------------------------------------------
