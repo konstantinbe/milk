@@ -21,9 +21,15 @@
 
 # ----------------------------------------------------- Aliased Functions ------
 
-spy = spyOn
+spy_on = spyOn
 before = beforeEach
 after = afterEach
+
+jasmine.Spy::and_call_through = jasmine.Spy::andCallThrough
+jasmine.Spy::and_return = jasmine.Spy::andReturn
+jasmine.Spy::and_throw = jasmine.Spy::andThrow
+jasmine.Spy::and_call_fake = jasmine.Spy::andCallFake
+jasmine.Spy::reset = jasmine.Spy::reset
 
 # ------------------------------------------------------ Aliased Matchers ------
 
