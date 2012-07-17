@@ -131,10 +131,9 @@ Object::includes = (mixins...) ->
           @[key] = value
       @
 
-    merge: (objects...) ->
-      for object in objects
-        for own key, value of object
-          @[key] = value
+    merge: (dictionary) ->
+      for own key, value of dictionary
+        @[key] = value
       @
 
     with_defaults: (defaults) ->
