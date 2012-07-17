@@ -59,15 +59,15 @@ describe "Comparing", ->
     it "returns false if receiver is greater than value", ->
       expect(5.is_less_than 3).to_be false
 
-  describe "#is_less_than_or_equal_to()", ->
+  describe "#is_less_than_or_equals()", ->
     it "returns true if receiver is less than or equal to value", ->
-      expect(3.is_less_than_or_equal_to 5).to_be true
+      expect(3.is_less_than_or_equals 5).to_be true
 
     it "returns true if they are equal", ->
-      expect(5.is_less_than_or_equal_to 5).to_be true
+      expect(5.is_less_than_or_equals 5).to_be true
 
     it "returns false if receiver is greater than or equal to value", ->
-      expect(5.is_less_than_or_equal_to 3).to_be false
+      expect(5.is_less_than_or_equals 3).to_be false
 
   describe "#is_greater_than()", ->
     it "returns true if receiver is greater than value", ->
@@ -79,15 +79,15 @@ describe "Comparing", ->
     it "returns false if receiver is greater than value", ->
       expect(3.is_greater_than 5).to_be false
 
-  describe "#is_greater_than_or_equal_to()", ->
+  describe "#is_greater_than_or_equals()", ->
     it "returns true if receiver is greater than or equal to value", ->
-      expect(5.is_greater_than_or_equal_to 3).to_be true
+      expect(5.is_greater_than_or_equals 3).to_be true
 
     it "returns true if they are equal", ->
-      expect(5.is_greater_than_or_equal_to 5).to_be true
+      expect(5.is_greater_than_or_equals 5).to_be true
 
     it "returns false if receiver is greater than or equal to value", ->
-      expect(3.is_greater_than_or_equal_to 5).to_be false
+      expect(3.is_greater_than_or_equals 5).to_be false
 
   describe "#is_between()", ->
     describe "without options", ->
