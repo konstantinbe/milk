@@ -239,7 +239,12 @@ describe "Object (copying)", ->
 describe "Object (mixing & merging)", ->
 
   describe "#mixin()", ->
-    # TODO: specify
+    it "mixes dictionaries without overwriting existing ones", ->
+      left = key1: 1, key2: 2
+      right = key2: 4, key3: 3
+      left.mixin right
+      expect(left.keys().sort()).to_equal ['key1', 'key2', 'key3']
+      expect(left.values().sort()).to_equal [1, 2, 3]
 
   describe "#merge()", ->
     # TODO: specify
