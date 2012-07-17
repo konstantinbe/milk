@@ -125,10 +125,9 @@ Object::includes = (mixins...) ->
 
   class MixingAndMerging
 
-    mixin: (objects...) ->
-      for object in objects
-        for own key, value of object when not @has_own key
-          @[key] = value
+    mixin: (dictionary) ->
+      for own key, value of dictionary when not @has_own key
+        @[key] = value
       @
 
     merge: (dictionary) ->
