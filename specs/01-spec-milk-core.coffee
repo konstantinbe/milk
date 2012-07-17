@@ -465,7 +465,18 @@ describe "Object (messaging)", ->
       expect({method: method}.responds_to()).to_be no
 
   describe "#invoke()", ->
-    # TODO: specify
+    it "invokes a method", ->
+      object = method: -> # do nothing
+      spy_on(object, 'method').and_call_through()
+      object.invoke 'method'
+      expect(object.method).to_have_been_called()
+
+    it "passes an array of parameters", ->
+      args = [1, 2, 3]
+      object = method: (arg1, arg2, arg3) -> args = [arg1, arg2, arg3]
+      spy_on(object, 'method').and_call_through()
+      object.invoke 'method', [5, 6, 7]
+      expect(args.sort()).to_equal [5, 6, 7]
 
 # ------------------------------------------------------------------------------
 
