@@ -14,6 +14,7 @@ heavy use of monkey patching to extend the core JavaScript classes.
 * Install [CoffeeScript](http://coffeescript.org)
 * Install `shell.js`
 * Clone the Milk repository
+* Checkout `develop` branch
 * Build & run specs: `cake test`
 * Use: `milk.js` from the `build` directory
 
