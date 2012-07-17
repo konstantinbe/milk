@@ -247,7 +247,12 @@ describe "Object (mixing & merging)", ->
       expect(left.values().sort()).to_equal [1, 2, 3]
 
   describe "#merge()", ->
-    # TODO: specify
+    it "merges dictionaries while overwriting existing ones", ->
+      left = key1: 1, key2: 4
+      right = key2: 2, key3: 3
+      left.merge right
+      expect(left.keys().sort()).to_equal ['key1', 'key2', 'key3']
+      expect(left.values().sort()).to_equal [1, 2, 3]
 
   describe "#with_defaults()", ->
     # TODO: specify
