@@ -21,8 +21,8 @@
 
 # ------------------------------------------------------------------------------
 
-describe "Object (modules)", ->
-  it "allows organizing your code into modules", ->
+describe "Milk modules", ->
+  it "allow organizing code into modules", ->
 
     @module 'Test.Tick.Tack', ->
       @MAX_NUMBER_OF_VEHICLES = 5
@@ -47,7 +47,7 @@ describe "Object (modules)", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Object (comparing)", ->
+describe "Comparing", ->
 
   describe "#is_less_than()", ->
     it "returns true if receiver is less than value", ->
@@ -202,7 +202,7 @@ describe "Object (comparing)", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Object (copying)", ->
+describe "Copying", ->
 
   describe "#is_copyable()", ->
     copyable_objects = [
@@ -236,7 +236,7 @@ describe "Object (copying)", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Object (mixing & merging)", ->
+describe "Mixing & Merging", ->
 
   describe "#mixin()", ->
     it "mixes in dictionary without overwriting existing entries", ->
@@ -274,7 +274,7 @@ describe "Object (mixing & merging)", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Object (freezing & sealing)", ->
+describe "Freezing & Sealing", ->
 
   describe "#seal()", ->
     it "seals the receiver", ->
@@ -310,7 +310,7 @@ describe "Object (freezing & sealing)", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Object (key-value coding)", ->
+describe "Key-Value Coding", ->
 
   describe "#value_for()", ->
     # TODO: specify.
@@ -329,7 +329,7 @@ describe "Object (key-value coding)", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Object (type checking)", ->
+describe "Type-Checking", ->
 
   describe "#is_class()", ->
     it "returns true for a class", ->
@@ -445,7 +445,7 @@ describe "Object (type checking)", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Object (messaging)", ->
+describe "Messaging", ->
 
   describe "#responds_to()", ->
     it "returns yes if object responds to a method", ->
@@ -480,7 +480,7 @@ describe "Object (messaging)", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Object (core extensions)", ->
+describe "Object", ->
   describe "#class()", ->
     person_class = class Person
     person = new Person()
@@ -511,7 +511,7 @@ describe "Object (core extensions)", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Array (core extensions)", ->
+describe "Array", ->
   describe "#copy()", ->
     it "copys an array", ->
       array = [1, 2, 3]
@@ -531,7 +531,7 @@ describe "Array (core extensions)", ->
 
 # ------------------------------------------------------------------------------
 
-describe "String (core extensions)", ->
+describe "String", ->
   describe "#copy()", ->
     it "returns a copy of the receiver", ->
       string = "String"
@@ -544,7 +544,7 @@ describe "String (core extensions)", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Number (core extensions)", ->
+describe "Number", ->
   describe "#copy()", ->
     it "returns a copy of the receiver", ->
       five = 5
@@ -557,7 +557,7 @@ describe "Number (core extensions)", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Date (core extensions)", ->
+describe "Date", ->
   describe "#copy()", ->
     it "returns a copy of the receiver", ->
       five = 5
@@ -570,7 +570,7 @@ describe "Date (core extensions)", ->
 
 # ------------------------------------------------------------------------------
 
-describe "RegExp (core extensions)", ->
+describe "RegExp", ->
   describe "#copy()", ->
     it "returns a copy of the receiver", ->
       reg_exp = /.*/
@@ -578,7 +578,7 @@ describe "RegExp (core extensions)", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Math (core extensions)", ->
+describe "Math", ->
   describe ".generate_unique_id()", ->
     it "generates an RFC4122 version 4 ID", ->
       expect(Math.generate_unique_id()).to_match /^.+$/
