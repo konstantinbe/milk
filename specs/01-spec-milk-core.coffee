@@ -319,7 +319,8 @@ describe "Key-Value Coding", ->
     # TODO: specify.
 
   describe "#getter_name_for()", ->
-    # TODO: specify.
+    it "returns the key itself", ->
+      expect({}.getter_name_for 'some_nice_key').to_equal 'some_nice_key'
 
   describe "#setter_name_for()", ->
     # TODO: specify.
