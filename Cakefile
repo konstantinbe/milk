@@ -133,7 +133,7 @@ task 'run', "run Milk specs\n", (options) ->
 
 task 'test:all', "build & run all specs on all engines", (options) ->
   invoke 'build'
-  invoke 'run'
+  invoke 'run:all'
 
 task 'run:all', "run all specs on all engines\n", (options) ->
   invoke 'check'
