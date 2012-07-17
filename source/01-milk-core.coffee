@@ -138,9 +138,7 @@ Object::includes = (mixins...) ->
       @
 
     with_defaults: (defaults) ->
-      dictionary = @copy()
-      dictionary[key] = value for own key, value of defaults when not @has_own key
-      dictionary
+      @copy().mixin defaults
 
   # ----------------------------------------------------------------------------
 
