@@ -80,7 +80,7 @@ describe "Array", ->
     it "returns null if empty", ->
       expect([].min()).to_be null
 
-  xdescribe "#group_by()", ->
+  describe "#group_by()", ->
     describe "when a key is passed", ->
       it "returns a hash containing groups using the value of object's properties as keys", ->
         peter = name: "Peter"
