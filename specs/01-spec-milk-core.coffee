@@ -254,6 +254,15 @@ describe "Object (mixing & merging)", ->
       expect(left.keys().sort()).to_equal ['key1', 'key2', 'key3']
       expect(left.values().sort()).to_equal [1, 2, 3]
 
+  describe "#with()", ->
+    it "returnes a copy with merged dictionary", ->
+      left = key1: 1, key2: 4
+      right = key2: 2, key3: 3
+      left_with_right = left.with right
+      expect(left.keys().sort()).to_equal ['key1', 'key2']
+      expect(left_with_right.keys().sort()).to_equal ['key1', 'key2', 'key3']
+      expect(left_with_right.values().sort()).to_equal [1, 2, 3]
+
   describe "#with_defaults()", ->
     it "returns a copy with mixed in defaults", ->
       options = key1: 1, key2: 2
