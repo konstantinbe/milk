@@ -135,6 +135,9 @@ Object::includes = (mixins...) ->
         @[key] = value
       @
 
+    with: (dictionary) ->
+      @copy().merge dictionary
+
     with_defaults: (defaults) ->
       @copy().mixin defaults
 
