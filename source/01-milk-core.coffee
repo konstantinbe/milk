@@ -174,13 +174,13 @@ Object::includes = (mixins...) ->
 
       unless direct
         getter_name = @getter_name_for key
-        getter_function = this[getter_name]
+        getter_function = @[getter_name]
         return getter_function.call @ if getter_function?.is_function()
 
       instance_variable_name = @instance_variable_name_for key
-      return this[instance_variable_name] if this[instance_variable_name] isnt undefined
+      return @[instance_variable_name] if @[instance_variable_name] isnt undefined
 
-      this[key]
+      @[key]
 
     set_value_for: (value, key, options = {}) ->
       direct = options['direct'] or no
