@@ -328,7 +328,25 @@ describe "Key-Value Coding", ->
       expect({key: "property"}.value_for 'key').to_be "property"
 
   describe "#set_value_for()", ->
-    # TODO: specify.
+    it "calls the setter if setter is available", ->
+      object = set_key: ((key) -> @['@key'] = key), '@key': "variable"
+      object.set_value_for "Test", 'key'
+      expect(object['@key']).to_be "Test"
+
+    it "sets the private instance variable if no setter is available", ->
+      object = '@key': "variable", key: "property"
+      object.set_value_for "Test", 'key'
+      expect(object['@key']).to_be "Test"
+
+    it "sets the private instance variable if setter is available but option 'direct: yes' was passed", ->
+      object = set_key: ((key) -> @['@key'] = "setter"), '@key': "variable"
+      object.set_value_for "Test", 'key', direct: yes
+      expect(object['@key']).to_be "Test"
+
+    it "sets the property if no instaince variable is available", ->
+      object = key: "property"
+      object.set_value_for "Test", 'key'
+      expect(object['key']).to_be "Test"
 
   describe "#getter_name_for()", ->
     it "returns the key itself", ->
