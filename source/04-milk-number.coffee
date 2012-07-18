@@ -21,10 +21,14 @@
 
 @module 'Milk', ->
 
-  native_is_nan = isNaN
-  native_is_finite = isFinite
-
   class NumberExtensions
+
+    # -------------------------------------------------- Native Functions ------
+
+    native_is_nan = isNaN
+    native_is_finite = isFinite
+
+    # --------------------------------------------------------------------------
 
     is_nan: ->
       native_is_nan @
@@ -34,5 +38,7 @@
 
     is_infinite: ->
       not @is_nan() and not @is_finite()
+
+  # ----------------------------------------------------------------------------
 
   Number.includes NumberExtensions
