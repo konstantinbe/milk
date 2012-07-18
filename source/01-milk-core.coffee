@@ -187,16 +187,16 @@ Object::includes = (mixins...) ->
 
       unless direct
         setter_name = @setter_name_for key
-        setter_function = this[setter_name]
-        return setter_function.call(this, value, options = {}) if setter_function?.is_function()
+        setter_function = @[setter_name]
+        return setter_function.call(@, value, options = {}) if setter_function?.is_function()
 
       instance_variable_name = @instance_variable_name_for key
-      if this[instance_variable_name] isnt undefined
-        this[instance_variable_name] = value
+      if @[instance_variable_name] isnt undefined
+        @[instance_variable_name] = value
         return @
 
-      if this[key] isnt undefined
-        this[key] = value
+      if @[key] isnt undefined
+        @[key] = value
         return @
 
       throw "Can't set value for key '" + key + "', property unknown"
