@@ -313,7 +313,19 @@ describe "Freezing & Sealing", ->
 describe "Key-Value Coding", ->
 
   describe "#value_for()", ->
-    # TODO: specify.
+    it "returns the value by calling the getter if it is a function", ->
+      object = key: (-> "getter"), '@key': "variable"
+      expect(object.value_for 'key').to_be "getter"
+
+    it "returns the value of the private instance variable if there is no getter", ->
+      expect({'@key': "variable", key: "property"}.value_for 'key').to_be "variable"
+
+    it "returns the value of the private instance variable if there a getter, but option 'direct: yes' was passed", ->
+      object = key: (-> "getter"), '@key': "variable"
+      expect(object.value_for 'key', direct: yes).to_be "variable"
+
+    it "returns the value of the property if there is no getter and no instance variable", ->
+      expect({key: "property"}.value_for 'key').to_be "property"
 
   describe "#set_value_for()", ->
     # TODO: specify.
