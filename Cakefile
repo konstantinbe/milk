@@ -93,8 +93,8 @@ task 'build', "build Milk", (options) ->
   put "Building Milk specs ... "
   run "cat specs/*.coffee > build/milk-specs.coffee"
   run "coffee --output build/ --compile --bare build/milk-specs.coffee"
-  run "coffee --output build/ --compile --bare support/driver.coffee support/spec-runner.coffee"
-  run "cat build/driver.js externals/jasmine/jasmine.js build/milk.js build/milk-specs.js build/spec-runner.js > build/test-milk.js"
+  run "coffee --output build/ --compile --bare support/driver.coffee support/spec-helper.coffee support/spec-runner.coffee"
+  run "cat build/driver.js externals/jasmine/jasmine.js build/milk.js build/spec-helper.js build/milk-specs.js build/spec-runner.js > build/test-milk.js"
   puts OK
 
 task 'test', "build & run Milk specs", (options) ->
