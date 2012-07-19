@@ -31,6 +31,7 @@
         secret: no
         readonly: no
         copy: no
+        freeze: no
         get: null
         set: null
 
@@ -46,8 +47,9 @@
       instance_variable_name = @instance_variable_name_for key
 
       getter ?= ->
-        @[instance_variable_name] = initial unless @has_own instance_variable_name
-        @[instance_variable_name]
+        value = @[instance_variable_name] ? null
+        value.freeze() if freeze and value?
+        value
 
       setter ?= (value) ->
         value = value.copy() if copy
