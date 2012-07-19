@@ -265,42 +265,6 @@ Object::includes = (mixins...) ->
 
   # ----------------------------------------------------------------------------
 
-  class DefiningAttributes
-
-    has: (key, options = {}) ->
-      initial = options.own 'initial'
-      secret = options.own 'private'
-      readonly = options.own 'readonly'
-      copy = options.own 'copy'
-      getter = options.own 'get'
-      setter = options.own 'set'
-
-      @[@instance_variable_name_for key + '_meta'] ?= {}.mixin options
-
-      getter_name = @getter_name_for key
-      setter_name = @setter_name_for key
-      instance_variable_name = @instance_variable_name_for key
-
-      getter ?= ->
-        @[instance_variable_name] = initial unless @has_own instance_variable_name
-        @[instance_variable_name]
-
-      setter ?= (value) ->
-        value = value.copy() if copy
-        @[instance_variable_name] = value
-        @
-
-      @prototype[getter_name] = getter
-      @prototype[setter_name] = setter
-
-      Object.defineProperty @prototype, getter_name, enumerable: no if secret
-      Object.defineProperty @prototype, setter_name, enumerable: no if secret or readonly
-
-    meta_for: (key) ->
-       @[@instance_variable_name_for key + '_meta']
-
-  # ----------------------------------------------------------------------------
-
   class ObjectExtensions
 
     native_has_own_property = Object::hasOwnProperty
@@ -492,8 +456,6 @@ Object::includes = (mixins...) ->
   Object.includes KeyValueCoding
   Object.includes TypeChecking
   Object.includes Messaging
-
-  Function.includes DefiningAttributes
 
   Object.includes ObjectExtensions
   Function.includes FunctionExtensions
