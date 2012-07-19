@@ -26,6 +26,14 @@
     # --------------------------------------------------------------------------
 
     has: (key, options = {}) ->
+      options.with_defaults
+        initial: null
+        secret: no
+        readonly: no
+        copy: no
+        get: null
+        set: null
+
       initial = options.own 'initial'
       secret = options.own 'secret'
       readonly = options.own 'readonly'
