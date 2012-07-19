@@ -21,7 +21,7 @@
 
 # ------------------------------------------------------------------------------
 
-describe "Milk modules", ->
+describe "Modules", ->
   it "allow organizing code into modules", ->
 
     @module 'Test.Tick.Tack', ->
@@ -48,6 +48,64 @@ describe "Milk modules", ->
 # ------------------------------------------------------------------------------
 
 describe "Comparing", ->
+
+  describe "#equals()", ->
+    it "returns yes if object is the same", ->
+      person = name: "Peter"
+      expect(person.equals person).to_be true
+
+    it "returns no if object is not the same", ->
+      person = name: "Peter"
+      expect(person.equals name: "Peter").to_be false
+
+  describe "#compare_to()", ->
+    examples = [
+      {type: "booleans", left: no, right: yes, result: -1}
+      {type: "booleans", left: yes, right: yes, result: 0}
+      {type: "booleans", left: yes, right: no, result: +1}
+      {type: "numbers", left: 1, right: 2, result: -1}
+      {type: "numbers", left: 2, right: 2, result: 0}
+      {type: "numbers", left: 3, right: 2, result: +1}
+      {type: "strings", left: "a", right: "b", result: -1}
+      {type: "strings", left: "b", right: "b", result: 0}
+      {type: "strings", left: "c", right: "b", result: +1}
+      {type: "dates", left: no, right: yes, result: -1}
+      {type: "dates", left: yes, right: yes, result: 0}
+      {type: "dates", left: yes, right: no, result: +1}
+      {type: "regular expressions", left: /a/, right: /b/, result: -1}
+      {type: "regular expressions", left: /b/, right: /b/, result: 0}
+      {type: "regular expressions", left: /c/, right: /b/, result: +1}
+    ]
+
+    examples_with_different_types = [
+      {left: no, right: 5}
+      {left: 5, right: no}
+      {left: "string", right: 3}
+      {left: "string", right: /regexp/}
+    ]
+
+    do ->
+      for example in examples
+        it "returns #{example['result']} when comparing #{example['left']} with #{example['right']} of type #{example['type']}", ->
+          expect(example['left'].compare_to example['right']).to_equal example['result']
+
+    do ->
+      for example in examples_with_different_types
+        it "throws when comparing #{example['left']} with #{example['right']} of of different types", ->
+          expect(-> example['left'].compare_to example['right']).to_throw()
+
+  describe "#is_comparable()", ->
+    it "returns true for numbers", ->
+      number = 5
+      expect(number.is_comparable()).to_be true
+
+    it "returns true for strings", ->
+      string = "Test"
+      expect(string.is_comparable()).to_be true
+
+    it "returns false for arrays", ->
+      array = []
+      expect(array.is_comparable()).to_be false
 
   describe "#is_less_than()", ->
     it "returns true if receiver is less than value", ->
@@ -142,64 +200,6 @@ describe "Comparing", ->
       it "returns false if receiver == upper == lower", ->
         expect(5.is_between [5, 5], excluding_upper: yes).to_be false
 
-  describe "#is_comparable()", ->
-    it "returns true for numbers", ->
-      number = 5
-      expect(number.is_comparable()).to_be true
-
-    it "returns true for strings", ->
-      string = "Test"
-      expect(string.is_comparable()).to_be true
-
-    it "returns false for arrays", ->
-      array = []
-      expect(array.is_comparable()).to_be false
-
-  describe "#compare_to()", ->
-    examples = [
-      {type: "booleans", left: no, right: yes, result: -1}
-      {type: "booleans", left: yes, right: yes, result: 0}
-      {type: "booleans", left: yes, right: no, result: +1}
-      {type: "numbers", left: 1, right: 2, result: -1}
-      {type: "numbers", left: 2, right: 2, result: 0}
-      {type: "numbers", left: 3, right: 2, result: +1}
-      {type: "strings", left: "a", right: "b", result: -1}
-      {type: "strings", left: "b", right: "b", result: 0}
-      {type: "strings", left: "c", right: "b", result: +1}
-      {type: "dates", left: no, right: yes, result: -1}
-      {type: "dates", left: yes, right: yes, result: 0}
-      {type: "dates", left: yes, right: no, result: +1}
-      {type: "regular expressions", left: /a/, right: /b/, result: -1}
-      {type: "regular expressions", left: /b/, right: /b/, result: 0}
-      {type: "regular expressions", left: /c/, right: /b/, result: +1}
-    ]
-
-    examples_with_different_types = [
-      {left: no, right: 5}
-      {left: 5, right: no}
-      {left: "string", right: 3}
-      {left: "string", right: /regexp/}
-    ]
-
-    do ->
-      for example in examples
-        it "returns #{example['result']} when comparing #{example['left']} with #{example['right']} of type #{example['type']}", ->
-          expect(example['left'].compare_to example['right']).to_equal example['result']
-
-    do ->
-      for example in examples_with_different_types
-        it "throws when comparing #{example['left']} with #{example['right']} of of different types", ->
-          expect(-> example['left'].compare_to example['right']).to_throw()
-
-  describe "#equals()", ->
-    it "returns yes if object is the same", ->
-      person = name: "Peter"
-      expect(person.equals person).to_be true
-
-    it "returns no if object is not the same", ->
-      person = name: "Peter"
-      expect(person.equals name: "Peter").to_be false
-
 # ------------------------------------------------------------------------------
 
 describe "Copying", ->
@@ -275,11 +275,15 @@ describe "Mixing & Merging", ->
 
 describe "Freezing & Sealing", ->
 
-  describe "#seal()", ->
-    it "seals the receiver", ->
+  describe "#isFrozen()", ->
+    it "returns no if receiver is not frozen", ->
       person = name: "Peter", age: 45
-      person.seal()
-      expect(person.is_sealed()).to_be true
+      expect(person.is_frozen()).to_be false
+
+    it "returns yes if receiver is sealed", ->
+      person = name: "Peter", age: 45
+      person.freeze()
+      expect(person.is_frozen()).to_be true
 
   describe "#freeze()", ->
     it "freezes the receiver", ->
@@ -297,15 +301,11 @@ describe "Freezing & Sealing", ->
       person.seal()
       expect(person.is_sealed()).to_be true
 
-  describe "#isFrozen()", ->
-    it "returns no if receiver is not frozen", ->
+  describe "#seal()", ->
+    it "seals the receiver", ->
       person = name: "Peter", age: 45
-      expect(person.is_frozen()).to_be false
-
-    it "returns yes if receiver is sealed", ->
-      person = name: "Peter", age: 45
-      person.freeze()
-      expect(person.is_frozen()).to_be true
+      person.seal()
+      expect(person.is_sealed()).to_be true
 
 # ------------------------------------------------------------------------------
 
@@ -409,10 +409,6 @@ describe "Type-Checking", ->
     it "returns yes if receiver is a function", ->
       expect((->).is_function()).to_be true
 
-  describe "#is_string()", ->
-    it "returns yes if receiver is a string", ->
-      expect("".is_string()).to_be true
-
   describe "#is_boolean()", ->
     it "returns yes if receiver is a boolean", ->
       expect(yes.is_boolean()).to_be true
@@ -421,17 +417,25 @@ describe "Type-Checking", ->
     it "returns yes if receiver is a number", ->
       expect(1.is_number()).to_be true
 
-  describe "#is_array()", ->
-    it "returns yes if receiver is an array", ->
-      expect([].is_array()).to_be true
-
   describe "#is_date()", ->
     it "returns yes if receiver is a date", ->
       expect(new Date().is_date()).to_be true
 
+  describe "#is_string()", ->
+    it "returns yes if receiver is a string", ->
+      expect("".is_string()).to_be true
+
   describe "#is_reg_exp()", ->
     it "returns yes if receiver is a regular expression", ->
       expect(//.is_reg_exp()).to_be true
+
+  describe "#is_array()", ->
+    it "returns yes if receiver is an array", ->
+      expect([].is_array()).to_be true
+
+  describe "#is_dictionary()", ->
+    it "returns yes if receiver is a simple JSON hash", ->
+      expect({}.is_dictionary()).to_be true
 
   describe "#is_kind_of()", ->
     class Vehicle
@@ -520,6 +524,14 @@ describe "Object", ->
     it "returns the class object", ->
       expect(person.class()).to_be person_class
 
+  describe "#class_name()", ->
+    person_class = class Person
+    person = new Person()
+
+    it "returns the name of the instance's class", ->
+      expect(person.class_name()).to_be "Person"
+      expect(Person.class_name()).to_be "Function"
+
   describe "#keys()", ->
     it "returns an array of keys", ->
       expect({name: "Peter", age: 45}.keys()).to_equal ['name', 'age']
@@ -541,38 +553,27 @@ describe "Object", ->
       method = -> console.log "I'm a method."
       expect({method: method}.values()).to_equal [method]
 
-# ------------------------------------------------------------------------------
+  describe "#has_own()", ->
+    # TODO: specify.
 
-describe "Array", ->
-  describe "#copy()", ->
-    it "copys an array", ->
-      array = [1, 2, 3]
-      copy = array.copy()
-      expect(copy).not.to_be array
-      expect(copy).to_equal array
+  describe "#own()", ->
+    # TODO: specify.
 
-  describe "#equals()", ->
-    it "returns true for an array with the same objects", ->
-      expect([1, 2, 3].equals [1, 2, 3]).to_be true
+  describe "#toString()", ->
+    # TODO: specify.
 
-    it "returns false for an array with the same objects but in a different order", ->
-      expect([1, 2, 3].equals [1, 3, 2]).to_be false
-
-    it "returns false when passing something else than an array (for example an object)", ->
-      expect([1, 2, 3].equals {}).to_be false
+  describe "#to_string()", ->
+    # TODO: specify.
 
 # ------------------------------------------------------------------------------
 
-describe "String", ->
-  describe "#copy()", ->
-    it "returns a copy of the receiver", ->
-      string = "String"
-      expect(string.copy()).to_equal "String"
+describe "Function", ->
+  # TODO: specify.
 
-    it "which is not the same instance", ->
-      string = "String"
-      string.uniqueStringInstance = "Unique String Instance"
-      expect(string.copy().unique_string_instance).to_be undefined
+# ------------------------------------------------------------------------------
+
+describe "Boolean", ->
+  # TODO: specify.
 
 # ------------------------------------------------------------------------------
 
@@ -602,11 +603,44 @@ describe "Date", ->
 
 # ------------------------------------------------------------------------------
 
+describe "String", ->
+  describe "#copy()", ->
+    it "returns a copy of the receiver", ->
+      string = "String"
+      expect(string.copy()).to_equal "String"
+
+    it "which is not the same instance", ->
+      string = "String"
+      string.uniqueStringInstance = "Unique String Instance"
+      expect(string.copy().unique_string_instance).to_be undefined
+
+# ------------------------------------------------------------------------------
+
 describe "RegExp", ->
   describe "#copy()", ->
     it "returns a copy of the receiver", ->
       reg_exp = /.*/
       expect(reg_exp.copy().to_string()).to_equal /.*/.to_string()
+
+# ------------------------------------------------------------------------------
+
+describe "Array", ->
+  describe "#copy()", ->
+    it "copys an array", ->
+      array = [1, 2, 3]
+      copy = array.copy()
+      expect(copy).not.to_be array
+      expect(copy).to_equal array
+
+  describe "#equals()", ->
+    it "returns true for an array with the same objects", ->
+      expect([1, 2, 3].equals [1, 2, 3]).to_be true
+
+    it "returns false for an array with the same objects but in a different order", ->
+      expect([1, 2, 3].equals [1, 3, 2]).to_be false
+
+    it "returns false when passing something else than an array (for example an object)", ->
+      expect([1, 2, 3].equals {}).to_be false
 
 # ------------------------------------------------------------------------------
 
