@@ -27,7 +27,7 @@
 
     has: (key, options = {}) ->
       initial = options.own 'initial'
-      secret = options.own 'private'
+      secret = options.own 'secret'
       readonly = options.own 'readonly'
       copy = options.own 'copy'
       getter = options.own 'get'
