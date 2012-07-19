@@ -267,10 +267,9 @@ describe "Mixing & Merging", ->
     it "returns a copy with mixed in defaults", ->
       options = key1: 1, key2: 2
       defaults = key2: 4, key3: 3
-      options_with_defaults = options.with_defaults defaults
-      expect(options_with_defaults.keys().sort()).to_equal ['key1', 'key2', 'key3']
-      expect(options_with_defaults.values().sort()).to_equal [1, 2, 3]
-      expect(options.keys().sort()).to_equal ['key1', 'key2']
+      options.with_defaults defaults
+      expect(options.keys().sort()).to_equal ['key1', 'key2', 'key3']
+      expect(options.values().sort()).to_equal [1, 2, 3]
 
 # ------------------------------------------------------------------------------
 

@@ -139,7 +139,7 @@ Object::includes = (mixins...) ->
       @copy().merge dictionary
 
     with_defaults: (defaults) ->
-      @copy().mixin defaults
+      @mixin defaults
 
   # ----------------------------------------------------------------------------
 
