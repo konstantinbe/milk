@@ -23,6 +23,8 @@
 
   class Attributes
 
+    # --------------------------------------------------------------------------
+
     has: (key, options = {}) ->
       initial = options.own 'initial'
       secret = options.own 'private'
@@ -49,5 +51,7 @@
 
       Object.defineProperty @prototype, getter_name, enumerable: no if secret
       Object.defineProperty @prototype, setter_name, enumerable: no if secret or readonly
+
+  # ----------------------------------------------------------------------------
 
   Function.includes Attributes
