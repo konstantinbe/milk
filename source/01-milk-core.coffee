@@ -66,6 +66,16 @@ Object::includes = (mixins...) ->
 
   class Comparing
 
+    equals: (object, options = {}) ->
+      return this is object unless @is_comparable()
+      @compare_to(object, options = {}) is 0
+
+    is_comparable: ->
+      no
+
+    compare_to: (object, options = {}) ->
+      throw "#Can't compare #{this} to #{object}, object is not comparable"
+
     is_less_than: (value, options = {}) ->
       @compare_to(value, options = {}) is -1
 
@@ -95,16 +105,6 @@ Object::includes = (mixins...) ->
       meets_lower = compared_to_lower is +1 or include_lower and compared_to_lower is 0
       meets_upper = compared_to_upper is -1 or include_upper and compared_to_upper is 0
       meets_lower and meets_upper
-
-    is_comparable: ->
-      no
-
-    compare_to: (object, options = {}) ->
-      throw "#Can't compare #{this} to #{object}, object is not comparable"
-
-    equals: (object, options = {}) ->
-      return this is object unless @is_comparable()
-      @compare_to(object, options = {}) is 0
 
   # ----------------------------------------------------------------------------
 
@@ -151,19 +151,19 @@ Object::includes = (mixins...) ->
     native_is_sealed = Object.isSealed
     native_is_frozen = Object.isFrozen
 
+    is_frozen: ->
+      native_is_frozen? @
+
     freeze: ->
       native_freeze? @
       @
 
+    is_sealed: ->
+      native_is_sealed? @
+
     seal: ->
       native_seal? @
       @
-
-    is_frozen: ->
-      native_is_frozen? @
-
-    is_sealed: ->
-      native_is_sealed? @
 
   # ----------------------------------------------------------------------------
 
@@ -223,29 +223,29 @@ Object::includes = (mixins...) ->
     is_class: ->
       Boolean (typeof @) is 'function' and @name.match /^[A-Z]/
 
+    is_function: ->
+      @constructor? and @call? and @apply?
+
+    is_boolean: ->
+      @ instanceof Boolean
+
+    is_number: ->
+      @ is 0 or (@toExponential? and @toFixed?)
+
+    is_date: ->
+      @getTimezoneOffset? and @setUTCFullYear?
+
+    is_string: ->
+      @ is "" or (@charCodeAt? and @substr?)
+
+    is_reg_exp: (value) ->
+      @test? and @exec? and (@ignoreCase? or @ignoreCase == no)
+
     is_array: ->
       native_is_array @
 
     is_dictionary: ->
       @constructor? and @constructor.name is 'Object'
-
-    is_function: ->
-      @constructor? and @call? and @apply?
-
-    is_string: ->
-      @ is "" or (@charCodeAt? and @substr?)
-
-    is_number: ->
-      @ is 0 or (@toExponential? and @toFixed?)
-
-    is_boolean: ->
-      @ instanceof Boolean
-
-    is_date: ->
-      @getTimezoneOffset? and @setUTCFullYear?
-
-    is_reg_exp: (value) ->
-      @test? and @exec? and (@ignoreCase? or @ignoreCase == no)
 
     is_kind_of: (klass) ->
       @ instanceof klass
@@ -325,11 +325,24 @@ Object::includes = (mixins...) ->
       if @has_own key then @[key] else undefined
 
     toString: ->
-      return @to_string() if @to_string?
+      return @to_string() if @responds_to 'to_string'
       native_to_string.call @
 
     to_string: ->
       native_to_string.call @
+
+  # ----------------------------------------------------------------------------
+
+  class FunctionExtensions
+
+    is_comparable: ->
+      no
+
+    is_copyable: ->
+      no
+
+    new: (args...) ->
+      new this args...
 
   # ----------------------------------------------------------------------------
 
@@ -373,26 +386,6 @@ Object::includes = (mixins...) ->
 
   # ----------------------------------------------------------------------------
 
-  class RegExpExtensions
-
-    is_comparable: ->
-      yes
-
-    is_copyable: ->
-      yes
-
-    compare_to: (object, options = {}) ->
-      throw "Can't compare regexp '#{this}' to #{object}" unless object?.is_reg_exp()
-      return -1 if this < object
-      return +1 if this > object
-      0
-
-    copy: ->
-      return @ if @is_frozen()
-      new RegExp @
-
-  # ----------------------------------------------------------------------------
-
   class DateExtensions
 
     is_comparable: ->
@@ -413,16 +406,43 @@ Object::includes = (mixins...) ->
 
   # ----------------------------------------------------------------------------
 
-  class FunctionExtensions
+  class StringExtensions
 
     is_comparable: ->
-      no
+      yes
 
     is_copyable: ->
-      no
+      yes
 
-    new: (args...) ->
-      new this args...
+    compare_to: (object, options = {}) ->
+      throw "Can't compare string '#{this}' to #{object}." unless object?.is_string()
+      return -1 if this < object
+      return +1 if this > object
+      0
+
+    copy: ->
+      return @ if @is_frozen()
+      new String @
+
+  # ----------------------------------------------------------------------------
+
+  class RegExpExtensions
+
+    is_comparable: ->
+      yes
+
+    is_copyable: ->
+      yes
+
+    compare_to: (object, options = {}) ->
+      throw "Can't compare regexp '#{this}' to #{object}" unless object?.is_reg_exp()
+      return -1 if this < object
+      return +1 if this > object
+      0
+
+    copy: ->
+      return @ if @is_frozen()
+      new RegExp @
 
   # ----------------------------------------------------------------------------
 
@@ -447,26 +467,6 @@ Object::includes = (mixins...) ->
     to_string: ->
       strings = @collect (object) -> if object? then object.to_string() else object
       "[" + strings.join(", ") + "]"
-
-  # ----------------------------------------------------------------------------
-
-  class StringExtensions
-
-    is_comparable: ->
-      yes
-
-    is_copyable: ->
-      yes
-
-    compare_to: (object, options = {}) ->
-      throw "Can't compare string '#{this}' to #{object}." unless object?.is_string()
-      return -1 if this < object
-      return +1 if this > object
-      0
-
-    copy: ->
-      return @ if @is_frozen()
-      new String @
 
   # ----------------------------------------------------------------------------
 
@@ -498,13 +498,14 @@ Object::includes = (mixins...) ->
   Object.includes ObjectExtensions
   Function.includes FunctionExtensions
 
-  Array.includes ArrayExtensions
+  Boolean.includes BooleanExtensions
+  Number.includes NumberExtensions
+  Date.includes DateExtensions
+
   String.includes StringExtensions
   RegExp.includes RegExpExtensions
 
-  Date.includes DateExtensions
-  Number.includes NumberExtensions
-  Boolean.includes BooleanExtensions
+  Array.includes ArrayExtensions
 
   Math.includes MathExtensions
 
