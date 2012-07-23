@@ -624,11 +624,29 @@ describe "Function", ->
 # ------------------------------------------------------------------------------
 
 describe "Boolean", ->
-  # TODO: specify.
+  describe "#is_comparable()", ->
+    it "returns true", ->
+      value = true
+      expect(value.is_comparable()).to_be true
+
+  describe "#is_copyable()", ->
+    it "returns true", ->
+      value = true
+      expect(value.is_copyable()).to_be true
 
 # ------------------------------------------------------------------------------
 
 describe "Number", ->
+  describe "#is_comparable()", ->
+    it "returns true", ->
+      value = 1
+      expect(value.is_comparable()).to_be true
+
+  describe "#is_copyable()", ->
+    it "returns true", ->
+      value = 2
+      expect(value.is_copyable()).to_be true
+
   describe "#copy()", ->
     it "returns a copy of the receiver", ->
       five = 5
@@ -642,6 +660,16 @@ describe "Number", ->
 # ------------------------------------------------------------------------------
 
 describe "Date", ->
+  describe "#is_comparable()", ->
+    it "returns true", ->
+      value = new Date()
+      expect(value.is_comparable()).to_be true
+
+  describe "#is_copyable()", ->
+    it "returns true", ->
+      value = new Date()
+      expect(value.is_copyable()).to_be true
+
   describe "#copy()", ->
     it "returns a copy of the receiver", ->
       five = 5
@@ -655,6 +683,16 @@ describe "Date", ->
 # ------------------------------------------------------------------------------
 
 describe "String", ->
+  describe "#is_comparable()", ->
+    it "returns true", ->
+      value = "string"
+      expect(value.is_comparable()).to_be true
+
+  describe "#is_copyable()", ->
+    it "returns true", ->
+      value = "string"
+      expect(value.is_copyable()).to_be true
+
   describe "#copy()", ->
     it "returns a copy of the receiver", ->
       string = "String"
@@ -668,6 +706,16 @@ describe "String", ->
 # ------------------------------------------------------------------------------
 
 describe "RegExp", ->
+  describe "#is_comparable()", ->
+    it "returns true", ->
+      value = /regexp/
+      expect(value.is_comparable()).to_be true
+
+  describe "#is_copyable()", ->
+    it "returns true", ->
+      value = /regexp/
+      expect(value.is_copyable()).to_be true
+
   describe "#copy()", ->
     it "returns a copy of the receiver", ->
       reg_exp = /.*/
@@ -676,6 +724,16 @@ describe "RegExp", ->
 # ------------------------------------------------------------------------------
 
 describe "Array", ->
+  describe "#is_comparable()", ->
+    it "returns false", ->
+      value = []
+      expect(value.is_comparable()).to_be false
+
+  describe "#is_copyable()", ->
+    it "returns true", ->
+      value = []
+      expect(value.is_copyable()).to_be true
+
   describe "#copy()", ->
     it "copys an array", ->
       array = [1, 2, 3]
