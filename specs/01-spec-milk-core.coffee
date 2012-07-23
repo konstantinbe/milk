@@ -580,10 +580,15 @@ describe "Object", ->
       expect(person.own 'age').to_be undefined
 
   describe "#toString()", ->
-    # TODO: specify.
+    it "invokes to_string() if defined", ->
+      class Person
+        to_string: ->
+          "test"
+      person = new Person()
+      expect(person.toString()).to_equal "test"
 
   describe "#to_string()", ->
-    # TODO: specify.
+    # without spec, subclassees implement this
 
 # ------------------------------------------------------------------------------
 
