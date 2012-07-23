@@ -59,10 +59,10 @@ CustomMatchers =
   to_be_a_dictionary: ->
     @actual? and @actual instanceof Object
 
-  to_be_a_kind_of: (klass) ->
+  to_be_kind_of: (klass) ->
     @actual.is_kind_of klass
 
-  to_be_an_instance_of: (klass) ->
+  to_be_instance_of: (klass) ->
     @actual.is_instance_of klass
 
   to_equal: (object) ->
