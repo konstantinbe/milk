@@ -115,7 +115,7 @@ Object::includes = (mixins...) ->
       no
 
     copy: ->
-      throw "#{@class_name()} doesn't support copying" unless @class() is Object
+      throw "#{@class_name()} doesn't support copying" unless @is_dictionary()
       copy = {}
       for own key, value of @
         copy[key] = value
