@@ -593,6 +593,16 @@ describe "Object", ->
 # ------------------------------------------------------------------------------
 
 describe "Function", ->
+  describe "#is_comparable()", ->
+    it "returns false", ->
+      some_function = ->
+      expect(some_function.is_comparable()).to_be false
+
+  describe "#is_copyable()", ->
+    it "returns false", ->
+      some_function = ->
+      expect(some_function.is_copyable()).to_be false
+
   describe "#new()", ->
     it "instantiates an object with that constructor", ->
       class Person
