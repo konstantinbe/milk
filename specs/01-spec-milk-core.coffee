@@ -593,7 +593,23 @@ describe "Object", ->
 # ------------------------------------------------------------------------------
 
 describe "Function", ->
-  # TODO: specify.
+  describe "#new()", ->
+    it "instantiates an object with that constructor", ->
+      class Person
+      person = Person.new()
+      expect(person).to_be_instance_of Person
+
+    it "passes arguments to the constructor", ->
+      class Person
+        constructor: (one, two, three) ->
+          @one = one
+          @two = two
+          @three = three
+
+      person = Person.new 1, 2, 3
+      expect(person['one']).to_be 1
+      expect(person['two']).to_be 2
+      expect(person['three']).to_be 3
 
 # ------------------------------------------------------------------------------
 
