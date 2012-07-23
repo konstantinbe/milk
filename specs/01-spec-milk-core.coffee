@@ -554,7 +554,17 @@ describe "Object", ->
       expect({method: method}.values()).to_equal [method]
 
   describe "#has_own()", ->
-    # TODO: specify.
+    it "returns true if object has own property", ->
+      class Person
+      person = new Person()
+      person['age'] = 1
+      expect(person.has_own 'age').to_be true
+
+    it "returns false if property is not own but somewhere in the prototype chain", ->
+      class Person
+      Person::age = "1"
+      person = new Person()
+      expect(person.has_own 'age').to_be false
 
   describe "#own()", ->
     # TODO: specify.
