@@ -65,6 +65,12 @@ CustomMatchers =
   to_be_instance_of: (klass) ->
     @actual.is_instance_of klass
 
+  to_be_frozen: (object) ->
+    @actual.is_frozen()
+
+  to_be_sealed: (object) ->
+    @actual.is_sealed()
+
   to_equal: (object) ->
     @actual.equals object
 
