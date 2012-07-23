@@ -68,7 +68,7 @@ Object::includes = (mixins...) ->
 
     equals: (object, options = {}) ->
       return this is object unless @is_comparable()
-      @compare_to(object, options = {}) is 0
+      @compare_to(object, options) is 0
 
     is_comparable: ->
       no
