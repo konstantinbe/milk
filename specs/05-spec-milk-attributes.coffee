@@ -24,4 +24,100 @@
 describe "Attributes", ->
 
   describe "Function#has()", ->
-    # TODO: specify.
+
+    describe "when no options are passed", ->
+      person = null
+      instance_variable_name = null
+      class Person
+        @has 'name'
+
+      before ->
+        person = new Person()
+        instance_variable_name = person.instance_variable_name_for 'name'
+        person[instance_variable_name] = "Peter"
+
+      it "defines a getter method returning the value of the instance variable", ->
+        expect(person).to_respond_to 'name'
+        expect(person.name()).to_be "Peter"
+
+      it "defines a setter method updating the instance variable", ->
+        expect(person).to_respond_to 'set_name'
+        person.set_name 'Anna'
+        expect(person[instance_variable_name]).to_be "Anna"
+
+      it "sets the initial value to be null", ->
+        person = new Person()
+        expect(person.name()).to_be null
+
+    describe "when option 'initial: value' is passed", ->
+      class Person
+        @has 'name', initial: "New"
+
+      it "sets the initial value", ->
+        person = new Person()
+        expect(person.name()).to_be "New"
+
+    describe "when option 'secret: yes' is passed", ->
+      class Person
+        @has 'age', secret: yes
+
+      it "makes the getter and setter non-enumerable", ->
+        person = new Person()
+        keys = (key for key of person)
+        expect(keys).not.to_contain 'age'
+        expect(keys).not.to_contain 'set_age'
+
+    describe "when option 'readonly: yes' is passed", ->
+      class Person
+        @has 'age', readonly: yes
+
+      it "makes the only the setter non-enumerable", ->
+        person = new Person()
+        keys = (key for key of person)
+        expect(keys).to_contain 'age'
+        expect(keys).not.to_contain 'set_age'
+
+    describe "when option 'copy: yes' is passed", ->
+      class Person
+        @has 'relatives', copy: yes
+
+      it "copies the value when setting the attribute", ->
+        person = new Person()
+        peter = new Person()
+        anna = new Person()
+        relatives = [peter, anna]
+        person.set_relatives relatives
+        expect(person.relatives()).not.to_be relatives
+        expect(person.relatives()).to_equal relatives
+
+    describe "when option 'freeze: yes' is passed", ->
+      class Person
+        @has 'relatives', freeze: yes
+
+      it "freezes the value when returning through the getter", ->
+        person = new Person()
+        peter = new Person()
+        anna = new Person()
+        relatives = [peter, anna]
+        person.set_relatives relatives
+        expect(relatives).not.to_be_frozen()
+        expect(person.relatives()).to_be relatives
+        expect(relatives).to_be_frozen()
+
+    describe "when option 'get: function' is passed", ->
+      class Person
+        @has 'name', get: -> "Custom Getter"
+
+      it "installs the passed in function as getter", ->
+        person = new Person()
+        expect(person.name()).to_equal "Custom Getter"
+
+    describe "when option 'set: function' is passed", ->
+      class Person
+        instance_variable_name = instance_variable_name_for 'name'
+        @has 'name', set: (name) -> @[instance_variable_name] = name + " (using custom setter)"
+
+      it "installs the passed in function as setter", ->
+        person = new Person()
+        person.set_name "Peter"
+        expect(person.name()).to_equal "Peter (using custom setter)"
