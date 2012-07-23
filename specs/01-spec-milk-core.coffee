@@ -567,7 +567,17 @@ describe "Object", ->
       expect(person.has_own 'age').to_be false
 
   describe "#own()", ->
-    # TODO: specify.
+    it "returns the value if object has own property", ->
+      class Person
+      person = new Person()
+      person['age'] = 1
+      expect(person.own 'age').to_equal 1
+
+    it "returns undefined if property is not own but somewhere in the prototype chain", ->
+      class Person
+      Person::age = "1"
+      person = new Person()
+      expect(person.own 'age').to_be undefined
 
   describe "#toString()", ->
     # TODO: specify.
