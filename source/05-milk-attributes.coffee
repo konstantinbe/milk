@@ -47,7 +47,7 @@
       instance_variable_name = @instance_variable_name_for key
 
       getter ?= ->
-        value = @[instance_variable_name] ? null
+        value = @[instance_variable_name] ? initial
         value.freeze() if freeze and value?
         value
 
