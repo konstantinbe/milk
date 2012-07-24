@@ -54,6 +54,11 @@ describe "Comparing", ->
       person = name: "Peter"
       expect(person.equals person).to_be true
 
+    it "returns no if object is null or undefined", ->
+      person = name: "Peter"
+      expect(person.equals null).to_be false
+      expect(person.equals()).to_be false
+
     it "returns no if object is not the same", ->
       person = name: "Peter"
       expect(person.equals name: "Peter").to_be false
@@ -757,6 +762,10 @@ describe "Array", ->
   describe "#equals()", ->
     it "returns true for an array with the same objects", ->
       expect([1, 2, 3].equals [1, 2, 3]).to_be true
+
+    it "returns false for undefined or null", ->
+      expect([1, 2, 3].equals null).to_be false
+      expect([1, 2, 3].equals()).to_be false
 
     it "returns false for an array with the same objects but in a different order", ->
       expect([1, 2, 3].equals [1, 3, 2]).to_be false

@@ -67,7 +67,8 @@ Object::includes = (mixins...) ->
   class Comparing
 
     equals: (object, options = {}) ->
-      return this is object unless @is_comparable()
+      return no unless object?
+      return @ is object unless @is_comparable()
       @compare_to(object, options) is 0
 
     is_comparable: ->
@@ -425,6 +426,7 @@ Object::includes = (mixins...) ->
       yes
 
     equals: (object) ->
+      return no unless object?
       return no unless object.is_array()
       return no unless @length == object.length
       return no unless (@all (value, index) -> value is object[index] or value?.equals object[index])
