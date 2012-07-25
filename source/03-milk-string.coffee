@@ -125,6 +125,11 @@
     parse_integer: ->
       parseInt this, 10
 
+    to_number: ->
+      parseFloat this
+
+    # --------------------------------------------------------------------------
+
     utf8: ->
       unescape encodeURIComponent this
 
