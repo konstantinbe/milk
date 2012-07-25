@@ -28,6 +28,8 @@
     native_char_code_at = String::charCodeAt
     native_index_of = String::indexOf
     native_last_index_of = String::lastIndexOf
+    native_to_lower_case = String::toLowerCase
+    native_to_upper_case = String::toUpperCase
 
     # --------------------------------------------------------------------------
 
@@ -106,10 +108,10 @@
       prefix + " " + number
 
     uppercased: ->
-      @toUpperCase()
+      native_to_upper_case.call @
 
     lowercased: ->
-      @toLowerCase()
+      native_to_lower_case.call @
 
     capitalized: ->
       return "" if @length is 0
