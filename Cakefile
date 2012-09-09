@@ -21,8 +21,7 @@
 # THE SOFTWARE.
 
 fs = require 'fs'
-marked = require 'marked'
-require 'shelljs/global'
+shell = require 'shelljs'
 
 # ------------------------------------------------------------- Constants ------
 
@@ -78,8 +77,8 @@ option '-b', "--browser [NAME]", "use one of the browsers: #{Object.keys(browser
 
 task 'check', "check what engines are installed", (options) ->
   for id, engine of engines
-     put "Checking whether #{CYAN_BRIGHT + engine['title'] + RESET} is installed ... "
-     installed = run "which #{engine['command']}", silent: yes
+     put "Checking whether #{WHITE + engine['title'] + RESET} is installed ... "
+     installed = run "which #{engine['command']}", silent: yes, survive: yes
      puts if installed then GREEN + "YES" + RESET else RED + "NO" + RESET
 
 task 'build', "build Milk", (options) ->
@@ -122,13 +121,13 @@ task 'play', "build & run Milk in browser", (options) ->
   puts OK
 
   browser = browsers[options['browser']] or default_browser
-  put "Opening play.html in #{CYAN_BRIGHT + browser['name'] + RESET} ... "
+  put "Opening play.html in #{WHITE + browser['name'] + RESET} ... "
   run "open build/play.html -a #{browser['name']}"
   puts OK
 
 task 'run', "run Milk specs\n", (options) ->
   engine = engines[options['engine']] or default_engine
-  puts "Running Milk specs on #{CYAN_BRIGHT + engine['title'] + RESET} ..."
+  puts "Running Milk specs on #{WHITE + engine['title'] + RESET} ..."
   run "cd build; #{engine['command']} test-milk.js"
 
 task 'test:all', "build & run all specs on all engines", (options) ->
@@ -214,15 +213,15 @@ run = (command, options = {}) ->
   redirect = parts[1]
 
   options['silent'] = yes if redirect?
-  result = exec command, options
+  result = shell.exec command, options
 
   code = result['code']
   output = result['output']
 
   if code > 0
-    put output
-    puts FAILED
-    process.exit error
+    put output unless options['silent']
+    puts FAILED unless options['silent']
+    process.exit code unless options['survive']
 
   output.to redirect if output? and redirect?
   output
