@@ -19,11 +19,36 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-# ------------------------------------------------------------------------------
+describe "Function", ->
+  describe "#is_comparable()", ->
+    it "returns false", ->
+      some_function = ->
+      expect(some_function.is_comparable()).to_be false
 
-describe "Attributes", ->
+  describe "#is_copyable()", ->
+    it "returns false", ->
+      some_function = ->
+      expect(some_function.is_copyable()).to_be false
 
-  describe "Function#has()", ->
+  describe "#new()", ->
+    it "instantiates an object with that constructor", ->
+      class Person
+      person = Person.new()
+      expect(person).to_be_instance_of Person
+
+    it "passes arguments to the constructor", ->
+      class Person
+        constructor: (one, two, three) ->
+          @one = one
+          @two = two
+          @three = three
+
+      person = Person.new 1, 2, 3
+      expect(person['one']).to_be 1
+      expect(person['two']).to_be 2
+      expect(person['three']).to_be 3
+
+  describe "#has()", ->
 
     describe "when no options are passed", ->
       person = null
@@ -70,54 +95,3 @@ describe "Attributes", ->
     describe "when option 'readonly: yes' is passed", ->
       class Person
         @has 'age', readonly: yes
-
-      it "makes the only the setter non-enumerable", ->
-        person = new Person()
-        keys = (key for key of person)
-        expect(keys).to_contain 'age'
-        expect(keys).not.to_contain 'set_age'
-
-    describe "when option 'copy: yes' is passed", ->
-      class Person
-        @has 'relatives', copy: yes
-
-      it "copies the value when setting the attribute", ->
-        person = new Person()
-        peter = new Person()
-        anna = new Person()
-        relatives = [peter, anna]
-        person.set_relatives relatives
-        expect(person.relatives()).not.to_be relatives
-        expect(person.relatives()).to_equal relatives
-
-    describe "when option 'freeze: yes' is passed", ->
-      class Person
-        @has 'relatives', freeze: yes
-
-      it "freezes the value when returning through the getter", ->
-        person = new Person()
-        peter = new Person()
-        anna = new Person()
-        relatives = [peter, anna]
-        person.set_relatives relatives
-        expect(relatives).not.to_be_frozen()
-        expect(person.relatives()).to_be relatives
-        expect(relatives).to_be_frozen()
-
-    describe "when option 'get: function' is passed", ->
-      class Person
-        @has 'name', get: -> "Custom Getter"
-
-      it "installs the passed in function as getter", ->
-        person = new Person()
-        expect(person.name()).to_equal "Custom Getter"
-
-    describe "when option 'set: function' is passed", ->
-      class Person
-        instance_variable_name = instance_variable_name_for 'name'
-        @has 'name', set: (name) -> @[instance_variable_name] = name + " (using custom setter)"
-
-      it "installs the passed in function as setter", ->
-        person = new Person()
-        person.set_name "Peter"
-        expect(person.name()).to_equal "Peter (using custom setter)"

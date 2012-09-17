@@ -90,11 +90,18 @@ SOURCE = [
 ].map (pattern) -> "source/#{pattern}.coffee"
 
 TESTS = [
-  "01-spec-basics"
-  "02-spec-number"
-  "03-spec-string"
-  "04-spec-array"
-  "05-spec-attributes"
+  "test"
+  "test-core"
+  "test-object"
+  "test-function"
+  "test-boolean"
+  "test-number"
+  "test-date"
+  "test-string"
+  "test-reg-exp"
+  "test-array"
+  "test-math"
+  "test-milk"
 ].map (pattern) -> "tests/#{pattern}.coffee"
 
 task 'check', "check what engines are installed", (options) ->
@@ -114,8 +121,8 @@ task 'build', "build Milk", (options) ->
   put "Building Milk tests ... "
   run "cat #{TESTS.join ' '} > build/milk-tests.coffee"
   run "coffee --output build/ --compile --bare build/milk-tests.coffee"
-  run "coffee --output build/ --compile --bare support/driver.coffee support/spec-helper.coffee support/spec-runner.coffee"
-  run "cat build/driver.js externals/jasmine/jasmine.js build/milk.js build/spec-helper.js build/milk-tests.js build/spec-runner.js > build/test-milk.js"
+  run "coffee --output build/ --compile --bare support/driver.coffee support/spec-runner.coffee"
+  run "cat build/driver.js externals/jasmine/jasmine.js build/milk.js build/milk-tests.js build/spec-runner.js > build/test-milk.js"
   puts OK
 
 task 'test', "build & run Milk tests", (options) ->

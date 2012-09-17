@@ -19,8 +19,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-# ------------------------------------------------------------------------------
-
 describe "Array", ->
 
   describe "#each()", ->
@@ -93,44 +91,44 @@ describe "Array", ->
         expect(groups["Maxim"]).to_equal [maxim]
         expect(groups["Inna"]).to_equal [inna1, inna2]
 
-    describe "when a block is passed", ->
-      it "returns a hash containing groups using the results of the block as keys", ->
-        groups = [0, 1, 2, 3, 4, 5].group_by (value) -> if value % 2 == 0 then "even" else "odd"
-        expect(groups["odd"]).to_equal [1, 3, 5]
-        expect(groups["even"]).to_equal [0, 2, 4]
+  describe "when a block is passed", ->
+    it "returns a hash containing groups using the results of the block as keys", ->
+      groups = [0, 1, 2, 3, 4, 5].group_by (value) -> if value % 2 == 0 then "even" else "odd"
+      expect(groups["odd"]).to_equal [1, 3, 5]
+      expect(groups["even"]).to_equal [0, 2, 4]
 
-    describe "#inject()", ->
-      it "behaves like reduce() while taking the initial parameter as the first argument", ->
-        expect([1, 2, 4].inject 0, (sum, number) -> sum + number).to_be 7
+  describe "#inject()", ->
+    it "behaves like reduce() while taking the initial parameter as the first argument", ->
+      expect([1, 2, 4].inject 0, (sum, number) -> sum + number).to_be 7
 
-      it "returns the initial parameter if array is empty", ->
-        expect([].inject 123, (sum, number) -> sum + number).to_be 123
+    it "returns the initial parameter if array is empty", ->
+      expect([].inject 123, (sum, number) -> sum + number).to_be 123
 
-    describe "#contains()", ->
-      it "returns true if collection contains value", ->
-        expect([1, 2, 3].contains 2).to_be true
+  describe "#contains()", ->
+    it "returns true if collection contains value", ->
+      expect([1, 2, 3].contains 2).to_be true
 
-      it "returns false if collection does not contain the value", ->
-        expect([1, 2, 3].contains 4).to_be false
+    it "returns false if collection does not contain the value", ->
+      expect([1, 2, 3].contains 4).to_be false
 
-    describe "#pluck()", ->
-      it "returns an array collecting the values for the given key", ->
-        people = [{name: "_peter", age: 59}, {name: "_esther", age: 45}, {name: "_heinerle", age: 4}]
-        expect(people.pluck 'name').to_equal ["_peter", "_esther", "_heinerle"]
+  describe "#pluck()", ->
+    it "returns an array collecting the values for the given key", ->
+      people = [{name: "_peter", age: 59}, {name: "_esther", age: 45}, {name: "_heinerle", age: 4}]
+      expect(people.pluck 'name').to_equal ["_peter", "_esther", "_heinerle"]
 
-    describe "#count()", ->
-      it "returns the number of elements in a collection", ->
-        expect([].count()).to_be 0
-        expect([1, 2, 3].count()).to_be 3
-        expect([1, 2, 3, 3, 3].count()).to_be 5
+  describe "#count()", ->
+    it "returns the number of elements in a collection", ->
+      expect([].count()).to_be 0
+      expect([1, 2, 3].count()).to_be 3
+      expect([1, 2, 3, 3, 3].count()).to_be 5
 
-    describe "#is_empty()", ->
-      it "returns true if collection is empty", ->
-        expect([].is_empty()).to_be true
+  describe "#is_empty()", ->
+    it "returns true if collection is empty", ->
+      expect([].is_empty()).to_be true
 
-      it "returns false if collection has at least one element", ->
-        expect([1].is_empty()).to_be false
-        expect([1, 2, 3].is_empty()).to_be false
+    it "returns false if collection has at least one element", ->
+      expect([1].is_empty()).to_be false
+      expect([1, 2, 3].is_empty()).to_be false
 
   describe "#first()", ->
     it "returns the first element if |count| is not given", ->
@@ -497,3 +495,33 @@ describe "Array", ->
 
     it "returns the receiver", ->
       expect(people.sort_by ['name']).to_be people
+  describe "#is_comparable()", ->
+    it "returns false", ->
+      value = []
+      expect(value.is_comparable()).to_be false
+
+  describe "#is_copyable()", ->
+    it "returns true", ->
+      value = []
+      expect(value.is_copyable()).to_be true
+
+  describe "#copy()", ->
+    it "copys an array", ->
+      array = [1, 2, 3]
+      copy = array.copy()
+      expect(copy).not.to_be array
+      expect(copy).to_equal array
+
+  describe "#equals()", ->
+    it "returns true for an array with the same objects", ->
+      expect([1, 2, 3].equals [1, 2, 3]).to_be true
+
+    it "returns false for undefined or null", ->
+      expect([1, 2, 3].equals null).to_be false
+      expect([1, 2, 3].equals()).to_be false
+
+    it "returns false for an array with the same objects but in a different order", ->
+      expect([1, 2, 3].equals [1, 3, 2]).to_be false
+
+    it "returns false when passing something else than an array (for example an object)", ->
+      expect([1, 2, 3].equals {}).to_be false
