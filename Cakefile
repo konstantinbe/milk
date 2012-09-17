@@ -89,13 +89,13 @@ SOURCE = [
   "milk"
 ].map (pattern) -> "source/#{pattern}.coffee"
 
-SPECS = [
+TESTS = [
   "01-spec-basics"
   "02-spec-number"
   "03-spec-string"
   "04-spec-array"
   "05-spec-attributes"
-].map (pattern) -> "specs/#{pattern}.coffee"
+].map (pattern) -> "tests/#{pattern}.coffee"
 
 task 'check', "check what engines are installed", (options) ->
   for id, engine of engines
@@ -111,14 +111,14 @@ task 'build', "build Milk", (options) ->
   run "coffee --output build/ --compile --bare build/milk.coffee"
   puts OK
 
-  put "Building Milk specs ... "
-  run "cat #{SPECS.join ' '} > build/milk-specs.coffee"
-  run "coffee --output build/ --compile --bare build/milk-specs.coffee"
+  put "Building Milk tests ... "
+  run "cat #{TESTS.join ' '} > build/milk-tests.coffee"
+  run "coffee --output build/ --compile --bare build/milk-tests.coffee"
   run "coffee --output build/ --compile --bare support/driver.coffee support/spec-helper.coffee support/spec-runner.coffee"
-  run "cat build/driver.js externals/jasmine/jasmine.js build/milk.js build/spec-helper.js build/milk-specs.js build/spec-runner.js > build/test-milk.js"
+  run "cat build/driver.js externals/jasmine/jasmine.js build/milk.js build/spec-helper.js build/milk-tests.js build/spec-runner.js > build/test-milk.js"
   puts OK
 
-task 'test', "build & run Milk specs", (options) ->
+task 'test', "build & run Milk tests", (options) ->
   invoke 'build'
   invoke 'run'
 
@@ -147,16 +147,16 @@ task 'play', "build & run Milk in browser", (options) ->
   run "open build/play.html -a #{browser['name']}"
   puts OK
 
-task 'run', "run Milk specs\n", (options) ->
+task 'run', "run Milk tests\n", (options) ->
   engine = engines[options['engine']] or default_engine
-  puts "Running Milk specs on #{WHITE + engine['title'] + RESET} ..."
+  puts "Running Milk tests on #{WHITE + engine['title'] + RESET} ..."
   run "cd build; #{engine['command']} test-milk.js"
 
-task 'test:all', "build & run all specs on all engines", (options) ->
+task 'test:all', "build & run all tests on all engines", (options) ->
   invoke 'build'
   invoke 'run:all'
 
-task 'run:all', "run all specs on all engines\n", (options) ->
+task 'run:all', "run all tests on all engines\n", (options) ->
   invoke 'check'
   for own id, engine of engines
     if which engine.command
@@ -179,13 +179,13 @@ task 'npm:publish', "build & publish milk-node\n", (options) ->
   run "cd build/milk-node/; npm publish"
   puts OK
 
-task 'camel', "build camel case version & run specs\n", (options) ->
+task 'camel', "build camel case version & run tests\n", (options) ->
   invoke 'clean'
   invoke 'build'
 
   coffee_file_names = [
     'milk'
-    'milk-specs'
+    'milk-tests'
   ]
 
   put "Converting to CamelCase ... "
