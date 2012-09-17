@@ -76,11 +76,17 @@ option '-b', "--browser [NAME]", "use one of the browsers: #{Object.keys(browser
 # ------------------------------------------------------------------ Milk ------
 
 SOURCE = [
-  "01-basics"
-  "02-number"
-  "03-string"
-  "04-array"
-  "05-attributes"
+  "core"
+  "object"
+  "function"
+  "boolean"
+  "number"
+  "date"
+  "string"
+  "reg-exp"
+  "array"
+  "math"
+  "milk"
 ].map (pattern) -> "source/#{pattern}.coffee"
 
 SPECS = [

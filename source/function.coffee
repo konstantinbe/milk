@@ -21,9 +21,10 @@
 
 @module 'Milk', ->
 
-  class Attributes
+  class FunctionExtensions
 
-    # --------------------------------------------------------------------------
+    new: (args...) ->
+      new this args...
 
     has: (key, options = {}) ->
       options.with_defaults
@@ -62,6 +63,10 @@
       Object.defineProperty @prototype, getter_name, enumerable: no if secret
       Object.defineProperty @prototype, setter_name, enumerable: no if secret or readonly
 
-  # ----------------------------------------------------------------------------
+    is_comparable: ->
+      no
 
-  Function.includes Attributes
+    is_copyable: ->
+      no
+
+  Function.includes FunctionExtensions

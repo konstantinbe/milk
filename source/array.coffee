@@ -337,6 +337,25 @@
     sort_by: (keys) ->
       @sort make_compare_function_for_sorting_by_keys keys if keys.count() > 0
 
-  # ----------------------------------------------------------------------------
+    is_comparable: ->
+      no
+
+    is_copyable: ->
+      yes
+
+    equals: (object) ->
+      return no unless object?
+      return no unless object.is_array()
+      return no unless @length == object.length
+      return no unless (@all (value, index) -> value is object[index] or value?.equals object[index])
+      yes
+
+    copy: ->
+      return @ if @is_frozen()
+      [].concat this
+
+    to_string: ->
+      strings = @collect (object) -> if object? then object.to_string() else object
+      "[" + strings.join(", ") + "]"
 
   Array.includes ArrayExtensions

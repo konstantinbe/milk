@@ -19,9 +19,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-# ------------------------------------------------------------------------------
-
 global = exports ? this
+
+# ------------------------------------------------------------------------------
 
 class Module
 
@@ -45,6 +45,8 @@ class Module
     throw "Can't export #{object} as '#{name}', name already taken" if @[name]?
     name = '$' + name if options['secret']
     @[name] = object
+
+# ------------------------------------------------------------------------------
 
 Object::module = (path, block) ->
   module = Module.walk path, create_if_not_exists: yes
@@ -266,195 +268,6 @@ Object::includes = (mixins...) ->
 
   # ----------------------------------------------------------------------------
 
-  class ObjectExtensions
-
-    native_has_own_property = Object::hasOwnProperty
-    native_to_string = Object::toString
-
-    class: ->
-      return @constructor
-
-    class_name: ->
-      return @class().name
-
-    count: ->
-      @keys().count()
-
-    is_empty: ->
-      @count() is 0
-
-    keys: ->
-      Object.keys @
-
-    values: ->
-      (value for own key, value of @)
-
-    has_own: (key) ->
-      native_has_own_property.call this, key
-
-    own: (key) ->
-      if @has_own key then @[key] else undefined
-
-    toString: ->
-      return @to_string() if @responds_to 'to_string'
-      native_to_string.call @
-
-    to_string: ->
-      native_to_string.call @
-
-  # ----------------------------------------------------------------------------
-
-  class FunctionExtensions
-
-    is_comparable: ->
-      no
-
-    is_copyable: ->
-      no
-
-    new: (args...) ->
-      new this args...
-
-  # ----------------------------------------------------------------------------
-
-  class BooleanExtensions
-
-    is_comparable: ->
-      yes
-
-    is_copyable: ->
-      yes
-
-    compare_to: (object, options = {}) ->
-      throw "Can't compare boolean to #{object}." unless object?.is_boolean()
-      return -1 if not @ and object
-      return +1 if @ and not object
-      0
-
-    copy: ->
-      return @ if @is_frozen()
-      @ is true
-
-  # ----------------------------------------------------------------------------
-
-  class NumberExtensions
-
-    is_comparable: ->
-      yes
-
-    is_copyable: ->
-      yes
-
-    compare_to: (object, options = {}) ->
-      throw "Can't compare number '#{this}' to #{object}" unless object?.is_number()
-      return -1 if this < object
-      return +1 if this > object
-      0
-
-    copy: ->
-      return @ if @is_frozen()
-      new Number @
-
-  # ----------------------------------------------------------------------------
-
-  class DateExtensions
-
-    is_comparable: ->
-      yes
-
-    is_copyable: ->
-      yes
-
-    compare_to: (object, options = {}) ->
-      throw "Can't compare date '#{this}' to #{object}." unless object?.is_date()
-      return -1 if this < object
-      return +1 if this > object
-      0
-
-    copy: ->
-      return @ if @is_frozen()
-      new Date @
-
-  # ----------------------------------------------------------------------------
-
-  class StringExtensions
-
-    is_comparable: ->
-      yes
-
-    is_copyable: ->
-      yes
-
-    compare_to: (object, options = {}) ->
-      throw "Can't compare string '#{this}' to #{object}." unless object?.is_string()
-      return -1 if this < object
-      return +1 if this > object
-      0
-
-    copy: ->
-      return @ if @is_frozen()
-      new String @
-
-  # ----------------------------------------------------------------------------
-
-  class RegExpExtensions
-
-    is_comparable: ->
-      yes
-
-    is_copyable: ->
-      yes
-
-    compare_to: (object, options = {}) ->
-      throw "Can't compare regexp '#{this}' to #{object}" unless object?.is_reg_exp()
-      return -1 if this < object
-      return +1 if this > object
-      0
-
-    copy: ->
-      return @ if @is_frozen()
-      new RegExp @
-
-  # ----------------------------------------------------------------------------
-
-  class ArrayExtensions
-
-    is_comparable: ->
-      no
-
-    is_copyable: ->
-      yes
-
-    equals: (object) ->
-      return no unless object?
-      return no unless object.is_array()
-      return no unless @length == object.length
-      return no unless (@all (value, index) -> value is object[index] or value?.equals object[index])
-      yes
-
-    copy: ->
-      return @ if @is_frozen()
-      [].concat this
-
-    to_string: ->
-      strings = @collect (object) -> if object? then object.to_string() else object
-      "[" + strings.join(", ") + "]"
-
-  # ----------------------------------------------------------------------------
-
-  class MathExtensions
-
-    @generate_unique_id: ->
-      unique_id = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace /[xy]/g, (character) ->
-        random = Math.random() * 16 | 0
-        number = if character == 'x' then random else (random & 0x3 | 0x8)
-        number.toString 16
-      unique_id
-
-    @identity = (object) -> object
-
-  # ----------------------------------------------------------------------------
-
   Object.includes Comparing
   Object.includes Copying
 
@@ -464,29 +277,5 @@ Object::includes = (mixins...) ->
   Object.includes KeyValueCoding
   Object.includes TypeChecking
   Object.includes Messaging
-
-  Object.includes ObjectExtensions
-  Function.includes FunctionExtensions
-
-  Boolean.includes BooleanExtensions
-  Number.includes NumberExtensions
-  Date.includes DateExtensions
-
-  String.includes StringExtensions
-  RegExp.includes RegExpExtensions
-
-  Array.includes ArrayExtensions
-
-  Math.includes MathExtensions
-
-  # ----------------------------------------------------------------------------
-
-  for key of Object.prototype
-    Object.defineProperty Object.prototype, key, enumerable: no
-
-  for key of Array.prototype
-    Object.defineProperty Array.prototype, key, enumerable: no
-
-  # ----------------------------------------------------------------------------
 
   @export Module

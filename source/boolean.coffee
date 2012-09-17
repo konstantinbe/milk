@@ -21,24 +21,22 @@
 
 @module 'Milk', ->
 
-  class NumberExtensions
+  class BooleanExtensions
 
-    # -------------------------------------------------- Native Functions ------
+    is_comparable: ->
+      yes
 
-    native_is_nan = isNaN
-    native_is_finite = isFinite
+    is_copyable: ->
+      yes
 
-    # --------------------------------------------------------------------------
+    compare_to: (object, options = {}) ->
+      throw "Can't compare boolean to #{object}." unless object?.is_boolean()
+      return -1 if not @ and object
+      return +1 if @ and not object
+      0
 
-    is_nan: ->
-      native_is_nan @
+    copy: ->
+      return @ if @is_frozen()
+      @ is true
 
-    is_finite: ->
-      native_is_finite @
-
-    is_infinite: ->
-      not @is_nan() and not @is_finite()
-
-  # ----------------------------------------------------------------------------
-
-  Number.includes NumberExtensions
+  Boolean.includes BooleanExtensions

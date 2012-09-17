@@ -23,8 +23,6 @@
 
   class StringExtensions
 
-    # -------------------------------------------------- Native Functions ------
-
     native_char_code_at = String::charCodeAt
     native_index_of = String::indexOf
     native_last_index_of = String::lastIndexOf
@@ -182,11 +180,11 @@
         W[t] = M[i][t] for t in [0...16]
         W[t] = rotate_left(W[t - 3] ^ W[t - 8] ^ W[t - 14] ^ W[t - 16], 1) for t in [16...80]
 
-        a = H0;
-        b = H1;
-        c = H2;
-        d = H3;
-        e = H4;
+        a = H0
+        b = H1
+        c = H2
+        d = H3
+        e = H4
 
         for t in [0...80]
           s = Math.floor t / 20
@@ -205,6 +203,20 @@
 
       to_hex(H0) + to_hex(H1) + to_hex(H2) + to_hex(H3) + to_hex(H4)
 
-  # ----------------------------------------------------------------------------
+    is_comparable: ->
+      yes
+
+    is_copyable: ->
+      yes
+
+    compare_to: (object, options = {}) ->
+      throw "Can't compare string '#{this}' to #{object}." unless object?.is_string()
+      return -1 if this < object
+      return +1 if this > object
+      0
+
+    copy: ->
+      return @ if @is_frozen()
+      new String @
 
   String.includes StringExtensions
