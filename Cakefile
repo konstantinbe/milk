@@ -75,6 +75,22 @@ option '-b', "--browser [NAME]", "use one of the browsers: #{Object.keys(browser
 
 # ------------------------------------------------------------------ Milk ------
 
+SOURCE = [
+  "01-basics"
+  "02-number"
+  "03-string"
+  "04-array"
+  "05-attributes"
+].map (pattern) -> "source/#{pattern}.coffee"
+
+SPECS = [
+  "01-spec-basics"
+  "02-spec-number"
+  "03-spec-string"
+  "04-spec-array"
+  "05-spec-attributes"
+].map (pattern) -> "specs/#{pattern}.coffee"
+
 task 'check', "check what engines are installed", (options) ->
   for id, engine of engines
      put "Checking whether #{WHITE + engine['title'] + RESET} is installed ... "
@@ -85,12 +101,12 @@ task 'build', "build Milk", (options) ->
   invoke 'prepare'
 
   put "Building Milk library ... "
-  run "cat source/*.coffee > build/milk.coffee"
+  run "cat #{SOURCE.join ' '} > build/milk.coffee"
   run "coffee --output build/ --compile --bare build/milk.coffee"
   puts OK
 
   put "Building Milk specs ... "
-  run "cat specs/*.coffee > build/milk-specs.coffee"
+  run "cat #{SPECS.join ' '} > build/milk-specs.coffee"
   run "coffee --output build/ --compile --bare build/milk-specs.coffee"
   run "coffee --output build/ --compile --bare support/driver.coffee support/spec-helper.coffee support/spec-runner.coffee"
   run "cat build/driver.js externals/jasmine/jasmine.js build/milk.js build/spec-helper.js build/milk-specs.js build/spec-runner.js > build/test-milk.js"
