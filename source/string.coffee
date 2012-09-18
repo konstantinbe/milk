@@ -23,13 +23,15 @@
 
   class StringExtensions
 
+    # -------------------------------------------------- Native Functions ------
+
     native_char_code_at = String::charCodeAt
     native_index_of = String::indexOf
     native_last_index_of = String::lastIndexOf
     native_to_lower_case = String::toLowerCase
     native_to_upper_case = String::toUpperCase
 
-    # --------------------------------------------------------------------------
+    # ---------------------------------------------- Working with Strings ------
 
     count: ->
       @length
