@@ -1,5 +1,7 @@
 # Milk
 
+*Opinionated utility-belt library for CoffeeScript*
+
 Milk is a little utility-belt library for CoffeeScript mainly inspired by
 underscore.js while borrowing ideas from Cocoa, Rails, jQuery, Prototype, and
 others.
