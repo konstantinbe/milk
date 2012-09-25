@@ -8,7 +8,7 @@ others.
 
 Milk is *opinionated*, alledged "conventions" and "best-practices" may be
 violated. In particular, Milk uses underscore notation like *Ruby* and makes
-heavy use of monkey patching to extend the core JavaScript classes.
+heavy use of monkey patching to extend the core JavaScript types.
 
 ## Getting Started
 
