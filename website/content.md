@@ -23,7 +23,11 @@ heavy use of monkey patching to extend the core JavaScript types.
 
 *TODO: write a little tutorial here.*
 
-### Working with Objects
+--------------------------------------------------------------------------------
+
+## Reference
+
+### Object Class Reference
 
 Comparing:
 
@@ -93,7 +97,24 @@ Other:
 - [`own()`](#)
 - [`to_string()`](#)
 
-### Working with Strings
+
+### Function Class Reference
+
+*TODO: put detailed descriptions for each method here.*
+
+### Boolean Class Reference
+
+*TODO: put detailed descriptions for each method here.*
+
+### Number Class Reference
+
+*TODO: put detailed descriptions for each method here.*
+
+### Date Class Reference
+
+*TODO: put detailed descriptions for each method here.*
+
+### String Class Reference
 
 - [`count()`](#)
 - [`first()`](#)
@@ -123,7 +144,11 @@ Other:
 - [`utf16()`](#)
 - [`sha1()`](#)
 
-### Working with Arrays
+### RegExp Class Reference
+
+*TODO: put detailed descriptions for each method here.*
+
+### Array Class Reference
 
 - [`count()`](#)
 - [`is_empty()`](#)
@@ -204,26 +229,10 @@ Mutating Arrays:
 - [`replace_at_with_many()`](#)
 - [`sort_by()`](#)
 
-### Defining Attributes
-
-    TODO: document.
-
-### Organizing Code
-
-    TODO: document.
-
-### Miscellaneous
-
-Math extensions:
+### Math Class Reference
 
 - [`Math.generate_unique_id()`](#)
 - [`Math.identity()`](#)
-
---------------------------------------------------------------------------------
-
-## Reference
-
-*TODO: put detailed descriptions for each method here.*
 
 --------------------------------------------------------------------------------
 
