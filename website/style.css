@@ -1,7 +1,8 @@
 body {
-    background: #d4e9ec;
-    color: #000;
-    font-family: "Myriad Pro", "Lucida Grande", Verdana, Arial, Sans-Serif;
+    background: hsl(188, 39%, 88%);
+    color: hsl(227, 28%, 10%);
+    font-family: "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+    font-size: 14px;
 }
 
 * {
@@ -14,24 +15,57 @@ a:link, a:visited {
 }
 
 a:hover, a:focus {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 h1 {
+    font-weight: bold;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-size: 6em;
+    text-shadow: 0px 0px 3px hsla(227, 28%, 10%, 0.7);
+    color: hsl(188, 39%, 97%);
+}
+
+h2 {
     font-weight: normal;
-    font-size: 4em;
+    font-variant: small-caps;
+    text-shadow: 0px 1px 0px hsl(0, 0%, 100%);
+    font-size: 2em;
+}
+
+h3 {
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+h4 {
+    font-weight: bold;
+    font-size: 1em;
+}
+
+h5 {
+   font-weight: normal;
+   font-style: italic;
+   font-size: 1em;
 }
 
 hr {
     height: 2px;
-    border-top: 1px solid hsla(0, 0%, 0%, 20%);
-    border-bottom: 1px solid hsla(0, 100%, 100%, 20%);
+    border: none;
+    border-top: 1px solid hsla(0, 0%, 0%, 0.1);
+    border-bottom: 1px solid hsla(0, 100%, 100%, 0.7);
+    margin: 40px 0px;
+}
+
+code {
+    font-family: "Monaco", "Inconsolata", "Menlo", monospace;
+    font-size: 0.9em;
 }
 
 #fork-me {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 0px;
+    right: 0px;
     width: 140px;
     height: 140px;
     text-indent: -9999px;
@@ -48,5 +82,22 @@ hr {
 .content {
     max-width: 760px;
     margin: 0px auto;
+    padding: 20px;
+}
+
+.content h1:first-of-type {
     text-align: center;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+}
+
+.content p:first-of-type {
+    text-align: center;
+    text-shadow: 0px 1px 0px hsl(0, 0%, 100%);
+    color: hsl(188, 39%, 38%);
+    font-size: 1.3em;
+}
+
+.content p:first-of-type em {
+    font-style: normal;
 }
