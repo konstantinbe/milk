@@ -22,6 +22,7 @@
 
 fs = require 'fs'
 shell = require 'shelljs'
+marked = require 'marked'
 
 # ------------------------------------------------------------- Constants ------
 
@@ -215,11 +216,15 @@ task 'website', "build website\n", (options) ->
 
   put "Building website ... "
   run "mkdir -p build/website"
-  run "cp website/style.css build/website/"
+  run "cp website/style.css website/*.png build/website/"
   index_html = read_from_file "website/index.html"
   content_md = read_from_file "website/content.md"
   index_html = index_html.replace "<!-- content.md -->", marked content_md
   write_to_file index_html, "build/website/index.html"
+  puts OK
+
+  put "Opening website ... "
+  run "open build/website/index.html"
   puts OK
 
 # --------------------------------------------------------------- Default ------
