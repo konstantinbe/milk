@@ -154,19 +154,19 @@ Object::includes = (mixins...) ->
     native_is_sealed = Object.isSealed
     native_is_frozen = Object.isFrozen
 
-    is_frozen: ->
-      native_is_frozen? @
-
     freeze: ->
       native_freeze? @
       @
 
-    is_sealed: ->
-      native_is_sealed? @
+    is_frozen: ->
+      native_is_frozen? @
 
     seal: ->
       native_seal? @
       @
+
+    is_sealed: ->
+      native_is_sealed? @
 
   # ----------------------------------------------------------------------------
 
