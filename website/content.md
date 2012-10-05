@@ -131,19 +131,59 @@ properties of `object` while overwriting existing ones. See also: `merge()`
 
 #### `freeze()`
 
-*TODO: describe.*
+Freezes the receiver and returns it. This method has no effect if the receiver
+is already frozen. An object can't be modified after it has been frozen.
 
 #### `is_frozen()`
 
-*TODO: describe.*
+Returns `yes` if receiver is frozen, otherwise returns `no`. See also:
+`freeze()`.
 
 #### `seal()`
 
-*TODO: describe.*
+Seals the receiver and returns it. This method has no effect if the receiver
+is already sealed. A sealed object doesn't allow to add or to remove properties,
+only existing properties can be modified.
 
 #### `is_sealed()`
 
+Returns `yes` if receiver is sealed, otherwise returns `no`. See also:
+`seal()`.
+
+#### `value_for(key, options = {})`
+
+Returns the value for the property identified by `key`. Tries to call the getter
+or return the instance variables directly in the following order:
+
+1. Getter method named `{key}`
+2. Instance variable named `@{key}`
+3. Instance variable named `{key}`
+
+If none of the above exist, returns `undefined`. Bypasses the getter if option
+`direct: yes` is passed. See also: `set_value_for()`.
+
+#### `set_value_for(value, key, options = {})`
+
+Sets the `value` for the property identified by `key` and returns the receiver.
+Tries to call the setter or set the instance variables directly in the following
+order:
+
+1. Setter method named `set_{key}`
+2. Instance variable named `@{key}`
+3. Instance variable named `{key}`
+
+If none of the above exist, throws an error. Bypasses the setter If option
+`direct: yes` is passed. See also: `value_for()`.
+
+#### `getter_name_for()`
+
 *TODO: describe.*
+
+#### `setter_name_for()`
+
+*TODO: describe.*
+
+#### `instance_variable_name_for()`
 
 Comparing:
 
