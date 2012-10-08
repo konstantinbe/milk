@@ -106,23 +106,23 @@ implementation returns `no`. subclasses returning `yes` must implement the
 
 #### `copy()`
 
-Returns a copy of the receiver. The default implementation throws an error.
+Returns a copy of `self`. The default implementation throws an error.
 Subclasses implementing this method should also implement `is_copyable()`
 and return `yes`.
 
 #### `mixin(object)`
 
-Modifies the receiver by mixing in all own properties of `object` without
-overwriting existing ones. Returns the receiver. See also: `merge()`.
+Mutates `self` by mixing in all own properties of `object` without
+overwriting existing ones. Returns `self`. See also: `merge()`.
 
 #### `merge(object)`
 
-Modifies the receiver by mixing in all own properties of `object` overwriting
-existing ones. Returns the receiver. See also: `mixin()`.
+Mutates `self` by mixing in all own properties of `object` overwriting
+existing ones. Returns `self`. See also: `mixin()`.
 
 #### `with(object)`
 
-Returns a new object with all own properties of the receiver merged with all own
+Returns a new object with all own properties of `self` merged with all own
 properties of `object` while overwriting existing ones. See also: `merge()`
 
 #### `with_defaults(object)`
@@ -131,7 +131,7 @@ properties of `object` while overwriting existing ones. See also: `merge()`
 
 #### `freeze()`
 
-Freezes the receiver and returns it. This method has no effect if the receiver
+Freezes and returns `self`. This method has no effect if `self`
 is already frozen. An object can't be modified after it has been frozen.
 
 #### `is_frozen()`
@@ -141,7 +141,7 @@ Returns `yes` if receiver is frozen, otherwise returns `no`. See also:
 
 #### `seal()`
 
-Seals the receiver and returns it. This method has no effect if the receiver
+Seals and returns `self`. This method has no effect if `self`
 is already sealed. A sealed object doesn't allow to add or to remove properties,
 only existing properties can be modified.
 
@@ -155,35 +155,87 @@ Returns `yes` if receiver is sealed, otherwise returns `no`. See also:
 Returns the value for the property identified by `key`. Tries to call the getter
 or return the instance variables directly in the following order:
 
-1. Getter method named `{key}`
-2. Instance variable named `@{key}`
-3. Instance variable named `{key}`
+1. Getter method named `<key>`
+2. Instance variable named `@<key>`
+3. Instance variable named `<key>`
 
 If none of the above exist, returns `undefined`. Bypasses the getter if option
 `direct: yes` is passed. See also: `set_value_for()`.
 
 #### `set_value_for(value, key, options = {})`
 
-Sets the `value` for the property identified by `key` and returns the receiver.
+Sets the `value` for the property identified by `key` and returns `self`.
 Tries to call the setter or set the instance variables directly in the following
 order:
 
-1. Setter method named `set_{key}`
-2. Instance variable named `@{key}`
-3. Instance variable named `{key}`
+1. Setter method named `set_<key>`
+2. Instance variable named `@<key>`
+3. Instance variable named `<key>`
 
 If none of the above exist, throws an error. Bypasses the setter If option
 `direct: yes` is passed. See also: `value_for()`.
 
-#### `getter_name_for()`
+#### `getter_name_for(key)`
 
-*TODO: describe.*
+Returns the getter name for a specific `key`. Currently, the getter name is
+simply the key itself (this might change in the future).
 
-#### `setter_name_for()`
+#### `setter_name_for(key)`
 
-*TODO: describe.*
+Returns the setter name for a specific `key`. Currently, the setter name is of
+the form `set_<key>` (this might change in the future).
 
-#### `instance_variable_name_for()`
+#### `instance_variable_name_for(key)`
+
+Returns the instance variable name for a specific `key`. Currently, the instance
+variable name is of the form `@<key>` (this might change in the future).
+
+#### `is_class()`
+
+Returns `yes` if `self` is a class, otherwise returns `no`.
+
+#### `is_function()`
+
+Returns `yes` if `self` is a function, otherwise returns `no`.
+
+#### `is_boolean()`
+
+Returns `yes` if `self` is a boolean, otherwise returns `no`.
+
+#### `is_number()`
+
+Returns `yes` if `self` is a number, otherwise returns `no`.
+
+#### `is_date()`
+
+Returns `yes` if `self` is a date, otherwise returns `no`.
+
+#### `is_string()`
+
+Returns `yes` if `self` is a string, otherwise returns `no`.
+
+#### `is_reg_exp()`
+
+Returns `yes` if `self` is a regular expression, otherwise returns `no`.
+
+#### `is_array()`
+
+Returns `yes` if `self` is an array, otherwise returns `no`.
+
+#### `is_dictionary()`
+
+Returns `yes` if `self` is a dictionary, otherwise returns `no`. A dictionary is
+a plain JavaScript object without a superclass.
+
+#### `is_kind_of(class)`
+
+Returns `yes` if `self` is an instance of `class` or any of its superclasses,
+otherwise returns `no`. See also: `is_instance_of()`.
+
+#### `is_instance_of(class)`
+
+Returns `yes` if `self` is an instance of `class`, otherwise returns `no`. See
+also: `is_kind_of()`.
 
 Comparing:
 
