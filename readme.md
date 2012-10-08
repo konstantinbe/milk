@@ -32,7 +32,7 @@ heavy use of monkey patching to extend the core JavaScript types.
 * Use dashed notation for directories and files:
   `milk-core.coffee`, `helper-files`
 * Use dashed notation for URLs:
-  `http://konstantinbender.com/introducing-the-milk-framework`
+  `http://konstantinbender.com/introducing-milk`
 * Use dashed notation for XML, HTML and CSS: `person-name`, `table-of-people`,
   `regular-xml-parser`
 * No arbitrary abbreviations, such as `src`, `mod`, `obj`, ...
