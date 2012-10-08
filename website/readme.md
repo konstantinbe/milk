@@ -1,12 +1,13 @@
 # Milk Website
 
-Website for Milk, currently part of: [http://milkandsugar.org](http://milkandsugar.org)
+Website for Milk, currently part of:
+[http://milkandsugar.org](http://milkandsugar.org)
 
 ## License
 
 Released under the MIT license.
 
-Copyright (c) 2010 [Konstantin Bender](https://github.com/konstantinbender).
+Copyright (c) 2010 [Konstantin Bender](http://github.com/konstantinbe).
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

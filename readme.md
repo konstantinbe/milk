@@ -37,7 +37,7 @@ heavy use of monkey patching to extend the core JavaScript types.
   `regular-xml-parser`
 * No arbitrary abbreviations, such as `src`, `mod`, `obj`, ...
 * Source must be "white-space-clean", the *White* command line utility
-  will cleanup whitespace for you: [White](https://github.com/konstantinbender/white)
+  will cleanup whitespace for you: [White](http://github.com/konstantinbe/white)
 
 ## Inspiration
 
@@ -48,14 +48,14 @@ heavy use of monkey patching to extend the core JavaScript types.
 
 ## Acknowledgements
 
-Special thanks to [Jeremy Ashkenas](https://github.com/jashkenas) for bringing
+Special thanks to [Jeremy Ashkenas](http://github.com/jashkenas) for bringing
 [CoffeeScript](http://coffeescript.org) into life.
 
 ## License
 
 Released under the MIT license.
 
-Copyright (c) 2010 [Konstantin Bender](https://github.com/konstantinbender).
+Copyright (c) 2010 [Konstantin Bender](http://github.com/konstantinbe).
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
