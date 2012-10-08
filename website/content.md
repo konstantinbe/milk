@@ -239,7 +239,7 @@ also: `is_kind_of()`.
 
 #### `responds_to(command)`
 
-Returns `yes` if `self` responds to a `command` (i.e. has a method with that
+Returns `yes` if `self` responds to `command` (i.e. has a method with that
 name), otherwise returns `no`.
 
 #### `invoke(command, args = [])`
@@ -256,9 +256,9 @@ Creates a new instance of a class by passing `args` to the constructor.
 #### `has(key, options = {})`
 
 Defines a property for the class. By default synthesizes a getter and a setter
-method (`<key>()`, `set_<key>()`), and initializes an instance variable with
-`null` (`@<key> = null`). The property can be customized by passing the
-following options:
+method of the form `<key>()` and `set_<key>()`, and initializes an instance
+variable named `@<key>` with `null`. The property can be customized by passing
+the following options:
 
 * `initial`: initial value for the property, default: `null`.
 * `secret`: public or private, defualt: `no`.
@@ -267,6 +267,8 @@ following options:
 * `freeze`: freeze the value before returning it, default: `no`.
 * `get`: custom getter function, default: `null` (will be synthesized).
 * `set`: custom setter function, default: `null` (will be synthesized).
+
+See also: `value_for()`, `set_value_for()`.
 
 ### Boolean Class Reference
 
