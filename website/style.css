@@ -81,6 +81,9 @@ code {
     height: 140px;
     text-indent: -9999px;
     background-image: url("fork-me.png");
+    border: none;
+    text-decoration: none;
+    background-color: transparent;
 }
 
 @media (-webkit-min-device-pixel-ratio: 2) {
