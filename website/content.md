@@ -237,73 +237,15 @@ otherwise returns `no`. See also: `is_instance_of()`.
 Returns `yes` if `self` is an instance of `class`, otherwise returns `no`. See
 also: `is_kind_of()`.
 
-Comparing:
+#### `responds_to(command)`
 
-- `equals()`
-- `is_comparable()`
-- `compare_to()`
-- `is_less_than()`
-- `is_less_than_or_equals()`
-- `is_greater_than()`
-- `is_greater_than_or_equals()`
-- `is_between()`
+Returns `yes` if `self` responds to a `command` (i.e. has a method with that
+name), otherwise returns `no`.
 
-Copying:
+#### `invoke(command, args = [])`
 
-- `is_copyable()`
-- `copy()`
-
-Mixing & Merging:
-
-- `mixin()`
-- `merge()`
-- `with()`
-- `with_defaults()`
-
-Freezing & Sealing:
-
-- `freeze()`
-- `is_frozen()`
-- `seal()`
-- `is_sealed()`
-
-Key-Value-Coding:
-
-- `value_for()`
-- `set_value_for()`
-- `getter_name_for()`
-- `setter_name_for()`
-- `instance_variable_name_for()`
-
-Checking types:
-
-- `is_class()`
-- `is_function()`
-- `is_boolean()`
-- `is_number()`
-- `is_date()`
-- `is_string()`
-- `is_reg_exp()`
-- `is_array()`
-- `is_dictionary()`
-- `is_kind_of()`
-- `is_instance_of()`
-
-Messaging:
-
-- `responds_to()`
-- `invoke()`
-
-Other:
-
-- `new()`
-- `class()`
-- `class_name()`
-- `keys()`
-- `values()`
-- `has_own()`
-- `own()`
-- `to_string()`
+Invokes the method named `command`, passes the `args` array as arguments and
+returns the result. Throws an error if `self` doesn't respond to `command`.
 
 ### Function Class Reference
 
