@@ -249,7 +249,24 @@ returns the result. Throws an error if `self` doesn't respond to `command`.
 
 ### Function Class Reference
 
-*TODO: put detailed descriptions for each method here.*
+#### `new(args...)`
+
+Creates a new instance of a class by passing `args` to the constructor.
+
+#### `has(key, options = {})`
+
+Defines a property for the class. By default synthesizes a getter and a setter
+method (`<key>()`, `set_<key>()`), and initializes an instance variable with
+`null` (`@<key> = null`). The property can be customized by passing the
+following options:
+
+* `initial`: initial value for the property, default: `null`.
+* `secret`: public or private, defualt: `no`.
+* `readonly`: read/write or readonly, default: `no`.
+* `copy`: copy the value rather than referencing it directly, default: `no`.
+* `freeze`: freeze the value before returning it, default: `no`.
+* `get`: custom getter function, default: `null` (will be synthesized).
+* `set`: custom setter function, default: `null` (will be synthesized).
 
 ### Boolean Class Reference
 
