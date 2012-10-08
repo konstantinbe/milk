@@ -260,11 +260,11 @@ Object::includes = (mixins...) ->
 
   class Messaging
 
-    responds_to: (method) ->
-      method? and @[method]? and @[method].is_function()
+    responds_to: (command) ->
+      command? and @[command]? and @[command].is_function()
 
-    invoke: (method, args = []) ->
-      @[method](args...)
+    invoke: (command, args = []) ->
+      @[command](args...)
 
   # ----------------------------------------------------------------------------
 
