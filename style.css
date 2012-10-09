@@ -1,0 +1,87 @@
+body {
+    background: hsl(188, 39%, 88%);
+    color: hsl(227, 28%, 10%);
+    font-family: "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+    font-size: 14px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a:link, a:visited {
+    color: #00688B;
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    text-decoration: none;
+}
+
+h1 {
+    font-weight: bold;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-size: 6em;
+    text-shadow: 0px 0px 3px hsla(227, 28%, 10%, 0.7);
+    color: hsl(188, 39%, 97%);
+}
+
+h2 {
+    font-weight: normal;
+    font-variant: small-caps;
+    font-size: 2em;
+}
+
+hr {
+    height: 2px;
+    border: none;
+    border-top: 1px solid hsla(0, 0%, 0%, 0.1);
+    border-bottom: 1px solid hsla(0, 100%, 100%, 0.7);
+    margin: 40px 0px;
+}
+
+code {
+    font-family: "Monaco", "Inconsolata", "Menlo", monospace;
+    font-size: 0.8em;
+}
+
+#fork-me {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 140px;
+    height: 140px;
+    text-indent: -9999px;
+    background-image: url("fork-me.png");
+}
+
+@media (-webkit-min-device-pixel-ratio: 2) {
+    #fork-me {
+        background-image: url("fork-me@2x.png") !important;
+        -webkit-background-size: 140px 140px;
+    }
+}
+
+.content {
+    max-width: 760px;
+    margin: 0px auto;
+    padding: 20px;
+}
+
+.content h1:first-of-type {
+    text-align: center;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+}
+
+.content p:first-of-type {
+    text-align: center;
+    text-shadow: 0px 1px 0px hsl(0, 0%, 100%);
+    color: hsla(0, 0%, 0%, 0.3);
+    color: hsl(188, 39%, 38%);
+    font-size: 1.3em;
+}
+
+.content p:first-of-type em {
+    font-style: normal;
+}
