@@ -216,6 +216,7 @@ task 'website', "build website\n", (options) ->
 
   put "Building website ... "
   run "mkdir -p build/website"
+  run "rm -rf build/website/*"
   run "cp website/style.css website/*.png build/website/"
   index_html = read_from_file "website/index.html"
   content_md = read_from_file "website/content.md"
@@ -225,6 +226,17 @@ task 'website', "build website\n", (options) ->
 
   put "Opening website ... "
   run "open build/website/index.html"
+  puts OK
+
+task 'publish', "publish website\n", (options) ->
+  invoke 'website'
+
+  put "Prepare publishing ... "
+  run "rm -rf build/publish"
+  run "git clone .git build/publish"
+  run "cd build/publish; git checkout origin/gh-pages -b gh-pages; git clean -f; rm -rf *"
+  run "cp build/website/* build/publish/"
+  run "cd build/publish; git commit -a -m 'Update website'; git push origin gh-pages:gh-pages"
   puts OK
 
 # --------------------------------------------------------------- Default ------
