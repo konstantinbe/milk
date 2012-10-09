@@ -272,15 +272,29 @@ See also: `value_for()`, `set_value_for()`.
 
 ### Boolean Class Reference
 
-*TODO: put detailed descriptions for each method here.*
+The `Boolean` class currently has no extended methods but supports copying and
+comparing.
 
 ### Number Class Reference
 
-*TODO: put detailed descriptions for each method here.*
+The `Number` class supports copying and comparing.
+
+#### `is_nan()`
+
+Returns `yes` if number is `NaN` (not a number), otherwise returns `no`.
+
+#### `is_finite()`
+
+Returns `yes` if number is finite, otherwise returns `no`.
+
+#### `is_infinite()`
+
+Returns `yes` if number is infinite, otherwise returns `no`.
 
 ### Date Class Reference
 
-*TODO: put detailed descriptions for each method here.*
+The `Date` class currently has no extended methods but supports copying and
+comparing.
 
 ### String Class Reference
 
@@ -314,7 +328,8 @@ See also: `value_for()`, `set_value_for()`.
 
 ### RegExp Class Reference
 
-*TODO: put detailed descriptions for each method here.*
+The `RegExp` class currently has no extended methods but supports copying and
+comparing.
 
 ### Array Class Reference
 
