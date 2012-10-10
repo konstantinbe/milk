@@ -37,20 +37,9 @@
       @length
 
     first: (count) ->
-      return @[0] unless count?
       @slice 0, count
 
-    second: ->
-      @[1]
-
-    third: ->
-      @[2]
-
-    rest: ->
-      @slice 1
-
     last: (count) ->
-      return @[@length - 1] unless count?
       return "" if count is 0
       @slice -count
 

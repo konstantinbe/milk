@@ -300,27 +300,19 @@ comparing.
 
 #### `count()`
 
-*TODO: describe.*
+Returns number of characters contained in `self`.
 
-#### `first(count = null)`
+#### `first(count)`
 
-*TODO: describe.*
+Returns a string containing the first character if string is not empty.
+Otherwise returns `null`. If the optional parameter `count` is passed, returns
+a prefix with up to `count` characters.
 
-#### `second()`
+#### `last(count)`
 
-*TODO: describe.*
-
-#### `third()`
-
-*TODO: describe.*
-
-#### `rest()`
-
-*TODO: describe.*
-
-#### `last(count = null)`
-
-*TODO: describe.*
+Returns a string containing the last character if string is not empty.
+Otherwise returns `null`. If the optional parameter `count` is passed, returns
+a prefix with up to `count` characters.
 
 #### `code_at(index)`
 
