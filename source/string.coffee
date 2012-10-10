@@ -132,9 +132,6 @@
     utf8: ->
       unescape encodeURIComponent this
 
-    utf16: ->
-      decodeURIComponent escape this
-
     sha1: ->
       rotate_left = (n, s) -> (n << s) | (n >>> (32 - s))
 
