@@ -211,7 +211,7 @@ task 'camel', "build camel case version & run tests\n", (options) ->
 
   invoke 'run'
 
-task 'website', "build website\n", (options) ->
+task 'website', "build website", (options) ->
   invoke 'prepare'
 
   put "Building website ... "
