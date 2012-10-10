@@ -298,33 +298,107 @@ comparing.
 
 ### String Class Reference
 
-- `count()`
-- `first()`
-- `second()`
-- `third()`
-- `rest()`
-- `last()`
-- `code_at()`
-- `characters()`
-- `codes()`
-- `lines()`
-- `paragraphs()`
-- `prepend()`
-- `append()`
-- `index_of()`
-- `last_index_of()`
-- `indexes_of()`
-- `begins_with()`
-- `ends_with()`
-- `increment_suffix_number()`
-- `uppercased()`
-- `lowercased()`
-- `capitalized()`
-- `escaped_for_reg_exp()`
-- `parse_integer()`
-- `utf8()`
-- `utf16()`
-- `sha1()`
+#### `count()`
+
+*TODO: describe.*
+
+#### `first(count = null)`
+
+*TODO: describe.*
+
+#### `second()`
+
+*TODO: describe.*
+
+#### `third()`
+
+*TODO: describe.*
+
+#### `rest()`
+
+*TODO: describe.*
+
+#### `last(count = null)`
+
+*TODO: describe.*
+
+#### `code_at(index)`
+
+*TODO: describe.*
+
+#### `characters()`
+
+*TODO: describe.*
+
+#### `codes()`
+
+*TODO: describe.*
+
+#### `lines()`
+
+*TODO: describe.*
+
+#### `paragraphs()`
+
+*TODO: describe.*
+
+#### `prepend(string)`
+
+*TODO: describe.*
+
+#### `append(string)`
+
+*TODO: describe.*
+
+#### `index_of(string)`
+
+*TODO: describe.*
+
+#### `last_index_of(string)`
+
+*TODO: describe.*
+
+#### `indexes_of(string)`
+
+*TODO: describe.*
+
+#### `begins_with(string)`
+
+*TODO: describe.*
+
+#### `ends_with(string)`
+
+*TODO: describe.*
+
+#### `increment_suffix_number()`
+
+*TODO: describe.*
+
+#### `uppercased()`
+
+*TODO: describe.*
+
+#### `lowercased()`
+
+*TODO: describe.*
+
+#### `capitalized()`
+
+*TODO: describe.*
+
+#### `escaped_for_reg_exp()`
+
+*TODO: describe.*
+
+#### `parse_integer(integer)`
+
+*TODO: describe.*
+
+#### `utf8()`
+
+*TODO: describe.*
+
+#### `sha1()`
 
 ### RegExp Class Reference
 
@@ -333,89 +407,277 @@ comparing.
 
 ### Array Class Reference
 
-- `count()`
-- `is_empty()`
-- `contains()`
-- `contains_all()`
-- `contains_any()`
-- `at()`
-- `at_many()`              
-- `index_of()`
-- `last_index_of()`
-- `indexes_of()`
+#### `count()`
 
-Accessing Parts:
+*TODO: describe.*
 
-- `first()`
-- `second()`
-- `third()`
-- `last()`
-- `rest()`
+#### `is_empty()`
 
-Deriving Arrays:
+*TODO: describe.*
 
-- `with()`
-- `with_many()`
-- `with_at()`
-- `with_many_at()`
-- `with_before()`
-- `with_many_before()`
-- `with_after()`
-- `with_many_after()`
-- `without()`
-- `without_many()`
-- `without_at()`
-- `without_many_at()`
-- `compacted()`
-- `flattened()`
-- `reversed()`
-- `sorted()`
-- `unique()`
-- `intersect()`
-- `unite()`
-- `zip()`
+#### `contains()`
 
-Iterating Arrays:
+*TODO: describe.*
 
-- `each()`
-- `collect()`
-- `select()`
-- `reject()`
-- `detect()`
-- `pluck()`
-- `partition()`
-- `all()`
-- `any()`
-- `max()`
-- `min()`
-- `group_by()`
-- `inject()`
+#### `contains_all()`
 
-Mutating Arrays:
+*TODO: describe.*
 
-- `add()`
-- `add_many()`
-- `remove()`
-- `remove_many()`
-- `remove_at()`
-- `remove_many_at()`
-- `remove_all()`
-- `insert_at()`
-- `insert_many_at()`
-- `insert_before()`
-- `insert_many_before()`
-- `insert_after()`
-- `insert_many_after()`
-- `replace_with()`
-- `replace_with_many()`
-- `replace_at_with()`
-- `replace_at_with_many()`
-- `sort_by()`
+#### `contains_any()`
+
+*TODO: describe.*
+
+#### `at()`
+
+*TODO: describe.*
+
+#### `at_many()`              
+
+*TODO: describe.*
+
+#### `index_of()`
+
+*TODO: describe.*
+
+#### `last_index_of()`
+
+*TODO: describe.*
+
+#### `indexes_of()`
+
+*TODO: describe.*
+
+#### `first()`
+
+*TODO: describe.*
+
+#### `second()`
+
+*TODO: describe.*
+
+#### `third()`
+
+*TODO: describe.*
+
+#### `last()`
+
+*TODO: describe.*
+
+#### `rest()`
+
+*TODO: describe.*
+
+#### `with()`
+
+*TODO: describe.*
+
+#### `with_many()`
+
+*TODO: describe.*
+
+#### `with_at()`
+
+*TODO: describe.*
+
+#### `with_many_at()`
+
+*TODO: describe.*
+
+#### `with_before()`
+
+*TODO: describe.*
+
+#### `with_many_before()`
+
+*TODO: describe.*
+
+#### `with_after()`
+
+*TODO: describe.*
+
+#### `with_many_after()`
+
+*TODO: describe.*
+
+#### `without()`
+
+*TODO: describe.*
+
+#### `without_many()`
+
+*TODO: describe.*
+
+#### `without_at()`
+
+*TODO: describe.*
+
+#### `without_many_at()`
+
+*TODO: describe.*
+
+#### `compacted()`
+
+*TODO: describe.*
+
+#### `flattened()`
+
+*TODO: describe.*
+
+#### `reversed()`
+
+*TODO: describe.*
+
+#### `sorted()`
+
+*TODO: describe.*
+
+#### `unique()`
+
+*TODO: describe.*
+
+#### `intersect()`
+
+*TODO: describe.*
+
+#### `unite()`
+
+*TODO: describe.*
+
+#### `zip()`
+
+*TODO: describe.*
+
+#### `each()`
+
+*TODO: describe.*
+
+#### `collect()`
+
+*TODO: describe.*
+
+#### `select()`
+
+*TODO: describe.*
+
+#### `reject()`
+
+*TODO: describe.*
+
+#### `detect()`
+
+*TODO: describe.*
+
+#### `pluck()`
+
+*TODO: describe.*
+
+#### `partition()`
+
+*TODO: describe.*
+
+#### `all()`
+
+*TODO: describe.*
+
+#### `any()`
+
+*TODO: describe.*
+
+#### `max()`
+
+*TODO: describe.*
+
+#### `min()`
+
+*TODO: describe.*
+
+#### `group_by()`
+
+*TODO: describe.*
+
+#### `inject()`
+
+*TODO: describe.*
+
+#### `add()`
+
+*TODO: describe.*
+
+#### `add_many()`
+
+*TODO: describe.*
+
+#### `remove()`
+
+*TODO: describe.*
+
+#### `remove_many()`
+
+*TODO: describe.*
+
+#### `remove_at()`
+
+*TODO: describe.*
+
+#### `remove_many_at()`
+
+*TODO: describe.*
+
+#### `remove_all()`
+
+*TODO: describe.*
+
+#### `insert_at()`
+
+*TODO: describe.*
+
+#### `insert_many_at()`
+
+*TODO: describe.*
+
+#### `insert_before()`
+
+*TODO: describe.*
+
+#### `insert_many_before()`
+
+*TODO: describe.*
+
+#### `insert_after()`
+
+*TODO: describe.*
+
+#### `insert_many_after()`
+
+*TODO: describe.*
+
+#### `replace_with()`
+
+*TODO: describe.*
+
+#### `replace_with_many()`
+
+*TODO: describe.*
+
+#### `replace_at_with()`
+
+*TODO: describe.*
+
+#### `replace_at_with_many()`
+
+*TODO: describe.*
+
+#### `sort_by()`
 
 ### Math Class Reference
 
-- `Math.generate_unique_id()`
-- `Math.identity()`
+#### `Math.generate_unique_id()`
+
+*TODO: describe.*
+
+#### `Math.identity()`
+
+*TODO: describe.*
 
 --------------------------------------------------------------------------------
 
