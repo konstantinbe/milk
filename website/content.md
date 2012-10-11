@@ -464,51 +464,51 @@ Returns the last object if count of array is >= 1, otherwise returns `null`. If
 
 Returns an array containg all but the first object.
 
-#### `with()`
+#### `with(object)`
 
 *TODO: describe.*
 
-#### `with_many()`
+#### `with_many(objects)`
 
 *TODO: describe.*
 
-#### `with_at()`
+#### `with_at(object, index)`
 
 *TODO: describe.*
 
-#### `with_many_at()`
+#### `with_many_at(objects, index)`
 
 *TODO: describe.*
 
-#### `with_before()`
+#### `with_before(object, before)`
 
 *TODO: describe.*
 
-#### `with_many_before()`
+#### `with_many_before(objects, before)`
 
 *TODO: describe.*
 
-#### `with_after()`
+#### `with_after(object, after)`
 
 *TODO: describe.*
 
-#### `with_many_after()`
+#### `with_many_after(objects, after)`
 
 *TODO: describe.*
 
-#### `without()`
+#### `without(object)`
 
 *TODO: describe.*
 
-#### `without_many()`
+#### `without_many(objects)`
 
 *TODO: describe.*
 
-#### `without_at()`
+#### `without_at(index)`
 
 *TODO: describe.*
 
-#### `without_many_at()`
+#### `without_many_at(indexes)`
 
 *TODO: describe.*
 
@@ -532,15 +532,15 @@ Returns an array containg all but the first object.
 
 *TODO: describe.*
 
-#### `intersect()`
+#### `intersect(objects)`
 
 *TODO: describe.*
 
-#### `unite()`
+#### `unite(objects)`
 
 *TODO: describe.*
 
-#### `zip()`
+#### `zip(arrays...)`
 
 *TODO: describe.*
 
