@@ -665,11 +665,13 @@ comparing.
 
 #### `Math.generate_unique_id()`
 
-*TODO: describe.*
+Generates and returns a random string which can be used as a (globally) unique
+ID.
 
 #### `Math.identity()`
 
-*TODO: describe.*
+Returns the identity function. An identity function takes a parameter and simply
+returns it as is without doing anything.
 
 --------------------------------------------------------------------------------
 
