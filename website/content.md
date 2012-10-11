@@ -401,63 +401,68 @@ comparing.
 
 #### `count()`
 
-*TODO: describe.*
+Returns the number of objects contained in the array.
 
 #### `is_empty()`
 
-*TODO: describe.*
+Returns `yes` if array is empty (count = 0) otherwise returns `no`.
 
-#### `contains()`
+#### `contains(object)`
 
-*TODO: describe.*
+Returns `yes` if `object` is in array, otherwise returns `no`.
 
-#### `contains_all()`
+#### `contains_all(objects)`
 
-*TODO: describe.*
+Returns `yes` if `self` contains *all* of `objects`, otherwise returns `no`.
 
-#### `contains_any()`
+#### `contains_any(objects)`
 
-*TODO: describe.*
+Returns `yes` if `self` contains *any* of `objects`, otherwise returns `no`.
 
-#### `at()`
+#### `at(index)`
 
-*TODO: describe.*
+Returns the object at `index`. Returns `null` if `index` is out of bounds.
 
-#### `at_many()`              
+#### `at_many(indexes)`
 
-*TODO: describe.*
+Returns an array containing the object for each of the `indexes`. For each of
+the index that is out of bounds, the array contains a `null`.
 
-#### `index_of()`
+#### `index_of(object)`
 
-*TODO: describe.*
+Returns the index of the first occurence of `object` if it's in the array,
+otherwise returns `-1`.
 
-#### `last_index_of()`
+#### `last_index_of(object)`
 
-*TODO: describe.*
+Returns the index of the last occurence of `object` if it's in the array,
+otherwise returns `-1`.
 
-#### `indexes_of()`
+#### `indexes_of(object)`
 
-*TODO: describe.*
+Returns an array with indexes for each occurence of `object`.
 
-#### `first()`
+#### `first(count = null)`
 
-*TODO: describe.*
+Returns the first object if count of array is >= 1, otherwise returns `null`. If
+`count` is passed, returns an array containing the first `count` objects.
 
 #### `second()`
 
-*TODO: describe.*
+Returns the second object if count of array is >= 2, otherwise returns `null`.
 
 #### `third()`
 
-*TODO: describe.*
+Returns the third object if count of array is >= 3, otherwise returns `null`.
 
-#### `last()`
+#### `last(count = null)`
 
-*TODO: describe.*
+Returns the last object if count of array is >= 1, otherwise returns `null`. If
+`count` is passed, returns an array containing the last `count` objects.
 
 #### `rest()`
 
-*TODO: describe.*
+Returns an array containg all but the first object.
 
 #### `with()`
 
