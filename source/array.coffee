@@ -79,10 +79,10 @@
       objects.any (object) => @contains object
 
     at: (index) ->
-      @[index]
+      @[index] ? null
  
     at_many: (indexes) ->              
-      (@[index] for index in indexes)
+      (@[index] ? null for index in indexes)
 
     index_of: (object) ->
       native_array_index_of.call this, object
@@ -93,18 +93,18 @@
     indexes_of: (object) ->
       (index for current, index in this when current is object)
 
-    first: (count) ->
-      return @[0] unless count?
-      @slice 0, count
+    first: (count = null) ->
+      return @slice 0, count if count?
+      @[0] ? null
 
     second: ->
-      @[1]
+      @[1] ? null
 
     third: ->
-      @[2]
+      @[2] ? null
 
     last: (count = null) ->
-      return @[@length - 1] unless count?
+      return @[@length - 1] ? null unless count?
       return [] if count is 0
       @slice -count
 

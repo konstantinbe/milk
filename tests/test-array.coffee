@@ -133,7 +133,7 @@ describe "Array", ->
   describe "#first()", ->
     it "returns the first element if |count| is not given", ->
       expect([1, 2, 3].first()).to_be 1
-      expect([].first()).to_be undefined
+      expect([].first()).to_be_null()
 
     it "returns a new array containing the first N elements if |count| = N is given", ->
       expect([1, 2, 3].first 0).to_equal []
@@ -157,7 +157,7 @@ describe "Array", ->
   describe "#last()", ->
     it "returns the last element if |count| is not given", ->
       expect([1, 2, 3].last()).to_be 3
-      expect([].last()).to_be undefined
+      expect([].last()).to_be_null()
 
     it "returns a new array containing the last N elements if |count| = N is given", ->
       expect([1, 2, 3].last 0).to_equal []
