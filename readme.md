@@ -12,13 +12,17 @@ heavy use of monkey patching to extend the core JavaScript types.
 
 ## Getting Started
 
-* Install [Git](http://git-scm.com/)
+If you just want to use the library, please consult the official website:
+[milkandsugar.org](http://milkandsugar.org).
+
+For developers:
+
+* Fork Milk
+* Install [Git](http://git-scm.com)
 * Install [CoffeeScript](http://coffeescript.org)
 * Install `shell.js`
-* Clone the Milk repository
 * Checkout `develop` branch
-* Build & run specs: `cake test`
-* Use: `milk.js` from the `build` directory
+* Build & run tests: `cake test`
 
 ## Conventions
 
@@ -41,10 +45,10 @@ heavy use of monkey patching to extend the core JavaScript types.
 
 ## Inspiration
 
-* [Underscore](http://documentcloud.github.com/underscore/)
-* [Cocoa](http://developer.apple.com/cocoa/)
-* [Ruby on Rails](http://rubyonrails.org/)
-* [Prototype](http://www.prototypejs.org/)
+* [Underscore](http://documentcloud.github.com/underscore)
+* [Cocoa](http://developer.apple.com/cocoa)
+* [Ruby on Rails](http://rubyonrails.org)
+* [Prototype](http://www.prototypejs.org)
 
 ## Acknowledgements
 
