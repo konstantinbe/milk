@@ -12,6 +12,8 @@ Milk is *opinionated*, alledged "conventions" and "best-practices" may be
 violated. In particular, Milk uses underscore notation like *Ruby* and makes
 heavy use of monkey patching to extend the core JavaScript types.
 
+Released under the [MIT license](license.txt). Copyright &copy; 2012 [Konstantin Bender](http://github.com/konstantinbe).
+
 --------------------------------------------------------------------------------
 
 ## Overview
