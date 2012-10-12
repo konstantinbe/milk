@@ -217,7 +217,7 @@ task 'website', "build website", (options) ->
   put "Building website ... "
   run "mkdir -p build/website"
   run "rm -rf build/website/*"
-  run "cp website/style.css website/*.png build/website/"
+  run "cp website/* build/website/"
   index_html = read_from_file "website/index.html"
   content_md = read_from_file "website/content.md"
   index_html = index_html.replace "<!-- content.md -->", marked content_md
