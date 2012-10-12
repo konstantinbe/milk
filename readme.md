@@ -59,7 +59,7 @@ Special thanks to [Jeremy Ashkenas](http://github.com/jashkenas) for bringing
 
 Released under the MIT license.
 
-Copyright (c) 2010 [Konstantin Bender](http://github.com/konstantinbe).
+Copyright (c) 2012 [Konstantin Bender](http://github.com/konstantinbe).
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
