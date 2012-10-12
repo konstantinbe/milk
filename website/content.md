@@ -466,19 +466,19 @@ Returns an array containg all but the first object.
 
 #### `with(object)`
 
-*TODO: describe.*
+Returns a new array by adding `object` at the end.
 
 #### `with_many(objects)`
 
-*TODO: describe.*
+Returns a new array by adding many `objects` at the end.
 
 #### `with_at(object, index)`
 
-*TODO: describe.*
+Returns a new array by inserting `object` at `index`.
 
 #### `with_many_at(objects, index)`
 
-*TODO: describe.*
+Returns a new array by inserting many `objects` at `index`.
 
 #### `with_before(object, before)`
 
