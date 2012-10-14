@@ -73,6 +73,7 @@ default_browser = browsers['safari']
 
 option '-e', "--engine [NAME]", "use one of the engines: #{Object.keys(engines).join(', ')}"
 option '-b', "--browser [NAME]", "use one of the browsers: #{Object.keys(browsers).join(', ')}"
+option '-h', "--version [NAME]", "version for release & publishing (library + website)"
 
 # ------------------------------------------------------------------ Milk ------
 
@@ -231,12 +232,17 @@ task 'website', "build website", (options) ->
 task 'publish', "publish website\n", (options) ->
   invoke 'website'
 
+  version = options['version']
+  folder = if version then "versions/#{version}" else "."
+
   put "Prepare publishing ... "
   run "rm -rf build/publish"
   run "git clone .git build/publish"
-  run "cd build/publish; git checkout origin/gh-pages -b gh-pages; git clean -f; rm -rf *"
-  run "cp build/website/* build/publish/"
-  run "cd build/publish; git commit -a -m 'Update website'; git push origin gh-pages:gh-pages"
+  run "cd build/publish; git checkout origin/gh-pages -b gh-pages; git clean -fd"
+  run "mkdir -p build/publish/#{folder}"
+  run "rm -rf build/publish/#{folder}/*.*"
+  run "cp build/website/* build/publish/#{folder}/"
+  run "cd build/publish/#{folder}/; git add *; git commit -a -m 'Update website'; git push origin gh-pages:gh-pages"
   puts OK
 
 # --------------------------------------------------------------- Default ------
