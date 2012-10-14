@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Milk</title>
+        <link rel="stylesheet" href="style.css" type="text/css" media="screen">
+        <meta name="viewport" content="width=760, maximum-scale=1" />
+    </head>
+    <body>
+        <a id="fork-me" href="https://github.com/konstantinbe/milk">Fork me on GitHub</a>
+        <div class="content">
+            <h1>Milk</h1>
+<p><em>A little opinionated utility-belt library for CoffeeScript</em>
+
+</p>
+<hr>
+<p>Milk is a little utility-belt library for CoffeeScript mainly inspired by
+<a href="http://underscorejs.org">underscore.js</a> while borrowing ideas from <em>Cocoa</em>,
+<em>Rails</em>, <em>jQuery</em>, <em>Prototype</em>, and others.
+
+</p>
+<p>Milk is <em>opinionated</em>, alledged &quot;conventions&quot; and &quot;best-practices&quot; may be
+violated. In particular, Milk uses underscore notation like <em>Ruby</em> and makes
+heavy use of monkey patching to extend the core JavaScript types.
+
+</p>
+<p>Released under the <a href="license.txt">MIT license</a>. Copyright &copy; 2012 <a href="http://github.com/konstantinbe">Konstantin Bender</a>.
+
+</p>
+<hr>
+<h2>Overview</h2>
+<p><em>TODO: give an overview here.</em>
+
+</p>
+<hr>
+<h2>Tutorial</h2>
+<p><em>TODO: write a little tutorial here.</em>
+
+</p>
+<hr>
+<h2>Reference</h2>
+<h3>Object Class Reference</h3>
+<h4><code>equals(object)</code></h4>
+<p>Returns <code>yes</code> if receiver equals <code>object</code>, otherwise returns <code>no</code>.
+
+</p>
+<h4><code>is_comparable()</code></h4>
+<p>Returns <code>yes</code> if receiver is comparable, otherwise returns <code>no</code>. The default
+implementation returns <code>no</code>, subclasses returning <code>yes</code> must implement the
+<code>compare_to()</code> method.
+
+</p>
+<h4><code>compare_to(object)</code></h4>
+<p>Returns:
+
+</p>
+<ul>
+<li><code>-1</code> if receiver is less than <code>object</code></li>
+<li><code>+1</code> if receiver is greater than <code>object</code></li>
+<li><code> 0</code> if receiver equals <code>object</code></li>
+</ul>
+<p>The default implementation throws an error. Subclasses implementing this method
+should also implement <code>is_comparable()</code> and return <code>yes</code>. This is a low-level
+method called by all high-level comparison methods:
+
+</p>
+<ul>
+<li><code>is_less_than()</code></li>
+<li><code>is_less_than_or_equals()</code></li>
+<li><code>is_greater_than()</code></li>
+<li><code>is_greater_than_or_equals()</code></li>
+<li><code>is_between()</code></li>
+</ul>
+<h4><code>is_less_than(object)</code></h4>
+<p>Returns <code>yes</code> if receiver is less than <code>object</code>, otherwise returns <code>no</code>. This is
+a high-level method and should not be overriden. To support or customize
+comparison, objects must override the <code>compare_to()</code> method instead.
+
+</p>
+<h4><code>is_less_than_or_equals(object)</code></h4>
+<p>Returns <code>yes</code> if receiver is less than or equals <code>object</code>, otherwise returns
+<code>no</code>. This is a high-level method and should not be overriden. To support or
+customize comparison, objects must override the <code>compare_to()</code> method
+instead.
+
+</p>
+<h4><code>is_greater_than(object)</code></h4>
+<p>Returns <code>yes</code> if receiver is greater than <code>object</code>, otherwise returns <code>no</code>. This
+is a high-level method and should not be overriden. To support or customize
+comparison, objects must override the <code>compare_to()</code> method instead.
+
+</p>
+<h4><code>is_greater_than_or_equals(object)</code></h4>
+<p>Returns <code>yes</code> if receiver is greater than or equals <code>object</code>, otherwise returns
+<code>no</code>. This is a high-level method and should not be overriden. To support or
+customize comparison, objects must override the <code>compare_to()</code> method
+instead.
+
+</p>
+<h4><code>is_between(bounds, options = {})</code></h4>
+<p>Returns <code>yes</code> if receiver is within <code>bounds</code> (array with two elements <code>[lower,
+upper]</code>), otherwise returns <code>no</code>. By default, bounds are inclusive. To exclude
+both bounds, or lower/upper bound individually, pass in any of the following
+options:
+
+</p>
+<ul>
+<li><code>excluding_bounds: yes</code></li>
+<li><code>excluding_lower: yes</code></li>
+<li><code>excluding_upper: yes</code></li>
+</ul>
+<p>This is a high-level method and should not be overriden. To support or customize
+comparison, objects must override the <code>compare_to()</code> method instead.
+
+</p>
+<h4><code>is_copyable()</code></h4>
+<p>Returns <code>yes</code> if receiver supports copying, otherwise returns <code>no</code>. The default
+implementation returns <code>no</code>. subclasses returning <code>yes</code> must implement the
+<code>copy()</code> method.
+
+</p>
+<h4><code>copy()</code></h4>
+<p>Returns a copy of <code>self</code>. The default implementation throws an error.
+Subclasses implementing this method should also implement <code>is_copyable()</code>
+and return <code>yes</code>.
+
+</p>
+<h4><code>mixin(object)</code></h4>
+<p>Mutates <code>self</code> by mixing in all own properties of <code>object</code> without
+overwriting existing ones. Returns <code>self</code>. See also: <code>merge()</code>.
+
+</p>
+<h4><code>merge(object)</code></h4>
+<p>Mutates <code>self</code> by mixing in all own properties of <code>object</code> overwriting
+existing ones. Returns <code>self</code>. See also: <code>mixin()</code>.
+
+</p>
+<h4><code>with(object)</code></h4>
+<p>Returns a new object with all own properties of <code>self</code> merged with all own
+properties of <code>object</code> while overwriting existing ones. See also: <code>merge()</code>
+
+</p>
+<h4><code>with_defaults(object)</code></h4>
+<p><em>TODO: describe or deprecate.</em>
+
+</p>
+<h4><code>freeze()</code></h4>
+<p>Freezes and returns <code>self</code>. This method has no effect if <code>self</code>
+is already frozen. An object can&#39;t be modified after it has been frozen.
+
+</p>
+<h4><code>is_frozen()</code></h4>
+<p>Returns <code>yes</code> if receiver is frozen, otherwise returns <code>no</code>. See also:
+<code>freeze()</code>.
+
+</p>
+<h4><code>seal()</code></h4>
+<p>Seals and returns <code>self</code>. This method has no effect if <code>self</code>
+is already sealed. A sealed object doesn&#39;t allow to add or to remove properties,
+only existing properties can be modified.
+
+</p>
+<h4><code>is_sealed()</code></h4>
+<p>Returns <code>yes</code> if receiver is sealed, otherwise returns <code>no</code>. See also:
+<code>seal()</code>.
+
+</p>
+<h4><code>value_for(key, options = {})</code></h4>
+<p>Returns the value for the property identified by <code>key</code>. Tries to call the getter
+or return the instance variables directly in the following order:
+
+</p>
+<ol>
+<li>Getter method named <code>&lt;key&gt;</code></li>
+<li>Instance variable named <code>@&lt;key&gt;</code></li>
+<li>Instance variable named <code>&lt;key&gt;</code></li>
+</ol>
+<p>If none of the above exist, returns <code>undefined</code>. Bypasses the getter if option
+<code>direct: yes</code> is passed. See also: <code>set_value_for()</code>.
+
+</p>
+<h4><code>set_value_for(value, key, options = {})</code></h4>
+<p>Sets the <code>value</code> for the property identified by <code>key</code> and returns <code>self</code>.
+Tries to call the setter or set the instance variables directly in the following
+order:
+
+</p>
+<ol>
+<li>Setter method named <code>set_&lt;key&gt;</code></li>
+<li>Instance variable named <code>@&lt;key&gt;</code></li>
+<li>Instance variable named <code>&lt;key&gt;</code></li>
+</ol>
+<p>If none of the above exist, throws an error. Bypasses the setter If option
+<code>direct: yes</code> is passed. See also: <code>value_for()</code>.
+
+</p>
+<h4><code>getter_name_for(key)</code></h4>
+<p>Returns the getter name for a specific <code>key</code>. Currently, the getter name is
+simply the key itself (this might change in the future).
+
+</p>
+<h4><code>setter_name_for(key)</code></h4>
+<p>Returns the setter name for a specific <code>key</code>. Currently, the setter name is of
+the form <code>set_&lt;key&gt;</code> (this might change in the future).
+
+</p>
+<h4><code>instance_variable_name_for(key)</code></h4>
+<p>Returns the instance variable name for a specific <code>key</code>. Currently, the instance
+variable name is of the form <code>@&lt;key&gt;</code> (this might change in the future).
+
+</p>
+<h4><code>is_class()</code></h4>
+<p>Returns <code>yes</code> if <code>self</code> is a class, otherwise returns <code>no</code>.
+
+</p>
+<h4><code>is_function()</code></h4>
+<p>Returns <code>yes</code> if <code>self</code> is a function, otherwise returns <code>no</code>.
+
+</p>
+<h4><code>is_boolean()</code></h4>
+<p>Returns <code>yes</code> if <code>self</code> is a boolean, otherwise returns <code>no</code>.
+
+</p>
+<h4><code>is_number()</code></h4>
+<p>Returns <code>yes</code> if <code>self</code> is a number, otherwise returns <code>no</code>.
+
+</p>
+<h4><code>is_date()</code></h4>
+<p>Returns <code>yes</code> if <code>self</code> is a date, otherwise returns <code>no</code>.
+
+</p>
+<h4><code>is_string()</code></h4>
+<p>Returns <code>yes</code> if <code>self</code> is a string, otherwise returns <code>no</code>.
+
+</p>
+<h4><code>is_reg_exp()</code></h4>
+<p>Returns <code>yes</code> if <code>self</code> is a regular expression, otherwise returns <code>no</code>.
+
+</p>
+<h4><code>is_array()</code></h4>
+<p>Returns <code>yes</code> if <code>self</code> is an array, otherwise returns <code>no</code>.
+
+</p>
+<h4><code>is_dictionary()</code></h4>
+<p>Returns <code>yes</code> if <code>self</code> is a dictionary, otherwise returns <code>no</code>. A dictionary is
+a plain JavaScript object without a superclass.
+
+</p>
+<h4><code>is_kind_of(class)</code></h4>
+<p>Returns <code>yes</code> if <code>self</code> is an instance of <code>class</code> or any of its superclasses,
+otherwise returns <code>no</code>. See also: <code>is_instance_of()</code>.
+
+</p>
+<h4><code>is_instance_of(class)</code></h4>
+<p>Returns <code>yes</code> if <code>self</code> is an instance of <code>class</code>, otherwise returns <code>no</code>. See
+also: <code>is_kind_of()</code>.
+
+</p>
+<h4><code>responds_to(command)</code></h4>
+<p>Returns <code>yes</code> if <code>self</code> responds to <code>command</code> (i.e. has a method with that
+name), otherwise returns <code>no</code>.
+
+</p>
+<h4><code>invoke(command, args = [])</code></h4>
+<p>Invokes the method named <code>command</code>, passes the <code>args</code> array as arguments and
+returns the result. Throws an error if <code>self</code> doesn&#39;t respond to <code>command</code>.
+
+</p>
+<h3>Function Class Reference</h3>
+<h4><code>new(args...)</code></h4>
+<p>Creates a new instance of a class by passing <code>args</code> to the constructor.
+
+</p>
+<h4><code>has(key, options = {})</code></h4>
+<p>Defines a property for the class. By default synthesizes a getter and a setter
+method of the form <code>&lt;key&gt;()</code> and <code>set_&lt;key&gt;()</code>, and initializes an instance
+variable named <code>@&lt;key&gt;</code> with <code>null</code>. The property can be customized by passing
+the following options:
+
+</p>
+<ul>
+<li><code>initial</code>: initial value for the property, default: <code>null</code>.</li>
+<li><code>secret</code>: public or private, defualt: <code>no</code>.</li>
+<li><code>readonly</code>: read/write or readonly, default: <code>no</code>.</li>
+<li><code>copy</code>: copy the value rather than referencing it directly, default: <code>no</code>.</li>
+<li><code>freeze</code>: freeze the value before returning it, default: <code>no</code>.</li>
+<li><code>get</code>: custom getter function, default: <code>null</code> (will be synthesized).</li>
+<li><code>set</code>: custom setter function, default: <code>null</code> (will be synthesized).</li>
+</ul>
+<p>See also: <code>value_for()</code>, <code>set_value_for()</code>.
+
+</p>
+<h3>Boolean Class Reference</h3>
+<p>The <code>Boolean</code> class currently has no extended methods but supports copying and
+comparing.
+
+</p>
+<h3>Number Class Reference</h3>
+<p>The <code>Number</code> class supports copying and comparing.
+
+</p>
+<h4><code>is_nan()</code></h4>
+<p>Returns <code>yes</code> if number is <code>NaN</code> (not a number), otherwise returns <code>no</code>.
+
+</p>
+<h4><code>is_finite()</code></h4>
+<p>Returns <code>yes</code> if number is finite, otherwise returns <code>no</code>.
+
+</p>
+<h4><code>is_infinite()</code></h4>
+<p>Returns <code>yes</code> if number is infinite, otherwise returns <code>no</code>.
+
+</p>
+<h3>Date Class Reference</h3>
+<p>The <code>Date</code> class currently has no extended methods but supports copying and
+comparing.
+
+</p>
+<h3>String Class Reference</h3>
+<h4><code>count()</code></h4>
+<p>Returns number of characters contained in <code>self</code>.
+
+</p>
+<h4><code>first(count)</code></h4>
+<p>Returns a string containing the first character if string is not empty.
+Otherwise returns <code>null</code>. If the optional parameter <code>count</code> is passed, returns
+a prefix with up to <code>count</code> characters.
+
+</p>
+<h4><code>last(count)</code></h4>
+<p>Returns a string containing the last character if string is not empty.
+Otherwise returns <code>null</code>. If the optional parameter <code>count</code> is passed, returns
+a prefix with up to <code>count</code> characters.
+
+</p>
+<h4><code>code_at(index)</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>characters()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>codes()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>lines()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>paragraphs()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>prepend(string)</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>append(string)</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>index_of(string)</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>last_index_of(string)</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>indexes_of(string)</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>begins_with(string)</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>ends_with(string)</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>increment_suffix_number()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>uppercased()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>lowercased()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>capitalized()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>escaped_for_reg_exp()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>parse_integer(integer)</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>utf8()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>sha1()</code></h4>
+<h3>RegExp Class Reference</h3>
+<p>The <code>RegExp</code> class currently has no extended methods but supports copying and
+comparing.
+
+</p>
+<h3>Array Class Reference</h3>
+<h4><code>count()</code></h4>
+<p>Returns the number of objects contained in the array.
+
+</p>
+<h4><code>is_empty()</code></h4>
+<p>Returns <code>yes</code> if array is empty (count = 0) otherwise returns <code>no</code>.
+
+</p>
+<h4><code>contains(object)</code></h4>
+<p>Returns <code>yes</code> if <code>object</code> is in array, otherwise returns <code>no</code>.
+
+</p>
+<h4><code>contains_all(objects)</code></h4>
+<p>Returns <code>yes</code> if <code>self</code> contains <em>all</em> of <code>objects</code>, otherwise returns <code>no</code>.
+
+</p>
+<h4><code>contains_any(objects)</code></h4>
+<p>Returns <code>yes</code> if <code>self</code> contains <em>any</em> of <code>objects</code>, otherwise returns <code>no</code>.
+
+</p>
+<h4><code>at(index)</code></h4>
+<p>Returns the object at <code>index</code>. Returns <code>null</code> if <code>index</code> is out of bounds.
+
+</p>
+<h4><code>at_many(indexes)</code></h4>
+<p>Returns an array containing the object for each of the <code>indexes</code>. For each of
+the index that is out of bounds, the array contains a <code>null</code>.
+
+</p>
+<h4><code>index_of(object)</code></h4>
+<p>Returns the index of the first occurence of <code>object</code> if it&#39;s in the array,
+otherwise returns <code>-1</code>.
+
+</p>
+<h4><code>last_index_of(object)</code></h4>
+<p>Returns the index of the last occurence of <code>object</code> if it&#39;s in the array,
+otherwise returns <code>-1</code>.
+
+</p>
+<h4><code>indexes_of(object)</code></h4>
+<p>Returns an array with indexes for each occurence of <code>object</code>.
+
+</p>
+<h4><code>first(count = null)</code></h4>
+<p>Returns the first object if count of array is &gt;= 1, otherwise returns <code>null</code>. If
+<code>count</code> is passed, returns an array containing the first <code>count</code> objects.
+
+</p>
+<h4><code>second()</code></h4>
+<p>Returns the second object if count of array is &gt;= 2, otherwise returns <code>null</code>.
+
+</p>
+<h4><code>third()</code></h4>
+<p>Returns the third object if count of array is &gt;= 3, otherwise returns <code>null</code>.
+
+</p>
+<h4><code>last(count = null)</code></h4>
+<p>Returns the last object if count of array is &gt;= 1, otherwise returns <code>null</code>. If
+<code>count</code> is passed, returns an array containing the last <code>count</code> objects.
+
+</p>
+<h4><code>rest()</code></h4>
+<p>Returns an array containg all but the first object.
+
+</p>
+<h4><code>with(object)</code></h4>
+<p>Returns a new array by adding <code>object</code> at the end.
+
+</p>
+<h4><code>with_many(objects)</code></h4>
+<p>Returns a new array by adding many <code>objects</code> at the end.
+
+</p>
+<h4><code>with_at(object, index)</code></h4>
+<p>Returns a new array by inserting <code>object</code> at <code>index</code>.
+
+</p>
+<h4><code>with_many_at(objects, index)</code></h4>
+<p>Returns a new array by inserting many <code>objects</code> at <code>index</code>.
+
+</p>
+<h4><code>with_before(object, before)</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>with_many_before(objects, before)</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>with_after(object, after)</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>with_many_after(objects, after)</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>without(object)</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>without_many(objects)</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>without_at(index)</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>without_many_at(indexes)</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>compacted()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>flattened()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>reversed()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>sorted()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>unique()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>intersect(objects)</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>unite(objects)</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>zip(arrays...)</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>each()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>collect()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>select()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>reject()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>detect()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>pluck()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>partition()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>all()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>any()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>max()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>min()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>group_by()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>inject()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>add()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>add_many()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>remove()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>remove_many()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>remove_at()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>remove_many_at()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>remove_all()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>insert_at()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>insert_many_at()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>insert_before()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>insert_many_before()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>insert_after()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>insert_many_after()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>replace_with()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>replace_with_many()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>replace_at_with()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>replace_at_with_many()</code></h4>
+<p><em>TODO: describe.</em>
+
+</p>
+<h4><code>sort_by()</code></h4>
+<h3>Math Class Reference</h3>
+<h4><code>Math.generate_unique_id()</code></h4>
+<p>Generates and returns a random string which can be used as a (globally) unique
+ID.
+
+</p>
+<h4><code>Math.identity()</code></h4>
+<p>Returns the identity function. An identity function takes a parameter and simply
+returns it as is without doing anything.
+
+</p>
+<hr>
+<h2>Changelog</h2>
+<h3>0.1.0</h3>
+<ul>
+<li>Initial release</li>
+</ul>
+
+        <div>
+    </body>
+</html>
