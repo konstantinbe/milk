@@ -234,15 +234,17 @@ task 'publish', "publish website\n", (options) ->
 
   version = options['version']
   folder = if version then "versions/#{version}" else "."
+  description = if version? then "(#{version})" else "(latest)"
 
-  put "Prepare publishing ... "
+  put "Prepare publishing website #{description} ... "
   run "rm -rf build/publish"
   run "git clone .git build/publish"
   run "cd build/publish; git checkout origin/gh-pages -b gh-pages; git clean -fd"
   run "mkdir -p build/publish/#{folder}"
   run "rm -rf build/publish/#{folder}/*.*"
   run "cp build/website/* build/publish/#{folder}/"
-  run "cd build/publish/#{folder}/; git add *; git commit -a -m 'Update website'; git push origin gh-pages:gh-pages"
+  run "cd build/publish/#{folder}/; git add *; git commit -a -m 'Publish website #{description}'; git push origin gh-pages:gh-pages"
+  run "git push origin gh-pages:gh-pages"
   puts OK
 
 # --------------------------------------------------------------- Default ------
