@@ -125,17 +125,17 @@
     with_many_at: (objects, index) ->
       @copy().insert_many_at objects, index
 
-    with_before: (object, before_object) ->
-      @copy().insert_before object, before_object
+    with_before: (object, next) ->
+      @copy().insert_before object, next
 
-    with_many_before: (objects, before_object) ->
-      @copy().insert_many_before objects, before_object
+    with_many_before: (objects, next) ->
+      @copy().insert_many_before objects, next
 
-    with_after: (object, after_object) ->
-      @copy().insert_after object, after_object
+    with_after: (object, previous) ->
+      @copy().insert_after object, previous
 
-    with_many_after: (objects, after_object) ->
-      @copy().insert_many_after objects, after_object
+    with_many_after: (objects, previous) ->
+      @copy().insert_many_after objects, previous
 
     without: (object) ->
       @copy().remove object
@@ -292,28 +292,28 @@
       @splice index, 0, objects...
       @
 
-    insert_before: (object, before_object) ->
-      index = @index_of before_object
+    insert_before: (object, next) ->
+      index = @index_of next
       index = 0 if index < 0
       @splice index, 0, object
       @
 
-    insert_many_before: (objects, before_object) ->
-      index = @index_of before_object
+    insert_many_before: (objects, next) ->
+      index = @index_of next
       index = 0 if index < 0
       @splice index, 0, objects...
       @
 
-    insert_after: (object, after_object) ->
+    insert_after: (object, previous) ->
       count = @count()
-      index = @last_index_of(after_object) + 1
+      index = @last_index_of(previous) + 1
       index = count if index > count
       @splice index, 0, object
       @
 
-    insert_many_after: (objects, after_object) ->
+    insert_many_after: (objects, previous) ->
       count = @count()
-      index = @last_index_of(after_object) + 1
+      index = @last_index_of(previous) + 1
       index = count if index > count
       @splice index, 0, objects...
       @
