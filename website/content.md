@@ -482,41 +482,49 @@ Returns a new array by inserting `object` at `index`.
 
 Returns a new array by inserting many `objects` at `index`.
 
-#### `with_before(object, before)`
+#### `with_before(object, next)`
 
-*TODO: describe.*
+Returns a new array by inserting `object` before the first occurence of `next`
+or at the beginning if `next` is not in array.
 
-#### `with_many_before(objects, before)`
+#### `with_many_before(objects, next)`
 
-*TODO: describe.*
+Returns a new array by inserting `objects` before the first occurence of `next`
+or at the beginning if `next` is not in array.
 
-#### `with_after(object, after)`
+#### `with_after(object, previous)`
 
-*TODO: describe.*
+Returns a new array by inserting `object` after the last occurence of `previous`
+or at the end if `previous` is not in array.
 
-#### `with_many_after(objects, after)`
+#### `with_many_after(objects, previous)`
 
-*TODO: describe.*
+Returns a new array by inserting `objects` after the last occurence of `previous`
+or at the end if `previous` is not in array.
 
 #### `without(object)`
 
-*TODO: describe.*
+Returns a new array by removing all occurences of `object`. Returns an exact
+copy if `object` is not in array.
 
 #### `without_many(objects)`
 
-*TODO: describe.*
+Returns a new array by removing all occurences of `objects`. Ignores any object
+not contained in array.
 
 #### `without_at(index)`
 
-*TODO: describe.*
+Returns a new array without the object at `index`. Throws an error if index is
+out of bounds.
 
 #### `without_many_at(indexes)`
 
-*TODO: describe.*
+Returns a new array without the objects at `indexes`. Throws an error if one of
+the indexes is out of bounds.
 
 #### `compacted()`
 
-*TODO: describe.*
+Returns a new array by removing all `null`s and `undefined`s.
 
 #### `flattened()`
 
@@ -524,29 +532,30 @@ Returns a new array by inserting many `objects` at `index`.
 
 #### `reversed()`
 
-*TODO: describe.*
+Returns a new array by reversing the order of contained objects.
 
 #### `sorted()`
 
-*TODO: describe.*
+Returns a new array by sorting all objects.
 
 #### `unique()`
 
-*TODO: describe.*
+Returns a new array by removing all duplicates.
 
 #### `intersect(objects)`
 
-*TODO: describe.*
+Returns a new array containing only unique objects that are contained in both,
+`self` *and* `objects`.
 
 #### `unite(objects)`
 
-*TODO: describe.*
+Returns a new array containing unique objects from both, `self` and `objects`.
 
 #### `zip(arrays...)`
 
 *TODO: describe.*
 
-#### `each()`
+#### `each(block)`
 
 *TODO: describe.*
 
