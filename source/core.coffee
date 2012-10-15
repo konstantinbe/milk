@@ -180,7 +180,7 @@ Object::includes = (mixins...) ->
         getter_function = @[getter_name]
         return getter_function.call @ if getter_function?.is_function()
 
-      instance_variable_name = @instance_variable_name_for key
+      instance_variable_name = '@' + key
       return @[instance_variable_name] if @[instance_variable_name] isnt undefined
 
       @[key]
@@ -193,7 +193,7 @@ Object::includes = (mixins...) ->
         setter_function = @[setter_name]
         return setter_function.call(@, value, options = {}) if setter_function?.is_function()
 
-      instance_variable_name = @instance_variable_name_for key
+      instance_variable_name = '@' + key
       if @[instance_variable_name] isnt undefined
         @[instance_variable_name] = value
         return @
@@ -213,9 +213,6 @@ Object::includes = (mixins...) ->
       is_camel_cased = example_key[4] isnt '_'
       return "set_" + key unless is_camel_cased
       "set" + key[0].uppercased() + key.slice 1
-
-    instance_variable_name_for: (key) ->
-      "@" + key
 
   # ----------------------------------------------------------------------------
 

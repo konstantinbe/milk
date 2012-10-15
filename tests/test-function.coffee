@@ -58,7 +58,7 @@ describe "Function", ->
 
       before ->
         person = new Person()
-        instance_variable_name = person.instance_variable_name_for 'name'
+        instance_variable_name = '@name'
         person[instance_variable_name] = "Peter"
 
       it "defines a getter method returning the value of the instance variable", ->

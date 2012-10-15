@@ -45,7 +45,7 @@
 
       getter_name = @getter_name_for key
       setter_name = @setter_name_for key
-      instance_variable_name = @instance_variable_name_for key
+      instance_variable_name = '@' + key
 
       getter ?= ->
         value = @[instance_variable_name] ? initial

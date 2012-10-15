@@ -360,10 +360,6 @@ describe "Key-Value Coding", ->
     it "returns the key prefixed with 'get'", ->
       expect({}.setter_name_for 'some_nice_key').to_equal 'set_some_nice_key'
 
-  describe "#instance_variable_name_for()", ->
-    it "returns the key prefixed with an '@'", ->
-      expect({}.instance_variable_name_for 'some_nice_key').to_equal '@some_nice_key'
-
 # ------------------------------------------------------------------------------
 
 describe "Type-Checking", ->

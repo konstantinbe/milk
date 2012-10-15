@@ -187,11 +187,6 @@ simply the key itself (this might change in the future).
 Returns the setter name for a specific `key`. Currently, the setter name is of
 the form `set_<key>` (this might change in the future).
 
-#### `instance_variable_name_for(key)`
-
-Returns the instance variable name for a specific `key`. Currently, the instance
-variable name is of the form `@<key>` (this might change in the future).
-
 #### `is_class()`
 
 Returns `yes` if `self` is a class, otherwise returns `no`.
