@@ -523,7 +523,8 @@ Returns a new array by removing all `null`s and `undefined`s.
 
 #### `flattened()`
 
-*TODO: describe.*
+Returns a new array containing all objects of all sub-arrays as a flat linear
+array.
 
 #### `reversed()`
 
@@ -548,7 +549,9 @@ Returns a new array containing unique objects from both, `self` and `objects`.
 
 #### `zip(arrays...)`
 
-*TODO: describe.*
+Returns a new array containing arrays with each containing the x-th object of
+the y-th array. Fill up with `null` for all arrays that are shorter than the
+one with the greatest count.
 
 #### `each(block)`
 
@@ -602,57 +605,61 @@ Returns a new array containing unique objects from both, `self` and `objects`.
 
 *TODO: describe.*
 
-#### `add()`
+#### `add(object)`
 
-*TODO: describe.*
+Adds `object` at the end, returns `self`.
 
-#### `add_many()`
+#### `add_many(objects)`
 
-*TODO: describe.*
+Adds `objects` at the end, returns `self`.
 
-#### `remove()`
+#### `remove(object)`
 
-*TODO: describe.*
+Removes all occurences of `object`, returns `self`.
 
-#### `remove_many()`
+#### `remove_many(objects)`
 
-*TODO: describe.*
+Removes all occurences of each of the `objects`, returns `self`.
 
-#### `remove_at()`
+#### `remove_at(index)`
 
-*TODO: describe.*
+Removes object at `index` and returns `self`.
 
-#### `remove_many_at()`
+#### `remove_many_at(indexes)`
 
-*TODO: describe.*
+Removes objects at `indexes` and returns `self`.
 
 #### `remove_all()`
 
-*TODO: describe.*
+Removes all objects and returns `self`.
 
-#### `insert_at()`
+#### `insert_at(objet, index)`
 
-*TODO: describe.*
+Inserts `object` at `index` and returns `self`.
 
-#### `insert_many_at()`
+#### `insert_many_at(objets, index)`
 
-*TODO: describe.*
+Inserts `objects` at `index` and returns `self`.
 
-#### `insert_before()`
+#### `insert_before(object, next)`
 
-*TODO: describe.*
+Inserts `object` before `next` or at the beginning if `next` is not contained
+in array and returns `self`.
 
-#### `insert_many_before()`
+#### `insert_many_before(objects, next)`
 
-*TODO: describe.*
+Inserts `objects` before `next` or at the beginning if `next` is not contained
+in array and returns `self`.
 
-#### `insert_after()`
+#### `insert_after(object, previous)`
 
-*TODO: describe.*
+Inserts `object` after `previous` or at the end if `previous` is not contained
+in array and returns `self`.
 
-#### `insert_many_after()`
+#### `insert_many_after(objects, previous)`
 
-*TODO: describe.*
+Inserts `objects` after `previous` or at the end if `previous` is not contained
+in array and returns `self`.
 
 #### `replace_with()`
 
