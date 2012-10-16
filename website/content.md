@@ -359,9 +359,6 @@ a prefix with up to `count` characters.
 
 *TODO: describe.*
 
-#### `increment_suffix_number()`
-
-*TODO: describe.*
 
 #### `uppercased()`
 

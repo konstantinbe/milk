@@ -90,12 +90,6 @@
 
     # --------------------------------------------------------------------------
 
-    increment_suffix_number: ->
-      result = @split(/(\s+)(\d+$)/)
-      prefix = result[0]
-      number = (result[2] or "0").parse_integer() + 1
-      prefix + " " + number
-
     uppercased: ->
       native_to_upper_case.call @
 
