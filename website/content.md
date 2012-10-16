@@ -557,51 +557,51 @@ one with the greatest count.
 
 *TODO: describe.*
 
-#### `collect()`
+#### `collect(block)`
 
 *TODO: describe.*
 
-#### `select()`
+#### `select(block)`
 
 *TODO: describe.*
 
-#### `reject()`
+#### `reject(block)`
 
 *TODO: describe.*
 
-#### `detect()`
+#### `detect(block)`
 
 *TODO: describe.*
 
-#### `pluck()`
+#### `pluck(key)`
 
 *TODO: describe.*
 
-#### `partition()`
+#### `partition(block)`
 
 *TODO: describe.*
 
-#### `all()`
+#### `all(block)`
 
 *TODO: describe.*
 
-#### `any()`
+#### `any(block)`
 
 *TODO: describe.*
 
-#### `max()`
+#### `max(block = null)`
 
 *TODO: describe.*
 
-#### `min()`
+#### `min(block = null)`
 
 *TODO: describe.*
 
-#### `group_by()`
+#### `group_by(key_or_block)`
 
 *TODO: describe.*
 
-#### `inject()`
+#### `inject(initial, block)`
 
 *TODO: describe.*
 
@@ -661,7 +661,7 @@ in array and returns `self`.
 Inserts `objects` after `previous` or at the end if `previous` is not contained
 in array and returns `self`.
 
-#### `replace_with()`
+#### `replace_with(object, replacement)`
 
 *TODO: describe.*
 
