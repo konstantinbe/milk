@@ -222,13 +222,15 @@
     any: (block) ->
       native_array_some.call this, block
 
-    max: (block = Math.identity) ->
+    max: (block = null) ->
+      block ?= Math.identity
       max = null
       @each (object) ->
         max = object unless max? and max.is_greater_than block object
       max
 
-    min: (block = Math.identity) ->
+    min: (block = null) ->
+      block ?= Math.identity
       min = null
       @each (object) ->
         min = object unless min? and min.is_less_than block object
