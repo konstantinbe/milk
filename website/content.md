@@ -313,78 +313,76 @@ a prefix with up to `count` characters.
 
 #### `code_at(index)`
 
-*TODO: describe.*
+Returns the character code at `index` or null if `index` is out of bounds.
 
 #### `characters()`
 
-*TODO: describe.*
+Returns an array of characters.
 
 #### `codes()`
 
-*TODO: describe.*
+Returns an array of codes.
 
 #### `lines()`
 
-*TODO: describe.*
+Returns an array by splitting the string into lines.
 
 #### `paragraphs()`
 
-*TODO: describe.*
+Returns an array by splitting the string into paragraphs. A paragraph is a block
+of text separated by an empty line.
 
-#### `prepend(string)`
+#### `prepend(strings...)`
 
-*TODO: describe.*
+Returns a new string by prepending `strings`.
 
-#### `append(string)`
+#### `append(strings...)`
 
-*TODO: describe.*
+Returns a new string by appending `strings`.
 
 #### `index_of(string)`
 
-*TODO: describe.*
+Returns the index of the first occurence of `string` or `-1` if not found.
 
 #### `last_index_of(string)`
 
-*TODO: describe.*
+Returns the index of the last occurence of `string` or `-1` if not found.
 
 #### `indexes_of(string)`
 
-*TODO: describe.*
+Returns the indexes of all occurences of `string`.
 
-#### `begins_with(string)`
+#### `begins_with(prefix)`
 
-*TODO: describe.*
+Returns `yes` if string begings with `prefix`, otherwise returns `no`.
 
-#### `ends_with(string)`
+#### `ends_with(suffix)`
 
-*TODO: describe.*
-
+Returns `yes` if string ends with `suffix`, otherwise returns `no`.
 
 #### `uppercased()`
 
-*TODO: describe.*
+Returns a new string with all characters in uppercase.
 
 #### `lowercased()`
 
-*TODO: describe.*
+Returns a new string with all characters in lowercase.
 
 #### `capitalized()`
 
-*TODO: describe.*
+Returns a new string with the first character capitalized.
 
 #### `escaped_for_reg_exp()`
 
-*TODO: describe.*
-
-#### `parse_integer(integer)`
-
-*TODO: describe.*
+Escapes all special characters used by regular expressions.
 
 #### `utf8()`
 
-*TODO: describe.*
+Returns a UTF-8 version.
 
 #### `sha1()`
+
+Returns the SHA1 hash.
 
 ### RegExp Class Reference
 
