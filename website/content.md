@@ -555,27 +555,30 @@ one with the greatest count.
 
 #### `each(block)`
 
-*TODO: describe.*
+Alias for native `forEach`.
 
 #### `collect(block)`
 
-*TODO: describe.*
+Alias for native `map`.
 
 #### `select(block)`
 
-*TODO: describe.*
+Alias for native `filter`.
 
 #### `reject(block)`
 
-*TODO: describe.*
+The opposite of `select()`. Returns a new array with objects for which
+`block(object)` returns falsy.
 
 #### `detect(block)`
 
-*TODO: describe.*
+Returns the first object for which `block(object)` is truthy or `null` if no
+such object can be found.
 
 #### `pluck(key)`
 
-*TODO: describe.*
+Shortcut for `.collect (object) -> object.value_for key`. Returns an array
+containing value for `key` for each object.
 
 #### `partition(block)`
 
@@ -583,11 +586,11 @@ one with the greatest count.
 
 #### `all(block)`
 
-*TODO: describe.*
+Returns `yes` if `block(object)` is truthy for *all* objects in array.
 
 #### `any(block)`
 
-*TODO: describe.*
+Returns `yes` if `block(object)` is truthy for *at least one* object in array.
 
 #### `max(block = null)`
 
@@ -663,21 +666,23 @@ in array and returns `self`.
 
 #### `replace_with(object, replacement)`
 
-*TODO: describe.*
+Replaces all occurences of `object` with `replacement`.
 
-#### `replace_with_many()`
+#### `replace_with_many(object, replacements)`
 
-*TODO: describe.*
+Replaces all occurences of `object` with many `replacements`.
 
-#### `replace_at_with()`
+#### `replace_at_with(index, replacement)`
 
-*TODO: describe.*
+Replaces object at `index` with `replacement`.
 
-#### `replace_at_with_many()`
+#### `replace_at_with_many(index, replacements)`
 
-*TODO: describe.*
+Replaces object at `index` with many `replacements`.
 
-#### `sort_by()`
+#### `sort_by(keys)`
+
+Sorts by `keys`.
 
 ### Math Class Reference
 
