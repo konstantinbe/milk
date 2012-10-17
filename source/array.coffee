@@ -222,17 +222,17 @@
     any: (block) ->
       native_array_some.call this, block
 
-    max: (block = null) ->
-      block ?= Object.compare
-      max = @first()
-      max = object for object in @ when block(object, max) > 0
-      max
-
     min: (block = null) ->
       block ?= Object.compare
       min = @first()
       min = object for object in @ when block(object, min) < 0
       min
+
+    max: (block = null) ->
+      block ?= Object.compare
+      max = @first()
+      max = object for object in @ when block(object, max) > 0
+      max
 
     group_by: (key_or_block) ->
       block = if key_or_block.is_function() then key_or_block else (object) -> object.value_for key_or_block

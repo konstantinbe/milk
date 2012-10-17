@@ -593,11 +593,11 @@ Returns `yes` if `block(object)` is truthy for *all* objects in array.
 
 Returns `yes` if `block(object)` is truthy for *at least one* object in array.
 
-#### `max(block = null)`
+#### `min(block = null)`
 
 *TODO: describe.*
 
-#### `min(block = null)`
+#### `max(block = null)`
 
 *TODO: describe.*
 
