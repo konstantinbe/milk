@@ -575,9 +575,15 @@ such object can be found.
 Shortcut for `.collect (object) -> object.value_for key`. Returns an array
 containing value for `key` for each object.
 
-#### `partition(block)`
+#### `partition(block = null)`
 
-*TODO: describe.*
+Returns an array containing 2 arrays `[selected, rejected]` where:
+
+* array `selected` contains all objects for which `block(object)` is truthy
+* array `rejected` contains all objects for which `block(object)` is falsy
+
+If no `block` is passed, `selected` contains all truthy objects, `rejected` all
+falsy.
 
 #### `all(block)`
 
