@@ -257,13 +257,13 @@ method of the form `<key>()` and `set_<key>()`, and initializes an instance
 variable named `@<key>` with `null`. The property can be customized by passing
 the following options:
 
-* `initial`: initial value for the property, default: `null`.
-* `secret`: public or private, defualt: `no`.
-* `readonly`: read/write or readonly, default: `no`.
-* `copy`: copy the value rather than referencing it directly, default: `no`.
-* `freeze`: freeze the value before returning it, default: `no`.
-* `get`: custom getter function, default: `null` (will be synthesized).
-* `set`: custom setter function, default: `null` (will be synthesized).
+* `initial`: initial value for the property, default: `null`
+* `secret`: public or private, defualt: `no`
+* `readonly`: read/write or readonly, default: `no`
+* `copy`: copy the value rather than referencing it directly, default: `no`
+* `freeze`: freeze the value before returning it, default: `no`
+* `get`: custom getter function, default: `null` (will be synthesized)
+* `set`: custom setter function, default: `null` (will be synthesized)
 
 See also: `value_for()`, `set_value_for()`.
 
