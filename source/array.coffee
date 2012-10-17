@@ -209,7 +209,7 @@
         value.value_for key
 
     partition: (block) ->
-      block = ((value) -> value) unless block?
+      block ?= Math.identity
       selected = []
       rejected = []
       for value in this
