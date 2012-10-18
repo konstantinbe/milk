@@ -26,3 +26,5 @@
 
   for key of Array.prototype
     Object.defineProperty Array.prototype, key, enumerable: no
+
+  @export 'x.x.x', as: 'VERSION'
