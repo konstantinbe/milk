@@ -703,7 +703,7 @@ ID.
 #### `Math.identity()`
 
 Returns the identity function. An identity function takes a parameter and simply
-returns it as is without doing anything.
+returns it as is: `(object) -> object`.
 
 --------------------------------------------------------------------------------
 
