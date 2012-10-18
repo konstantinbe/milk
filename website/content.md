@@ -607,11 +607,15 @@ if no `compare` function is passed. See also: `min()`, `Object.compare()`.
 
 #### `group_by(key_or_block)`
 
-*TODO: describe.*
+Returns a dictionary (plain JS object) by grouping objects as arrays using
+either the result of `value_for(key)` or `block(object)` as key for the
+dictionary.
 
 #### `inject(initial, block)`
 
-*TODO: describe.*
+Same as native `reduce()` with different parameter ordering (optimized for
+readability & CoffeeScript). Delegates to `reduce()` as follows:
+`reduce(block, initial)`.
 
 #### `add(object)`
 
