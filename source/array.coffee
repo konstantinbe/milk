@@ -222,16 +222,16 @@
     any: (block) ->
       native_array_some.call this, block
 
-    min: (block = null) ->
-      block ?= Object.compare
+    min: (compare = null) ->
+      compare ?= Object.compare
       min = @first()
-      min = object for object in @ when block(object, min) < 0
+      min = object for object in @ when compare(object, min) < 0
       min
 
-    max: (block = null) ->
-      block ?= Object.compare
+    max: (compare = null) ->
+      compare ?= Object.compare
       max = @first()
-      max = object for object in @ when block(object, max) > 0
+      max = object for object in @ when compare(object, max) > 0
       max
 
     group_by: (key_or_block) ->
