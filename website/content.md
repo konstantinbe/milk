@@ -129,7 +129,7 @@ properties of `object` while overwriting existing ones. See also: `merge()`
 
 #### `with_defaults(object)`
 
-*TODO: describe or deprecate.*
+Alias for `mixin()`.
 
 #### `freeze()`
 
@@ -593,13 +593,17 @@ Returns `yes` if `block(object)` is truthy for *all* objects in array.
 
 Returns `yes` if `block(object)` is truthy for *at least one* object in array.
 
-#### `min(block = null)`
+#### `min(compare = null)`
 
-*TODO: describe.*
+Returns the object that is less or equals any other object using the `compare`
+function. Returns `null` if array is empty. Uses `Object.compare()` if no
+`compare` function is passed. See also: `max()`, `Object.compare()`.
 
-#### `max(block = null)`
+#### `max(compare = null)`
 
-*TODO: describe.*
+Returns the object that is greater or equals any other object using the
+`compare` function. Returns `null` if array is empty. Uses `Object.compare()`
+if no `compare` function is passed. See also: `min()`, `Object.compare()`.
 
 #### `group_by(key_or_block)`
 
