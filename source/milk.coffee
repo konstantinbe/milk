@@ -21,10 +21,6 @@
 
 @module 'Milk', ->
 
-  class Attributes
-
-  Function.includes Attributes
-
   for key of Object.prototype
     Object.defineProperty Object.prototype, key, enumerable: no
 
