@@ -73,7 +73,8 @@ default_browser = browsers['safari']
 
 option '-e', "--engine [NAME]", "use one of the engines: #{Object.keys(engines).join(', ')}"
 option '-b', "--browser [NAME]", "use one of the browsers: #{Object.keys(browsers).join(', ')}"
-option '-h', "--version [NAME]", "version for release & publishing (library + website)"
+option '-h', "--version [NAME]", "release version, required for task 'release'"
+option '-d', "--dry", "only prepare release, don't publish"
 
 # ------------------------------------------------------------------ Milk ------
 
@@ -172,23 +173,7 @@ task 'run:all', "run all tests on all engines\n", (options) ->
       puts "==================================================\n"
       run "cake --engine #{id} run"
 
-task 'npm:build', "build milk-node", (options) ->
-  invoke 'build'
-
-  put "Building milk-node ... "
-  run "mkdir -p build/milk-node"
-  run "cp build/milk.js build/milk-node/milk-node.js"
-  run "cp support/package.json build/milk-node/"
-  puts OK
-
-task 'npm:publish', "build & publish milk-node\n", (options) ->
-  invoke 'npm:build'
-
-  put "Publishing milk-node ... "
-  run "cd build/milk-node/; npm publish"
-  puts OK
-
-task 'camel', "build camel case version & run tests\n", (options) ->
+task 'camel', "build camel case version & run tests", (options) ->
   invoke 'clean'
   invoke 'build'
 
@@ -212,7 +197,7 @@ task 'camel', "build camel case version & run tests\n", (options) ->
 
   invoke 'run'
 
-task 'website', "build website", (options) ->
+task 'website', "build website\n", (options) ->
   invoke 'prepare'
 
   put "Building website ... "
@@ -225,34 +210,47 @@ task 'website', "build website", (options) ->
   write_to_file index_html, "build/website/index.html"
   puts OK
 
-  put "Opening website ... "
-  run "open build/website/index.html"
-  puts OK
-
-task 'publish', "publish website\n", (options) ->
+task 'release', "release a version of Milk (website, NPM)\n", (options) ->
+  invoke 'build'
   invoke 'website'
 
   version = options['version']
-  folder = if version then "versions/#{version}" else "."
-  description = if version? then "(#{version})" else "(latest)"
+  dry = options['dry']
+  check version?, "Can't release, --version required"
 
-  put "Preparing website #{description} ... "
-  run "rm -rf build/publish"
-  run "git clone .git build/publish"
-  run "cd build/publish; git checkout origin/gh-pages -b gh-pages; git clean -fd"
-  run "mkdir -p build/publish/#{folder}"
-  run "rm -rf build/publish/#{folder}/*.*"
-  run "cp build/website/* build/publish/#{folder}/"
+  put "Preparing release ... "
+  run "rm -rf build/release"
+  run "mkdir -p build/release"
   puts OK
 
-  put "Generating versions page ... "
-  versions = run("ls build/publish/versions", silent: yes).trim().split "\n"
-  put "(generating versions page not implemented yet) ... "
+  put "Preparing node module ... "
+  run "mkdir -p build/release/node"
+  run "cp build/milk.js build/release/node/milk-node.js"
+  run "sed 's/x\.x\.x/#{version}/' support/package.json > build/release/node/package.json"
   puts OK
 
-  put "Pushing website ... "
-  run "cd build/publish/#{folder}/; git add *; git commit -a -m 'Publish website #{description}'; git push origin gh-pages:gh-pages"
-  run "git push origin gh-pages:gh-pages"
+  put "Preparing website ... "
+  run "mkdir -p build/release/website"
+  run "git clone -q .git build/release/website"
+  run "cd build/release/website; git checkout origin/gh-pages -b gh-pages; git clean -fd"
+  run "rm -rf build/release/website/*"
+  run "cp build/website/* build/release/website/; rm -rf build/release/website/*.md"
+  run "sed 's/x\.x\.x/#{version}/' build/milk.coffee > build/release/website/milk-#{version}.coffee"
+  run "sed 's/x\.x\.x/#{version}/' build/milk.js > build/release/website/milk-#{version}.js"
+  run "sed 's/x\.x\.x/#{version}/g' build/website/index.html > build/release/website/index.html"
+  puts OK
+
+  if dry
+    puts "Dry run, won't publish"
+    process.exit 0
+
+  put "Publishing website ... "
+  # run "cd build/release/website/; git add *; git commit -a -m 'Publish website (#{version})'; git push origin gh-pages:gh-pages"
+  # run "git push origin gh-pages:gh-pages"
+  puts OK
+
+  put "Publishing NPM package ... "
+  # run "cd build/release/node/; node publish"
   puts OK
 
 # --------------------------------------------------------------- Default ------
@@ -287,6 +285,11 @@ run = (command, options = {}) ->
 
   output.to redirect if output? and redirect?
   output
+
+check = (condition, message) ->
+  unless condition
+    puts "#{message} #{FAILED}"
+    process.exit 1
 
 put = (message) ->
   process.stdout.write message
