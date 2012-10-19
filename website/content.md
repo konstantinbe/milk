@@ -12,19 +12,24 @@ Milk is *opinionated*, alledged "conventions" and "best-practices" may be
 violated. In particular, Milk uses underscore notation like *Ruby* and makes
 heavy use of monkey patching to extend the core JavaScript types.
 
+Download:
+
+* [milk-x.x.x.coffee](milk-x.x.x.coffee)
+* [milk-x.x.x.js](milk-x.x.x.js)
+
+Contribute:
+
+* [Repository](https://github.com/konstantinbe/milk)
+* [Issues](https://github.com/konstantinbe/milk/issues)
+* [Wiki](https://github.com/konstantinbe/milk/wiki)
+
 Released under the [MIT license](license.txt). Copyright &copy; 2012 [Konstantin Bender](http://github.com/konstantinbe).
 
 --------------------------------------------------------------------------------
 
-## Overview
+## Getting Started
 
 *TODO: give an overview here.*
-
---------------------------------------------------------------------------------
-
-## Tutorial
-
-*TODO: write a little tutorial here.*
 
 --------------------------------------------------------------------------------
 
