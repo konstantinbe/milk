@@ -68,12 +68,6 @@ Object::includes = (mixins...) ->
 
   class Comparing
 
-    @compare: (left, right) ->
-      return 0 unless left? and right?
-      return -1 unless left?
-      return +1 unless right?
-      left.compare_to right
-
     equals: (object, options = {}) ->
       return no unless object?
       return @ is object unless @is_comparable()

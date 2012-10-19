@@ -223,15 +223,13 @@
       native_array_some.call this, block
 
     min: (compare = null) ->
-      compare ?= Object.compare
       min = @first()
-      min = object for object in @ when compare(object, min) < 0
+      min = object for object in @ when object.is_less_than min
       min
 
     max: (compare = null) ->
-      compare ?= Object.compare
       max = @first()
-      max = object for object in @ when compare(object, max) > 0
+      max = object for object in @ when object.is_greater_than max
       max
 
     group_by: (key_or_block) ->

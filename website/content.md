@@ -601,14 +601,14 @@ Returns `yes` if `block(object)` is truthy for *at least one* object in array.
 #### `min(compare = null)`
 
 Returns the object that is less or equals any other object using the `compare`
-function. Returns `null` if array is empty. Uses `Object.compare()` if no
-`compare` function is passed. See also: `max()`, `Object.compare()`.
+function. Returns `null` if array is empty. Uses `compare_to()` if no
+`compare` function is passed. See also: `max()`.
 
 #### `max(compare = null)`
 
 Returns the object that is greater or equals any other object using the
-`compare` function. Returns `null` if array is empty. Uses `Object.compare()`
-if no `compare` function is passed. See also: `min()`, `Object.compare()`.
+`compare` function. Returns `null` if array is empty. Uses `compare_to()`
+if no `compare` function is passed. See also: `min()`.
 
 #### `group_by(key_or_block)`
 
