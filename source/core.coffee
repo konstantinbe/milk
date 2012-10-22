@@ -233,7 +233,7 @@ Object::class_name_of = (object) ->
     is_string: ->
       @ is "" or (@charCodeAt? and @substr?)
 
-    is_reg_exp: (value) ->
+    is_reg_exp: ->
       @test? and @exec? and (@ignoreCase? or @ignoreCase == no)
 
     is_array: ->
