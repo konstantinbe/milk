@@ -126,26 +126,6 @@ Object::includes = (mixins...) ->
 
   # ----------------------------------------------------------------------------
 
-  class MixingAndMerging
-
-    mixin: (dictionary) ->
-      for own key, value of dictionary when not @has_own key
-        @[key] = value
-      @
-
-    merge: (dictionary) ->
-      for own key, value of dictionary
-        @[key] = value
-      @
-
-    with: (dictionary) ->
-      @copy().merge dictionary
-
-    with_defaults: (defaults) ->
-      @mixin defaults
-
-  # ----------------------------------------------------------------------------
-
   class FreezingAndSealing
 
     native_seal = Object.seal
@@ -268,7 +248,6 @@ Object::includes = (mixins...) ->
   Object.includes Comparing
   Object.includes Copying
 
-  Object.includes MixingAndMerging
   Object.includes FreezingAndSealing
 
   Object.includes KeyValueCoding
