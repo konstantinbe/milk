@@ -62,6 +62,15 @@ Object::includes = (mixins...) ->
     @[key] = value for own key, value of mixin
     @prototype[key] = value for own key, value of mixin.prototype
 
+# TODO: delete either includes or supports.
+Object::supports = (mixins...) ->
+  for mixin in mixins
+    @[key] = value for own key, value of mixin
+    @prototype[key] = value for own key, value of mixin.prototype
+
+Object::option = (object, key, fallback) ->
+  if object? and Object::hasOwnProperty.call(object, key) then object[key] else fallback
+
 # ------------------------------------------------------------------------------
 
 @module 'Milk', ->

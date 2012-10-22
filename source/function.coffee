@@ -27,21 +27,12 @@
       new this args...
 
     has: (key, options = {}) ->
-      options.with_defaults
-        initial: null
-        secret: no
-        readonly: no
-        copy: no
-        freeze: no
-        get: null
-        set: null
-
-      initial = options.own 'initial'
-      secret = options.own 'secret'
-      readonly = options.own 'readonly'
-      copy = options.own 'copy'
-      getter = options.own 'get'
-      setter = options.own 'set'
+      initial = @option options, 'initial', null
+      secret = @option options, 'secret', no
+      readonly = @option options, 'readonly', no
+      copy = @option options, 'copy', no
+      getter = @option options, 'get', null
+      setter = @option options, 'set', null
 
       getter_name = @getter_name_for key
       setter_name = @setter_name_for key
