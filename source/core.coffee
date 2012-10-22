@@ -240,7 +240,7 @@ Object::class_name_of = (object) ->
       native_is_array @
 
     is_dictionary: ->
-      @constructor? and @constructor.name is 'Object'
+      @constructor?.name is 'Object'
 
     is_kind_of: (klass) ->
       @ instanceof klass
