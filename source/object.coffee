@@ -32,12 +32,6 @@
     class_name: ->
       return @class().name
 
-    count: ->
-      @keys().count()
-
-    is_empty: ->
-      @count() is 0
-
     keys: ->
       Object.keys @
 

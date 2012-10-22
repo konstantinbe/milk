@@ -35,19 +35,6 @@ describe "Object", ->
       expect(person.class_name()).to_be "Person"
       expect(Person.class_name()).to_be "Function"
 
-  describe "#count()", ->
-    it "returns the number of own key/value pairs", ->
-      expect({}.count()).to_be 0
-      expect({key1: 1, key2: 2, key3: 3}.count()).to_be 3
-
-  describe "#is_empty()", ->
-    it "returns true if collection is empty", ->
-      expect({}.is_empty()).to_be true
-
-    it "returns false if collection has at least one element", ->
-      expect({key1: 1}.is_empty()).to_be false
-      expect({key1: 1, key2: 2, key3: 3}.is_empty()).to_be false
-
   describe "#keys()", ->
     it "returns an array of keys", ->
       expect({name: "Peter", age: 45}.keys()).to_equal ['name', 'age']
