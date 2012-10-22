@@ -20,26 +20,6 @@
 # THE SOFTWARE.
 
 describe "Object", ->
-  describe "#keys()", ->
-    it "returns an array of keys", ->
-      expect({name: "Peter", age: 45}.keys()).to_equal ['name', 'age']
-
-    it "returns an empty array if the object is empty", ->
-      expect({}.keys()).to_equal []
-
-    it "also includes methods", ->
-      expect({method: -> console.log "I'm a method." }.keys()).to_equal ['method']
-
-  describe "#values()", ->
-    it "returns an array of values", ->
-      expect({name: "Peter", age: 45}.values()).to_equal ['Peter', 45]
-
-    it "returns an empty array if the object is empty", ->
-      expect({}.values()).to_equal []
-
-    it "also includes methods", ->
-      method = -> console.log "I'm a method."
-      expect({method: method}.values()).to_equal [method]
 
   describe "#has_own()", ->
     it "returns true if object has own property", ->

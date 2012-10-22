@@ -63,6 +63,26 @@ describe "Keywords", ->
       expect(@class_name_of person).to_be "Person"
       expect(@class_name_of Person).to_be "Function"
 
+  describe "#keys_of()", ->
+    it "returns an array of keys", ->
+      expect(@keys_of name: "Peter", age: 45).to_equal ['name', 'age']
+
+    it "returns an empty array if the object is empty", ->
+      expect(@keys_of {}).to_equal []
+
+    it "also includes methods", ->
+      expect(@keys_of method: -> console.log "I'm a method.").to_equal ['method']
+
+  describe "#values_of()", ->
+    it "returns an array of values", ->
+      expect(@values_of name: "Peter", age: 45).to_equal ['Peter', 45]
+
+    it "returns an empty array if the object is empty", ->
+      expect(@values_of {}).to_equal []
+
+    it "also includes methods", ->
+      method = -> console.log "I'm a method."
+      expect(@values_of method: method).to_equal [method]
 # ------------------------------------------------------------------------------
 
 describe "Comparing", ->
@@ -248,51 +268,14 @@ describe "Copying", ->
     it "has all keys and values of the receiver", ->
       person = name: "Peter", age: 45
       copy = person.copy()
-      expect(copy.keys()).to_equal ['name', 'age']
-      expect(copy.values()).to_equal ["Peter", 45]
+      expect(@keys_of copy).to_equal ['name', 'age']
+      expect(@values_of copy).to_equal ["Peter", 45]
 
     it "doesn't copy objects recursively, just references them", ->
       address = street: "Rhode-Island-Alley", city: "Karlsruhe"
       person = name: "Peter", age: 45, address: address
       copy = person.copy()
       expect(copy.address).to_be address
-
-# ------------------------------------------------------------------------------
-
-xdescribe "Mixing & Merging", ->
-
-  describe "#mixin()", ->
-    it "mixes in dictionary without overwriting existing entries", ->
-      left = key1: 1, key2: 2
-      right = key2: 4, key3: 3
-      left.mixin right
-      expect(left.keys().sort()).to_equal ['key1', 'key2', 'key3']
-      expect(left.values().sort()).to_equal [1, 2, 3]
-
-  describe "#merge()", ->
-    it "merges dictionary while overwriting existing enties", ->
-      left = key1: 1, key2: 4
-      right = key2: 2, key3: 3
-      left.merge right
-      expect(left.keys().sort()).to_equal ['key1', 'key2', 'key3']
-      expect(left.values().sort()).to_equal [1, 2, 3]
-
-  describe "#with()", ->
-    it "returnes a copy with merged dictionary", ->
-      left = key1: 1, key2: 4
-      right = key2: 2, key3: 3
-      left_with_right = left.with right
-      expect(left.keys().sort()).to_equal ['key1', 'key2']
-      expect(left_with_right.keys().sort()).to_equal ['key1', 'key2', 'key3']
-      expect(left_with_right.values().sort()).to_equal [1, 2, 3]
-
-  describe "#with_defaults()", ->
-    it "returns a copy with mixed in defaults", ->
-      options = key1: 1, key2: 2
-      defaults = key2: 4, key3: 3
-      options.with_defaults defaults
-      expect(options.keys().sort()).to_equal ['key1', 'key2', 'key3']
-      expect(options.values().sort()).to_equal [1, 2, 3]
 
 # ------------------------------------------------------------------------------
 

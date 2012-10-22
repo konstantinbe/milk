@@ -86,6 +86,12 @@ Object::supports = (mixins...) ->
     class_name_of: (object) ->
       object?.constructor?.name ? null
 
+    keys_of: (object) ->
+      Object.keys object
+
+    values_of: (object) ->
+      (object[key] for key in Object.keys object)
+
 # ------------------------------------------------------------------------------
 
   class Comparing

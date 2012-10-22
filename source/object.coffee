@@ -26,12 +26,6 @@
     native_has_own_property = Object::hasOwnProperty
     native_to_string = Object::toString
 
-    keys: ->
-      Object.keys @
-
-    values: ->
-      (value for own key, value of @)
-
     has_own: (key) ->
       native_has_own_property.call this, key
 
