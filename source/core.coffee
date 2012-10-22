@@ -71,6 +71,12 @@ Object::supports = (mixins...) ->
 Object::option = (object, key, fallback) ->
   if object? and Object::hasOwnProperty.call(object, key) then object[key] else fallback
 
+Object::class_of = (object) ->
+  object?.constructor ? null
+
+Object::class_name_of = (object) ->
+  object?.constructor?.name ? null
+
 # ------------------------------------------------------------------------------
 
 @module 'Milk', ->
@@ -123,11 +129,11 @@ Object::option = (object, key, fallback) ->
   class Copying
 
     is_copyable: ->
-      return yes if @class() is Object
+      return yes if @class_of @ is Object
       no
 
     copy: ->
-      throw "#{@class_name()} doesn't support copying" unless @is_dictionary()
+      throw "#{@class_name_of @} doesn't support copying" unless @class_of @ is Object
       copy = {}
       for own key, value of @
         copy[key] = value
@@ -240,7 +246,7 @@ Object::option = (object, key, fallback) ->
       @ instanceof klass
 
     is_instance_of: (klass) ->
-      @class() is klass
+      @class_of(@) is klass
 
   # ----------------------------------------------------------------------------
 

@@ -26,12 +26,6 @@
     native_has_own_property = Object::hasOwnProperty
     native_to_string = Object::toString
 
-    class: ->
-      return @constructor
-
-    class_name: ->
-      return @class().name
-
     keys: ->
       Object.keys @
 

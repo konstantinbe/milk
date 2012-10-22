@@ -39,11 +39,29 @@ describe "Modules", ->
       car = new Car()
 
       expect(TestTickTack.MAX_NUMBER_OF_VEHICLES).to_be 5
-      expect(vehicle.class_name()).to_be 'Vehicle'
-      expect(car.class_name()).to_be 'Car'
+      expect(@class_name_of vehicle).to_be 'Vehicle'
+      expect(@class_name_of car).to_be 'Car'
 
     expect(-> @import 'Test.Tick.Tack.SecretVehicle').to_throw()
     expect(-> @import 'Test.Tick.Tack.SecretVehicle', secret: yes).to_exist()
+
+
+describe "Keywords", ->
+
+  describe "#class_of()", ->
+    person_class = class Person
+    person = new Person()
+
+    it "returns the class object", ->
+      expect(@class_of person).to_be person_class
+
+  describe "#class_name_of()", ->
+    person_class = class Person
+    person = new Person()
+
+    it "returns the name of the instance's class", ->
+      expect(@class_name_of person).to_be "Person"
+      expect(@class_name_of Person).to_be "Function"
 
 # ------------------------------------------------------------------------------
 

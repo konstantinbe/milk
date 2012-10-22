@@ -20,21 +20,6 @@
 # THE SOFTWARE.
 
 describe "Object", ->
-  describe "#class()", ->
-    person_class = class Person
-    person = new Person()
-
-    it "returns the class object", ->
-      expect(person.class()).to_be person_class
-
-  describe "#class_name()", ->
-    person_class = class Person
-    person = new Person()
-
-    it "returns the name of the instance's class", ->
-      expect(person.class_name()).to_be "Person"
-      expect(Person.class_name()).to_be "Function"
-
   describe "#keys()", ->
     it "returns an array of keys", ->
       expect({name: "Peter", age: 45}.keys()).to_equal ['name', 'age']
