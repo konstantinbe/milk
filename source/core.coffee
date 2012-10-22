@@ -68,9 +68,6 @@ Object::supports = (mixins...) ->
     @[key] = value for own key, value of mixin
     @prototype[key] = value for own key, value of mixin.prototype
 
-Object::option = (object, key, fallback) ->
-  if object? and Object::hasOwnProperty.call(object, key) then object[key] else fallback
-
 # ------------------------------------------------------------------------------
 
 @module 'Milk', ->
@@ -78,6 +75,10 @@ Object::option = (object, key, fallback) ->
   class Keywords
 
     native_is_array = Array.isArray
+    native_has_own_property = Object::hasOwnProperty
+
+    option: (object, key, fallback) ->
+      if object? and native_has_own_property.call(object, key) then object[key] else fallback
 
     class_of: (object) ->
       object?.constructor ? null
