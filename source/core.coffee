@@ -71,15 +71,19 @@ Object::supports = (mixins...) ->
 Object::option = (object, key, fallback) ->
   if object? and Object::hasOwnProperty.call(object, key) then object[key] else fallback
 
-Object::class_of = (object) ->
-  object?.constructor ? null
-
-Object::class_name_of = (object) ->
-  object?.constructor?.name ? null
-
 # ------------------------------------------------------------------------------
 
 @module 'Milk', ->
+
+  class Keywords
+
+    class_of: (object) ->
+      object?.constructor ? null
+
+    class_name_of: (object) ->
+      object?.constructor?.name ? null
+
+# ------------------------------------------------------------------------------
 
   class Comparing
 
@@ -260,6 +264,7 @@ Object::class_name_of = (object) ->
 
   # ----------------------------------------------------------------------------
 
+  Object.includes Keywords
   Object.includes Comparing
   Object.includes Copying
 
