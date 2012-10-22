@@ -57,13 +57,13 @@ CustomMatchers =
     @actual?
 
   to_be_a_dictionary: ->
-    @actual? and @actual instanceof Object
+    Object.is_dictioanary @actual
 
   to_be_kind_of: (klass) ->
-    @actual.is_kind_of klass
+    Object.is_kind_of @actual, klass
 
   to_be_instance_of: (klass) ->
-    @actual.is_instance_of klass
+    Object.is_instance_of @actual, klass
 
   to_be_frozen: (object) ->
     @actual.is_frozen()

@@ -77,6 +77,8 @@ Object::option = (object, key, fallback) ->
 
   class Keywords
 
+    native_is_array = Array.isArray
+
     class_of: (object) ->
       object?.constructor ? null
 
@@ -177,7 +179,7 @@ Object::option = (object, key, fallback) ->
       unless direct
         getter_name = @getter_name_for key
         getter_function = @[getter_name]
-        return getter_function.call @ if getter_function?.is_function()
+        return getter_function.call @ if Object.is_function getter_function
 
       instance_variable_name = '@' + key
       return @[instance_variable_name] if @[instance_variable_name] isnt undefined
@@ -190,7 +192,7 @@ Object::option = (object, key, fallback) ->
       unless direct
         setter_name = @setter_name_for key
         setter_function = @[setter_name]
-        return setter_function.call(@, value, options = {}) if setter_function?.is_function()
+        return setter_function.call(@, value, options = {}) if Object.is_function setter_function
 
       instance_variable_name = '@' + key
       if @[instance_variable_name] isnt undefined
@@ -219,45 +221,48 @@ Object::option = (object, key, fallback) ->
 
     native_is_array = Array.isArray
 
-    is_class: ->
-      Boolean (typeof @) is 'function' and @name.match /^[A-Z]/
+    @is_null: (object) ->
+      object is null
 
-    is_function: ->
-      @constructor? and @call? and @apply?
+    @is_class: (object) ->
+      Boolean (typeof object) is 'function' and object.name.match /^[A-Z]/
 
-    is_boolean: ->
-      @ instanceof Boolean
+    @is_function: (object) ->
+      object?.constructor? and object.call? and object.apply?
 
-    is_number: ->
-      @ is 0 or (@toExponential? and @toFixed?)
+    @is_boolean: (object) ->
+      object is yes or object is no
 
-    is_date: ->
-      @getTimezoneOffset? and @setUTCFullYear?
+    @is_number: (object) ->
+      object is 0 or (object?.toExponential? and object.toFixed?)
 
-    is_string: ->
-      @ is "" or (@charCodeAt? and @substr?)
+    @is_date: (object) ->
+      object? and object.getTimezoneOffset? and object.setUTCFullYear?
 
-    is_reg_exp: ->
-      @test? and @exec? and (@ignoreCase? or @ignoreCase == no)
+    @is_string: (object) ->
+      object is "" or (object?.charCodeAt? and object.substr?)
 
-    is_array: ->
-      native_is_array @
+    @is_reg_exp: (object) ->
+      object? and object.test? and object.exec? and (object.ignoreCase? or object.ignoreCase == no)
 
-    is_dictionary: ->
-      @constructor?.name is 'Object'
+    @is_array: (object) ->
+      native_is_array object
 
-    is_kind_of: (klass) ->
-      @ instanceof klass
+    @is_dictionary: (object) ->
+      object?.constructor?.name is 'Object'
 
-    is_instance_of: (klass) ->
-      @class_of(@) is klass
+    @is_kind_of: (object, klass) ->
+      object instanceof klass
+
+    @is_instance_of: (object, klass) ->
+      @class_of(object) is klass
 
   # ----------------------------------------------------------------------------
 
   class Messaging
 
     responds_to: (command) ->
-      command? and @[command]? and @[command].is_function()
+      command? and @[command]? and Object.is_function @[command]
 
     invoke: (command, args = []) ->
       @[command](args...)

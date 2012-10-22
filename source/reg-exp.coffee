@@ -30,7 +30,7 @@
       yes
 
     compare_to: (object, options = {}) ->
-      throw "Can't compare regexp '#{this}' to #{object}" unless object?.is_reg_exp()
+      throw "Can't compare regexp '#{this}' to #{object}" unless Object.is_reg_exp object
       return -1 if this < object
       return +1 if this > object
       0

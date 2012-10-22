@@ -192,52 +192,56 @@ simply the key itself (this might change in the future).
 Returns the setter name for a specific `key`. Currently, the setter name is of
 the form `set_<key>` (this might change in the future).
 
-#### `is_class()`
+#### `Object.is_null(object)`
 
-Returns `yes` if `self` is a class, otherwise returns `no`.
+Returns `yes` if `object` is `null`, otherwise returns `no`.
 
-#### `is_function()`
+#### `Object.is_class(object)`
 
-Returns `yes` if `self` is a function, otherwise returns `no`.
+Returns `yes` if `object` is a class, otherwise returns `no`.
 
-#### `is_boolean()`
+#### `Object.is_function(object)`
 
-Returns `yes` if `self` is a boolean, otherwise returns `no`.
+Returns `yes` if `object` is a function, otherwise returns `no`.
 
-#### `is_number()`
+#### `Object.is_boolean(object)`
 
-Returns `yes` if `self` is a number, otherwise returns `no`.
+Returns `yes` if `object` is a boolean, otherwise returns `no`.
 
-#### `is_date()`
+#### `Object.is_number(object)`
 
-Returns `yes` if `self` is a date, otherwise returns `no`.
+Returns `yes` if `object` is a number, otherwise returns `no`.
 
-#### `is_string()`
+#### `Object.is_date(object)`
 
-Returns `yes` if `self` is a string, otherwise returns `no`.
+Returns `yes` if `object` is a date, otherwise returns `no`.
 
-#### `is_reg_exp()`
+#### `Object.is_string(object)`
 
-Returns `yes` if `self` is a regular expression, otherwise returns `no`.
+Returns `yes` if `object` is a string, otherwise returns `no`.
 
-#### `is_array()`
+#### `Object.is_reg_exp(object)`
 
-Returns `yes` if `self` is an array, otherwise returns `no`.
+Returns `yes` if `object` is a regular expression, otherwise returns `no`.
 
-#### `is_dictionary()`
+#### `Object.is_array(object)`
 
-Returns `yes` if `self` is a dictionary, otherwise returns `no`. A dictionary is
+Returns `yes` if `object` is an array, otherwise returns `no`.
+
+#### `Object.is_dictionary(object)`
+
+Returns `yes` if `object` is a dictionary, otherwise returns `no`. A dictionary is
 a plain JavaScript object without a superclass.
 
-#### `is_kind_of(class)`
+#### `Object.is_kind_of(object, class)`
 
-Returns `yes` if `self` is an instance of `class` or any of its superclasses,
-otherwise returns `no`. See also: `is_instance_of()`.
+Returns `yes` if `object` is an instance of `class` or any of its superclasses,
+otherwise returns `no`. See also: `Object.is_instance_of()`.
 
-#### `is_instance_of(class)`
+#### `Object.is_instance_of(object, class)`
 
-Returns `yes` if `self` is an instance of `class`, otherwise returns `no`. See
-also: `is_kind_of()`.
+Returns `yes` if `object` is an instance of `class`, otherwise returns `no`. See
+also: `Object.is_kind_of()`.
 
 #### `responds_to(command)`
 

@@ -154,7 +154,7 @@
 
     flattened: ->
       @inject [], (result, object) =>
-        objects = if object.is_array() then object.flattened() else [object]
+        objects = if Object.is_array object then object.flattened() else [object]
         result.add_many objects
 
     reversed: ->
@@ -233,7 +233,7 @@
       max
 
     group_by: (key_or_block) ->
-      block = if key_or_block.is_function() then key_or_block else (object) -> object.value_for key_or_block
+      block = if Object.is_function key_or_block then key_or_block else (object) -> object.value_for key_or_block
       partition = {}
       @each (object) ->
         key = block object
@@ -344,8 +344,7 @@
       yes
 
     equals: (object) ->
-      return no unless object?
-      return no unless object.is_array()
+      return no unless Object.is_array object
       return no unless @length == object.length
       return no unless (@all (value, index) -> value is object[index] or value?.equals object[index])
       yes

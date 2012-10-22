@@ -192,7 +192,7 @@
       yes
 
     compare_to: (object, options = {}) ->
-      throw "Can't compare string '#{this}' to #{object}." unless object?.is_string()
+      throw "Can't compare string '#{this}' to #{object}." unless Object.is_string object
       return -1 if this < object
       return +1 if this > object
       0

@@ -382,81 +382,81 @@ describe "Key-Value Coding", ->
 
 describe "Type-Checking", ->
 
-  describe "#is_class()", ->
+  describe "Object.is_class()", ->
     it "returns true for a class", ->
       class Vehicle
-      expect(Vehicle.is_class()).to_be true
+      expect(Object.is_class Vehicle).to_be true
 
     it "returns true for a subclass", ->
       class Vehicle
       class Car extends Vehicle
-      expect(Car.is_class()).to_be true
+      expect(Object.is_class Car).to_be true
 
     it "returns true for Object", ->
-      expect(Object.is_class()).to_be true
+      expect(Object.is_class Object).to_be true
 
     it "returns true for Date", ->
-      expect(Date.is_class()).to_be true
+      expect(Object.is_class Date).to_be true
 
     it "returns true for Array", ->
-      expect(Array.is_class()).to_be true
+      expect(Object.is_class Array).to_be true
 
     it "returns true for Function", ->
-      expect(Array.is_class()).to_be true
+      expect(Object.is_class Array).to_be true
 
     it "returns false for a hash", ->
-      expect({}.is_class()).to_be false
+      expect(Object.is_class {}).to_be false
 
     it "returns false for an array", ->
-      expect([].is_class()).to_be false
+      expect(Object.is_class []).to_be false
 
     it "returns false for an instance of a class", ->
       class Vehicle
       vehicle = new Vehicle()
-      expect(vehicle.is_class()).to_be false
+      expect(Object.is_class vehicle).to_be false
 
     it "returns false for an instance of a subclass", ->
       class Vehicle
       class Car
       car = new Car()
-      expect(car.is_class()).to_be false
+      expect(Object.is_class car).to_be false
 
     it "returns false for a function", ->
-      expect((->).is_class()).to_be false
+      expect(Object.is_class ->).to_be false
 
-  describe "#is_function()", ->
+  describe "Object.is_function()", ->
     it "returns yes if receiver is a function", ->
-      expect((->).is_function()).to_be true
+      expect(Object.is_function ->).to_be true
 
-  describe "#is_boolean()", ->
+  describe "Object.is_boolean()", ->
     it "returns yes if receiver is a boolean", ->
-      expect(yes.is_boolean()).to_be true
+      expect(Object.is_boolean yes).to_be true
 
-  describe "#is_number()", ->
+  describe "Object.is_number()", ->
     it "returns yes if receiver is a number", ->
-      expect(1.is_number()).to_be true
+      expect(Object.is_number 1).to_be true
 
-  describe "#is_date()", ->
+  describe "Object.is_date()", ->
     it "returns yes if receiver is a date", ->
-      expect(new Date().is_date()).to_be true
+      expect(Object.is_date new Date()).to_be true
 
-  describe "#is_string()", ->
+  describe "Object.is_string()", ->
     it "returns yes if receiver is a string", ->
-      expect("".is_string()).to_be true
+      expect(Object.is_string "").to_be true
 
-  describe "#is_reg_exp()", ->
+  describe "Object.is_reg_exp()", ->
     it "returns yes if receiver is a regular expression", ->
-      expect(//.is_reg_exp()).to_be true
+      expect(Object.is_reg_exp //).to_be true
 
-  describe "#is_array()", ->
+  describe "Object.is_array()", ->
     it "returns yes if receiver is an array", ->
-      expect([].is_array()).to_be true
+      expect(Object.is_array []).to_be true
 
-  describe "#is_dictionary()", ->
+  describe "Object.is_dictionary()", ->
     it "returns yes if receiver is a simple JSON hash", ->
-      expect({}.is_dictionary()).to_be true
+      expect(Object.is_dictionary {}).to_be true
 
-  describe "#is_kind_of()", ->
+  describe "Object.is_kind_of()", ->
     class Vehicle
       type: ""
 
@@ -466,18 +466,18 @@ describe "Type-Checking", ->
     car = new Car()
 
     it "returns true of an object is an instance of class", ->
-      expect(car.is_kind_of Car).to_be true
+      expect(Object.is_kind_of car, Car).to_be true
 
     it "returns true of an object is an instance of subclass of class", ->
-      expect(car.is_kind_of Vehicle).to_be true
+      expect(Object.is_kind_of car, Vehicle).to_be true
 
     it "returns true for Object", ->
-      expect(car.is_kind_of Object).to_be true
+      expect(Object.is_kind_of car, Object).to_be true
 
     it "returns false if an object is an instance of a different class which is not a subclass of class", ->
-      expect(car.is_kind_of Array).to_be false
+      expect(Object.is_kind_of car, Array).to_be false
 
-  describe "#is_instance_of()", ->
+  describe "Object.is_instance_of()", ->
     class Vehicle
       type: ""
 
@@ -487,16 +487,16 @@ describe "Type-Checking", ->
     car = new Car()
 
     it "returns true of an object is an instance of class", ->
-      expect(car.is_instance_of Car).to_be true
+      expect(Object.is_instance_of car, Car).to_be true
 
     it "returns false of an object is an instance of subclass of class", ->
-      expect(car.is_instance_of Vehicle).to_be false
+      expect(Object.is_instance_of car, Vehicle).to_be false
 
     it "returns false for Object", ->
-      expect(car.is_instance_of Object).to_be false
+      expect(Object.is_instance_of car, Object).to_be false
 
     it "returns false if an object is an instance of a different class which is not a subclass of class", ->
-      expect(car.is_instance_of Array).to_be false
+      expect(Object.is_instance_of car, Array).to_be false
 
 # ------------------------------------------------------------------------------
 

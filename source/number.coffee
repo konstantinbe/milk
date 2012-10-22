@@ -42,7 +42,7 @@
       yes
 
     compare_to: (object, options = {}) ->
-      throw "Can't compare number '#{this}' to #{object}" unless object?.is_number()
+      throw "Can't compare number '#{this}' to #{object}" unless Object.is_number object
       return -1 if this < object
       return +1 if this > object
       0

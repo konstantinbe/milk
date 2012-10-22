@@ -30,7 +30,7 @@
       yes
 
     compare_to: (object, options = {}) ->
-      throw "Can't compare boolean to #{object}." unless object?.is_boolean()
+      throw "Can't compare boolean to #{object}." unless Object.is_boolean object
       return -1 if not @ and object
       return +1 if @ and not object
       0
