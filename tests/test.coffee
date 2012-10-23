@@ -99,11 +99,16 @@ CustomMatchers =
     @actual.count() < count
 
   to_have_between: (bounds, options = {}) ->
+    excluding_lower = @option options, 'excluding_lower', no
+    excluding_upper = @option options, 'excluding_upper', no
+    excluding_bounds = @option options, 'excluding_bounds', no
+
     [lower, upper] = bounds.sort()
     count = @actual.count()
-    return lower < count <= upper if options.own 'excluding_lower'
-    return lower <= count < upper if options.own 'excluding_upper'
-    return lower < count < upper if options.own 'excluding_bounds'
+
+    return lower < count <= upper if excluding_lower
+    return lower <= count < upper if excluding_upper
+    return lower < count < upper if excluding_bounds
     lower <= count <= upper
 
   to_respond_to: (method) ->

@@ -26,12 +26,6 @@
     native_has_own_property = Object::hasOwnProperty
     native_to_string = Object::toString
 
-    has_own: (key) ->
-      native_has_own_property.call this, key
-
-    own: (key) ->
-      if @has_own key then @[key] else undefined
-
     is_copyable: ->
       return yes if @class_of @ is Object
       no

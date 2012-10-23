@@ -83,6 +83,33 @@ describe "Keywords", ->
     it "also includes methods", ->
       method = -> console.log "I'm a method."
       expect(@values_of method: method).to_equal [method]
+
+  describe "#has_own()", ->
+    it "returns true if object has own property", ->
+      class Person
+      person = new Person()
+      person['age'] = 1
+      expect(@has_own person, 'age').to_be true
+
+    it "returns false if property is not own but somewhere in the prototype chain", ->
+      class Person
+      Person::age = "1"
+      person = new Person()
+      expect(@has_own person, 'age').to_be false
+
+  describe "#own()", ->
+    it "returns the value if object has own property", ->
+      class Person
+      person = new Person()
+      person['age'] = 1
+      expect(@own person, 'age').to_equal 1
+
+    it "returns undefined if property is not own but somewhere in the prototype chain", ->
+      class Person
+      Person::age = "1"
+      person = new Person()
+      expect(@own person, 'age').to_be undefined
+
 # ------------------------------------------------------------------------------
 
 describe "Comparing", ->

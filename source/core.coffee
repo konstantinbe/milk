@@ -80,7 +80,7 @@ Object::supports = (mixins...) ->
     native_keys = Object.keys
 
     option: (object, key, fallback) ->
-      if object? and native_has_own_property.call(object, key) then object[key] else fallback
+      if object? and native_has_own_property.call object, key then object[key] else fallback
 
     class_of: (object) ->
       object?.constructor ? null
@@ -100,6 +100,12 @@ Object::supports = (mixins...) ->
     copy_of: (object) ->
       return null unless object?
       native_get_prototype_of(object)['copy'].call object
+
+    has_own: (object, key) ->
+      native_has_own_property.call object, key
+
+    own: (object, key) ->
+      if native_has_own_property.call object, key then object[key] else undefined
 
 # ------------------------------------------------------------------------------
 
@@ -164,7 +170,7 @@ Object::supports = (mixins...) ->
   class KeyValueCoding
 
     value_for: (key, options = {}) ->
-      direct = options.own 'direct'
+      direct = @option options, 'direct', no
 
       unless direct
         getter_name = @getter_name_for key
