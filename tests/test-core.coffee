@@ -245,73 +245,27 @@ describe "Comparing", ->
 
 # ------------------------------------------------------------------------------
 
-describe "Copying", ->
-
-  describe "#is_copyable()", ->
-    copyable_objects = [
-      yes
-      1
-      "String"
-      /RegExp/
-      {a_dictianary_object_should_be_copyable: yes}
-      new Date
-    ]
-
-    for object in copyable_objects
-      it "returns true for #{object}", ->
-        expect(object.is_copyable()).to_be true
-
-  describe "#copy()", ->
-    it "returns a new object", ->
-      expect({}.copy()).to_be_defined()
-
-    it "has all keys and values of the receiver", ->
-      person = name: "Peter", age: 45
-      copy = person.copy()
-      expect(@keys_of copy).to_equal ['name', 'age']
-      expect(@values_of copy).to_equal ["Peter", 45]
-
-    it "doesn't copy objects recursively, just references them", ->
-      address = street: "Rhode-Island-Alley", city: "Karlsruhe"
-      person = name: "Peter", age: 45, address: address
-      copy = person.copy()
-      expect(copy.address).to_be address
-
-# ------------------------------------------------------------------------------
-
 describe "Freezing & Sealing", ->
 
-  describe "#isFrozen()", ->
+  describe "Object.is_frozen()", ->
     it "returns no if receiver is not frozen", ->
       person = name: "Peter", age: 45
-      expect(person.is_frozen()).to_be false
+      expect(Object.is_frozen person).to_be false
 
-    it "returns yes if receiver is sealed", ->
+    it "returns yes if receiver is frozen", ->
       person = name: "Peter", age: 45
-      person.freeze()
-      expect(person.is_frozen()).to_be true
+      Object.freeze person
+      expect(Object.is_frozen person).to_be true
 
-  describe "#freeze()", ->
-    it "freezes the receiver", ->
-      person = name: "Peter", age: 45
-      person.freeze()
-      expect(person.is_frozen()).to_be true
-
-  describe "#isSealed()", ->
+  describe "Object.is_sealed()", ->
     it "returns no if receiver is not sealed", ->
       person = name: "Peter", age: 45
-      expect(person.is_sealed()).to_be false
+      expect(Object.is_sealed person).to_be false
 
     it "returns yes if receiver is sealed", ->
       person = name: "Peter", age: 45
-      person.seal()
-      expect(person.is_sealed()).to_be true
-
-  describe "#seal()", ->
-    it "seals the receiver", ->
-      person = name: "Peter", age: 45
-      person.seal()
-      expect(person.is_sealed()).to_be true
+      Object.seal person
+      expect(Object.is_sealed person).to_be true
 
 # ------------------------------------------------------------------------------
 

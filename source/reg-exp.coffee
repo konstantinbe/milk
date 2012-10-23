@@ -36,7 +36,7 @@
       0
 
     copy: ->
-      return @ if @is_frozen()
+      return @ if Object.is_frozen @
       new RegExp @
 
   RegExp.includes RegExpExtensions

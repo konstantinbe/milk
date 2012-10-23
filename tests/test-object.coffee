@@ -47,6 +47,36 @@ describe "Object", ->
       person = new Person()
       expect(person.own 'age').to_be undefined
 
+  describe "#is_copyable()", ->
+    copyable_objects = [
+      yes
+      1
+      "String"
+      /RegExp/
+      {a_dictianary_object_should_be_copyable: yes}
+      new Date
+    ]
+
+    for object in copyable_objects
+      it "returns true for #{object}", ->
+        expect(object.is_copyable()).to_be true
+
+  describe "#copy()", ->
+    it "returns a new object", ->
+      expect({}.copy()).to_be_defined()
+
+    it "has all keys and values of the receiver", ->
+      person = name: "Peter", age: 45
+      copy = person.copy()
+      expect(@keys_of copy).to_equal ['name', 'age']
+      expect(@values_of copy).to_equal ["Peter", 45]
+
+    it "doesn't copy objects recursively, just references them", ->
+      address = street: "Rhode-Island-Alley", city: "Karlsruhe"
+      person = name: "Peter", age: 45, address: address
+      copy = person.copy()
+      expect(copy.address).to_be address
+
   describe "#toString()", ->
     it "invokes to_string() if defined", ->
       class Person

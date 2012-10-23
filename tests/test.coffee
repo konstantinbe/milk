@@ -66,10 +66,10 @@ CustomMatchers =
     Object.is_instance_of @actual, klass
 
   to_be_frozen: (object) ->
-    @actual.is_frozen()
+    Object.is_frozen @actual
 
   to_be_sealed: (object) ->
-    @actual.is_sealed()
+    Object.is_sealed @actual
 
   to_equal: (object) ->
     @actual.equals object

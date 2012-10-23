@@ -31,6 +31,7 @@
       secret = @option options, 'secret', no
       readonly = @option options, 'readonly', no
       copy = @option options, 'copy', no
+      freeze = @option options, 'creeze', no
       getter = @option options, 'get', null
       setter = @option options, 'set', null
 
@@ -40,11 +41,11 @@
 
       getter ?= ->
         value = @[instance_variable_name] ? initial
-        value.freeze() if freeze and value?
+        Object.freeze value if freeze and value?
         value
 
       setter ?= (value) ->
-        value = value.copy() if copy
+        value = @copy_of value if copy
         @[instance_variable_name] = value
         @
 

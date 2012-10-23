@@ -32,6 +32,17 @@
     own: (key) ->
       if @has_own key then @[key] else undefined
 
+    is_copyable: ->
+      return yes if @class_of @ is Object
+      no
+
+    copy: ->
+      throw "#{@class_name_of @} doesn't support copying" unless @class_of @ is Object
+      copy = {}
+      for own key, value of @
+        copy[key] = value
+      copy
+
     toString: ->
       return @to_string() if @responds_to 'to_string'
       native_to_string.call @

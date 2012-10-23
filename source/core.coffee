@@ -76,6 +76,8 @@ Object::supports = (mixins...) ->
 
     native_is_array = Array.isArray
     native_has_own_property = Object::hasOwnProperty
+    native_get_prototype_of = Object.getPrototypeOf
+    native_keys = Object.keys
 
     option: (object, key, fallback) ->
       if object? and native_has_own_property.call(object, key) then object[key] else fallback
@@ -87,10 +89,17 @@ Object::supports = (mixins...) ->
       object?.constructor?.name ? null
 
     keys_of: (object) ->
-      Object.keys object
+      native_keys object
 
     values_of: (object) ->
-      (object[key] for key in Object.keys object)
+      (object[key] for key in native_keys object)
+
+    prototype_of: (object) ->
+      native_get_prototype_of object
+
+    copy_of: (object) ->
+      return null unless object?
+      native_get_prototype_of(object)['copy'].call object
 
 # ------------------------------------------------------------------------------
 
@@ -139,42 +148,16 @@ Object::supports = (mixins...) ->
 
   # ----------------------------------------------------------------------------
 
-  class Copying
-
-    is_copyable: ->
-      return yes if @class_of @ is Object
-      no
-
-    copy: ->
-      throw "#{@class_name_of @} doesn't support copying" unless @class_of @ is Object
-      copy = {}
-      for own key, value of @
-        copy[key] = value
-      copy
-
-  # ----------------------------------------------------------------------------
-
   class FreezingAndSealing
-
-    native_seal = Object.seal
-    native_freeze = Object.freeze
 
     native_is_sealed = Object.isSealed
     native_is_frozen = Object.isFrozen
 
-    freeze: ->
-      native_freeze? @
-      @
+    @is_frozen: (object) ->
+      native_is_frozen object
 
-    is_frozen: ->
-      native_is_frozen? @
-
-    seal: ->
-      native_seal? @
-      @
-
-    is_sealed: ->
-      native_is_sealed? @
+    @is_sealed: (object) ->
+      native_is_sealed object
 
   # ----------------------------------------------------------------------------
 
@@ -278,10 +261,7 @@ Object::supports = (mixins...) ->
 
   Object.includes Keywords
   Object.includes Comparing
-  Object.includes Copying
-
   Object.includes FreezingAndSealing
-
   Object.includes KeyValueCoding
   Object.includes TypeChecking
   Object.includes Messaging

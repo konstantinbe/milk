@@ -350,7 +350,7 @@
       yes
 
     copy: ->
-      return @ if @is_frozen()
+      return @ if Object.is_frozen @
       [].concat this
 
     to_string: ->
