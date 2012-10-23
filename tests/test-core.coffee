@@ -439,33 +439,19 @@ describe "Type-Checking", ->
 
 describe "Messaging", ->
 
-  describe "#responds_to()", ->
+  describe "Object.responds_to()", ->
     it "returns yes if object responds to a method", ->
       method = -> console.log "I'm a method."
-      expect({method: method}.responds_to 'method').to_be yes
+      expect(Object.responds_to {method: method}, 'method').to_be yes
 
     it "returns no if object does not respond to a method", ->
       method = -> console.log "I'm a method."
-      expect({method: method}.responds_to 'not_existing_method').to_be no
+      expect(Object.responds_to {method: method}, 'not_existing_method').to_be no
 
     it "returns no if method is null", ->
       method = -> console.log "I'm a method."
-      expect({method: method}.responds_to null).to_be no
+      expect(Object.responds_to {method: method}, null).to_be no
 
     it "returns no if no arguments are passed", ->
       method = -> console.log "I'm a method."
-      expect({method: method}.responds_to()).to_be no
-
-  describe "#invoke()", ->
-    it "invokes a method", ->
-      object = method: -> # do nothing
-      spy_on(object, 'method').and_call_through()
-      object.invoke 'method'
-      expect(object.method).to_have_been_called()
-
-    it "passes an array of parameters", ->
-      args = [1, 2, 3]
-      object = method: (arg1, arg2, arg3) -> args = [arg1, arg2, arg3]
-      spy_on(object, 'method').and_call_through()
-      object.invoke 'method', [5, 6, 7]
-      expect(args.sort()).to_equal [5, 6, 7]
+      expect(Object.responds_to {method: method}).to_be no

@@ -107,7 +107,7 @@ CustomMatchers =
     lower <= count <= upper
 
   to_respond_to: (method) ->
-    @actual.responds_to method
+    Object.responds_to @actual, method
 
 # ----------------------------------------------------- Register Matchers ------
 

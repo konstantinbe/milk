@@ -251,11 +251,8 @@ Object::supports = (mixins...) ->
 
   class Messaging
 
-    responds_to: (command) ->
-      command? and @[command]? and Object.is_function @[command]
-
-    invoke: (command, args = []) ->
-      @[command](args...)
+    @responds_to: (object, command) ->
+      command? and object[command]? and Object.is_function object[command]
 
   # ----------------------------------------------------------------------------
 

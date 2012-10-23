@@ -44,7 +44,7 @@
       copy
 
     toString: ->
-      return @to_string() if @responds_to 'to_string'
+      return @to_string() if Object.responds_to @, 'to_string'
       native_to_string.call @
 
     to_string: ->
