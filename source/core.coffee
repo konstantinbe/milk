@@ -25,25 +25,28 @@ global = exports ? this
 
 class Module
 
+  option = (object, key, fallback) ->
+    if object? and Object::hasOwnProperty.call object, key then object[key] else fallback
+
   @walk: (path, options = {}) ->
-    options['create_if_not_exists'] ?= no
-    options['secret'] ?= no
+    create_if_not_exists = option options, 'create_if_not_exists', no
+    secret = option options, 'secret', no
     object = global
     for section in path.split "."
       parent = object
       object = object[section]
-      object ?= object['$' + section] if options['secret']
-      object ?= parent[section] = new Module() if options['create_if_not_exists']
+      object ?= object['$' + section] if secret
+      object ?= parent[section] = new Module() if create_if_not_exists
       throw "Can't walk module path '#{path}', #{section} doesn't exist" unless object?
     object
 
   export: (object, options = {}) ->
-    options['as'] ?= null
-    options['secret'] ?= no
-    name = options['as'] ? object['name']
+    as = option options, 'as', null
+    secret = option options, 'secret', no
+    name = as ? object['name']
     throw "Can't export #{object}, couldn't determine name" unless name?
     throw "Can't export #{object} as '#{name}', name already taken" if @[name]?
-    name = '$' + name if options['secret']
+    name = '$' + name if secret
     @[name] = object
 
 # ------------------------------------------------------------------------------
@@ -54,16 +57,10 @@ Object::module = (path, block) ->
   module
 
 Object::import = (path, options = {}) ->
-  options['secret'] ?= no
+  secret = @option options, 'secret', no
   Module.walk path, options
 
 Object::includes = (mixins...) ->
-  for mixin in mixins
-    @[key] = value for own key, value of mixin
-    @prototype[key] = value for own key, value of mixin.prototype
-
-# TODO: delete either includes or supports.
-Object::supports = (mixins...) ->
   for mixin in mixins
     @[key] = value for own key, value of mixin
     @prototype[key] = value for own key, value of mixin.prototype
@@ -137,10 +134,11 @@ Object::supports = (mixins...) ->
       result is 0 or result is 1
 
     is_between: (bounds, options = {}) ->
+      excluding_bounds = @option options, 'excluding_bounds', no
+      excluding_lower = @option options, 'excluding_lower', no
+      excluding_upper = @option options, 'excluding_upper', no
+
       [lower, upper] = bounds
-      excluding_bounds = options['excluding_bounds'] or no
-      excluding_lower = options['excluding_lower'] or no
-      excluding_upper = options['excluding_upper'] or no
 
       include_lower = not (excluding_bounds or excluding_lower)
       include_upper = not (excluding_bounds or excluding_upper)
@@ -183,7 +181,7 @@ Object::supports = (mixins...) ->
       @[key]
 
     set_value_for: (value, key, options = {}) ->
-      direct = options['direct'] or no
+      direct = @option options, 'direct', no
 
       unless direct
         setter_name = @setter_name_for key
