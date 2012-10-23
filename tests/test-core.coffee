@@ -48,14 +48,14 @@ describe "Modules", ->
 
 describe "Keywords", ->
 
-  describe "#class_of()", ->
+  describe "@class_of()", ->
     person_class = class Person
     person = new Person()
 
     it "returns the class object", ->
       expect(@class_of person).to_be person_class
 
-  describe "#class_name_of()", ->
+  describe "@class_name_of()", ->
     person_class = class Person
     person = new Person()
 
@@ -63,7 +63,7 @@ describe "Keywords", ->
       expect(@class_name_of person).to_be "Person"
       expect(@class_name_of Person).to_be "Function"
 
-  describe "#keys_of()", ->
+  describe "@keys_of()", ->
     it "returns an array of keys", ->
       expect(@keys_of name: "Peter", age: 45).to_equal ['name', 'age']
 
@@ -73,7 +73,7 @@ describe "Keywords", ->
     it "also includes methods", ->
       expect(@keys_of method: -> console.log "I'm a method.").to_equal ['method']
 
-  describe "#values_of()", ->
+  describe "@values_of()", ->
     it "returns an array of values", ->
       expect(@values_of name: "Peter", age: 45).to_equal ['Peter', 45]
 
@@ -84,7 +84,7 @@ describe "Keywords", ->
       method = -> console.log "I'm a method."
       expect(@values_of method: method).to_equal [method]
 
-  describe "#has_own()", ->
+  describe "@has_own()", ->
     it "returns true if object has own property", ->
       class Person
       person = new Person()
@@ -97,7 +97,7 @@ describe "Keywords", ->
       person = new Person()
       expect(@has_own person, 'age').to_be false
 
-  describe "#own()", ->
+  describe "@own()", ->
     it "returns the value if object has own property", ->
       class Person
       person = new Person()
