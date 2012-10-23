@@ -160,7 +160,10 @@ task 'play', "build & run Milk in browser", (options) ->
 task 'run', "run Milk tests\n", (options) ->
   engine = engines[options['engine']] or default_engine
   puts "Running Milk tests on #{WHITE + engine['title'] + RESET} ..."
-  run "cd build; #{engine['command']} test-milk.js"
+  if options['engine']?
+    run "cd build; #{engine['command']} test-milk.js"
+  else
+    require 'build/test-milk.js'
 
 task 'test:all', "build & run all tests on all engines", (options) ->
   invoke 'build'
