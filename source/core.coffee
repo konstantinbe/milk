@@ -98,6 +98,11 @@ Object::includes = (mixins...) ->
       return null unless object?
       native_get_prototype_of(object)['copy'].call object
 
+    description_of: (object) ->
+      return "undefined" if object is undefined
+      return "null" if object is null
+      return native_get_prototype_of(object)['to_string'].call object
+
     has_own: (object, key) ->
       native_has_own_property.call object, key
 
