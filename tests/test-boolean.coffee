@@ -20,12 +20,4 @@
 # THE SOFTWARE.
 
 describe "Boolean", ->
-  describe "#is_comparable()", ->
-    it "returns true", ->
-      value = true
-      expect(value.is_comparable()).to_be true
-
-  describe "#is_copyable()", ->
-    it "returns true", ->
-      value = true
-      expect(value.is_copyable()).to_be true
+  # TODO: specify.

@@ -64,7 +64,6 @@ option '-d', "--dry", "only prepare release, don't publish"
 
 SOURCE = [
   "core"
-  "object"
   "function"
   "boolean"
   "number"

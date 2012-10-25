@@ -223,13 +223,15 @@
       native_array_some.call this, block
 
     min: (compare = null) ->
+      compare ?= @compare
       min = @first()
-      min = object for object in @ when object.is_less_than min
+      min = object for object in @ when compare(object, min) < 0
       min
 
     max: (compare = null) ->
+      compare ?= @compare
       max = @first()
-      max = object for object in @ when object.is_greater_than max
+      max = object for object in @ when compare(object, max) > 0
       max
 
     group_by: (key_or_block) ->
@@ -337,16 +339,10 @@
     sort_by: (keys) ->
       @sort make_compare_function_for_sorting_by_keys keys if keys.count() > 0
 
-    is_comparable: ->
-      no
-
-    is_copyable: ->
-      yes
-
     equals: (object) ->
       return no unless Object.is_array object
       return no unless @length == object.length
-      return no unless (@all (value, index) -> value is object[index] or value?.equals object[index])
+      return no unless @all (value, index) -> value is object[index] or @are_equal value, object[index]
       yes
 
     copy: ->

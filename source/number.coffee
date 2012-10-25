@@ -35,12 +35,6 @@
     is_infinite: ->
       not @is_nan() and not @is_finite()
 
-    is_comparable: ->
-      yes
-
-    is_copyable: ->
-      yes
-
     compare_to: (object, options = {}) ->
       throw "Can't compare number '#{this}' to #{object}" unless Object.is_number object
       return -1 if this < object

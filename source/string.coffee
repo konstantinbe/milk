@@ -185,12 +185,6 @@
 
       to_hex(H0) + to_hex(H1) + to_hex(H2) + to_hex(H3) + to_hex(H4)
 
-    is_comparable: ->
-      yes
-
-    is_copyable: ->
-      yes
-
     compare_to: (object, options = {}) ->
       throw "Can't compare string '#{this}' to #{object}." unless Object.is_string object
       return -1 if this < object

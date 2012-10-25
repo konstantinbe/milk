@@ -114,20 +114,6 @@ describe "Keywords", ->
 
 describe "Comparing", ->
 
-  describe "#equals()", ->
-    it "returns yes if object is the same", ->
-      person = name: "Peter"
-      expect(person.equals person).to_be true
-
-    it "returns no if object is null or undefined", ->
-      person = name: "Peter"
-      expect(person.equals null).to_be false
-      expect(person.equals()).to_be false
-
-    it "returns no if object is not the same", ->
-      person = name: "Peter"
-      expect(person.equals name: "Peter").to_be false
-
   describe "#compare_to()", ->
     examples = [
       {type: "booleans", left: no, right: yes, result: -1}
@@ -163,112 +149,6 @@ describe "Comparing", ->
       for example in examples_with_different_types
         it "throws when comparing #{example['left']} with #{example['right']} of of different types", ->
           expect(-> example['left'].compare_to example['right']).to_throw()
-
-  describe "#is_comparable()", ->
-    it "returns true for numbers", ->
-      number = 5
-      expect(number.is_comparable()).to_be true
-
-    it "returns true for strings", ->
-      string = "Test"
-      expect(string.is_comparable()).to_be true
-
-    it "returns false for arrays", ->
-      array = []
-      expect(array.is_comparable()).to_be false
-
-  describe "#is_less_than()", ->
-    it "returns true if receiver is less than value", ->
-      expect(3.is_less_than 5).to_be true
-
-    it "returns false if they are equal", ->
-      expect(5.is_less_than 5).to_be false
-
-    it "returns false if receiver is greater than value", ->
-      expect(5.is_less_than 3).to_be false
-
-  describe "#is_less_than_or_equals()", ->
-    it "returns true if receiver is less than or equal to value", ->
-      expect(3.is_less_than_or_equals 5).to_be true
-
-    it "returns true if they are equal", ->
-      expect(5.is_less_than_or_equals 5).to_be true
-
-    it "returns false if receiver is greater than or equal to value", ->
-      expect(5.is_less_than_or_equals 3).to_be false
-
-  describe "#is_greater_than()", ->
-    it "returns true if receiver is greater than value", ->
-      expect(5.is_greater_than 3).to_be true
-
-    it "returns false if they are equal", ->
-      expect(5.is_greater_than 5).to_be false
-
-    it "returns false if receiver is greater than value", ->
-      expect(3.is_greater_than 5).to_be false
-
-  describe "#is_greater_than_or_equals()", ->
-    it "returns true if receiver is greater than or equal to value", ->
-      expect(5.is_greater_than_or_equals 3).to_be true
-
-    it "returns true if they are equal", ->
-      expect(5.is_greater_than_or_equals 5).to_be true
-
-    it "returns false if receiver is greater than or equal to value", ->
-      expect(3.is_greater_than_or_equals 5).to_be false
-
-  describe "#is_between()", ->
-    describe "without options", ->
-      it "returns true if receiver is between lower and upper bound", ->
-        expect(5.is_between [4, 6]).to_be true
-
-      it "returns true if receiver equals lower bound", ->
-        expect(5.is_between [5, 6]).to_be true
-
-      it "returns true if receiver equals upper bound", ->
-        expect(5.is_between [4, 5]).to_be true
-
-      it "returns true if receiver == upper == lower", ->
-        expect(5.is_between [5, 5]).to_be true
-
-    describe "when given option excluding_bounds:yes", ->
-      it "returns true if receiver is between lower and upper bound", ->
-        expect(5.is_between [4, 6], excluding_bounds: yes).to_be true
-
-      it "returns false if receiver equals lower bound", ->
-        expect(5.is_between [5, 6], excluding_bounds: yes).to_be false
-
-      it "returns false if receiver equals upper bound", ->
-        expect(5.is_between [4, 5], excluding_bounds: yes).to_be false
-
-      it "returns false if receiver == upper == lower", ->
-        expect(5.is_between [5, 5], excluding_bounds: yes).to_be false
-
-    describe "when given option excluding_lower:yes", ->
-      it "returns true if receiver is between lower and upper bound", ->
-        expect(5.is_between [4, 6], excluding_lower: yes).to_be true
-
-      it "returns false if receiver equals lower bound", ->
-        expect(5.is_between [5, 6], excluding_lower: yes).to_be false
-
-      it "returns true if receiver equals upper bound", ->
-        expect(5.is_between [4, 5], excluding_lower: yes).to_be true
-
-      it "returns false if receiver == upper == lower", ->
-        expect(5.is_between [5, 5], excluding_lower: yes).to_be false
-
-    describe "when given option excluding_upper:yes", ->
-      it "returns true if receiver is between lower and upper bound", ->
-        expect(5.is_between [4, 6], excluding_upper: yes).to_be true
-
-      it "returns true if receiver equals lower bound", ->
-        expect(5.is_between [5, 6], excluding_upper: yes).to_be true
-
-      it "returns false if receiver equals upper bound", ->
-        expect(5.is_between [4, 5], excluding_upper: yes).to_be false
-
-      it "returns false if receiver == upper == lower", ->
-        expect(5.is_between [5, 5], excluding_upper: yes).to_be false
 
 # ------------------------------------------------------------------------------
 

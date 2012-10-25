@@ -75,6 +75,7 @@ Object::includes = (mixins...) ->
     native_has_own_property = Object::hasOwnProperty
     native_get_prototype_of = Object.getPrototypeOf
     native_keys = Object.keys
+    native_to_string = Object::toString
 
     option: (object, key, fallback) ->
       if object? and native_has_own_property.call object, key then object[key] else fallback
@@ -95,65 +96,64 @@ Object::includes = (mixins...) ->
       native_get_prototype_of object
 
     copy_of: (object) ->
-      return null unless object?
+      return undefined if object is undefined
+      return null if object is null
+
+      if Object.is_dictionary object
+        copy = {}
+        for own key, value of @
+          copy[key] = value
+        return copy
+
+      throw "Object doesn't support copying" unless Object.responds_to object, 'copy'
       native_get_prototype_of(object)['copy'].call object
+
+    frozen_copy_of: (object) ->
+      return object if Object.is_frozen object
+      return @copy_of object
 
     description_of: (object) ->
       return "undefined" if object is undefined
       return "null" if object is null
-      return native_get_prototype_of(object)['to_string'].call object
+      return "{" + @keys_of(object).join(", ") + "}" if Object.is_dictionary object
+      return object.to_string() if Object.responds_to object, 'to_string'
+      native_to_string.call object
+
+    are_equal: (left, right) ->
+      throw "Can't compare objects, left is undefined" if left is undefined
+      throw "Can't compare objects, right is undefined" if right is undefined
+      return yes if left is null and right is null
+      return no if left is null or right is null
+      left_is_dictionary = Object.is_dictionary left
+      right_is_dictionary = Object.is_dictionary right
+      return no if left_is_dictionary and not right_is_dictionary
+      return no if not left_is_dictionary and right_is_dictionary
+      if left_is_dictionary and right_is_dictionary
+        for key in @keys_of(left).concat @keys_of(right)
+          return no unless left.has_own(key) and right.has_own(key)
+          return no unless @are_equal left.own[key], right.own[key]
+        return yes
+      return left.equals right if Object.responds_to left, 'equals'
+      return right.equals left if Object.responds_to right, 'equals'
+      return left.compare_to(right) is 0 if Object.responds_to left, 'compare_to'
+      return right.compare_to(left) is 0 if Object.responds_to right, 'compare_to'
+      throw "Can't compare objects, neither left nor right implement equals() or compare_to()"
+
+    compare: (left, right) ->
+      throw "Can't compare objects, left is undefined" if left is undefined
+      throw "Can't compare objects, right is undefined" if right is undefined
+      throw "Can't compare objects, left is null" if left is null
+      throw "Can't compare objects, right is null" if right is null
+      throw "Can't compare objects, left is a dictionary" if Object.is_dictionary left
+      throw "Can't compare objects, right is a dictionary" if Object.is_dictionary right
+      throw "Can't compare, objects don't support comparing" unless Object.responds_to left, 'compare_to'
+      left.compare_to right
 
     has_own: (object, key) ->
       native_has_own_property.call object, key
 
     own: (object, key) ->
       if native_has_own_property.call object, key then object[key] else undefined
-
-# ------------------------------------------------------------------------------
-
-  class Comparing
-
-    equals: (object, options = {}) ->
-      return no unless object?
-      return @ is object unless @is_comparable()
-      @compare_to(object, options) is 0
-
-    is_comparable: ->
-      no
-
-    compare_to: (object, options = {}) ->
-      throw "#Can't compare #{this} to #{object}, object is not comparable"
-
-    is_less_than: (value, options = {}) ->
-      @compare_to(value, options = {}) is -1
-
-    is_less_than_or_equals: (value, options = {}) ->
-      result = @compare_to value, options
-      result is 0 or result is -1
-
-    is_greater_than: (value, options = {}) ->
-      @compare_to(value, options = {}) is 1
-
-    is_greater_than_or_equals: (value, options = {}) ->
-      result = @compare_to value, options
-      result is 0 or result is 1
-
-    is_between: (bounds, options = {}) ->
-      excluding_bounds = @option options, 'excluding_bounds', no
-      excluding_lower = @option options, 'excluding_lower', no
-      excluding_upper = @option options, 'excluding_upper', no
-
-      [lower, upper] = bounds
-
-      include_lower = not (excluding_bounds or excluding_lower)
-      include_upper = not (excluding_bounds or excluding_upper)
-
-      compared_to_lower = @compare_to lower, options
-      compared_to_upper = @compare_to upper, options
-
-      meets_lower = compared_to_lower is +1 or include_lower and compared_to_lower is 0
-      meets_upper = compared_to_upper is -1 or include_upper and compared_to_upper is 0
-      meets_lower and meets_upper
 
   # ----------------------------------------------------------------------------
 
@@ -266,7 +266,6 @@ Object::includes = (mixins...) ->
   # ----------------------------------------------------------------------------
 
   Object.includes Keywords
-  Object.includes Comparing
   Object.includes FreezingAndSealing
   Object.includes KeyValueCoding
   Object.includes TypeChecking

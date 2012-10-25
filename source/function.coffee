@@ -55,10 +55,4 @@
       Object.defineProperty @prototype, getter_name, enumerable: no if secret
       Object.defineProperty @prototype, setter_name, enumerable: no if secret or readonly
 
-    is_comparable: ->
-      no
-
-    is_copyable: ->
-      no
-
   Function.includes FunctionExtensions

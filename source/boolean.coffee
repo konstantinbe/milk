@@ -23,12 +23,6 @@
 
   class BooleanExtensions
 
-    is_comparable: ->
-      yes
-
-    is_copyable: ->
-      yes
-
     compare_to: (object, options = {}) ->
       throw "Can't compare boolean to #{object}." unless Object.is_boolean object
       return -1 if not @ and object

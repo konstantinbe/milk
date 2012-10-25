@@ -495,15 +495,6 @@ describe "Array", ->
 
     it "returns the receiver", ->
       expect(people.sort_by ['name']).to_be people
-  describe "#is_comparable()", ->
-    it "returns false", ->
-      value = []
-      expect(value.is_comparable()).to_be false
-
-  describe "#is_copyable()", ->
-    it "returns true", ->
-      value = []
-      expect(value.is_copyable()).to_be true
 
   describe "#copy()", ->
     it "copys an array", ->

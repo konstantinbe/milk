@@ -20,16 +20,6 @@
 # THE SOFTWARE.
 
 describe "Date", ->
-  describe "#is_comparable()", ->
-    it "returns true", ->
-      value = new Date()
-      expect(value.is_comparable()).to_be true
-
-  describe "#is_copyable()", ->
-    it "returns true", ->
-      value = new Date()
-      expect(value.is_copyable()).to_be true
-
   describe "#copy()", ->
     it "returns a copy of the receiver", ->
       five = 5

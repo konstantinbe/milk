@@ -23,12 +23,6 @@
 
   class DateExtensions
 
-    is_comparable: ->
-      yes
-
-    is_copyable: ->
-      yes
-
     compare_to: (object, options = {}) ->
       throw "Can't compare date '#{this}' to #{object}." unless object?.is_date()
       return -1 if this < object

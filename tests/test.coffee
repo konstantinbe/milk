@@ -72,7 +72,7 @@ CustomMatchers =
     Object.is_sealed @actual
 
   to_equal: (object) ->
-    @actual.equals object
+    @are_equal @actual, object
 
   to_contain: (value) ->
     @actual.contains value

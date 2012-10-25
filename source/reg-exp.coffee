@@ -23,12 +23,6 @@
 
   class RegExpExtensions
 
-    is_comparable: ->
-      yes
-
-    is_copyable: ->
-      yes
-
     compare_to: (object, options = {}) ->
       throw "Can't compare regexp '#{this}' to #{object}" unless Object.is_reg_exp object
       return -1 if this < object
@@ -36,7 +30,6 @@
       0
 
     copy: ->
-      return @ if Object.is_frozen @
       new RegExp @
 
   RegExp.includes RegExpExtensions

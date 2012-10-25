@@ -51,16 +51,6 @@ describe "String", ->
     it "returns an array", ->
       expect("".codes()).to_equal []
 
-  describe "#is_comparable()", ->
-    it "returns true", ->
-      value = "string"
-      expect(value.is_comparable()).to_be true
-
-  describe "#is_copyable()", ->
-    it "returns true", ->
-      value = "string"
-      expect(value.is_copyable()).to_be true
-
   describe "#copy()", ->
     it "returns a copy of the receiver", ->
       string = "String"

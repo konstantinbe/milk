@@ -20,17 +20,7 @@
 # THE SOFTWARE.
 
 describe "RegExp", ->
-  describe "#is_comparable()", ->
-    it "returns true", ->
-      value = /regexp/
-      expect(value.is_comparable()).to_be true
-
-  describe "#is_copyable()", ->
-    it "returns true", ->
-      value = /regexp/
-      expect(value.is_copyable()).to_be true
-
   describe "#copy()", ->
     it "returns a copy of the receiver", ->
       reg_exp = /.*/
-      expect(reg_exp.copy().to_string()).to_equal /.*/.to_string()
+      expect(@description_of reg_exp.copy()).to_equal @description_of /.*/
