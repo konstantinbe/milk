@@ -178,6 +178,14 @@ describe "Freezing & Sealing", ->
 
 describe "Key-Value Coding", ->
 
+  describe "Object.getter_name_for()", ->
+    it "returns the key itself", ->
+      expect(Object.getter_name_for 'some_nice_key').to_equal 'some_nice_key'
+
+  describe "Object.setter_name_for()", ->
+    it "returns the key prefixed with 'get'", ->
+      expect(Object.setter_name_for 'some_nice_key').to_equal 'set_some_nice_key'
+
   describe "#value_for()", ->
     it "returns the value by calling the getter if it is a function", ->
       object = key: (-> "getter"), '@key': "variable"
@@ -213,14 +221,6 @@ describe "Key-Value Coding", ->
       object = key: "property"
       object.set_value_for "Test", 'key'
       expect(object['key']).to_be "Test"
-
-  describe "#getter_name_for()", ->
-    it "returns the key itself", ->
-      expect({}.getter_name_for 'some_nice_key').to_equal 'some_nice_key'
-
-  describe "#setter_name_for()", ->
-    it "returns the key prefixed with 'get'", ->
-      expect({}.setter_name_for 'some_nice_key').to_equal 'set_some_nice_key'
 
 # ------------------------------------------------------------------------------
 

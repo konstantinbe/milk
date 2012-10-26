@@ -35,8 +35,8 @@
       getter = @option options, 'get', null
       setter = @option options, 'set', null
 
-      getter_name = @getter_name_for key
-      setter_name = @setter_name_for key
+      getter_name = Object.getter_name_for key
+      setter_name = Object.setter_name_for key
       instance_variable_name = '@' + key
 
       getter ?= ->

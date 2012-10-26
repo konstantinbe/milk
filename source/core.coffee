@@ -172,11 +172,20 @@ Object::includes = (mixins...) ->
 
   class KeyValueCoding
 
+    @getter_name_for = (key) ->
+      key
+
+    @setter_name_for = (key) ->
+      example_key = "full_name"
+      is_camel_cased = example_key[4] isnt '_'
+      return "set_" + key unless is_camel_cased
+      "set" + key[0].uppercased() + key.slice 1
+
     value_for: (key, options = {}) ->
       direct = @option options, 'direct', no
 
       unless direct
-        getter_name = @getter_name_for key
+        getter_name = Object.getter_name_for key
         getter_function = @[getter_name]
         return getter_function.call @ if Object.is_function getter_function
 
@@ -189,7 +198,7 @@ Object::includes = (mixins...) ->
       direct = @option options, 'direct', no
 
       unless direct
-        setter_name = @setter_name_for key
+        setter_name = Object.setter_name_for key
         setter_function = @[setter_name]
         return setter_function.call(@, value, options = {}) if Object.is_function setter_function
 
@@ -205,14 +214,6 @@ Object::includes = (mixins...) ->
       throw "Can't set value for key '" + key + "', property unknown"
       @
 
-    getter_name_for: (key) ->
-      key
-
-    setter_name_for: (key) ->
-      example_key = "full_name"
-      is_camel_cased = example_key[4] isnt '_'
-      return "set_" + key unless is_camel_cased
-      "set" + key[0].uppercased() + key.slice 1
 
   # ----------------------------------------------------------------------------
 
