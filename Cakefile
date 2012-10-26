@@ -78,7 +78,6 @@ SOURCE = [
 TESTS = [
   "test"
   "test-core"
-  "test-object"
   "test-function"
   "test-boolean"
   "test-number"
