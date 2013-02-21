@@ -99,7 +99,13 @@ task 'build', "build Milk", (options) ->
   invoke 'prepare'
 
   put "Building Milk library ... "
-  run "cat #{SOURCE.join ' '} > build/milk.coffee"
+  joined = ""
+  for source, index in SOURCE
+    joined += "\n" unless index is 0
+    joined += "# *****************************************************************************\n"
+    joined += "# File: #{source}\n"
+    joined += read_from_file source
+  write_to_file joined, "build/milk.coffee"
   run "coffee --output build/ --compile --bare build/milk.coffee"
   puts OK
 
