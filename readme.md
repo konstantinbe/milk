@@ -23,6 +23,8 @@ For developers:
 * Install `shell.js`
 * Checkout `develop` branch
 * Build & run tests: `cake test`
+* Develop ...
+* Open pull request
 
 ## Conventions
 
