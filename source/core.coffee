@@ -120,8 +120,8 @@ Object::includes = (mixins...) ->
       native_to_string.call object
 
     are_equal: (left, right) ->
-      throw "Can't compare objects, left is undefined" if left is undefined
-      throw "Can't compare objects, right is undefined" if right is undefined
+      throw "Can't check equality, left is undefined" if left is undefined
+      throw "Can't check equality, right is undefined" if right is undefined
       return yes if left is null and right is null
       return no if left is null or right is null
       left_is_dictionary = Object.is_dictionary left
@@ -137,7 +137,7 @@ Object::includes = (mixins...) ->
       return right.equals left if Object.responds_to right, 'equals'
       return left.compare_to(right) is 0 if Object.responds_to left, 'compare_to'
       return right.compare_to(left) is 0 if Object.responds_to right, 'compare_to'
-      throw "Can't compare objects, neither left nor right implement equals() or compare_to()"
+      throw "Can't check equality, neither left nor right implement equals() or compare_to()"
 
     compare: (left, right) ->
       throw "Can't compare objects, left is undefined" if left is undefined
