@@ -36,12 +36,17 @@
     count: ->
       @length
 
-    first: (count) ->
+    first: (count = 1) ->
+      count = 0 unless @length > 0
       @slice 0, count
 
-    last: (count) ->
-      return "" if count is 0
+    last: (count = 1) ->
+      count = 0 unless @length > 0
+      return "" if count <= 0
       @slice -count
+
+    rest: () ->
+      @last @count() - 1
 
     code_at: (index) ->
       native_char_code_at.call this, index
