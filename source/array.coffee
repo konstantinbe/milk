@@ -283,12 +283,12 @@
       @
 
     insert_at: (object, index) ->
-      throw "Can't insert object at index, index is out of bounds" unless 0 <= index < @length
+      throw "Can't insert object at index #{index}, index is out of bounds [0, #{@length}]" unless 0 <= index <= @length
       @splice index, 0, object
       @
 
     insert_many_at: (objects, index) ->
-      throw "Can't insert many objects at index, index is out of bounds" unless 0 <= index < @length
+      throw "Can't insert objects at index #{index}, index is out of bounds [0, #{@length}]" unless 0 <= index <= @length
       @splice index, 0, objects...
       @
 
