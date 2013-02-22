@@ -157,6 +157,18 @@ Object::includes = (mixins...) ->
       [object, key] = [@, object] if arguments.length < 2
       if native_has_own_property.call object, key then object[key] else undefined
 
+    mix: (objects...) ->
+      mixed = {}
+      for object in objects
+        mixed[key] = value for own key, value of object when not @has_own mixed, key
+      mixed
+
+    merge: (objects...) ->
+      merged = {}
+      for object in objects
+        merged[key] = value for own key, value of object
+      merged
+
   # ----------------------------------------------------------------------------
 
   class FreezingAndSealing
