@@ -99,9 +99,9 @@ Object::includes = (mixins...) ->
       return undefined if object is undefined
       return null if object is null
 
-      if Object.is_dictionary object
+      if @is_dictionary object
         copy = {}
-        for own key, value of @
+        for own key, value of object
           copy[key] = value
         return copy
 
@@ -110,7 +110,7 @@ Object::includes = (mixins...) ->
 
     frozen_copy_of: (object) ->
       return object if Object.is_frozen object
-      return @copy_of object
+      return @freeze @copy_of object
 
     description_of: (object) ->
       return "undefined" if object is undefined
