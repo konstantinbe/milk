@@ -251,7 +251,7 @@ Object::includes = (mixins...) ->
 
     is_boolean: (object) ->
       object = @ if arguments.length < 1
-      object is yes or object is no
+      object is yes or object is no or Object::toString.call(object) is '[object Boolean]'
 
     is_number: (object) ->
       object = @ if arguments.length < 1
