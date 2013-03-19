@@ -24,7 +24,7 @@
   class RegExpExtensions
 
     compare_to: (object, options = {}) ->
-      throw "Can't compare regexp '#{this}' to #{object}" unless Object.is_reg_exp object
+      @error "Can't compare regexp '#{this}' to #{object}" unless @is_reg_exp object
       return -1 if this < object
       return +1 if this > object
       0

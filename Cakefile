@@ -222,8 +222,8 @@ task 'release', "release a version of Milk (website, NPM)\n", (options) ->
 
   put "Preparing website ... "
   run "mkdir -p build/release/website"
-  run "git clone -q .git build/release/website"
-  run "cd build/release/website; git checkout origin/gh-pages -b gh-pages; git clean -fd"
+  run "git clone --quiet --single-branch --branch website .git build/release/website"
+  run "cd build/release/website; git clean -fd"
   run "rm -rf build/release/website/*"
   run "cp build/website/* build/release/website/; rm -rf build/release/website/*.md"
   run "sed 's/x\.x\.x/#{version}/' build/milk.coffee > build/release/website/milk-#{version}.coffee"

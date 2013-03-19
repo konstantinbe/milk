@@ -24,13 +24,13 @@
   class DateExtensions
 
     compare_to: (object, options = {}) ->
-      throw "Can't compare date '#{this}' to #{object}." unless object?.is_date()
+      @error "Can't compare date '#{this}' to #{object}." unless @is_date object
       return -1 if this < object
       return +1 if this > object
       0
 
     copy: ->
-      return @ if Object.is_frozen @
+      return @ if @is_frozen()
       new Date @
 
   Date.includes DateExtensions

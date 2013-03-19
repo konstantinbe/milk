@@ -37,15 +37,15 @@ class Module
       object = object[section]
       object ?= object['$' + section] if secret
       object ?= parent[section] = new Module() if create_if_not_exists
-      throw "Can't walk module path '#{path}', #{section} doesn't exist" unless object?
+      @error "Can't walk module path '#{path}', #{section} doesn't exist" unless object?
     object
 
   export: (object, options = {}) ->
     as = option options, 'as', null
     secret = option options, 'secret', no
     name = as ? object['name']
-    throw "Can't export #{object}, couldn't determine name" unless name?
-    throw "Can't export #{object} as '#{name}', name already taken" if @[name]?
+    @error "Can't export #{object}, couldn't determine name" unless name?
+    @error "Can't export #{object} as '#{name}', name already taken" if @[name]?
     name = '$' + name if secret
     @[name] = object
 
@@ -105,27 +105,27 @@ Object::includes = (mixins...) ->
           copy[key] = value
         return copy
 
-      throw "Object doesn't support copying" unless Object.responds_to object, 'copy'
+      @error "Object doesn't support copying" unless @responds_to object, 'copy'
       native_get_prototype_of(object)['copy'].call object
 
     frozen_copy_of: (object) ->
-      return object if Object.is_frozen object
+      return object if @is_frozen object
       return @freeze @copy_of object
 
     description_of: (object) ->
       return "undefined" if object is undefined
       return "null" if object is null
-      return "{" + @keys_of(object).join(", ") + "}" if Object.is_dictionary object
-      return object.to_string() if Object.responds_to object, 'to_string'
+      return "{" + @keys_of(object).join(", ") + "}" if @is_dictionary object
+      return object.to_string() if @responds_to object, 'to_string'
       native_to_string.call object
 
     are_equal: (left, right) ->
-      throw "Can't check equality, left is undefined" if left is undefined
-      throw "Can't check equality, right is undefined" if right is undefined
+      @error "Can't check equality, left is undefined" if left is undefined
+      @error "Can't check equality, right is undefined" if right is undefined
       return yes if left is null and right is null
       return no if left is null or right is null
-      left_is_dictionary = Object.is_dictionary left
-      right_is_dictionary = Object.is_dictionary right
+      left_is_dictionary = @is_dictionary left
+      right_is_dictionary = @is_dictionary right
       return no if left_is_dictionary and not right_is_dictionary
       return no if not left_is_dictionary and right_is_dictionary
       if left_is_dictionary and right_is_dictionary
@@ -133,20 +133,20 @@ Object::includes = (mixins...) ->
           return no unless left.has_own(key) and right.has_own(key)
           return no unless @are_equal left.own[key], right.own[key]
         return yes
-      return left.equals right if Object.responds_to left, 'equals'
-      return right.equals left if Object.responds_to right, 'equals'
-      return left.compare_to(right) is 0 if Object.responds_to left, 'compare_to'
-      return right.compare_to(left) is 0 if Object.responds_to right, 'compare_to'
-      throw "Can't check equality, neither left nor right implement equals() or compare_to()"
+      return left.equals right if @responds_to left, 'equals'
+      return right.equals left if @responds_to right, 'equals'
+      return left.compare_to(right) is 0 if @responds_to left, 'compare_to'
+      return right.compare_to(left) is 0 if @responds_to right, 'compare_to'
+      @error "Can't check equality, neither left nor right implement equals() or compare_to()"
 
     compare: (left, right) ->
-      throw "Can't compare objects, left is undefined" if left is undefined
-      throw "Can't compare objects, right is undefined" if right is undefined
-      throw "Can't compare objects, left is null" if left is null
-      throw "Can't compare objects, right is null" if right is null
-      throw "Can't compare objects, left is a dictionary" if Object.is_dictionary left
-      throw "Can't compare objects, right is a dictionary" if Object.is_dictionary right
-      throw "Can't compare, objects don't support comparing" unless Object.responds_to left, 'compare_to'
+      @error "Can't compare objects, left is undefined" if left is undefined
+      @error "Can't compare objects, right is undefined" if right is undefined
+      @error "Can't compare objects, left is null" if left is null
+      @error "Can't compare objects, right is null" if right is null
+      @error "Can't compare objects, left is a dictionary" if @is_dictionary left
+      @error "Can't compare objects, right is a dictionary" if @is_dictionary right
+      @error "Can't compare, objects don't support comparing" unless @responds_to left, 'compare_to'
       left.compare_to right
 
     has_own: (object, key) ->
@@ -168,6 +168,20 @@ Object::includes = (mixins...) ->
       for object in objects
         merged[key] = value for own key, value of object
       merged
+
+    info: (message) ->
+      console.info "[INFO] " + message
+
+    warning: (message) ->
+      console.warn "[WARNING] " + message
+
+    error: (message) ->
+      stackTrace = "(can't print stack trace, function printStackTrace() not found)"
+      stackTrace = "\n\n" + printStackTrace()[3..].join "\n" if printStackTrace?
+      throw "[ERROR] " + message + stackTrace
+
+    debug: (message) ->
+      console.debug "[DEBUG] " + message
 
   # ----------------------------------------------------------------------------
 
@@ -215,7 +229,7 @@ Object::includes = (mixins...) ->
       unless direct
         getter_name = Object.getter_name_for key
         getter_function = @[getter_name]
-        return getter_function.call @ if Object.is_function getter_function
+        return getter_function.call @ if @is_function getter_function
 
       instance_variable_name = '@' + key
       return @[instance_variable_name] if @[instance_variable_name] isnt undefined
@@ -228,7 +242,7 @@ Object::includes = (mixins...) ->
       unless direct
         setter_name = Object.setter_name_for key
         setter_function = @[setter_name]
-        return setter_function.call(@, value, options = {}) if Object.is_function setter_function
+        return setter_function.call(@, value, options = {}) if @is_function setter_function
 
       instance_variable_name = '@' + key
       if @[instance_variable_name] isnt undefined
@@ -239,9 +253,8 @@ Object::includes = (mixins...) ->
         @[key] = value
         return @
 
-      throw "Can't set value for key '" + key + "', property unknown"
+      @error "Can't set value for key '" + key + "', property unknown"
       @
-
 
   # ----------------------------------------------------------------------------
 
@@ -299,11 +312,48 @@ Object::includes = (mixins...) ->
 
   # ----------------------------------------------------------------------------
 
+  class Comparing
+
+    is_comparable: ->
+      no
+
+    is_less_than: (value, options = {}) ->
+      @compare_to(value, options = {}) is -1
+
+    is_less_than_or_equals: (value, options = {}) ->
+      result = @compare_to value, options
+      result is 0 or result is -1
+
+    is_greater_than: (value, options = {}) ->
+      @compare_to(value, options = {}) is 1
+
+    is_greater_than_or_equals: (value, options = {}) ->
+      result = @compare_to value, options
+      result is 0 or result is 1
+
+    is_between: (bounds, options = {}) ->
+      [lower, upper] = bounds
+      excluding_bounds = options['excluding_bounds'] or no
+      excluding_lower = options['excluding_lower'] or no
+      excluding_upper = options['excluding_upper'] or no
+
+      include_lower = not (excluding_bounds or excluding_lower)
+      include_upper = not (excluding_bounds or excluding_upper)
+
+      compared_to_lower = @compare_to lower, options
+      compared_to_upper = @compare_to upper, options
+
+      meets_lower = compared_to_lower is +1 or include_lower and compared_to_lower is 0
+      meets_upper = compared_to_upper is -1 or include_upper and compared_to_upper is 0
+      meets_lower and meets_upper
+
+  # ----------------------------------------------------------------------------
+
   class Messaging
 
     responds_to: (object, command) ->
       [object, command] = [@, object] if arguments.length < 2
-      command? and object[command]? and Object.is_function object[command]
+      command? and object[command]? and @is_function object[command]
 
   # ----------------------------------------------------------------------------
 
@@ -311,6 +361,7 @@ Object::includes = (mixins...) ->
   Object.includes FreezingAndSealing
   Object.includes KeyValueCoding
   Object.includes TypeChecking
+  Object.includes Comparing
   Object.includes Messaging
 
   @export Module

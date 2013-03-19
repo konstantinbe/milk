@@ -36,13 +36,13 @@
       not @is_nan() and not @is_finite()
 
     compare_to: (object, options = {}) ->
-      throw "Can't compare number '#{this}' to #{object}" unless Object.is_number object
+      @error "Can't compare number '#{this}' to #{object}" unless @is_number object
       return -1 if this < object
       return +1 if this > object
       0
 
     copy: ->
-      return @ if Object.is_frozen @
+      return @ if @is_frozen()
       new Number @
 
   Number.includes NumberExtensions

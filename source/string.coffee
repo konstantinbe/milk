@@ -49,7 +49,7 @@
       @last @count() - 1
 
     code_at: (index) ->
-      native_char_code_at.call this, index
+      native_char_code_at.call @, index
 
     # --------------------------------------------------------------------------
 
@@ -68,16 +68,16 @@
     # --------------------------------------------------------------------------
 
     prepend: (strings...) ->
-      "".concat strings..., this
+      "".concat strings..., @
 
     append: (strings...) ->
       @concat strings...
 
     index_of: (string, starting_at) ->
-      native_index_of.call this, string, starting_at
+      native_index_of.call @, string, starting_at
 
     last_index_of: (string, starting_at) ->
-      native_last_index_of.call this, string, starting_at
+      native_last_index_of.call @, string, starting_at
 
     indexes_of: (string) ->
       indexes = []
@@ -91,7 +91,7 @@
       @index_of(string) is 0
 
     ends_with: (string) ->
-      @index_of(string) is (this.length - string.length)
+      @index_of(string) is (@length - string.length)
 
     # --------------------------------------------------------------------------
 
@@ -118,7 +118,7 @@
     # --------------------------------------------------------------------------
 
     utf8: ->
-      unescape encodeURIComponent this
+      unescape encodeURIComponent @
 
     sha1: ->
       rotate_left = (n, s) -> (n << s) | (n >>> (32 - s))
@@ -135,7 +135,7 @@
           intermediate = (number >>> (i * 4)) & 0x0f
           string += intermediate.toString 16
 
-      string = this.utf8()
+      string = @utf8()
       string += String.fromCharCode 0x80
 
       K = [0x5a827999, 0x6ed9eba1, 0x8f1bbcdc, 0xca62c1d6]
@@ -191,13 +191,13 @@
       to_hex(H0) + to_hex(H1) + to_hex(H2) + to_hex(H3) + to_hex(H4)
 
     compare_to: (object, options = {}) ->
-      throw "Can't compare string '#{this}' to #{object}." unless Object.is_string object
-      return -1 if this < object
-      return +1 if this > object
+      @error "Can't compare string '#{@}' to #{object}." unless @is_string object
+      return -1 if @ < object
+      return +1 if @ > object
       0
 
     copy: ->
-      return @ if Object.is_frozen @
+      return @ if @is_frozen()
       new String @
 
   String.includes StringExtensions

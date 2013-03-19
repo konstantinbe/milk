@@ -154,7 +154,7 @@
 
     flattened: ->
       @inject [], (result, object) =>
-        objects = if Object.is_array object then object.flattened() else [object]
+        objects = if @is_array object then object.flattened() else [object]
         result.add_many objects
 
     reversed: ->
@@ -235,7 +235,7 @@
       max
 
     group_by: (key_or_block) ->
-      block = if Object.is_function key_or_block then key_or_block else (object) -> object.value_for key_or_block
+      block = if @is_function key_or_block then key_or_block else (object) -> object.value_for key_or_block
       partition = {}
       @each (object) ->
         key = block object
@@ -269,7 +269,7 @@
       @
 
     remove_at: (index) ->
-      throw "Array#remove_at() called with invalid index: #{index}, count: #{@length}"  unless 0 <= index < @length
+      @error "Array#remove_at() called with invalid index: #{index}, count: #{@length}"  unless 0 <= index < @length
       @splice index, 1
       @
 
@@ -283,12 +283,12 @@
       @
 
     insert_at: (object, index) ->
-      throw "Can't insert object at index #{index}, index is out of bounds [0, #{@length}]" unless 0 <= index <= @length
+      @error "Can't insert object at index #{index}, index is out of bounds [0, #{@length}]" unless 0 <= index <= @length
       @splice index, 0, object
       @
 
     insert_many_at: (objects, index) ->
-      throw "Can't insert objects at index #{index}, index is out of bounds [0, #{@length}]" unless 0 <= index <= @length
+      @error "Can't insert objects at index #{index}, index is out of bounds [0, #{@length}]" unless 0 <= index <= @length
       @splice index, 0, objects...
       @
 
@@ -340,14 +340,14 @@
       @sort make_compare_function_for_sorting_by_keys keys if keys.count() > 0
 
     equals: (object) ->
-      return no unless Object.is_array object
+      return no unless @is_array object
       return no unless @length == object.length
       return no unless @all (value, index) -> value is object[index] or @are_equal value, object[index]
       yes
 
     copy: ->
-      return @ if Object.is_frozen @
-      [].concat this
+      return @ if @is_frozen()
+      [].concat @
 
     to_string: ->
       strings = @collect (object) -> if object? then object.to_string() else object
