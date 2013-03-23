@@ -151,7 +151,7 @@ task 'run', "run Milk tests\n", (options) ->
   if options['engine']?
     run "cd build; #{engine['command']} test-milk.js"
   else
-    require 'build/test-milk.js'
+    require './build/test-milk.js'
 
 task 'test:all', "build & run all tests on all engines", (options) ->
   invoke 'build'
