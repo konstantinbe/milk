@@ -7,5 +7,5 @@ branches:
     - develop
 script: cake test
 before_install:
-  - npm -g update
-  - npm -g install coffee-script shelljs
+  - npm install -g coffee-script
+  - npm install shelljs marked
