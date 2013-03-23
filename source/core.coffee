@@ -150,23 +150,39 @@ Object::includes = (mixins...) ->
       left.compare_to right
 
     has_own: (object, key) ->
+      [object, key] = [@, object] if arguments.length < 2
       native_has_own_property.call object, key
 
     own: (object, key) ->
+      [object, key] = [@, object] if arguments.length < 2
       if native_has_own_property.call object, key then object[key] else undefined
 
   # ----------------------------------------------------------------------------
 
   class FreezingAndSealing
 
+    native_seal = Object.seal
+    native_freeze = Object.freeze
     native_is_sealed = Object.isSealed
     native_is_frozen = Object.isFrozen
 
-    @is_frozen: (object) ->
+    is_frozen: (object) ->
+      object = @ if arguments.length < 1
       native_is_frozen object
 
-    @is_sealed: (object) ->
+    is_sealed: (object) ->
+      object = @ if arguments.length < 1
       native_is_sealed object
+
+    freeze: (object) ->
+      object = @ if arguments.length < 1
+      native_freeze? object
+      object
+
+    seal: (object) ->
+      object = @ if arguments.length < 1
+      native_seal? object
+      object
 
   # ----------------------------------------------------------------------------
 
@@ -221,47 +237,60 @@ Object::includes = (mixins...) ->
 
     native_is_array = Array.isArray
 
-    @is_null: (object) ->
+    is_null: (object) ->
+      object = @ if arguments.length < 1
       object is null
 
-    @is_class: (object) ->
+    is_class: (object) ->
+      object = @ if arguments.length < 1
       Boolean (typeof object) is 'function' and object.name.match /^[A-Z]/
 
-    @is_function: (object) ->
+    is_function: (object) ->
+      object = @ if arguments.length < 1
       object?.constructor? and object.call? and object.apply?
 
-    @is_boolean: (object) ->
+    is_boolean: (object) ->
+      object = @ if arguments.length < 1
       object is yes or object is no
 
-    @is_number: (object) ->
+    is_number: (object) ->
+      object = @ if arguments.length < 1
       object is 0 or (object?.toExponential? and object.toFixed?)
 
-    @is_date: (object) ->
+    is_date: (object) ->
+      object = @ if arguments.length < 1
       object? and object.getTimezoneOffset? and object.setUTCFullYear?
 
-    @is_string: (object) ->
+    is_string: (object) ->
+      object = @ if arguments.length < 1
       object is "" or (object?.charCodeAt? and object.substr?)
 
-    @is_reg_exp: (object) ->
+    is_reg_exp: (object) ->
+      object = @ if arguments.length < 1
       object? and object.test? and object.exec? and (object.ignoreCase? or object.ignoreCase == no)
 
-    @is_array: (object) ->
+    is_array: (object) ->
+      object = @ if arguments.length < 1
       native_is_array object
 
-    @is_dictionary: (object) ->
+    is_dictionary: (object) ->
+      object = @ if arguments.length < 1
       object?.constructor?.name is 'Object'
 
-    @is_kind_of: (object, klass) ->
+    is_kind_of: (object, klass) ->
+      [object, klass] = [@, object] if arguments.length < 2
       object instanceof klass
 
-    @is_instance_of: (object, klass) ->
+    is_instance_of: (object, klass) ->
+      [object, klass] = [@, object] if arguments.length < 2
       @class_of(object) is klass
 
   # ----------------------------------------------------------------------------
 
   class Messaging
 
-    @responds_to: (object, command) ->
+    responds_to: (object, command) ->
+      [object, command] = [@, object] if arguments.length < 2
       command? and object[command]? and Object.is_function object[command]
 
   # ----------------------------------------------------------------------------
