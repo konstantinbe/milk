@@ -118,7 +118,9 @@ jasmine.CommandLineReporter::reportRunnerResults = (runner) ->
   failures = (if @numberOfFailedExamples is 1 then "failure" else "failures")
   put "\nFinished in " + durationInSeconds + " seconds\n"
   put @numberOfExamples + " " + examples + ", " + stylize(@numberOfFailedExamples + " " + failures + "\n", color) + "\n"
-  exit()
+  code = 0
+  code = 1 if results.failedCount > 0
+  exit code
 
 jasmine.CommandLineReporter::reportSuiteResults = (suite) ->
 
