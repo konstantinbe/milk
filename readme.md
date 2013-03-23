@@ -1,4 +1,4 @@
-# Milk
+# Milk [![Build Status](https://travis-ci.org/konstantinbe/milk.png)](https://travis-ci.org/konstantinbe/milk)
 
 *Opinionated utility-belt library for CoffeeScript*
 
