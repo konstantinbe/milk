@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - 0.8
+branches:
+  only:
+    - master
+    - develop
+script: cake test
+before_install:
+  - sudo npm -g update
+  - sudo npm -g install coffee-script shelljs
