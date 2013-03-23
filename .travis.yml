@@ -7,5 +7,5 @@ branches:
     - develop
 script: cake test
 before_install:
-  - sudo npm -g update
-  - sudo npm -g install coffee-script shelljs
+  - npm -g update
+  - npm -g install coffee-script shelljs
