@@ -197,7 +197,6 @@
       0
 
     copy: ->
-      return @ if @is_frozen()
       new String @
 
   String.includes StringExtensions

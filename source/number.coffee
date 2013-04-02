@@ -42,7 +42,6 @@
       0
 
     copy: ->
-      return @ if @is_frozen()
       new Number @
 
   Number.includes NumberExtensions

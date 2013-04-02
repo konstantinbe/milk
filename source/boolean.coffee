@@ -30,7 +30,6 @@
       0
 
     copy: ->
-      return @ if @is_frozen()
       @ is true
 
   Boolean.includes BooleanExtensions

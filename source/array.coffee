@@ -346,7 +346,6 @@
       yes
 
     copy: ->
-      return @ if @is_frozen()
       [].concat @
 
     to_string: ->
