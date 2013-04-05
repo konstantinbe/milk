@@ -21,18 +21,12 @@
 
 describe "Math", ->
   describe ".generate_unique_id()", ->
-    it "generates an RFC4122 version 4 ID", ->
+    it "generates an RFC4122 version 5 ID", ->
       expect(Math.generate_unique_id()).to_match /^.+$/
 
-    it "contains 36 characters", ->
-      expect(Math.generate_unique_id().length).to_be 36
+    it "contains 32 characters", ->
+      expect(Math.generate_unique_id().length).to_be 32
 
-    it "is divided by dashes at indexes 8, 13, 18, and 23", ->
-      expect(Math.generate_unique_id()).to_match "^........-....-....-....-............$"
-
-    it "has a 4 at index 14", ->
-      expect(Math.generate_unique_id()).to_match "^........-....-4...-....-............$"
-
-    it "has only HEX numbers besides the dashes", ->
-      unique_id = Math.generate_unique_id().replace /-/g, ""
+    it "has only HEX numbers", ->
+      unique_id = Math.generate_unique_id()
       expect(unique_id).to_match /^(\d|a|b|c|d|e|f)+$/
