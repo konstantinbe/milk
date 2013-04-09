@@ -120,8 +120,8 @@ Object::includes = (mixins...) ->
       native_to_string.call object
 
     are_equal: (left, right) ->
-      @error "Can't check equality, left is undefined" if left is undefined
-      @error "Can't check equality, right is undefined" if right is undefined
+      return yes if left is undefined and right is undefined
+      return no if left is undefined or right is undefined
       return yes if left is null and right is null
       return no if left is null or right is null
       left_is_dictionary = @is_dictionary left
