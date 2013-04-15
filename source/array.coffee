@@ -52,7 +52,7 @@
           descending = key_parts[1] and key_parts[1] is "DESC"
           ascending = not descending
 
-          comparison_result = (value1.compare_to value2 if value1 and value1.compare_to)
+          comparison_result = @compare value1, value2
 
           inverted_comparison_result = 0
           inverted_comparison_result = -1 if comparison_result > 0
