@@ -318,14 +318,14 @@ Object::includes = (mixins...) ->
       no
 
     is_less_than: (value, options = {}) ->
-      @compare_to(value, options = {}) is -1
+      @compare_to(value, options) is -1
 
     is_less_than_or_equals: (value, options = {}) ->
       result = @compare_to value, options
       result is 0 or result is -1
 
     is_greater_than: (value, options = {}) ->
-      @compare_to(value, options = {}) is 1
+      @compare_to(value, options) is 1
 
     is_greater_than_or_equals: (value, options = {}) ->
       result = @compare_to value, options
