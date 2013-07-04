@@ -24,12 +24,12 @@
   class BooleanExtensions
 
     compare_to: (object, options = {}) ->
-      @error "Can't compare boolean to #{object}." unless @is_boolean object
-      return -1 if not @ and object
-      return +1 if @ and not object
+      @error "Can't compare boolean to #{object}" unless @is_boolean object
+      return -1 if @ < object
+      return +1 if @ > object
       0
 
     copy: ->
-      @ is true
+      new Boolean(@)
 
   Boolean.includes BooleanExtensions

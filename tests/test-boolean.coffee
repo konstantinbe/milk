@@ -20,4 +20,15 @@
 # THE SOFTWARE.
 
 describe "Boolean", ->
-  # TODO: specify.
+  describe "#compare_to()", ->
+    it "return -1 when comparing no to yes", ->
+      expect(no.compare_to yes).to_be -1
+
+    it "return +1 when comparing yes to no", ->
+      expect(yes.compare_to no).to_be +1
+
+    it "return 0 when comparing no to no", ->
+      expect(no.compare_to no).to_be 0
+
+    it "return 0 when comparing yes to yes", ->
+      expect(yes.compare_to yes).to_be 0
