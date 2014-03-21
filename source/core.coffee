@@ -130,8 +130,8 @@ Object::includes = (mixins...) ->
       return no if not left_is_dictionary and right_is_dictionary
       if left_is_dictionary and right_is_dictionary
         for key in @keys_of(left).concat @keys_of(right)
-          return no unless left.has_own(key) and right.has_own(key)
-          return no unless @are_equal left.own[key], right.own[key]
+          return no unless @has_own(left, key) and @has_own(right, key)
+          return no unless @are_equal @own(left, key), @own(right, key)
         return yes
       return left.equals right if @responds_to left, 'equals'
       return right.equals left if @responds_to right, 'equals'
