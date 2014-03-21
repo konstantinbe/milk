@@ -290,7 +290,7 @@ describe "Type-Checking", ->
 
   describe "Object.is_reg_exp()", ->
     it "returns yes if receiver is a regular expression", ->
-      expect(Object.is_reg_exp //).to_be true
+      expect(Object.is_reg_exp /./).to_be true
 
   describe "Object.is_array()", ->
     it "returns yes if receiver is an array", ->
