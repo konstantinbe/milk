@@ -22,7 +22,6 @@
 
 fs = require 'fs'
 shell = require 'shelljs'
-marked = require 'marked'
 
 # ------------------------------------------------------------- Constants ------
 
@@ -189,6 +188,7 @@ task 'camel', "build camel case version & run tests", (options) ->
   invoke 'run'
 
 task 'website', "build website\n", (options) ->
+  marked = require 'marked'
   invoke 'prepare'
 
   put "Building website ... "
