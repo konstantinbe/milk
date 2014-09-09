@@ -54,6 +54,7 @@ default_browser = browsers['safari']
 
 # ----------------------------------------------------------------Browser ------
 
+option '-o', "--output [NAME]", "output directory, default: build"
 option '-e', "--engine [NAME]", "use one of the engines: #{Object.keys(engines).join(', ')}"
 option '-b', "--browser [NAME]", "use one of the browsers: #{Object.keys(browsers).join(', ')}"
 option '-h', "--version [NAME]", "release version, required for task 'release'"
@@ -103,8 +104,8 @@ task 'build', "build Milk", (options) ->
     joined += "\n" unless index is 0
     joined += "# *****************************************************************************\n"
     joined += "# File: #{source}\n"
-    joined += read_from_file source
-  write_to_file joined, "build/milk.coffee"
+    joined += load source
+  save joined, "build/milk.coffee"
   run "coffee --output build/ --compile --bare build/milk.coffee"
   puts OK
 
@@ -136,7 +137,7 @@ task 'play', "build & run Milk in browser", (options) ->
         </body>
     </html>
   """
-  write_to_file html, "build/play.html"
+  save html, "build/play.html"
   puts OK
 
   browser = browsers[options['browser']] or default_browser
@@ -174,10 +175,10 @@ task 'camel', "build camel case version & run tests", (options) ->
 
   put "Converting to CamelCase ... "
   for name in coffee_file_names
-    underscorized = read_from_file "build/#{name}.coffee"
+    underscorized = load "build/#{name}.coffee"
     camel_cased = underscorized.replace /_([a-z])/g, (match) -> match[1].toUpperCase()
     finalized = camel_cased.replace /([a-z])_/g, (match) -> match[1]
-    write_to_file finalized, "build/#{name}.coffee"
+    save finalized, "build/#{name}.coffee"
   puts OK
 
   put "Compiling ... "
@@ -195,10 +196,10 @@ task 'website', "build website\n", (options) ->
   run "mkdir -p build/website"
   run "rm -rf build/website/*"
   run "cp website/* build/website/"
-  index_html = read_from_file "website/index.html"
-  content_md = read_from_file "website/content.md"
+  index_html = load "website/index.html"
+  content_md = load "website/content.md"
   index_html = index_html.replace "<!-- content.md -->", marked content_md
-  write_to_file index_html, "build/website/index.html"
+  save index_html, "build/website/index.html"
   puts OK
 
 task 'release', "release a version of Milk (website, NPM)\n", (options) ->
@@ -288,20 +289,20 @@ put = (message) ->
 puts = (message) ->
   put message + "\n"
 
-read_from_file = (path) ->
+load = (path) ->
   data = fs.readFileSync path
   if not data?
     console.log "Error reading from file: #{path}"
     process.exit error
   data.toString()
 
-write_to_file = (string, path) ->
+save = (string, path) ->
   error = fs.writeFileSync path, string
   if error > 0
     console.log "Error writing to file: #{path}"
     process.exit error
 
-file_exists = (path) ->
+exists = (path) ->
   pwd = run "pwd", silent: yes
   tested_path = run "test -e #{path} && cd #{path}; pwd", silent: yes
   return yes if path is pwd
