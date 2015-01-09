@@ -170,10 +170,10 @@ Object::includes = (mixins...) ->
       merged
 
     info: (message) ->
-      console.info "[INFO] " + message
+      console.log "[INFO] " + message
 
     warning: (message) ->
-      console.warn "[WARNING] " + message
+      console.log "[WARNING] " + message
 
     error: (message) ->
       stackTrace = "(can't print stack trace, function printStackTrace() not found)"
@@ -181,7 +181,7 @@ Object::includes = (mixins...) ->
       throw "[ERROR] " + message + stackTrace
 
     debug: (message) ->
-      console.debug "[DEBUG] " + message
+      console.log "[DEBUG] " + message
 
   # ----------------------------------------------------------------------------
 
